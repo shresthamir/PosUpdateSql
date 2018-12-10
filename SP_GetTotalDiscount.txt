@@ -1,0 +1,47 @@
+CREATE OR ALTER PROCEDURE [dbo].[SP_GetTotalDiscount] @AMOUNT decimal
+AS
+--SET NOCOUNT ON
+--DECLARE @AMOUNT decimal
+--SET @AMOUNT= 10000
+DECLARE @WEEKDAY CHAR(1)
+DECLARE @DIS_RATE NUMERIC(18,2),@CARD_PRIORITY TINYINT,@PRIORITY_C TINYINT,@SchemeID numeric,@Dis_Amount numeric(18,2)
+Declare @Date1 Datetime,@Date2 Datetime,@Dayofweek VArchar(10),@TimeStart Datetime,@TimeEnd Datetime,@ScheduleType varchar(10),@priority tinyint,@CardPriority tinyint
+Declare @DisID numeric,@Mgroup varchar(20),@Parent varchar(20),@Mcode varchar(20),@Disrate numeric(18,2),@DisAmount numeric(18,2)
+
+
+if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
+	select * into #schedules from discount_scheme 
+		where  convert(datetime,convert(varchar,getdate(),106)) between isnull(DateStart,getdate()) and isnull(Dateend,getdate())
+		 and (isnull(DayOfWeek,'') ='' or Charindex(Case datename(dw,getdate()) when 'Sunday' then 'SU' when 'Monday' then 'MO' 
+						when 'Tuesday' then 'TU' When 'Wednesday' then 'WE'
+						when 'Thursday' then 'TH' when 'Friday' then 'FR' when 'Saturday' then 'SA' End,
+						isnull(DayOfWeek,'')) > 0)
+		 and convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) between 
+	case when isnull(Timestart,0)=0 then convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
+		else  Case when convert(numeric(18,4),convert(datetime,convert(varchar,timestart,108)))=0 then 
+				convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
+				else convert(numeric(18,4),convert(datetime,convert(varchar,timestart,108))) end
+		end 
+    and
+	case when isnull(Timeend,0)=0 then convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
+		else  case when convert(numeric(18,4),convert(datetime,convert(varchar,timeend,108)))=0 then 
+				convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
+				else convert(numeric(18,4),convert(datetime,convert(varchar,timeend,108)))
+				end 
+		end
+		--Date Filter
+  
+  Declare @MaxAmount decimal;
+  select @MaxAmount = max(c.LessThan)  from Discount_Rate a 
+   inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
+   where  a.SchemeType ='TotalAmount'
+
+   SELECT DISTINCT schemeID,GreaterThan,LessThan,GiftVoucher,DisRate,SchemeName, DisAmount FROM (
+  select  A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount   from Discount_Rate a 
+   inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
+   where  a.SchemeType ='TotalAmount' and @AMOUNT between c.GreaterThan and c.LessThan 
+  union all
+  select A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount  from Discount_Rate a 
+   inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
+   where  a.SchemeType ='TotalAmount' and (  @AMOUNT  > c.LessThan and c.LessThan =@MaxAmount )
+  ) A

@@ -1,0 +1,7 @@
+If not exists(select * from sysobjects where name='defaultuserrights') 
+CREATE TABLE [dbo].[DefaultUserRights](
+	[User] [varchar](25) NULL,
+	[AdditionalInfoJson] [varchar](max) NULL,
+	[MenuJson] [varchar](max) NULL,
+	[BillMenuJson] [varchar](max) NULL
+)
