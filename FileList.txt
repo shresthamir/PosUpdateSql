@@ -88,3 +88,6 @@ UserProfiles.txt
 ---/Reports/VatSalesRegister/RSP_VATSALESREGISTER.txt
 ---/Reports/VatSalesRegister/SP_DEBITNOTEREGISTER.txt
 ---/Reports/VatSalesRegister/SP_PURCHASEREGISTER.txt
+/Reports/VehicleReports/RSP_VEHICLEPURCHASEREGISTER.txt
+/Reports/VehicleReports/RSP_VEHICLESALESREGISTER.txt
+
