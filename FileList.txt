@@ -1,4 +1,4 @@
-BARCODE_LOG.txt
+---BARCODE_LOG.txt
 ---BARCODE_DETAIL_STAMP.txt
 CloudBackupSetting.txt
 ---CurrencyNumberToWords.txt
