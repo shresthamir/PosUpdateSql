@@ -75,7 +75,6 @@ UserProfiles.txt
 /Reports/SupplierVsProductAnalysis/SP_SUPPLIERVSPRODUCT.txt
 /Reports/SupplierVsProductAnalysis/SP_SUPPLIERVSPRODUCT_EXVAT.txt
 /Reports/SupplierVsProductAnalysis/RSP_SUPPLIERVSPRODUCT.txt
-/Reports/TertiaryMonthlySales.txt
 /Reports/TertiarySalesReports/TertiaryDailySalesFootfall.txt
 /Reports/TertiarySalesReports/TertiaryMonthlyFootFallSales.txt
 /Reports/TertiarySalesReports/TertiaryWeeklyFootFall.txt
