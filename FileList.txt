@@ -20,6 +20,7 @@ NUM_TOWORDS.txt
 SALES_TRNMAIN.txt
 SALES_TRNPROD.txt
 SETTINGS.txt
+ShippingInfo.txt
 ---SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
 ---TRNMAIN_BRANCH_OUT.txt

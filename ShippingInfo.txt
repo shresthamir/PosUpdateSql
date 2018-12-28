@@ -1,0 +1,20 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DeliveryPartners')
+CREATE TABLE [dbo].[DeliveryPartners](
+	[ID] [int] NOT NULL,
+	[NAME] [varchar](200) NOT NULL,
+	CONSTRAINT PK_DeliveryPartners PRIMARY KEY (ID)
+) 
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'tblShippingInfo')
+CREATE TABLE [dbo].[tblShippingInfo](
+	[VCHRNO] [varchar](25) NOT NULL,
+	[DIVISION] [char](3) NOT NULL,
+	[PHISCALID] [varchar](10) NOT NULL,
+	[DeliveryAgent] [int] NOT NULL,
+	[RecipientName] [varchar](200) NULL,
+	[RecipientAddress] [varchar](200) NULL,
+	[RecipientMobile] [varchar](20) NULL,
+	[DeliveryDate] [datetime] NULL
+) 
+
+
