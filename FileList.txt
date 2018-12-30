@@ -17,7 +17,8 @@ NUM_TOWORDS.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt
 ---RMD_BILLTENDER_UPDATE.txt
-RMD_RECPAY.txt
+RMD_RECPAY_TABLE.txt
+RMD_RECPAY_VIEW.txt
 SALES_TRNMAIN.txt
 SALES_TRNPROD.txt
 SETTINGS.txt
