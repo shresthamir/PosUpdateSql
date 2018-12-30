@@ -93,4 +93,6 @@ UserProfiles.txt
 ---/Reports/VatSalesRegister/SP_PURCHASEREGISTER.txt
 /Reports/VehicleReports/RSP_VEHICLEPURCHASEREGISTER.txt
 /Reports/VehicleReports/RSP_VEHICLESALESREGISTER.txt
+/Reports/VoucherBookReport/NSP_VOUCHERBOOKREPORT.txt
+/Reports/VoucherBookReport/RSP_VOUCHERBOOKREPORT.txt
 
