@@ -38,6 +38,8 @@ UserProfiles.txt
 /Reports/CashBookReport/SP_CASHBOOK_DAYWISE.txt
 /Reports/DayReport/NSP_DAYREPORT.txt
 /Reports/DayReport/RSP_DAYREPORT.txt
+/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.txt
+/Reports/DeliveryRegisterReport/RSP_DELIVERYREGISTER_REPORT.txt
 ---/Reports/GetParticularForLedger.txt
 /Reports/GroupLedger/NSP_GROUPLEDGER.txt
 /Reports/GroupLedger/RSP_GROUPLEDGER.txt
