@@ -70,6 +70,9 @@ UserProfiles.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW.txt
 /Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE_DETAIL.txt
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE_DETAIL.txt
+/Reports/SalesReportItemWise/RSP_SALESFIGURE_PARTYWISE.txt
+/Reports/SalesReportItemWise/SP_SALESFIGURE_PARTYWISE_DETAIL.txt
+/Reports/SalesReportItemWise/SP_SALESFIGURE_PARTYWISE_SUMMARY.txt
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockPosition/NSP_STOCKREPORT.txt
