@@ -90,6 +90,7 @@ UserProfiles.txt
 /Reports/TopNSalesAnalysis/RSP_TOPNSALES.txt
 ---/Reports/TrialBalance/NSP_TRIALBALANCE.txt
 /Reports/TrialBalance/RSP_TRIALBALANCE.txt
+/Reports/TRNMAIN_VIEW_SREPORT.txt
 /Reports/TRNPROD_VIEW_SREPORT.txt
 ---/Reports/VatSalesRegister/NSP_CREDITNOTEREGISTER.txt
 ---/Reports/VatSalesRegister/NSP_VATSALESREGISTER.txt
