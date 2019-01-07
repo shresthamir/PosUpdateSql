@@ -88,6 +88,9 @@ UserProfiles.txt
 /Reports/TertiarySalesReports/TertiaryWeeklyFootFall.txt
 /Reports/TopNSalesAnalysis/SP_TOPNSALES_NEW.txt
 /Reports/TopNSalesAnalysis/RSP_TOPNSALES.txt
+/Reports/TransactionActivityLog/HostName.txt
+/Reports/TransactionActivityLog/RSP_UserWLogDetail.txt
+/Reports/TransactionActivityLog/sp_UserWLogDetail.txt
 ---/Reports/TrialBalance/NSP_TRIALBALANCE.txt
 /Reports/TrialBalance/RSP_TRIALBALANCE.txt
 /Reports/TRNMAIN_VIEW_SREPORT.txt

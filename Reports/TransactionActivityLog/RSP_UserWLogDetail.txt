@@ -1,0 +1,17 @@
+CREATE OR ALTER   PROCEDURE [dbo].[RSP_UserWLogDetail] 
+@DATE1 datetime,
+@DATE2 datetime,
+@OPT_FLAG TINYINT =1,						--Detail:1,Summary:2,UserWiseSummary:3
+@USER varchar(100)='%',
+@SelectedHost varchar(200)='%',
+@SelectedAction varchar(250)='%',
+@SelectedForm varchar(100)='%'
+AS
+EXEC SP_UserWLogDetail
+@Flg = @OPT_FLAG,
+@SDate = @DATE1,
+@EDate = @DATE2,
+@UserID = @USER,
+@HostNM = @SELECTEDHOST,
+@FormNM = @SELECTEDFORM,
+@ActionNM = @SELECTEDACTION
