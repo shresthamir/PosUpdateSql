@@ -68,6 +68,11 @@ UserProfiles.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_NEW.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW.txt
+/Reports/SalesPosition/RSP_DAILYSALESPOSITION.txt
+/Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW.txt
+/Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW_TIMEWISE.txt
+/Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW.txt
+/Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE.txt
 /Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE_DETAIL.txt
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE_DETAIL.txt
 /Reports/SalesReportPartyWise/RSP_SALESFIGURE_PARTYWISE.txt
@@ -99,7 +104,7 @@ UserProfiles.txt
 /Reports/VatSalesRegister/NSP_VATSALESREGISTER.txt
 ---/Reports/VatSalesRegister/RSP_VATSALESREGISTER.txt
 ---/Reports/VatSalesRegister/SP_DEBITNOTEREGISTER.txt
----/Reports/VatSalesRegister/SP_PURCHASEREGISTER.txt
+/Reports/VatSalesRegister/SP_PURCHASEREGISTER.txt
 /Reports/VehicleReports/RSP_VEHICLEPURCHASEREGISTER.txt
 /Reports/VehicleReports/RSP_VEHICLESALESREGISTER.txt
 /Reports/VoucherBookReport/NSP_VOUCHERBOOKREPORT.txt

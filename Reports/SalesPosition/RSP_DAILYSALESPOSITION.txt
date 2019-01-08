@@ -1,0 +1,50 @@
+CREATE OR ALTER    PROCEDURE [dbo].[RSP_DAILYSALESPOSITION]
+@DATE1 VARCHAR(25),
+@DATE2 VARCHAR(25),
+@DIVISION VARCHAR(25),
+@SALESTERMINAL VARCHAR(50) = '%',
+@OPT_WISE VARCHAR(50)='CounterWise',	--CounterWise:CounterWise,UserWise:UserWise
+@TIME1  Datetime = null,
+@TIME2  DateTime=null,
+@CHKSHOWTIMEWISE TINYINT=0,
+@USER VARCHAR(50) = '%'
+AS
+
+DECLARE @datetime1 varchar(50),@datetime2 varchar(50)
+if @TIME1 <> null select @datetime1 = convert(varchar,cast(@DATE1 as date)) + ' ' + cast(cast(@TIME1 as time) as varchar)
+if @TIME2 <> null select @datetime2 = convert(varchar,cast(@DATE2 as date)) + ' ' + cast(cast(@TIME2 as time) as varchar)
+if @OPT_WISE='CounterWise'
+BEGIN
+	IF @CHKSHOWTIMEWISE=0
+		EXEC SP_DAILYSALESPOSITION_NEW 
+		@DATE1 =@DATE1 ,
+		@DATE2 =@DATE2 ,
+		@DIV =@DIVISION,
+		@COUNTER =@SALESTERMINAL 
+	ELSE
+		EXEC SP_DAILYSALESPOSITION_NEW_TIMEWISE 
+		@DATE1 =@DATE1 ,
+		@DATE2 =@DATE2 ,
+		@DIV =@DIVISION,
+		@TIME1 =@datetime1 ,
+		@TIME2=@datetime2 ,
+		@COUNTER =@SALESTERMINAL 
+END
+ELSE
+BEGIN
+	IF @CHKSHOWTIMEWISE=0
+		EXEC SP_DAILYSALESPOSITION_USERWISE_NEW 
+		@DATE1 =@DATE1 ,
+		@DATE2 =@DATE2 ,
+		@DIV =@DIVISION,
+		@USER =@USER 
+	ELSE
+		EXEC SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE 
+		@DATE1 =@DATE1 ,
+		@DATE2 =@DATE2 ,
+		@DIV =@DIVISION,
+		@TIME1 =@datetime1 ,
+		@TIME2=@datetime2 ,
+		@USER =@USER
+END
+
