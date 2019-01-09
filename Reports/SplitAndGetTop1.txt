@@ -1,0 +1,7 @@
+CREATE OR ALTER FUNCTION SplitAndGetTop1 (@data VARCHAR(2000), @seperator char(1)) returns varchar(100)
+as
+begin
+declare @result varchar(100)
+SELECT TOP 1 @result = items FROM Split(@data, @seperator)
+return @result
+end
