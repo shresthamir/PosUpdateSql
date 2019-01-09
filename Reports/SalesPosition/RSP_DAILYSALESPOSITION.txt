@@ -4,8 +4,8 @@ CREATE OR ALTER    PROCEDURE [dbo].[RSP_DAILYSALESPOSITION]
 @DIVISION VARCHAR(25),
 @SALESTERMINAL VARCHAR(50) = '%',
 @OPT_WISE VARCHAR(50)='CounterWise',	--CounterWise:CounterWise,UserWise:UserWise
-@TIME1  Datetime = null,
-@TIME2  DateTime=null,
+@TIME1  Datetime,
+@TIME2  DateTime,
 @CHKSHOWTIMEWISE TINYINT=0,
 @USER VARCHAR(50) = '%'
 AS

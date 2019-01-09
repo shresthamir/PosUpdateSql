@@ -1,0 +1,9 @@
+CREATE OR ALTER PROCEDURE RSP_ITEMSEARCH @MCODE VARCHAR(25)
+AS
+--DECLARE @MCODE VARCHAR(25)='M13493'
+
+select b.LOCATIONS,a.WAREHOUSE ,sum(realqty_in-realqty) Qty 
+from RMD_TRNPROD A left join ITEMLOCATION B on a.MCODE=b.MCODE
+ where A.mcode =@MCODE
+ group by WAREHOUSE,b.LOCATIONS
+having sum(realqty_in-RealQty) <> 0;

@@ -1,0 +1,5 @@
+Create OR ALTER view [dbo].[ItemLocation]
+as
+select MCODE,ISNULL(stuff(
+	(select distinct ',' + [location] from TBL_ITEM_LOCATIONS sub where sub.item= main.MCODE
+	 for xml path('')),1,1,''),'N/A') LOCATIONS from MENUITEM main where main.TYPE='A'
