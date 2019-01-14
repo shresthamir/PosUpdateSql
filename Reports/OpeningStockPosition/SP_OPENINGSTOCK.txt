@@ -1,0 +1,10 @@
+
+CREATE OR ALTER PROCEDURE [dbo].[SP_OPENINGSTOCK]
+	@WARE VARCHAR(25) = '%',
+	@DIV VARCHAR(3) = '%'	
+AS
+select A.mcode,B.menucode,B.desca, B.baseunit,A.qty,case when(a.qty >= 1) then round((A.Amnt/A.Qty),2) else null end as Rate, a.Amnt
+from menuitem B, (
+	select mcode,sum(quantity) as Qty,sum(amount)as Amnt from rmd_Trnprod where vchrno like 'OP%' and warehouse like @WARE AND RMD_TRNPROD.DIVISION LIKE @DIV 
+	group by mcode
+) as A where a.mcode = b.mcode AND PTYPE < 10
