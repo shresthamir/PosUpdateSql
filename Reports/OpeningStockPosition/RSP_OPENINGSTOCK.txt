@@ -1,0 +1,55 @@
+CREATE OR ALTER PROCEDURE [dbo].[RSP_OPENINGSTOCK] 
+@WAREHOUSE VARCHAR(25) ='%',
+@DIVISION VARCHAR(3)	='%',
+@OPT_TREE TINYINT = 0,                                       --NonTree:0,Tree:1
+@MGROUP VARCHAR(25)='MI'
+AS
+DECLARE @GROUPNAME AS VARCHAR(100)
+DECLARE @LVL INT	
+
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
+IF OBJECT_ID('TEMPDB..#TREE') IS NOT NULL DROP TABLE #TREE		
+
+select A.mcode,B.menucode,B.desca, B.baseunit,A.qty,
+case when(a.qty >= 1) then round((A.Amnt/A.Qty),2) else null end as Rate, a.Amnt
+INTO #RESULT from menuitem B, 
+(
+	select mcode,sum(quantity) as Qty,sum(amount)as Amnt from rmd_Trnprod 
+	where vchrno like 'OP%' and warehouse like @WAREHOUSE AND RMD_TRNPROD.DIVISION LIKE @DIVISION 
+	group by mcode
+) as A where a.mcode = b.mcode AND PTYPE <10
+
+IF @OPT_TREE = 0
+	SELECT * FROM #RESULT
+ELSE 
+BEGIN
+	IF @MGROUP = '%' OR @MGROUP IS NULL 
+		SET @MGROUP = 'MI'
+	IF @MGROUP='MI' 
+	BEGIN
+		SET @GROUPNAME = 'PRODUCTLIST'
+	END
+	ELSE
+	BEGIN
+		SELECT @GROUPNAME=Desca FROM MENUITEM WHERE MCODE=@MGROUP 
+	END 
+
+	SELECT CASE WHEN A.TYPE='G' THEN '-' ELSE NULL END AS SYMBOL, A.TYPE,A.LEVEL,A.DESCRIPTION,A.CODE,B.BASEUNIT,
+	A.PARENT,A.ID,A.MCODE, B.QTY, B.RATE, B.Amnt INTO #TREE 
+	FROM TreeExpand_function (@MGROUP ,@GROUPNAME ,0) AS A
+	LEFT JOIN #RESULT B ON A.MCODE = B.MCODE
+
+
+	select @LVL=MAX(LEVEL) from #TREE 
+	WHILE @lvl > 0
+	BEGIN
+		update A set A.Qty  =B.QTY  ,A.Amnt  =B.AMNT
+		from #TREE A INNER JOIN 
+		(
+			select Parent, SUM(QTY) QTY, SUM(AMNT) AMNT  from #TREE where level= @LVL group by parent
+		) B on A.MCODE =B.Parent 
+		SET @lvl = @lvl - 1;
+	END
+
+	SELECT * FROM #TREE where Qty <> 0 ORDER BY ID
+END

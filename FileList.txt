@@ -51,7 +51,7 @@ UserProfiles.txt
 /Reports/JournalBookReport/NSP_JOURNALBOOK.txt
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
 /Reports/LedgerReport/RSP_LEDGERREPORT.txt
-/Reports/OpeningStockPosition/SP_OPENINGSTOCK.txt
+/Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/ReportPrintParameter.txt
 /Reports/RMD_TRNPROD.txt
 /Reports/PL_Report/NSP_PLACCOUNT.txt
