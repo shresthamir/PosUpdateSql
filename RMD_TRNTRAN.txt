@@ -1,0 +1,34 @@
+CREATE OR ALTER view [dbo].[RMD_TRNTRAN]
+as
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.ACCTRAN
+
+UNION ALL						  
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.ABBTRAN		  					
+						
+UNION ALL
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.TRNTRAN 
+							 
+UNION ALL
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.PURTRAN
+
+UNION ALL
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.INVTRAN
+UNION ALL
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.AOPTRAN 
+
+UNION ALL
+SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
+		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.OPTRAN 
