@@ -54,6 +54,7 @@ UserProfiles.txt
 /Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/ReportPrintParameter.txt
 /Reports/RMD_TRNPROD.txt
+/Reports/RSP_SHIFTCLOSEREPORT.txt
 /Reports/PL_Report/NSP_PLACCOUNT.txt
 /Reports/PL_Report/NSP_PLACCOUNT_HORIZONTAL.txt
 /Reports/PL_Report/NSP_PLACCOUNT_REPORT.txt

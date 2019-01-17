@@ -2,11 +2,13 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_OPENINGSTOCK]
 @WAREHOUSE VARCHAR(25) ='%',
 @DIVISION VARCHAR(3)	='%',
 @OPT_TREE TINYINT = 0,                                       --NonTree:0,Tree:1
-@MGROUP VARCHAR(25)='MI'
+@MGROUP VARCHAR(25)='MI',
+@PTYPE INT = 100
 AS
 DECLARE @GROUPNAME AS VARCHAR(100)
 DECLARE @LVL INT	
 
+IF @PTYPE = 100 SET @PTYPE = NULL
 IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
 IF OBJECT_ID('TEMPDB..#TREE') IS NOT NULL DROP TABLE #TREE		
 
@@ -17,7 +19,7 @@ INTO #RESULT from menuitem B,
 	select mcode,sum(quantity) as Qty,sum(amount)as Amnt from rmd_Trnprod 
 	where vchrno like 'OP%' and warehouse like @WAREHOUSE AND RMD_TRNPROD.DIVISION LIKE @DIVISION 
 	group by mcode
-) as A where a.mcode = b.mcode AND PTYPE <10
+) as A where a.mcode = b.mcode AND ISNULL(@PTYPE, PTYPE) =  PTYPE
 
 IF @OPT_TREE = 0
 	SELECT * FROM #RESULT
