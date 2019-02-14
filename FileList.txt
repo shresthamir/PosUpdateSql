@@ -31,6 +31,7 @@ SP_GetTotalDiscount.txt
 ---TRNMAIN_BRANCH_OUT.txt
 ---TRNPROD_BRANCH_OUT.txt
 UserProfiles.txt
+USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 /Reports/BILLTENDER.TXT
 ---/Reports/ANNEX_7/SP_ANNEX7.TXT
