@@ -1,4 +1,4 @@
-CREATE OR ALTER FUNCTION [dbo].[RMD_TRNMAIN_FN] (@GRNWISE TINYINT)
+CREATE OR ALTER   FUNCTION [dbo].[RMD_TRNMAIN_FN] (@GRNWISE TINYINT)
 RETURNS @RMD_TRNMAIN TABLE (VCHRNO varchar(25) NOT NULL, DIVISION char(3) NOT NULL, CHALANNO varchar(50), TRNDATE smalldatetime NULL, BSDATE varchar(10),
 									TRNTIME varchar(15), TOTAMNT numeric(20, 12), DCAMNT numeric(20, 12), DCRATE numeric(18, 2), VATAMNT numeric(20, 12),
 									NETAMNT numeric(20, 12), ADVANCE numeric(22, 12), TRNMODE varchar(50), BILLTO varchar(100), BILLTOADD varchar(50),
@@ -15,7 +15,8 @@ RETURNS @RMD_TRNMAIN TABLE (VCHRNO varchar(25) NOT NULL, DIVISION char(3) NOT NU
 									CONFIRMEDTIME varchar(25), PhiscalID varchar(20) NOT NULL, Stamp float NULL, ROUNDOFF numeric(22, 12), Customer_Count numeric(18, 8), DBUSER varchar(50),
 									HOSTID varchar(25), VNUM varchar(25), TOTALREBATE numeric(18, 2), DISVALUE numeric(18, 8), STAXVALUE numeric(20, 12),
 									TOTALFLATDISCOUNT numeric(18, 8), TOTALINDDISCOUNT numeric(18, 8), TOTALLOYALTY numeric(18, 8), TOTALPROMOTION numeric(18, 8), NETWITHOUTROUNDOFF numeric(18, 8),
-									COSTCENTER varchar(100), guid varchar(100), JOBNO varchar(50), MWAREHOUSE varchar(50), POSTID varchar(20))
+									COSTCENTER varchar(100), guid varchar(100), JOBNO varchar(50), MWAREHOUSE varchar(50), POSTID varchar(20)
+									, PRIMARY KEY CLUSTERED (VCHRNO, DIVISION, PHISCALID))
 AS
 BEGIN
 	INSERT INTO @RMD_TRNMAIN
