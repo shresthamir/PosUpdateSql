@@ -53,6 +53,9 @@ USERPROFILESABB.txt
 /Reports/GroupLedger/RSP_GROUPLEDGER.txt
 /Reports/JournalBookReport/NSP_JOURNALBOOK.txt
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
+/Reports/LedgerReport/NSP_LEDGERREPORT.txt
+/Reports/LedgerReport/NSP_LEDGERREPORT_DETAIL_FCURRENCY.txt
+/Reports/LedgerReport/NSP_LEDGERREPORT_SUMMARY_FCURRENCY.txt
 /Reports/LedgerReport/RSP_LEDGERREPORT.txt
 /Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/ReportPrintParameter.txt
