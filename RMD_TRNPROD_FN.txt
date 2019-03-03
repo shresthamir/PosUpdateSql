@@ -8,8 +8,8 @@ RETURNS @RMD_TRNPROD TABLE (VCHRNO varchar(25) NOT NULL, CHALANNO varchar(15), D
 							SNO int NULL, CUSTOM numeric(18, 6), [WEIGHT] numeric(18, 6), DRATE numeric(18, 6), CARTON numeric(18, 6), INVOICENO varchar(50), ISSUENO varchar(50), 
 							BC varchar(50), GENERIC varchar(50), BATCH varchar(50), MFGDATE datetime NULL, MANUFACTURER varchar(100), SERVICETAX numeric(20, 12), 
 							BCODEID numeric(18, 0), VoucherType varchar(2) NOT NULL, SALESMANID int NULL, PhiscalID varchar(20), STAMP float NULL, ITEMDESC varchar(200), 
-							DNID numeric(18, 0), PROMOTION numeric(18, 8), LOYALTY numeric(18, 8), INDDISCOUNT numeric(18, 8), FLATDISCOUNT numeric(18, 8), 
-							NETAMOUNT numeric(18, 8), ADDTIONALROW numeric(18, 8), COSTCENTER varchar(100), ISVAT tinyint, PRODCONDITION varchar(20), PRODMODE varchar(20), 
+							DNID numeric(18, 0), COSTCENTER varchar(100), PROMOTION numeric(18, 8), LOYALTY numeric(18, 8), INDDISCOUNT numeric(18, 8), FLATDISCOUNT numeric(18, 8), 
+							NETAMOUNT numeric(18, 8), ADDTIONALROW numeric(18, 8), ISVAT tinyint, PRODCONDITION varchar(20), PRODMODE varchar(20), 
 							ITEMTYPE varchar(20), RECEIVEDTYPE varchar(20), REMARKS varchar(255))
 AS
 BEGIN
