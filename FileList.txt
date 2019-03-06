@@ -92,6 +92,7 @@ USERPROFILESABB.txt
 /Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_SUMMARY.txt
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
+/Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
 /Reports/StockPosition/NSP_STOCKREPORT.txt
 /Reports/StockPosition/RSP_STOCKREPORT.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT.txt
