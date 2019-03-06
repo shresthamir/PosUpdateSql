@@ -63,7 +63,7 @@ set @sql =
 'SELECT NULL AS SN, B.MENUCODE CODE, CASE WHEN ''' + @WISE + ''' = ''ITEM''  OR ''' + @WISE + ''' = ''MGROUP'' THEN  B.DESCA ELSE A.MCODE END AS PARTICULAR,
 A as ' + quotename('below' + convert(varchar,@d1)) + ',B as ' + quotename( convert(varchar,@d1) +' - ' +  convert(varchar,@d2)) + ',C as ' + quotename( convert(varchar,@d2) +' - ' +  convert(varchar,@d3)) + ',
 D as ' + quotename( convert(varchar,@d3) +' - ' +  convert(varchar,@d4)) + ',E as ' + quotename( convert(varchar,@d4) +' - ' +  convert(varchar,@d5)) + ',F as ' + quotename( convert(varchar,@d5) +' - ' +  convert(varchar,@d6)) + ',
-G as ' + quotename('above' +  convert(varchar,@d6)) + ',TOTAL,A.MCODE 
+G as ' + quotename('above' +  convert(varchar,@d6)) + ', B.PRATE_A PRATE,TOTAL,A.MCODE 
 FROM #AGINGTABLE A LEFT JOIN MENUITEM B ON A.MCODE= B.MCODE  order by PARTICULAR '
 
 exec (@sql)
