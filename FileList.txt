@@ -36,7 +36,7 @@ SP_GetTotalDiscount.txt
 UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
-VEHICLE_BARCODE.txt
+VEHICLE_WAREHOUSE.txt
 /Reports/BILLTENDER.TXT
 ---/Reports/ANNEX_7/SP_ANNEX7.TXT
 ---/Reports/ANNEX_7/VIEW_ANNEX7.TXT
