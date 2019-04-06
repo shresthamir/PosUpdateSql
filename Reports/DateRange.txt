@@ -1,0 +1,1 @@
+UPDATE REPORTMASTER set DateRange = 'Yearly' WHERE REPORTNAME IN ('Account Ledger', 'Account Group Ledger', 'Balance Sheet', 'Party Ledger', 'Profit & Loss Report', 'Party Group Ledger', 'Stock Position', 'Stock Ledger', 'Stock Ageing Report', 'Trial Balance')

@@ -8,9 +8,9 @@ UPDATE REPORTDETAILS SET ISREPORTPARAMETER = 1, PRINTLABEL = 'Item', PRINTALTERN
 UPDATE REPORTDETAILS SET ISREPORTPARAMETER = 1, PRINTLABEL = 'Major Group', PRINTALTERNATEVALUE_QUERY = 'SELECT DESCA FROM MENUITEM WHERE MCODE = ''{0}''' WHERE PARAMNAME = '@MGROUP'
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'ReportMaster' AND COLUMN_NAME = 'DateRange')
-BEGIN
 ALTER TABLE ReportMaster ADD DateRange VARCHAR(20)
-UPDATE REPORTMASTER set DateRange = 'Yearly' WHERE REPORTNAME IN ('Account Ledger', 'Account Group Ledger', 'Balance Sheet', 'Party Ledger', 'Profit & Loss Report', 'Party Group Ledger', 'Stock Position', 'Stock Ledger', 'Stock Ageing Report', 'Trial Balance')
-END
+
+
+
 
 

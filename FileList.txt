@@ -46,6 +46,7 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/BalanceSheet/RSP_BALANCESHEET_REPORT.txt
 /Reports/CashBookReport/RSP_CASHBOOK_DAYWISE.txt
 /Reports/CashBookReport/SP_CASHBOOK_DAYWISE.txt
+/Reports/DateRange.txt
 /Reports/DayReport/NSP_DAYREPORT.txt
 /Reports/DayReport/RSP_DAYREPORT.txt
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.txt
