@@ -46,15 +46,25 @@ ALTER TABLE VoucherRemark ADD GiftRemark VARCHAR(1000)
 
 UPDATE Discount_SchemeDiscount SET DisAmount = 0 WHERE DisAmount IS NULL
 ALTER TABLE Discount_SchemeDiscount ALTER COLUMN DisAmount DECIMAL(25,16) NOT NULL
+
+UPDATE Discount_SchemeDiscount SET DisRate = 0 WHERE DisRate IS NULL
 ALTER TABLE Discount_SchemeDiscount ALTER COLUMN DisRate DECIMAL(5,2) NOT NULL
 
+UPDATE Discount_IfAnyItemsList SET DisAmount = 0 WHERE DisAmount IS NULL
 ALTER TABLE Discount_IfAnyItemsList ALTER COLUMN DisAmount DECIMAL(25,16) NOT NULL
+
+UPDATE Discount_IfAnyItemsList SET DisAmount = 0 WHERE DisRate IS NULL
 ALTER TABLE Discount_IfAnyItemsList ALTER COLUMN DisRate DECIMAL(5,2) NOT NULL
+
 ALTER TABLE Discount_IfAnyItemsList ALTER COLUMN GreaterThan DECIMAL(25,16)
 ALTER TABLE Discount_IfAnyItemsList ALTER COLUMN LessThan DECIMAL(25,16) 
 
+UPDATE Discount_Rate SET DisAmount = 0 WHERE DisAmount IS NULL
 ALTER TABLE Discount_Rate ALTER COLUMN DisAmount DECIMAL(25,16) NOT NULL
+
+UPDATE Discount_Rate SET DisAmount = 0 WHERE DisRate IS NULL
 ALTER TABLE Discount_Rate ALTER COLUMN DisRate DECIMAL(5,2) NOT NULL
+
 ALTER TABLE Discount_Rate ALTER COLUMN GreaterThan DECIMAL(25,16)
 ALTER TABLE Discount_Rate ALTER COLUMN LessThan DECIMAL(25,16) 
 
