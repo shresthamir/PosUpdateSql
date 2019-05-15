@@ -37,6 +37,8 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+/Reports/BranchTransferReport/NSP_TRANSFER_INOUT_REPORT.txt
+/Reports/BranchTransferReport/RSP_TRANSFER_INOUT_REPORT.txt
 /Reports/BILLTENDER.TXT
 ---/Reports/ANNEX_7/SP_ANNEX7.TXT
 ---/Reports/ANNEX_7/VIEW_ANNEX7.TXT
@@ -77,6 +79,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_DAILYTRIAL.txt
 /Reports/RSP_DSR.txt
 /Reports/RSP_LAKMEDSR.txt
+/Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_STOCKLEDGER.txt
 ---/Reports/RSP_SALESREPORT_ITEMWISE.TXT
 /Reports/SalesBookReport/GETNEPALIMONTH.txt
@@ -98,6 +101,12 @@ VEHICLE_WAREHOUSE.txt
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
+/Reports/StockLevelReports/RSP_MAXSTOCK.txt
+/Reports/StockLevelReports/RSP_MINSTOCK.txt
+/Reports/StockLevelReports/RSP_ROSTOCK.txt
+/Reports/StockLevelReports/SP_MAXSTOCK.txt
+/Reports/StockLevelReports/SP_MINSTOCK.txt
+/Reports/StockLevelReports/SP_ROSTOCK.txt
 /Reports/StockPosition/NSP_STOCKREPORT.txt
 /Reports/StockPosition/RSP_STOCKREPORT.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT.txt
