@@ -76,6 +76,10 @@ VEHICLE_WAREHOUSE.txt
 /Reports/ProfitablitySalesAnalysis/RSP_PROFITIBILITYSALESANALYSIS.txt
 ---/Reports/PurchaseBookReport/NSP_PURCHASEBOOKREPORT.txt
 ---/Reports/PurchaseBookReport/RSP_PURCHASEBOOKREPORT.txt
+/Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE.txt
+/Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE.txt
+/Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
+/Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
 /Reports/RSP_DAILYTRIAL.txt
 /Reports/RSP_DSR.txt
 /Reports/RSP_LAKMEDSR.txt
@@ -118,6 +122,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/TertiarySalesReports/TertiaryDailySalesFootfall.txt
 /Reports/TertiarySalesReports/TertiaryMonthlyFootFallSales.txt
 /Reports/TertiarySalesReports/TertiaryWeeklyFootFall.txt
+/Reports/TopNPurchaseReport/RSP_TOPNPURCHASE_NEW.txt
+/Reports/TopNPurchaseReport/SP_TOPNPURCHASE_NEW.txt
 /Reports/TopNSalesAnalysis/SP_TOPNSALES_NEW.txt
 /Reports/TopNSalesAnalysis/RSP_TOPNSALES.txt
 /Reports/TransactionActivityLog/HostName.txt
