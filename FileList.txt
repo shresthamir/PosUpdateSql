@@ -70,7 +70,6 @@ VEHICLE_WAREHOUSE.txt
 /Reports/LedgerReport/RSP_LEDGERREPORT.txt
 /Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/ReportPrintParameter.txt
-/Reports/RMD_TRNPROD.txt
 /Reports/RSP_SHIFTCLOSEREPORT.txt
 /Reports/PL_Report/NSP_PLACCOUNT.txt
 /Reports/PL_Report/NSP_PLACCOUNT_HORIZONTAL.txt
