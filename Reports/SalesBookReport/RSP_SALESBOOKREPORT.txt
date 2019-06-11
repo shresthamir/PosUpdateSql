@@ -10,7 +10,7 @@ CREATE OR ALTER   PROCEDURE [dbo].[RSP_SALESBOOKREPORT]
 	@VCHR VARCHAR(25) = 'A',
 	@ACID VARCHAR(25) = '%',
 	@SALESMAN VARCHAR(25) = '%',
-	@OPT_INAD TINYINT = 0,												--AD:0,BS:1
+	@OPT_INAD TINYINT = 0,												--AD:1,BS:0
 	@OPT_DISCOUNTEDSALES TINYINT = 0,									--NoDiscountSales:0,DiscountedSales:1,CardDiscountSales:2,ComplimentarySales:3
 	@DISRATE NUMERIC(18,8) = 0,										    
 	@OPT_COUNTERSALES TINYINT = 0,										--All:0,CounterSales:1,TableSales:2

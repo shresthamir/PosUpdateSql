@@ -60,6 +60,7 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/GetParticularForLedger.txt
 /Reports/GroupLedger/NSP_GROUPLEDGER.txt
 /Reports/GroupLedger/RSP_GROUPLEDGER.txt
+/Reports/ItemLocation.txt
 /Reports/JournalBookReport/NSP_JOURNALBOOK.txt
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
 /Reports/LedgerReport/NSP_LEDGERREPORT.txt
@@ -86,9 +87,11 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_DAILYTRIAL.txt
 /Reports/RSP_DSR.txt
 /Reports/RSP_LAKMEDSR.txt
+/Reports/RSP_ITEMSEARCH.txt
 /Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_STOCKLEDGER.txt
 ---/Reports/RSP_SALESREPORT_ITEMWISE.TXT
+/Reports/SalesBookReport/GETMONTHLIST.txt
 /Reports/SalesBookReport/GETNEPALIMONTH.txt
 /Reports/SalesBookReport/GETNEPALIMONTHLIST.txt
 /Reports/SalesBookReport/NSP_SALESBOOKREPORT.txt
