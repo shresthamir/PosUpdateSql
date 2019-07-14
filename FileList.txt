@@ -10,6 +10,7 @@ DISCOUNT_SCHEME.txt
 ---FIX_ACTYPE.TXT
 Footfall.txt
 ---GetDefaultParamenterOfStoredProcedure.txt
+PREBILL_TABLES.txt
 getPrintFormat.txt
 MULTICURRENCY.txt
 NEPMONTH.txt
@@ -113,6 +114,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
+/Reports/StockIssueRegister/NSP_STOCKISSUEREGISTER.txt
+/Reports/StockIssueRegister/RSP_STOCKISSUEREGISTER.txt
 /Reports/StockLevelReports/RSP_MAXSTOCK.txt
 /Reports/StockLevelReports/RSP_MINSTOCK.txt
 /Reports/StockLevelReports/RSP_ROSTOCK.txt
@@ -121,6 +124,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/StockLevelReports/SP_ROSTOCK.txt
 /Reports/StockPosition/NSP_STOCKREPORT.txt
 /Reports/StockPosition/RSP_STOCKREPORT.txt
+/Reports/StockSettlementReports/RSP_STOCKSETTLEMNTREGISTER.txt
+/Reports/StockSettlementReports/RSP_STOCKSETTLEMNTSTATUS.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT_DIVISIONWISE.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATIONREPORT.txt
