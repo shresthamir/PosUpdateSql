@@ -14,7 +14,8 @@ CREATE OR ALTER   PROCEDURE [dbo].[RSP_SALESBOOKREPORT]
 	@OPT_DISCOUNTEDSALES TINYINT = 0,									--NoDiscountSales:0,DiscountedSales:1,CardDiscountSales:2,ComplimentarySales:3
 	@DISRATE NUMERIC(18,8) = 0,										    
 	@OPT_COUNTERSALES TINYINT = 0,										--All:0,CounterSales:1,TableSales:2
-	@CHK_SALESMANWISESUMMARY TINYINT = 0								--SalesManWise:1:0
+	@CHK_SALESMANWISESUMMARY TINYINT = 0,								--SalesManWise:1:0
+	@FYID VARCHAR(10)
 AS
 
 EXEC [dbo].[NSP_SALESBOOKREPORT]
@@ -32,4 +33,5 @@ EXEC [dbo].[NSP_SALESBOOKREPORT]
 	@DISCOUNTEDSALES = @OPT_DISCOUNTEDSALES,						    	-- 0 No Discount Sales, 1 Discounted Sales, 2 Card Discount Sales
 	@DISRATE =@DISRATE,						                 				-- Discount Rate
 	@COUNTERSALES =@OPT_COUNTERSALES,										-- 0 ALL   1 COUNTER SALES  2 TABLE SALES  
-	@SALESMANWISESUMMARY =@CHK_SALESMANWISESUMMARY	
+	@SALESMANWISESUMMARY =@CHK_SALESMANWISESUMMARY,	
+	@FYID = @FYID
