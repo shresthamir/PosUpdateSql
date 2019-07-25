@@ -115,6 +115,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
+/Reports/StockAgeingReport/RSP_STOCKAGEING.txt
 /Reports/StockIssueRegister/NSP_STOCKISSUEREGISTER.txt
 /Reports/StockIssueRegister/RSP_STOCKISSUEREGISTER.txt
 /Reports/StockLevelReports/RSP_MAXSTOCK.txt

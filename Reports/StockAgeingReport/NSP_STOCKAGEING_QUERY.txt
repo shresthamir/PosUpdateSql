@@ -11,21 +11,22 @@ CREATE OR ALTER procedure [dbo].[NSP_STOCKAGEING_QUERY]
  @DIV VARCHAR(20),
  @FLG TINYINT,
  @ByCostRate tinyint=0,
- @WISE VARCHAR(20) ='ITEM'
+ @WISE VARCHAR(20) ='ITEM',
+ @FYID VARCHAR(10) = '%'
 AS
 --set @ByCostRate=N'0';
 --set @D1=15;set @D2=30;set @D3=45;set @D4=60;set @D5=75;set @D6=90;set @DATE='2018-05-31 14:12:12.887'; 
 --set @DIV=N'%';set @PRODUCT=N'%';set @SUPPLIER=N'%';set @FLG=0
 DECLARE @DATE1 DATETIME,@DATE2 DATETIME
-SELECT @DATE1 = FBDATE FROM COMPANY
+SELECT @DATE1 = BeginDate FROM PhiscalYear WHERE PhiscalId = @FYID
 SET @DATE2 = CONVERT(DATE,@DATE);
 IF OBJECT_ID('TEMPDB..#SUMTABLE') IS NOT NULL DROP TABLE #SUMTABLE
 
 --insert sum of total stock till now ie, sum(realqty_in-realqty)
 SELECT CASE @WISE WHEN 'ITEM' THEN a.mcode WHEN 'MGROUP' THEN C.MGROUP WHEN 'MENUCAT' THEN C.MCAT END AS MCODE,
 SUM(realqty_in-realqty) total 
-INTO #SUMTABLE FROM rmd_trnprod a 
-inner join rmd_trnmain b on a.VCHRNO=b.VCHRNO and a.DIVISION = b.DIVISION and a.PhiscalID=b.PhiscalID 
+INTO #SUMTABLE FROM rmd_trnprod_fn(0,@FYID) a 
+inner join rmd_trnmain_fn(0,@FYID) b on a.VCHRNO=b.VCHRNO and a.DIVISION = b.DIVISION and a.PhiscalID=b.PhiscalID 
 INNER JOIN MENUITEM C ON A.MCODE= C.MCODE 
 where A.MCODE LIKE @PRODUCT AND B.TRNDATE BETWEEN @DATE1 AND @DATE2  AND B.DIVISION LIKE @DIV  AND ISNULL(C.SUPCODE,'') LIKE @SUPPLIER
 group by CASE @WISE WHEN 'ITEM' THEN a.mcode WHEN 'MGROUP' THEN C.MGROUP WHEN 'MENUCAT' THEN C.MCAT END having sum(realqty_in-realqty) > 0
