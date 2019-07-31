@@ -1,7 +1,7 @@
 CREATE OR ALTER     FUNCTION [dbo].[RMD_TRNMAIN_FN] (@GRNWISE TINYINT, @PhiscalId VARCHAR(25) = '%')
 RETURNS @RMD_TRNMAIN TABLE (VCHRNO varchar(25) NOT NULL, DIVISION char(3) NOT NULL, CHALANNO varchar(50), TRNDATE smalldatetime NULL, BSDATE varchar(10),
 									TRNTIME varchar(15), TOTAMNT numeric(20, 12), DCAMNT numeric(20, 12), DCRATE numeric(18, 2), VATAMNT numeric(20, 12),
-									NETAMNT numeric(20, 12), ADVANCE numeric(22, 12), TRNMODE varchar(50), BILLTO varchar(100), BILLTOADD varchar(50),
+									NETAMNT numeric(20, 12), ADVANCE numeric(22, 12), TRNMODE varchar(50), BILLTO varchar(100), BILLTOADD varchar(500),
 									TRNUSER varchar(25), VATBILL tinyint, DELIVERYDATE smalldatetime NULL, DELIVERYTIME varchar(15), ORDERS varchar(25),
 									REFORDBILL varchar(50), INDDIS tinyint, CREBATE numeric(18, 2), CREDIT tinyint, DUEDATE datetime NULL, TRNAC varchar(25),
 									PARAC varchar(25), PARTRNAMNT numeric(22, 12), RETTO varchar(255), REFBILL varchar(50), CHEQUENO varchar(25),

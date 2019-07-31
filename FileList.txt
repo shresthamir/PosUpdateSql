@@ -66,6 +66,9 @@ VEHICLE_WAREHOUSE.txt
 /Reports/ItemLocation.txt
 /Reports/JournalBookReport/NSP_JOURNALBOOK.txt
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
+/Reports/KOT Reports/KOTRECORD.txt
+/Reports/KOT Reports/NSP_KOTREPORT.txt
+/Reports/KOT Reports/RSP_KOTREPORT.txt
 /Reports/LedgerReport/NSP_LEDGERREPORT.txt
 /Reports/LedgerReport/NSP_LEDGERREPORT_DETAIL.txt
 /Reports/LedgerReport/NSP_LEDGERREPORT_SUMMARY.txt
@@ -95,7 +98,6 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_ITEMSEARCH.txt
 /Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_STOCKLEDGER.txt
-/Reports/RSP_SALESREPORT_ITEMWISE.TXT
 /Reports/SalesBookReport/GETMONTHLIST.txt
 /Reports/SalesBookReport/GETNEPALIMONTH.txt
 /Reports/SalesBookReport/GETNEPALIMONTHLIST.txt
