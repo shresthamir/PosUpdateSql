@@ -65,6 +65,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/GroupLedger/RSP_GROUPLEDGER.txt
 /Reports/ItemLocation.txt
 /Reports/JournalBookReport/NSP_JOURNALBOOK.txt
+/Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.txt
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
 /Reports/KOT Reports/KOTRECORD.txt
 /Reports/KOT Reports/NSP_KOTREPORT.txt
