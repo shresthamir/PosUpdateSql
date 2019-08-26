@@ -15,7 +15,8 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_DEBTORSREPORT]
 	@D3 NUMERIC=1,
 	@D4 NUMERIC=1,
 	@CHK_AGEINGOFPARTYOPENING TINYINT=1,           --AgeingOfPartyOpening:1:0
-	@CHK_SHOWAGEINGREPORT TINYINT = 0              --ShowAgeingReport:1:0
+	@CHK_SHOWAGEINGREPORT TINYINT = 0,              --ShowAgeingReport:1:0
+	@FYID VARCHAR(10) = '%'
 	AS
 	if @DIVISION is null set @DIVISION = '%';
 	IF @CHK_STATUS is null SET  @CHK_STATUS=1

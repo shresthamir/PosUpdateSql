@@ -1,4 +1,5 @@
 CREATE OR ALTER procedure [dbo].[NSP_STOCKAGEING_QUERY]
+-- DECLARE
  @SUPPLIER AS VARCHAR(25), 
  @DATE DATETIME,
  @D1 NUMERIC,
@@ -8,7 +9,7 @@ CREATE OR ALTER procedure [dbo].[NSP_STOCKAGEING_QUERY]
  @D5 NUMERIC,
  @D6 NUMERIC,
  @PRODUCT VARCHAR(50),
- @DIV VARCHAR(20),
+ @DIV VARCHAR(20) ,
  @FLG TINYINT,
  @ByCostRate tinyint=0,
  @WISE VARCHAR(20) ='ITEM',
@@ -34,38 +35,32 @@ group by CASE @WISE WHEN 'ITEM' THEN a.mcode WHEN 'MGROUP' THEN C.MGROUP WHEN 'M
 if OBJECT_ID('TEMPDB..#AGINGTABLE') IS NOT NULL DROP TABLE #AGINGTABLE
 --first create a colum that holds the date diff as accoriding to parameter(d1,d2...) passed
 --then sum total as per datediff and segregate it to different columns with (a,b,c,)
-select mcode,total ,sum(case when days =@D1 then remaining  else 0 end) as A
-,sum(case when days =@D2 then remaining else 0 end) as B,sum(case when days =@D3 then remaining else 0 end) as C,
-sum(case when days =@D4 then remaining else 0 end) as D,sum(case when days =@D5 then remaining else 0 end) as E,
-sum(case when days = @D6 then remaining else 0 end) as F,sum(case when days = 365 then remaining else 0 end) as G
+select mcode,total ,sum(case when days =@D1 then remaining  else 0 end) as D1
+,sum(case when days =@D2 then remaining else 0 end) as D2,sum(case when days =@D3 then remaining else 0 end) as D3,
+sum(case when days =@D4 then remaining else 0 end) as D4,sum(case when days =@D5 then remaining else 0 end) as D5,
+sum(case when days = @D6 then remaining else 0 end) as D6,sum(case when days = 365 then remaining else 0 end) as D7
 INTO #AGINGTABLE
 from 
 (
 select A.mcode,a.trndate,a.VCHRNO,b.total,a.REALQTY_IN  ,
-DATEDIFF(d,trndate,GETDATE()) daynos,case when DATEDIFF(d,trndate,GETDATE()) < @D1  then @D1 
-	 when DATEDIFF(d,trndate,GETDATE()) between @D1  and @D2  then @D2 
-	 when DATEDIFF(d,trndate,GETDATE()) between @D2 and @D3 then @D3 
-	 when DATEDIFF(d,trndate,GETDATE()) between @D3 and @D4 then @D4 
-	 when DATEDIFF(d,trndate,GETDATE()) between @D4 and @D5 then @D5 
-	 when DATEDIFF(d,trndate,GETDATE()) between @D5 and @D6 then @D6 
-	 when DATEDIFF(d,trndate,GETDATE()) > @D6  then 365 end  days
+DATEDIFF(d,trndate,@DATE) daynos,case when DATEDIFF(d,trndate,@DATE) < @D1  then @D1 
+	 when DATEDIFF(d,trndate,@DATE) between @D1  and @D2  then @D2 
+	 when DATEDIFF(d,trndate,@DATE) between @D2 and @D3 then @D3 
+	 when DATEDIFF(d,trndate,@DATE) between @D3 and @D4 then @D4 
+	 when DATEDIFF(d,trndate,@DATE) between @D4 and @D5 then @D5 
+	 when DATEDIFF(d,trndate,@DATE) between @D5 and @D6 then @D6 
+	 when DATEDIFF(d,trndate,@DATE) > @D6  then 365 end  days
 ,sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) as cumulative
 , case when total - sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) >= 0 then realqty_in else total - sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) + realQty_in end as remaining
 ,REALQTY_IN + total -sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) as minimum
 from (
-select  CASE @WISE WHEN 'ITEM' THEN a.mcode WHEN 'MGROUP' THEN C.MGROUP WHEN 'MENUCAT' THEN C.MCAT END AS MCODE,b.VCHRNO,b.trndate,a.realqty_in from rmd_trnprod a inner join rmd_trnmain b on a.VCHRNO=b.VCHRNO and a.DIVISION = b.DIVISION and a.PhiscalID=b.PhiscalID 
+select  CASE @WISE WHEN 'ITEM' THEN a.mcode WHEN 'MGROUP' THEN C.MGROUP WHEN 'MENUCAT' THEN C.MCAT END AS MCODE,b.VCHRNO,b.trndate,a.realqty_in from RMD_TRNPROD_FN(0, @FYID) a inner join rmd_trnmain_FN(0, @FYID) b on a.VCHRNO=b.VCHRNO and a.DIVISION = b.DIVISION and a.PhiscalID=b.PhiscalID 
 INNER JOIN MENUITEM C ON A.MCODE= C.MCODE 
 where b.VoucherType in ('OP','PI','TR','GR')) as a
 left  join #SUMTABLE  as b on a.MCODE=b.MCODE  
 ) as a where minimum >=0  group by MCODE,total
 
-declare @sql  varchar(max)
-set @sql = 
-'SELECT NULL AS SN, B.MENUCODE CODE, CASE WHEN ''' + @WISE + ''' = ''ITEM''  OR ''' + @WISE + ''' = ''MGROUP'' THEN  B.DESCA ELSE A.MCODE END AS PARTICULAR,
-A as ' + quotename('below' + convert(varchar,@d1)) + ',B as ' + quotename( convert(varchar,@d1) +' - ' +  convert(varchar,@d2)) + ',C as ' + quotename( convert(varchar,@d2) +' - ' +  convert(varchar,@d3)) + ',
-D as ' + quotename( convert(varchar,@d3) +' - ' +  convert(varchar,@d4)) + ',E as ' + quotename( convert(varchar,@d4) +' - ' +  convert(varchar,@d5)) + ',F as ' + quotename( convert(varchar,@d5) +' - ' +  convert(varchar,@d6)) + ',
-G as ' + quotename('above' +  convert(varchar,@d6)) + ', B.PRATE_A PRATE,TOTAL,A.MCODE 
-FROM #AGINGTABLE A LEFT JOIN MENUITEM B ON A.MCODE= B.MCODE  order by PARTICULAR '
-
-exec (@sql)
+SELECT null AS SN, B.MENUCODE CODE, CASE WHEN @WISE = 'ITEM'  OR @WISE = 'MGROUP' THEN  B.DESCA ELSE A.MCODE END AS PARTICULAR,
+D1,D2,D3,D4,D5,D6,D7, B.PRATE_A PRATE,TOTAL,A.MCODE 
+FROM #AGINGTABLE A LEFT JOIN MENUITEM B ON A.MCODE= B.MCODE  order by PARTICULAR
 

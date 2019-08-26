@@ -3,6 +3,7 @@ ADDITIONALCOST_JSON.txt
 ---BARCODE_LOG.txt
 ---BARCODE_DETAIL_STAMP.txt
 CloudBackupSetting.txt
+COMBO_GROUP.txt
 ---CurrencyNumberToWords.txt
 ---DefaultUserRights.txt
 DATEMITI_FULL.txt
@@ -12,6 +13,7 @@ Footfall.txt
 ---GetDefaultParamenterOfStoredProcedure.txt
 PREBILL_TABLES.txt
 getPrintFormat.txt
+GROUP_ITEM.txt
 MULTICURRENCY.txt
 NEPMONTH.txt
 NEPMONTH_FISCAL.txt
@@ -23,6 +25,7 @@ NUM_TOWORDS.txt
 ---RMD_BILLTENDER_UPDATE.txt
 RMD_RECPAY_TABLE.txt
 RMD_RECPAY_VIEW.txt
+RMD_ORDERMAIN_VCHRNO.txt
 RMD_SALESPROD.txt
 RMD_TRNMAIN.txt
 RMD_TRNMAIN_FN.txt
@@ -58,6 +61,10 @@ VEHICLE_WAREHOUSE.txt
 /Reports/DateRange.txt
 /Reports/DayReport/NSP_DAYREPORT.txt
 /Reports/DayReport/RSP_DAYREPORT.txt
+/Reports/DebtorsReport/NSP_DEBTORSREPORT.txt
+/Reports/DebtorsReport/NSP_DEBTORSCREDITORS_AGEING.txt
+/Reports/DebtorsReport/NSP_DEBTORS_REPORT.txt
+/Reports/DebtorsReport/RSP_DEBTORSREPORT.txt
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.txt
 /Reports/DeliveryRegisterReport/RSP_DELIVERYREGISTER_REPORT.txt
 ---/Reports/GetParticularForLedger.txt
