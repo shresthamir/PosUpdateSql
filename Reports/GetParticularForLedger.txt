@@ -1,33 +1,31 @@
-CREATE OR ALTER Function [dbo].[GetParticularForLedger]( @Vchrno as varchar(100), @DIVISION AS VARCHAR(3)) returns varchar(100)
-
+ALTER   Function [dbo].[GetParticularForLedger]( @Vchrno as varchar(100), @DIVISION AS VARCHAR(3)) returns varchar(100)
 Begin
 --Declare @Vchrno varchar(100)
 --set @vchrno= 'JV200'
-	Declare @particular varchar(100),@Vtype varchar(10)
-	set @Vtype=dbo.GetVoucherType(@Vchrno)
-	set @particular = 	Case @Vtype
-		when 'JV' then   'JournaL Voucher'
-		when 'JN' then	'Contra Voucher' 
-		When 'IE' then  'Income & Expenses Voucher'
-		When 'GN' then	'General'
-		When 'PI' then  'Purchase Voucher'
-		When 'PR' then  'Purchase Return Voucher'
-		When 'SI' then 'Sales Voucher'
-		When 'TI' then 'Sales Voucher'
-		When 'SR' then 'Sales Return  Voucher'
-		When 'CN' then 'Credit Note Voucher'
-		When 'DN' then 'Debit Note Voucher'
-		When 'IC' then 'Intercompany Sales Voucher'
-		When 'IR' then 'Intercompany Sales Return Voucher'
-		when 'PV' then 'Party Payment Voucher'
-		when 'RV' then 'Party Receipt Voucher'
-		When 'IV' then 'Vehicle Sales Voucher'
-		When 'TO' then 'Branch Transfer Out'
-		When 'TR' then 'Branch Transfer In'
-		else 'Not Defined'
-	end
-	return @particular
+Declare @particular varchar(100),@Vtype varchar(10)
+DECLARE @TRNMODE VARCHAR(100)
+SELECT @TRNMODE = TRNMODE FROM RMD_TRNMAIN WHERE VCHRNO = @Vchrno AND DIVISION = @DIVISION
+set @Vtype=dbo.GetVoucherType(@Vchrno)
+set @particular = Case @Vtype
+when 'JV' then 'JournaL Voucher'
+when 'JN' then 'Contra Voucher' 
+When 'IE' then 'Income & Expenses Voucher'
+When 'GN' then 'General'
+When 'PI' then 'Purchase Voucher'
+When 'PR' then 'Purchase Return Voucher'
+When 'SI' then 'Sales Voucher'
+When 'TI' then 'Sales Voucher'
+When 'SR' then 'Sales Return  Voucher'
+When 'CN' then 'Credit Note Voucher'
+When 'DN' then 'Debit Note Voucher'
+When 'IC' then 'Intercompany Sales Voucher'
+When 'IR' then 'Intercompany Sales Return Voucher'
+when 'PV' then @TRNMODE
+when 'RV' then @TRNMODE
+When 'IV' then 'Vehicle Sales Voucher'
+When 'TO' then 'Branch Transfer Out'
+When 'TR' then 'Branch Transfer In'
+else 'Not Defined'
+end
+return @particular
 End
-
-
-
