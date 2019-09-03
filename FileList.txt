@@ -100,6 +100,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE.txt
 /Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
 /Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
+/Reports/PurchaseReportSupplierWise/RSP_PURCHASEFIGURE_SUPPLIERWISE.txt
+/Reports/PurchaseReportSupplierWise/SP_PURCHASEFIGURE_SUPPLIERWISE.txt
 /Reports/RSP_DAILYTRIAL.txt
 /Reports/RSP_DSR.txt
 /Reports/RSP_LAKMEDSR.txt
@@ -149,6 +151,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/SupplierVsProductAnalysis/RSP_SUPPLIERVSPRODUCT.txt
 /Reports/TertiarySalesReports/TertiaryDailySalesFootfall.txt
 /Reports/TertiarySalesReports/TertiaryMonthlyFootFallSales.txt
+/Reports/TertiarySalesReports/TertiarySalesDetail.txt
+/Reports/TertiarySalesReports/TertiarySalesDetail.txt
 /Reports/TertiarySalesReports/TertiaryWeeklyFootFall.txt
 /Reports/TopNPurchaseReport/RSP_TOPNPURCHASE_NEW.txt
 /Reports/TopNPurchaseReport/SP_TOPNPURCHASE_NEW.txt
@@ -160,6 +164,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/TrialBalance/NSP_TRIALBALANCE.txt
 /Reports/TrialBalance/RSP_TRIALBALANCE.txt
 /Reports/TRNMAIN_VIEW_SREPORT.txt
+/Reports/TRNPROD_PURCHASEVIEW.txt
 /Reports/TRNPROD_VIEW_SREPORT.txt
 /Reports/VatSalesRegister/NSP_CREDITNOTEREGISTER.txt
 /Reports/VatSalesRegister/NSP_VATSALESREGISTER.txt

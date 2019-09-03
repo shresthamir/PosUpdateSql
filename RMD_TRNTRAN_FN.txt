@@ -1,41 +1,41 @@
-CREATE OR ALTER FUNCTION [dbo].[RMD_TRNTRAN_FN](@PhiscalId VARCHAR(10))
-RETURNS @RMD_TRNTRAN TABLE (VCHRNO varchar(25) NOT NULL, CHALANNO varchar(50), DIVISION char(3) NOT NULL, A_ACID varchar(25) NOT NULL, DRAMNT NUMERIC(20,12), CRAMNT numeric(20, 12),
-							B_ACID varchar(25), NARATION VARCHAR(1000), TOACID VARCHAR(25), NARATION1 VARCHAR(1000), VoucherType varchar(2) NOT NULL, ChequeNo VARCHAR(20), ChequeDate VARCHAR(20), 
-							FCurrency VARCHAR(20), FCurAmount NUMERIC(20,12), CostCenter VARCHAR(100),MultiJournalSno INT, PhiscalID VARCHAR(20), BANKDATE VARCHAR(25), SNO INT)
+CREATE OR ALTER   FUNCTION [dbo].[RMD_TRNTRAN_FN](@PhiscalId VARCHAR(10))
+RETURNS @RMD_TRNTRAN TABLE (VCHRNO varchar(25) NOT NULL, CHALANNO varchar(50), DIVISION char(3) NOT NULL, A_ACID varchar(25) NOT NULL, DRAMNT NUMERIC(22, 12), CRAMNT numeric(22, 12),
+B_ACID varchar(25), NARATION VARCHAR(1000), TOACID VARCHAR(25), NARATION1 VARCHAR(1000), VoucherType varchar(2) NOT NULL, ChequeNo VARCHAR(20), ChequeDate VARCHAR(20), 
+FCurrency VARCHAR(20), FCurAmount NUMERIC(22, 12), CostCenter VARCHAR(100),MultiJournalSno INT, PhiscalID VARCHAR(20), BANKDATE VARCHAR(25), SNO INT)
 as
 BEGIN
 INSERT INTO @RMD_TRNTRAN
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
 FROM    dbo.ACCTRAN WHERE PHiscalID LIKE @PhiscalId
 
-UNION ALL						  
+UNION ALL	 
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
-FROM    dbo.ABBTRAN WHERE PHiscalID LIKE @PhiscalId		  					
-						
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+FROM    dbo.ABBTRAN WHERE PHiscalID LIKE @PhiscalId	 	
+
 UNION ALL
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
 FROM    dbo.TRNTRAN WHERE PHiscalID LIKE @PhiscalId 
-							 
+
 UNION ALL
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
 FROM    dbo.PURTRAN WHERE PHiscalID LIKE @PhiscalId
 
 UNION ALL
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
 FROM    dbo.INVTRAN WHERE PHiscalID LIKE @PhiscalId
 UNION ALL
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
 FROM    dbo.AOPTRAN WHERE PHiscalID LIKE @PhiscalId 
 
 UNION ALL
 SELECT  VCHRNO, CHALANNO, DIVISION, A_ACID, DRAMNT, CRAMNT, B_ACID, NARATION, TOACID, NARATION1, VoucherType, 
-		ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
+ChequeNo, ChequeDate, FCurrency, FCurAmount, CostCenter, MultiJournalSno, PhiscalID, BANKDATE, SNO
 FROM    dbo.OPTRAN WHERE PHiscalID LIKE @PhiscalId 
 RETURN 
 END
