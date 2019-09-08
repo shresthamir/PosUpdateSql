@@ -50,6 +50,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/BranchTransferReport/NSP_TRANSFER_INOUT_REPORT.txt
 /Reports/BranchTransferReport/RSP_TRANSFER_INOUT_REPORT.txt
 /Reports/BILLTENDER.TXT
+/Reports/AccountOpening/RSP_OPENINGENTRYALL_REPORT.txt
 /Reports/ANNEX_7/SP_ANNEX7.TXT
 /Reports/ANNEX_7/VIEW_ANNEX7.TXT
 /Reports/BalanceSheet/NSP_BALANCESHEET.txt
