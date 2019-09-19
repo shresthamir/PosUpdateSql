@@ -1,4 +1,4 @@
-CREATE OR ALTER    PROCEDURE [dbo].[NSP_LEDGERREPORT_SUMMARY_FCURRENCY]
+CREATE OR ALTER      PROCEDURE [dbo].[NSP_LEDGERREPORT_SUMMARY_FCURRENCY]
 --Declare
 	@ACID AS VARCHAR(500),
 	@DATE1 AS DATETIME,
@@ -52,8 +52,8 @@ IF @InSingleLedger=0
 				FROM
 				(
 					SELECT a.A_ACID,'' COSTCENTER,
-					sum(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
-					-SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
+					sum(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
+					-SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
 					WHERE A.A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV AND 
 					(LEFT(A.VCHRNO,2) = 'OB' OR B.TRNDATE < @DATE1) AND ((@COSTCENTER='' and isnull(A.CostCenter,'') like '%') or (@COSTCENTER <> '' and  A.CostCenter IN (SELECT * FROM dbo.SPLIT(@COSTCENTER,','))))
 					group by A.A_ACID
@@ -69,8 +69,8 @@ IF @InSingleLedger=0
 				FROM
 				(
 					SELECT B.TRNDATE,B.BSDATE,B.VCHRNO, B.CHALANNO, A.DIVISION, A.A_ACID, 
-					SUM(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
-					SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,A.COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
+					SUM(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
+					SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,A.COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
 					ISNULL(B.STAMP,convert(float,convert(datetime,B.TRNDATE + ' ' + ISNULL(B.TRNTIME,'00:01:00')))) STAMP,ISNULL(A.CHEQUENO,'') CHEQUENO,ISNULL(A.CHEQUEDATE,'') CHEQUEDATE from 
 					DBO.RMD_TRNTRAN_FN(@FYID) AS A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO=B.VCHRNO AND A.DIVISION=B.DIVISION 
 					WHERE A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV  AND (B.TRNDATE >= @DATE1 AND B.TRNDATE <= @DATE2)
@@ -93,8 +93,8 @@ IF @InSingleLedger=0
 				FROM
 				(
 					SELECT a.A_ACID,ISNULL(A.COSTCENTER,'') COSTCENTER,
-					sum(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
-					-SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
+					sum(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
+					-SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
 					WHERE A.A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV AND 
 					(LEFT(A.VCHRNO,2) = 'OB' OR B.TRNDATE < @DATE1) AND ((@COSTCENTER='' and isnull(A.CostCenter,'') like '%') or (@COSTCENTER <> '' and  A.CostCenter IN (SELECT * FROM dbo.SPLIT(@COSTCENTER,','))))
 					group by A.A_ACID,ISNULL(A.COSTCENTER,'') 
@@ -111,8 +111,8 @@ IF @InSingleLedger=0
 				FROM
 				(
 					SELECT B.TRNDATE,B.BSDATE,B.VCHRNO, B.CHALANNO, A.DIVISION, A.A_ACID, 
-					SUM(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
-					SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,A.COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
+					SUM(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
+					SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,A.COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
 					ISNULL(B.STAMP,convert(float,convert(datetime,B.TRNDATE + ' ' + ISNULL(B.TRNTIME,'00:01:00')))) STAMP,ISNULL(A.CHEQUENO,'') CHEQUENO,ISNULL(A.CHEQUEDATE,'') CHEQUEDATE from 
 					DBO.RMD_TRNTRAN_FN(@FYID) AS A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO=B.VCHRNO AND A.DIVISION=B.DIVISION 
 					WHERE A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV  AND (B.TRNDATE >= @DATE1 AND B.TRNDATE <= @DATE2)
@@ -139,8 +139,8 @@ ELSE
 				FROM
 				(
 					SELECT 'AT' A_ACID,'' COSTCENTER,
-					sum(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
-					-SUM(case when isnull(FCurrency,0)>1 and   CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
+					sum(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
+					-SUM(case when isnull(FCurrency,'')<>'' and   CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
 					WHERE A.A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV AND 
 					(LEFT(A.VCHRNO,2) = 'OB' OR B.TRNDATE < @DATE1) AND ((@COSTCENTER='' and isnull(A.CostCenter,'') like '%') or (@COSTCENTER <> '' and  A.CostCenter IN (SELECT * FROM dbo.SPLIT(@COSTCENTER,','))))					
 				) as X right join rmd_aclist Y on x.A_acid=Y.acid WHERE Y.ACID = 'AT'
@@ -155,8 +155,8 @@ ELSE
 				FROM
 				(
 					SELECT B.TRNDATE,B.BSDATE,B.VCHRNO, B.CHALANNO, A.DIVISION, 'X001' A_ACID, 
-					SUM(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
-					SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,'' COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
+					SUM(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
+					SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,'' COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
 					ISNULL(B.STAMP,convert(float,convert(datetime,B.TRNDATE + ' ' + ISNULL(B.TRNTIME,'00:01:00')))) STAMP,ISNULL(A.CHEQUENO,'') CHEQUENO,ISNULL(A.CHEQUEDATE,'') CHEQUEDATE from 
 					DBO.RMD_TRNTRAN_FN(@FYID) AS A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO=B.VCHRNO AND A.DIVISION=B.DIVISION 
 					WHERE A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV  AND (B.TRNDATE >= @DATE1 AND B.TRNDATE <= @DATE2)
@@ -180,8 +180,8 @@ ELSE
 				FROM
 				(
 					SELECT 'AT' A_ACID,'AT' COSTCENTER,
-					sum(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
-					-SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
+					sum(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END)
+					-SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS OPBAL FROM DBO.RMD_TRNTRAN_FN(@FYID) A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION 
 					WHERE A.A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV AND 
 					(LEFT(A.VCHRNO,2) = 'OB' OR B.TRNDATE < @DATE1) AND ((@COSTCENTER='' and isnull(A.CostCenter,'') like '%') or (@COSTCENTER <> '' and  A.CostCenter IN (SELECT * FROM dbo.SPLIT(@COSTCENTER,','))))					
 				) as X right join RMD_ACLIST Y on x.A_ACID=Y.ACID WHERE Y.ACID = 'AT'
@@ -196,8 +196,8 @@ ELSE
 				FROM
 				(
 					SELECT B.TRNDATE,B.BSDATE,B.VCHRNO, B.CHALANNO, A.DIVISION, 'X001' A_ACID, 
-					SUM(case when isnull(FCurrency,0)>1 and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
-					SUM(case when isnull(FCurrency,0)>1 and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,'N/A' COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
+					SUM(case when isnull(FCurrency,'')<>'' and  DRAMNT > 1 THEN FCurAmount ELSE 0  END) AS DRAMNT, 
+					SUM(case when isnull(FCurrency,'')<>'' and  CRAMNT > 1 THEN FCurAmount ELSE 0  END) AS CRAMNT, case when isnull(NARATION1,'')='' then NARATION ELSE NARATION1 END  AS NARATION,'N/A' COSTCENTER,ISNULL(B.REMARKS,'')REMARKS,
 					ISNULL(B.STAMP,convert(float,convert(datetime,B.TRNDATE + ' ' + ISNULL(B.TRNTIME,'00:01:00')))) STAMP,ISNULL(A.CHEQUENO,'') CHEQUENO,ISNULL(A.CHEQUEDATE,'') CHEQUEDATE from  
 					DBO.RMD_TRNTRAN_FN(@FYID) AS A INNER JOIN DBO.RMD_TRNMAIN_FN(0,@FYID) B ON A.VCHRNO=B.VCHRNO AND A.DIVISION=B.DIVISION 
 					WHERE A_ACID IN (select * from dbo.split(@acid,',')) AND A.DIVISION LIKE @DIV  AND (B.TRNDATE >= @DATE1 AND B.TRNDATE <= @DATE2)
