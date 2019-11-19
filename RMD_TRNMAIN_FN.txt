@@ -1,5 +1,4 @@
-
-ALTER       FUNCTION [dbo].[RMD_TRNMAIN_FN] (@GRNWISE TINYINT, @PhiscalId VARCHAR(25) = '%')
+CREATE OR ALTER FUNCTION [dbo].[RMD_TRNMAIN_FN] (@GRNWISE TINYINT, @PhiscalId VARCHAR(25) = '%')
 RETURNS @RMD_TRNMAIN TABLE (VCHRNO varchar(25) NOT NULL, DIVISION char(3) NOT NULL, CHALANNO varchar(50), TRNDATE smalldatetime NULL, BSDATE varchar(10),
 TRNTIME varchar(15), TOTAMNT numeric(22, 12), DCAMNT numeric(22, 12), DCRATE numeric(22, 12), VATAMNT numeric(22, 12),
 NETAMNT numeric(22, 12), ADVANCE numeric(22, 12), TRNMODE varchar(50), BILLTO varchar(100), BILLTOADD varchar(500),
@@ -10,7 +9,7 @@ CHEQUEDATE datetime NULL, REMARKS nvarchar(500), POST tinyint, POSTUSER varchar(
 [SHIFT] varchar(25), EXPORT tinyint, CHOLDER varchar(50), CARDNO varchar(50), EditUser varchar(50), MEMBERNO varchar(50),
 MEMBERNAME varchar(250), EDITED smallint NULL, TAXABLE numeric(22, 12), NONTAXABLE numeric(22, 12), VMODE tinyint,
 BILLTOTEL varchar(50), BILLTOMOB varchar(50), TRN_DATE datetime NULL, BS_DATE varchar(50), STAX numeric(22, 12), TOTALCASH numeric(22, 12),
-TOTALCREDIT numeric(22, 12), TOTALCREDITCARD numeric(22, 12), TOTALGIFTVOUCHER numeric(22, 12), TENDER numeric(22, 12), CHANGE numeric(22, 12),
+TOTALCREDIT numeric(22, 12), TOTALCREDITCARD numeric(22, 12), TOTALGIFTVOUCHER numeric(22, 12), TENDER numeric(30, 12), CHANGE numeric(30, 12),
 CardTranID varchar(20), ReturnVchrID varchar(20), TranID numeric(18, 0), VoucherStatus varchar(200), VoucherType varchar(2) NOT NULL,
 PRESCRIBEBY varchar(50), DISPENSEBY varchar(50), RECEIVEBY varchar(50), Edate datetime NULL, [STATUS] tinyint, CONFIRMEDBY varchar(50),
 CONFIRMEDTIME varchar(25), PhiscalID varchar(20) NOT NULL, Stamp float NULL, ROUNDOFF numeric(22, 12), Customer_Count numeric(22, 12), DBUSER varchar(50),
