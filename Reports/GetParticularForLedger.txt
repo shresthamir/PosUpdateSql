@@ -25,6 +25,7 @@ when 'RV' then @TRNMODE
 When 'IV' then 'Vehicle Sales Voucher'
 When 'TO' then 'Branch Transfer Out'
 When 'TR' then 'Branch Transfer In'
+When 'AC' then 'Additional Cost Voucher'
 else 'Not Defined'
 end
 return @particular

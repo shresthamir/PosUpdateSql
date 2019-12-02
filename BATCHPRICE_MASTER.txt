@@ -1,0 +1,24 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'BATCHPRICE_MASTER')
+BEGIN
+CREATE TABLE [dbo].[BATCHPRICE_MASTER](
+	[MCODE] [varchar](20) NULL,
+	[BATCHCODE] [varchar](100) NULL,
+	[MRP] [numeric](18, 5) NULL,
+	[LSP] [numeric](18, 8) NULL,
+	[SELLRATEBEFORETAX] [numeric](18, 8) NULL,
+	[STATUS] [tinyint] NULL,
+	[STAMP] [datetime] NOT NULL,
+	[CreateBy] [varchar](20) NULL,
+	[UpdatedBy] [varchar](20) NULL,
+	[BCODE] [varchar](50) NULL,
+	[MFGDATE] [date] NULL,
+	[EXPDATE] [date] NULL,
+	[SELFLIFE] [int] NULL,
+	[APPLYFROMDATE] [date] NULL,
+	[UPTODATE] [date] NULL,
+	[ID] [varchar](50) NULL,
+	[PCL] [varchar](50) NULL,
+	[STATE] [varchar](50) NULL
+) ON [PRIMARY]
+ALTER TABLE [dbo].[BATCHPRICE_MASTER] ADD  DEFAULT (getdate()) FOR [STAMP]
+END

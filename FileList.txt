@@ -2,11 +2,13 @@ ABBCONPROD.txt
 ADDITIONALCOST_JSON.txt
 ---BARCODE_LOG.txt
 ---BARCODE_DETAIL_STAMP.txt
+BATCHPRICE_MASTER.txt
 CloudBackupSetting.txt
 COMBO_GROUP.txt
 ---CurrencyNumberToWords.txt
 ---DefaultUserRights.txt
 DATEMITI_FULL.txt
+DISCOUNT_PRESETS.txt
 DISCOUNT_SCHEME.txt
 ---FIX_ACTYPE.TXT
 Footfall.txt
