@@ -1,0 +1,24 @@
+CREATE OR ALTER PROC HSP_GET_AVAILABLE_ROOMS_AGGREGATE
+@CheckInDate DATETIME,
+@CheckOutDate DATETIME,
+@CategoryId INT = 0
+AS
+
+SELECT A.*, A.TotalRooms - ISNULL(B.Occupied, 0) Available FROM
+(
+	SELECT RC.CategoryId, RC.Category, RC.Bedding, RC.Amenities, RC.DefaultRate, COUNT(*) TotalRooms FROM HTL_ROOM_CATEGORY RC JOIN HTL_ROOM R ON RC.CategoryId = R.CategoryId 
+	WHERE @CategoryId = 0 OR RC.CategoryId = @CategoryId
+	GROUP BY RC.CategoryId, RC.Category, RC.Bedding, RC.Amenities, RC.DefaultRate
+) A LEFT JOIN
+(
+	SELECT CategoryId, Count(*) Occupied FROM
+	(
+		SELECT CategoryId, CheckInDate, CheckOutDate FROM HTL_BOOKING B JOIN HTL_BOOKING_STATUS BS ON B.BookingId = BS.BookingId AND B.DIVISION = BS.DIVISION AND B.PHISCALID = BS.PHISCALID
+		WHERE BS.STATUS = 'BOOKED' AND  (@CheckInDate BETWEEN CHECKINDATE AND DATEADD(D, -1, CHECKOUTDATE) OR @CheckOutDate BETWEEN DATEADD(D, 1, CheckInDate) AND CheckOutDate)
+		UNION ALL
+		SELECT CategoryId, CheckInDate, CheckOutDate FROM HTL_CHECKIN_DETAILS B JOIN HTL_CHECKIN_STATUS BS ON B.CheckInId = BS.CheckInId AND B.DIVISION = BS.DIVISION AND B.PHISCALID = BS.PHISCALID
+		WHERE BS.STATUS = 'CHECKED IN' --AND  (@CheckInDate BETWEEN CHECKINDATE AND DATEADD(D, -1, CHECKOUTDATE) OR @CheckOutDate BETWEEN DATEADD(D, 1, CheckInDate) AND CheckOutDate)
+	) A GROUP BY CategoryId
+) B ON A.CategoryId = B.CategoryId
+WHERE A.TotalRooms>ISNULL(B.Occupied, 0)
+

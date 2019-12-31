@@ -3,7 +3,7 @@ CREATE OR ALTER   PROCEDURE [dbo].[RSP_LEDGERREPORT]
 	@DATE1 AS DATETIME,
 	@DATE2 AS DATETIME,
 	@DIVISION VARCHAR(15)='%',
-	@CostCenter Varchar(500)='',
+	@COSTCENTER Varchar(500)='',
 	@CHK_ShowBsDate tinyint = 0,                     --ShowBSDate:1:0
 	@CHK_MergeLedger tinyint=0,	                     --MergeLedger:1:0
 	@IsAccountLedger tinyint=0,
