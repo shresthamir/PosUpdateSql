@@ -3,6 +3,7 @@ ADDITIONALCOST_JSON.txt
 ---BARCODE_LOG.txt
 ---BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.txt
+CapitalPurchaseConstraint.txt
 CloudBackupSetting.txt
 COMBO_GROUP.txt
 ---CurrencyNumberToWords.txt
