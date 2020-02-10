@@ -34,6 +34,7 @@ NUM_TOWORDS.txt
 ---RDLPRINTING.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt
+RMD_BillOnlinePaymentInfo.txt
 ---RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt
 RMD_RECPAY_TABLE.txt

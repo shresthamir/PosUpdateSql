@@ -1,0 +1,47 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'RMD_BillOnlinePaymentInfo')
+CREATE TABLE [dbo].[RMD_BillOnlinePaymentInfo](
+	[VCHRNO] [varchar](25) NOT NULL,
+	[DIVISION] [char](3) NOT NULL,
+	[PHISCALID] [varchar](10) NOT NULL,
+	[PaymentMode] [varchar](25) NOT NULL,
+	[PSO_TranId] [varchar](50) NOT NULL,
+	[GUID] [varchar](50) NOT NULL,
+	[STAMP] [float] NOT NULL,
+	[BillAmount] [decimal](18, 2) NOT NULL,
+	[VatAmount] [decimal](18, 2) NOT NULL,
+	[VatRefund] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_RMD_BillOnlinePaymentInfo] PRIMARY KEY CLUSTERED 
+(
+	[VCHRNO] ASC,
+	[DIVISION] ASC,
+	[PHISCALID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'LogVatRefundRequestError')
+CREATE TABLE [dbo].[LogVatRefundRequestError](
+[VCHRNO] [varchar](25) NOT NULL,
+[DIVISION] [char](3) NOT NULL,
+[PHISCALID] [varchar](10) NOT NULL,
+[PaymentMode] [varchar](25) NOT NULL,
+[PSO_TranId] [varchar](50) NOT NULL,
+[GUID] [varchar](50) NOT NULL,
+[STAMP] [float] NOT NULL,
+[BillAmount] [decimal](18, 2) NOT NULL,
+[VatAmount] [decimal](18, 2) NOT NULL,
+[VatRefund] [decimal](18, 2) NOT NULL,
+CustomerPan VARCHAR(9) NULL,
+CustomerId VARCHAR(50) NULL,
+VatAc VARCHAR(25) NOT NULL,
+TenderAc VARCHAR(25) NOT NULL,
+PSO_ID VARCHAR(25) NOT NULL,
+[BSDATE] VARCHAR(10) NULL,
+ErrorMessage VARCHAR(MAX)
+ CONSTRAINT [PK_LogVatRefundRequestError] PRIMARY KEY CLUSTERED
+(
+[VCHRNO] ASC,
+[DIVISION] ASC,
+[PHISCALID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
