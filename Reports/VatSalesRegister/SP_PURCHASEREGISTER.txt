@@ -12,6 +12,6 @@ CASE WHEN ISNULL(VMODE,1) <=1 THEN  TAXABLE else null end as[Purchase Amount] , 
 CASE WHEN ISNULL(VMODE,1) =2 THEN  TAXABLE else null end as[Import Purchase Amount] , CASE WHEN ISNULL(VMODE,1)=2 THEN  VATAMNT ELSE NULL END AS [Tax Amount],
 CASE WHEN ISNULL(VMODE,1) =3 THEN  TAXABLE else null end as[Capitalized Purchase Amount] , CASE WHEN ISNULL(VMODE,1)=3 THEN  VATAMNT ELSE NULL END AS [Tax Amount]
 FROM RMD_TRNMAIN A LEFT JOIN RMD_ACLIST B ON A.PARAC=B.ACID 
-LEFT JOIN RMD_ACLIST C ON A.PARAC= C.ACID where vchrno like 'PI%' and isnull(a.status,0) = 0
+LEFT JOIN RMD_ACLIST C ON A.PARAC= C.ACID where VoucherType IN ('PI', 'CP') and isnull(a.status,0) = 0
 and PhiscalID = @FYID  and DIVISION like @DIVISION and trndate between @DATE1 and @DATE2
 ORDER BY TRNDATE,CAST(SUBSTRING(VNUM,3,LEN(VNUM)) AS NUMERIC)

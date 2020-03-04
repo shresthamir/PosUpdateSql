@@ -121,5 +121,4 @@ SET @outputstring = UPPER(LEFT(@outputstring, 1)) + SUBSTRING(@outputstring, 2, 
 if @DecimalNumber <> '00'
 SET @outputString = @outputstring + ' & ' + dbo.num_towords(@decimalnumber) + ' paisa'
 RETURN @outputstring-- return the result
-
 End
