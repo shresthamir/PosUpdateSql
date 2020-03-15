@@ -32,7 +32,7 @@ if @FLG = 1
 		WHERE  A_ACID LIKE 'PA%' AND PTYPE = @DebtorOrCreditor  AND B.TRNDATE < =  @date2  AND ISNULL(B.DIVISION,'') LIKE  @DIV  AND ISNULL(A.CostCenter,'') LIKE @CostCenter AND
 		((@OPNINGONLY = 0 and A.VCHRNO LIKE '%') or (@OPNINGONLY <> 0 and A.VoucherType IN ('AO', 'OB')))
 		GROUP BY A_ACID,C.ACNAME,C.ACCODE
-		having ((@EXNEGETIVE =0 and  (sum(dramnt)- sum(cramnt)) <> 0) or (@EXNEGETIVE =1 and (sum(dramnt)- sum(cramnt)) > 0) or (@EXNEGETIVE =2 and (sum(dramnt)- sum(cramnt)) < 0 ) or (@EXNEGETIVE =10 and (sum(dramnt)- sum(cramnt)) like '%'))
+		having ((@EXNEGETIVE =0 and  (CONVERT(DECIMAL(18,2),sum(dramnt)- sum(cramnt))) <> 0) or (@EXNEGETIVE =1 and (sum(dramnt)- sum(cramnt)) > 0) or (@EXNEGETIVE =2 and (sum(dramnt)- sum(cramnt)) < 0 ) or (@EXNEGETIVE =10 and (sum(dramnt)- sum(cramnt)) like '%'))
 		order by ACNAME
 				 	
 		IF @TREE=0
