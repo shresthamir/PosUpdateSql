@@ -4,7 +4,7 @@
 ---BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.txt
 CapitalPurchaseConstraint.txt
---CloudBackupSetting.txt
+---CloudBackupSetting.txt
 COMBO_GROUP.txt
 ---CurrencyNumberToWords.txt
 ---DefaultUserRights.txt

@@ -1,0 +1,14 @@
+CREATE OR ALTER procedure [dbo].[RSP_CoversServedSummary_Report]
+as
+       set nocount on;
+
+         select tables_served,
+                covers_served,
+                current_orders_value_served,
+                (current_orders_value_served/tables_served) average_orders_value_served_per_table,
+                (current_orders_value_served/covers_served) average_orders_value_served_per_cover
+         from (
+               SELECT count(distinct rkm.KOTID) tables_served,sum(rkm.pax) covers_served,sum(TOTAMNT-DCAMNT) current_orders_value_served
+               FROM RMD_KOTMAIN rkm JOIN RMD_KOTMAIN_STATUS S ON rkm.KOTID = S.KOTID
+               WHERE S.STATUS = 'BILLED'
+              )a

@@ -1,0 +1,57 @@
+ALTER procedure [dbo].[RSP_SalesByHour]
+@flag varchar(20)
+as
+	set nocount on;
+	declare @DATE1 DATE, @DATE2 DATE
+	--SELECT @DATE2 = GETDATE()
+	SET @DATE2 = '2019-12-09'
+	if @flag='hourly'
+	begin
+		--set @parameter='TRNDATE='2019-07-18''
+		SET @DATE1 = @DATE2
+	end
+	ELSE IF @flag='Weekly'
+	begin
+		--set @parameter='TRNDATE between DATEADD(d, -6,'2019-07-18') and  '2019-07-18''
+		SELECT @DATE1 = DATEADD(d, -6,@DATE2)
+	end
+	else if @flag='Monthly'
+		--set @parameter='TRNDATE between DATEADD(d, -29,'2019-07-18') and  '2019-07-18''
+		SELECT @DATE1 = DATEADD(d, -29,@DATE2)
+
+	select hr hour,
+		count(case when bills=1 then 1 end) number_of_bills,
+		count(case when bills=0 then 0 end) number_of_return_bills,
+		sum(cashsales) total_cash_sales,
+		sum(creditsales) total_credit_sales,
+		sum(onlinesales) total_epayment_sales,
+		sum(overallsales) overall_sales
+		from
+		(  
+			select 
+				case when TRNTIME between   '00:00' and '02:00' then '0-2'
+					when TRNTIME between  '02:00' and '04:00' then '2-4'
+					when TRNTIME between  '04:00' and '06:00' then '4-6'
+					when TRNTIME between  '06:00' and '08:00' then '6-8'
+					when TRNTIME between  '08:00' and '10:00' then '8-10'
+					when TRNTIME between  '10:00' and '12:00' then '10-12'
+					when TRNTIME between  '12:00' and '14:00' then '12-14'
+					when TRNTIME between  '14:00' and '16:00' then '14-16'
+					when TRNTIME between  '16:00' and '18:00' then '16-18'
+					when TRNTIME between  '18:00' and '20:00' then '18-20'
+					when TRNTIME between  '20:00' and '22:00' then '20-22'
+					when TRNTIME between '22:00' and '24:00' then '22-24'
+				end hr,
+				case when LEFT(VCHRNO,2) IN ('SI','TI') then 1 else 0 end bills,
+				case when (am.DisplayPayMode in ('Cash') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end cashsales,
+				case when (am.DisplayPayMode in ('Credit') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end creditsales,
+				case when (am.DisplayPayMode in ('Online') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end onlinesales,
+				case when LEFT(VCHRNO,2) IN ('SI','RE','TI') then (case when LEFT(VCHRNO,2) IN ('RE')then NETAMNT*-1 else NETAMNT end) else 0 end overallsales  
+				FROM RMD_TRNMAIN A 
+				LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
+				left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
+				WHERE --(TRNDATE > = @DATE1 AND TRNDATE < = @DATE2) AND DIVISION LIKE @DIV AND
+				LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','RE') and TRNDATE BETWEEN @DATE1 AND @DATE2
+		)a
+		group by hr
+		order by cast(substring(hr,1,CHARINDEX('-',hr)-1) as int)

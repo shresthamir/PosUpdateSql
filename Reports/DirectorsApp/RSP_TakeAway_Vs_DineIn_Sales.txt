@@ -1,0 +1,21 @@
+CREATE OR ALTER   procedure [dbo].[RSP_TakeAway_Vs_DineIn_Sales]
+as 
+	set nocount on;
+	declare @DATE2 date= '2019-12-09',@DATE1 date
+	set @DATE1 = DATEADD(d, -29,@DATE2)
+	select  cast(tm.TRNDATE as date) TRNDATE,
+	case when ISNULL(rts.TAKEAWAY, 0)=0 then (case when left(tm.VCHRNO ,2) in ('RE') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end) else 0 end  dine_in_sales,
+	case when ISNULL(rts.TAKEAWAY, 0)=1 then (case when left(tm.VCHRNO ,2) in ('RE') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end) else 0 end  takeaway_sales,
+	case when left(tm.VCHRNO ,2) in ('RE') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end  overall_sales into #temp
+	from trnmain tm  
+	inner join TRNPROD tp on tm.VCHRNO=tp.VCHRNO and tm.DIVISION=tp.DIVISION and tm.PhiscalID=tp.PhiscalID
+	left join RMD_TRNPROD_STATUS rts on rts.VCHRNO=tp.VCHRNO and rts.DIVISION=tp.DIVISION and rts.PhiscalID=tp.PhiscalID and rts.MCODE=tp.MCODE and rts.SNO=tp.SNO
+	where LEFT(tm.VCHRNO,2) IN ('SI','RE','TI') and TRNDATE between @DATE1 and @DATE2
+	order by trndate
+
+	select 'Today' type,sum(dine_in_sales) dine_in_sales,sum(takeaway_sales) takeaway_sales,sum(overall_sales) overall_sales from #temp where TRNDATE=@DATE2
+	union all
+	select 'This Week' type,sum(dine_in_sales) dine_in_sales,sum(takeaway_sales) takeaway_sales,sum(overall_sales) overall_sales from #temp where TRNDATE between DATEADD(d, -6,@DATE2) and  @DATE2
+	union all
+	select 'This Month' type,sum(dine_in_sales) dine_in_sales,sum(takeaway_sales) takeaway_sales,sum(overall_sales) overall_sales from #temp where TRNDATE between @DATE1 and  @DATE2
+	drop table #temp
