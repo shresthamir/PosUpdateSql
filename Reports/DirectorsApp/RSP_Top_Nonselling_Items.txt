@@ -1,11 +1,12 @@
-CREATE OR ALTER procedure [dbo].[RSP_Top_Nonselling_Items]
+CREATE OR ALTER   procedure [dbo].[RSP_Top_Nonselling_Items]
 	@RMODE TINYINT =1,
 	@Daterange varchar(20)='Weekly',
 	@category varchar(50)='%'
 as
 	set nocount on;
       --declare @RMODE TINYINT =1,@Daterange varchar(20)='Weekly',@category varchar(50)='%'
-	declare @DATE1 DATETIME,@DATE2 DATETIME='2019-12-09'
+	declare @DATE1 DATETIME,@DATE2 DATETIME
+	SELECT @DATE2 = GETDATE()
 
 	if @Daterange='Weekly'  
 		set @DATE1=dateadd(d,-6,@DATE2)

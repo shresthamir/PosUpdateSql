@@ -1,51 +1,57 @@
-ALTER procedure [dbo].[RSP_Dashboard_Data]
+CREATE OR ALTER   procedure [dbo].[RSP_Dashboard_Data]
 as
-declare @DATE2 date= '2019-12-09',@DATE1 date
-      set @DATE1 = DATEADD(d, -29,@DATE2)
+declare @DATE2 date,@DATE1 date
+SELECT @DATE2 = GETDATE()
+set @DATE1 = DATEADD(d, -29,@DATE2)
 
-      select
-            case when LEFT(VCHRNO,2) IN ('SI','TI') then 1 else 0 end bills,
-            case when (a.trnmode in ('Credit') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end creditsales,
-            case when (am.DisplayPayMode in ('Cash') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end cashsales,
-            case when (a.trnmode in ('Credit Card') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end creditcardsales,
-            case when (am.DisplayPayMode in ('Online') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end onlinesales,
-            case when LEFT(VCHRNO,2) IN ('SI','RE','TI') then (case when LEFT(VCHRNO,2) IN ('RE')then NETAMNT*-1 else NETAMNT end) else 0 end overallsales,
-   cast (TRNDATE as date) TRNDATE into #temp
-      FROM RMD_TRNMAIN A LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
-          left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
-      WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','RE') and TRNDATE BETWEEN @DATE1 AND @DATE2
+select
+A.VOUCHERTYPE,
+case when (a.trnmode in ('Credit') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end creditsales,
+case when (am.DisplayPayMode in ('Cash') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end cashsales,
+case when (a.trnmode in ('Credit Card') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end creditcardsales,
+case when (am.DisplayPayMode in ('Online') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end onlinesales,
+case when (am.DisplayPayMode in ('Other Payment') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end othersales,
+case when LEFT(VCHRNO,2) IN ('SI','CN','TI') then (case when LEFT(VCHRNO,2) IN ('CN')then NETAMNT*-1 else NETAMNT end) else 0 end overallsales,
+cast (TRNDATE as date) TRNDATE into #temp
+FROM RMD_TRNMAIN A LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
+left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
+WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','CN') and TRNDATE BETWEEN @DATE1 AND @DATE2
 
- select  type,number_of_bills,number_of_return_bills,total_credit_amount,total_cash_amount,total_creditcard_amount,total_epayment_sales,total_sales from(
- select 'Daily' type,
-               count(case when bills=1 then 1 end) number_of_bills,
-               count(case when bills=0 then 0 end) number_of_return_bills,
-          sum(creditsales)  total_credit_amount,
-          sum(cashsales) total_cash_amount,
-          sum(creditsales) total_creditcard_amount,
-          sum(onlinesales) total_epayment_sales,
-          sum(overallsales) total_sales,1 sn
- from #temp where TRNDATE=@DATE2
+select  type,number_of_bills,number_of_return_bills,total_credit_amount,total_cash_amount,total_creditcard_amount,total_epayment_sales,total_other_sales,total_sales from
+(
+	select 'Daily' type,
+    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 1 ELSE 0 END) number_of_bills,
+    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
+    sum(creditsales)  total_credit_amount,
+    sum(cashsales) total_cash_amount,
+    sum(creditsales) total_creditcard_amount,
+    sum(onlinesales) total_epayment_sales,
+	sum(othersales) total_other_sales,
+    sum(overallsales) total_sales,1 sn
+	from #temp where TRNDATE=@DATE2
 
- UNION ALL
- select 'Weekly' type,
-               count(case when bills=1 then 1 end) number_of_bills,
-               count(case when bills=0 then 0 end) number_of_return_bills,
-          sum(creditsales)  total_credit_sales,
-          sum(cashsales) total_cash_sales,
-          sum(creditcardsales) total_creditcard_sales,
-          sum(onlinesales) total_epayment_sales,
-          sum(overallsales) overall_sales,2 sn
- from #temp where TRNDATE BETWEEN DATEADD(d, -6,@DATE2) and @DATE2  
+	UNION ALL
+	select 'Weekly' type,
+    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 1 ELSE 0 END) number_of_bills,
+    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
+	sum(creditsales)  total_credit_sales,
+	sum(cashsales) total_cash_sales,
+	sum(creditcardsales) total_creditcard_sales,
+	sum(onlinesales) total_epayment_sales,
+	sum(othersales) total_other_sales,
+    sum(overallsales) overall_sales,2 sn
+	from #temp where TRNDATE BETWEEN DATEADD(d, -6,@DATE2) and @DATE2  
 
- union all
- select 'Monthly' type,
-               count(case when bills=1 then 1 end) number_of_bills,
-               count(case when bills=0 then 0 end) number_of_return_bills,
-          sum(creditsales)  total_credit_sales,
-          sum(cashsales) total_cash_sales,
-          sum(creditcardsales) total_creditcard_sales,
-          sum(onlinesales) total_epayment_sales,
-          sum(overallsales) overall_sales,3 sn
- from #temp
+	union all
+	select 'Monthly' type,
+    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 1 ELSE 0 END) number_of_bills,
+    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
+    sum(creditsales)  total_credit_sales,
+    sum(cashsales) total_cash_sales,
+    sum(creditcardsales) total_creditcard_sales,
+    sum(onlinesales) total_epayment_sales,
+	sum(othersales) total_other_sales,
+    sum(overallsales) overall_sales,3 sn
+	from #temp
  )b order by sn
  drop table #temp

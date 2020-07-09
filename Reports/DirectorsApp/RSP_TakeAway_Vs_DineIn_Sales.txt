@@ -1,8 +1,9 @@
 CREATE OR ALTER   procedure [dbo].[RSP_TakeAway_Vs_DineIn_Sales]
 as 
 	set nocount on;
-	declare @DATE2 date= '2019-12-09',@DATE1 date
-	set @DATE1 = DATEADD(d, -29,@DATE2)
+	declare @DATE2 date,@DATE1 date
+	SELECT @DATE2 = GETDATE()
+	SET @DATE1 = DATEADD(d, -29,@DATE2)
 	select  cast(tm.TRNDATE as date) TRNDATE,
 	case when ISNULL(rts.TAKEAWAY, 0)=0 then (case when left(tm.VCHRNO ,2) in ('RE') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end) else 0 end  dine_in_sales,
 	case when ISNULL(rts.TAKEAWAY, 0)=1 then (case when left(tm.VCHRNO ,2) in ('RE') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end) else 0 end  takeaway_sales,

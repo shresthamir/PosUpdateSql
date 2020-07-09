@@ -1,14 +1,15 @@
 CREATE OR ALTER   procedure [dbo].[RSP_CategoryWiseSalesVsPlanned]
 as
 set nocount on;
-declare @DATE2 date= '2019-12-04',@DATE1 date
+declare @DATE2 date,@DATE1 date
+SELECT @DATE2 = GETDATE()
 set @DATE1 = DATEADD(d, -29,@DATE2)
  
 SELECT AD, YEAR(AD) [YEAR], MONTH(AD) [MONTH],  MENUCAT INTO #MCAT FROM DATEMITI, MCAT1 WHERE AD BETWEEN @DATE1 AND @DATE2
 SELECT  cast(AD as date) TRNDATE,M.[YEAR], M.[MONTH], MENUCAT Category, ISNULL(SUM(SALES), 0) actual_sales, ISNULL(cw.planned_sales/30, 0) planned_sales into #temp from #MCAT M
 	LEFT JOIN
 	(
-		SELECT TRNDATE, MCAT1, case when left(tm.VCHRNO ,2) in ('RE', 'CN') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end SALES FROM trnmain tm 
+		SELECT TRNDATE, MCAT1, case when left(tm.VCHRNO ,2) in ('RE', 'CN') then tp.NETAMOUNT*-1 else tp.NETAMOUNT end SALES FROM trnmain tm 
 		join TRNPROD tp on tm.VCHRNO = tp.VCHRNO and tm.DIVISION = tp.DIVISION and tm.PhiscalID = tp.PhiscalID
 		JOIN MENUITEM mi on tp.MCODE = mi.MCODE
 	) A ON M.AD = A.TRNDATE AND A.MCAT1 = M.MENUCAT
@@ -23,6 +24,3 @@ union all
 select category, 'Monthly' type, SUM(actual_sales) actual_sales, SUM(planned_sales) planned_sales from #temp where TRNDATE between DATEADD(d, -29,@DATE2)  and @DATE2 group by Category
 drop table #temp
 drop table #MCAT
-
-
-	

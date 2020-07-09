@@ -1,10 +1,10 @@
-ALTER procedure [dbo].[RSP_SalesByHour]
+CREATE OR ALTER   procedure [dbo].[RSP_SalesByHour]
 @flag varchar(20)
 as
 	set nocount on;
 	declare @DATE1 DATE, @DATE2 DATE
-	--SELECT @DATE2 = GETDATE()
-	SET @DATE2 = '2019-12-09'
+	SELECT @DATE2 = GETDATE()
+	--SET @DATE2 = '2019-12-09'
 	if @flag='hourly'
 	begin
 		--set @parameter='TRNDATE='2019-07-18''
