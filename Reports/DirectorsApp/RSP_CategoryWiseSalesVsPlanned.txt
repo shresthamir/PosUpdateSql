@@ -9,9 +9,10 @@ SELECT AD, YEAR(AD) [YEAR], MONTH(AD) [MONTH],  MENUCAT INTO #MCAT FROM DATEMITI
 SELECT  cast(AD as date) TRNDATE,M.[YEAR], M.[MONTH], MENUCAT Category, ISNULL(SUM(SALES), 0) actual_sales, ISNULL(cw.planned_sales/30, 0) planned_sales into #temp from #MCAT M
 	LEFT JOIN
 	(
-		SELECT TRNDATE, MCAT1, case when left(tm.VCHRNO ,2) in ('RE', 'CN') then tp.NETAMOUNT*-1 else tp.NETAMOUNT end SALES FROM trnmain tm 
-		join TRNPROD tp on tm.VCHRNO = tp.VCHRNO and tm.DIVISION = tp.DIVISION and tm.PhiscalID = tp.PhiscalID
+		SELECT TRNDATE, MCAT1, case when left(tm.VCHRNO ,2) in ('RE', 'CN') then (tp.TAXABLE + TP.NONTAXABLE + TP.VAT)*-1 else (tp.TAXABLE + TP.NONTAXABLE + TP.VAT) end SALES FROM RMD_TRNMAIN tm 
+		join RMD_TRNPROD tp on tm.VCHRNO = tp.VCHRNO and tm.DIVISION = tp.DIVISION and tm.PhiscalID = tp.PhiscalID
 		JOIN MENUITEM mi on tp.MCODE = mi.MCODE
+		WHERE TM.VOUCHERTYPE IN ('SI', 'TI', 'CN')
 	) A ON M.AD = A.TRNDATE AND A.MCAT1 = M.MENUCAT
 	LEFT join CategoryWiseMonthlySalesPlan cw on M.[YEAR] = cw.[year] and M.[MONTH]=cw.[month] and M.MENUCAT =cw.Category
 	GROUP BY AD, MENUCAT, M.[YEAR], M.[MONTH],cw.planned_sales

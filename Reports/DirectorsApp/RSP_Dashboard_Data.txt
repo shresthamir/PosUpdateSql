@@ -10,7 +10,7 @@ case when (a.trnmode in ('Credit') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then
 case when (am.DisplayPayMode in ('Cash') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end cashsales,
 case when (a.trnmode in ('Credit Card') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end creditcardsales,
 case when (am.DisplayPayMode in ('Online') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end onlinesales,
-case when (am.DisplayPayMode in ('Other Payment') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end othersales,
+case when (am.DisplayPayMode not in ('Cash','Credit', 'Credit Card', 'Online') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end othersales,
 case when LEFT(VCHRNO,2) IN ('SI','CN','TI') then (case when LEFT(VCHRNO,2) IN ('CN')then NETAMNT*-1 else NETAMNT end) else 0 end overallsales,
 cast (TRNDATE as date) TRNDATE into #temp
 FROM RMD_TRNMAIN A LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
@@ -24,7 +24,7 @@ select  type,number_of_bills,number_of_return_bills,total_credit_amount,total_ca
     SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
     sum(creditsales)  total_credit_amount,
     sum(cashsales) total_cash_amount,
-    sum(creditsales) total_creditcard_amount,
+    sum(creditcardsales) total_creditcard_amount,
     sum(onlinesales) total_epayment_sales,
 	sum(othersales) total_other_sales,
     sum(overallsales) total_sales,1 sn

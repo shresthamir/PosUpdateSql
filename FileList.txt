@@ -55,6 +55,7 @@ RMD_TRNTRAN_FN.txt
 ---SALES_TRNPROD.txt
 SETTINGS.txt
 ---ShippingInfo.txt
+SizeColorMaster.txt
 ---SP_GETSCHEMEDISCOUNT.txt
 ---SP_GetTotalDiscount.txt
 TRNMAIN_VIEW.txt
