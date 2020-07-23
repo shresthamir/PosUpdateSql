@@ -3,7 +3,8 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_OPENINGSTOCK]
 @DIVISION VARCHAR(3)	='%',
 @OPT_TREE TINYINT = 0,                                       --NonTree:0,Tree:1
 @MGROUP VARCHAR(25)='MI',
-@PTYPE INT = 100
+@PTYPE INT = 100,
+@FYID VARCHAR(20) = ''
 AS
 DECLARE @GROUPNAME AS VARCHAR(100)
 DECLARE @LVL INT	
@@ -17,7 +18,7 @@ case when(a.qty >= 1) then round((A.Amnt/A.Qty),2) else null end as Rate, a.Amnt
 INTO #RESULT from menuitem B, 
 (
 	select mcode,sum(quantity) as Qty,sum(amount)as Amnt from rmd_Trnprod 
-	where vchrno like 'OP%' and warehouse like @WAREHOUSE AND RMD_TRNPROD.DIVISION LIKE @DIVISION 
+	where vchrno like 'OP%' and warehouse like @WAREHOUSE AND RMD_TRNPROD.DIVISION LIKE @DIVISION AND 	RMD_TRNPROD.PHISCALID = @FYID
 	group by mcode
 ) as A where a.mcode = b.mcode AND ISNULL(@PTYPE, PTYPE) =  PTYPE
 
