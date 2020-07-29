@@ -76,6 +76,11 @@ VEHICLE_WAREHOUSE.txt
 /Reports/BalanceSheet/NSP_BALANCESHEET_HORIZONTAL.txt
 /Reports/BalanceSheet/NSP_BALANCESHEET_REPORT.txt
 /Reports/BalanceSheet/RSP_BALANCESHEET_REPORT.txt
+/Reports/BankReports/RSP_BANKSTATEMENT.txt
+/Reports/BankReports/RSP_BANKSTATUS.txt
+/Reports/BankReports/SP_ACLEDGER_PROC.txt
+/Reports/BankReports/SP_BANKSTATUS.txt
+/Reports/BankReports/SP_SUMMARYLEDGER.txt
 ---/Reports/CashBookReport/RSP_CASHBOOK_DAYWISE.txt
 /Reports/CashBookReport/SP_CASHBOOK_DAYWISE.txt
 /Reports/DateRange.txt
