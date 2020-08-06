@@ -1,0 +1,39 @@
+CREATE OR ALTER procedure [dbo].[RSP_CategoryWise_Sales_Report]  
+@flag varchar(20)
+AS
+--declare @flag varchar(20)='Monthly'
+set nocount on;
+declare @DATE1 date,@phiscalid varchar(15)
+
+SELECT @DATE1 = GETDATE()
+select @phiscalid  =PhiscalID  from COMPANY
+
+if @flag='Monthly'
+begin
+SELECT MI.MCAT1 category, CONVERT(DECIMAL(18,2), SUM(CASE WHEN TM.VoucherType  = 'CN' THEN NETAMNT * -1 ELSE NETAMNT END)) totalSales
+FROM RMD_TRNMAIN TM
+    JOIN RMD_TRNPROD TP ON TM.VCHRNO = TP.VCHRNO
+    JOIN MENUITEM MI ON TP.MCODE = MI.MCODE
+WHERE TM.VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-29,@DATE1) and @DATE1
+GROUP BY MCAT1
+end
+
+else if @flag='Weekly'
+begin
+SELECT MI.MCAT1 category, CONVERT(DECIMAL(18,2), SUM(CASE WHEN TM.VoucherType  = 'CN' THEN NETAMNT * -1 ELSE NETAMNT END)) totalSales
+FROM RMD_TRNMAIN TM
+    JOIN RMD_TRNPROD TP ON TM.VCHRNO = TP.VCHRNO
+    JOIN MENUITEM MI ON TP.MCODE = MI.MCODE
+WHERE TM.VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-6,@DATE1) and @DATE1
+GROUP BY MCAT1
+end
+
+else if @flag='Yearly'
+begin
+SELECT MI.MCAT1 category, CONVERT(DECIMAL(18,2), SUM(CASE WHEN TM.VoucherType  = 'CN' THEN NETAMNT * -1 ELSE NETAMNT END)) totalSales
+FROM RMD_TRNMAIN TM
+    JOIN RMD_TRNPROD TP ON TM.VCHRNO = TP.VCHRNO
+    JOIN MENUITEM MI ON TP.MCODE = MI.MCODE
+WHERE TM.VoucherType IN ('SI', 'TI', 'CN')  AND tm.PhiscalID=@phiscalid
+GROUP BY MCAT1
+end
