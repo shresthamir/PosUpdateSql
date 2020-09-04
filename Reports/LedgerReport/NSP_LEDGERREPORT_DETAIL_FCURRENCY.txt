@@ -214,37 +214,10 @@ END
 
 --PREPARING RECORD WITH RUNNING TOTAL
 -------------------------------------
-Declare  LedgerCursor Cursor for select Sno,A_Acid,Dramnt,Cramnt,trndate,Bsdate,vchrno,Chalanno,particulars,naration,B_acid,division,Ccenter,Rmk,stamp,Cheque from @Ledgertable_tmp
-open LedgerCursor
-fetch next from LedgerCursor into @Sno,@A_Acid,@Dramnt,@cramnt,@trndate,@Bsdate,@vchrno,@Chalanno,@particulars,@naration,@B_acid,@division,@Ccenter,@Rmk,@stamp,@CHEQUE
-while @@fetch_status=0
-Begin
-	if @REPORTBYCOSTCENTER = 0
-		begin
-		if @A_Acid <> @A_Acid_tmp 
-			Begin
-				set @RunningTotal=0
-				set @A_Acid_tmp=@A_Acid
-			end
-		Set @RunningTotal=@Runningtotal+@Dramnt-@Cramnt
-		insert into @LedgerTable Values (@sno,@trndate,@bsdate,@vchrno,@chalanno,@particulars,@Dramnt ,@Cramnt ,@naration ,@B_acid ,@division ,@RunningTotal,@A_acid,@ccenter,@rmk,@stamp,@CHEQUE)
-		fetch next from LedgerCursor into @Sno,@A_Acid,@Dramnt,@cramnt,@trndate,@Bsdate,@vchrno,@Chalanno,@particulars,@naration,@B_acid,@division,@Ccenter,@Rmk,@stamp,@CHEQUE
-		end
-	else
-		begin
-		if @Ccenter <> @A_Acid_tmp 
-			Begin
-				set @RunningTotal=0
-				set @A_Acid_tmp=@ccenter
-			end
-		Set @RunningTotal=@Runningtotal+@Dramnt-@Cramnt
-		insert into @LedgerTable Values (@sno,@trndate,@bsdate,@vchrno,@chalanno,@particulars,
-				@Dramnt ,@Cramnt ,@naration ,@B_acid ,@division ,@RunningTotal,@A_acid,@ccenter,@rmk,@stamp,@CHEQUE)
-		fetch next from LedgerCursor into @Sno,@A_Acid,@Dramnt,@cramnt,@trndate,@Bsdate,@vchrno,@Chalanno,@particulars,@naration,@B_acid,@division,@Ccenter,@Rmk,@stamp,@CHEQUE 
-		end
-End
-Close LedgerCursor
-Deallocate LedgerCursor
+if @REPORTBYCOSTCENTER = 0
+	INSERT INTO @LedgerTable SELECT SNO, TRNDATE, BSDATE, VCHRNO, CHALANNO, PARTICULARS, DRAMNT, CRAMNT, NARATION, B_ACID, DIVISION, SUM(DRAMNT-CRAMNT) OVER (PARTITION BY A_ACID ORDER BY SNO), A_ACID, CCENTER, RMK, STAMP, CHEQUE FROM @Ledgertable_tmp
+else
+	INSERT INTO @LedgerTable SELECT SNO, TRNDATE, BSDATE, VCHRNO, CHALANNO, PARTICULARS, DRAMNT, CRAMNT, NARATION, B_ACID, DIVISION, SUM(DRAMNT-CRAMNT) OVER (PARTITION BY CCENTER ORDER BY SNO), A_ACID, CCENTER, RMK, STAMP, CHEQUE FROM @Ledgertable_tmp
 
 --select * from @LedgerTable order by a_acid,sno
 
