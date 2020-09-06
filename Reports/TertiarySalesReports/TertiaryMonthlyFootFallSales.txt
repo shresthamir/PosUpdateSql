@@ -24,10 +24,10 @@ FROM
 		WHERE AD BETWEEN @DATE1 AND @DATE2  
 	) A INNER JOIN NEPMONTH  B ON A.MAHINA=B.MAHINA
 
-SELECT A.SAL,A.MAHINA,A.MAHINANAME,B.Footfall,[No of Bill Generated],[Qty Solds],cast(cast((([No of Bill Generated]/B.Footfall) *100) as decimal(5,2)) as varchar(20)) + '%' [Conversion],[Value Realized],[Average Ticket Value],
+SELECT A.SAL,A.MAHINA,A.MAHINANAME,B.Footfall,[No of Bill Generated],[Qty Solds],cast(cast((([No of Bill Generated]/B.Footfall) *100) as decimal(10,2)) as varchar(20)) + '%' [Conversion],[Value Realized],[Average Ticket Value],
 [Avg Garment Realization],[Avg Basket Size] FROM 
 (
-SELECT A.SAL,A.MAHINA,A.MAHINANAME, CAST(COUNT(DISTINCT B.VCHRNO) AS DECIMAL(5,2)) [No of Bill Generated],SUM(REALQTY) [Qty Solds],
+SELECT A.SAL,A.MAHINA,A.MAHINANAME, CAST(COUNT(DISTINCT B.VCHRNO) AS DECIMAL(10,2)) [No of Bill Generated],SUM(REALQTY) [Qty Solds],
 CASE WHEN @OPT_VATINCLUSIVE = 0 THEN SUM(AMOUNT-DISCOUNT) ELSE SUM(NETAMOUNT) END [Value Realized],
 CASE WHEN @OPT_VATINCLUSIVE = 0 THEN SUM(AMOUNT-DISCOUNT) ELSE SUM(NETAMOUNT) END/COUNT(DISTINCT B.VCHRNO) [Average Ticket Value],
 CASE WHEN @OPT_VATINCLUSIVE = 0 THEN SUM(AMOUNT-DISCOUNT) ELSE SUM(NETAMOUNT) END/SUM(REALQTY) [Avg Garment Realization],SUM(REALQTY)/COUNT(DISTINCT B.VCHRNO) [Avg Basket Size]

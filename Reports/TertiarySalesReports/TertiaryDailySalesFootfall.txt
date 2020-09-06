@@ -46,10 +46,10 @@ OPTION
 	(MAXRECURSION 0)
 	
 ------------------------------------------------
-SELECT A.AD,A.SAL,A.MAHINA,A.MAHINANAME,A.GATE,A.WEEK_COUNT [WEEK],D.WEEK_NAME,B.Footfall,[No of Bill Generated],[Qty Solds], [Value Realized],cast(cast((([No of Bill Generated]/B.Footfall) *100) as decimal(5,2)) as varchar(20)) + '%' [Conversion],[Average Ticket Value],
+SELECT A.AD,A.SAL,A.MAHINA,A.MAHINANAME,A.GATE,A.WEEK_COUNT [WEEK],D.WEEK_NAME,B.Footfall,[No of Bill Generated],[Qty Solds], [Value Realized],cast(cast((([No of Bill Generated]/B.Footfall) *100) as decimal(10,2)) as varchar(20)) + '%' [Conversion],[Average Ticket Value],
 [Avg Garment Realization],[Avg Basket Size] FROM 
 (
-	SELECT A.AD,A.SAL,A.MAHINA,A.MAHINANAME,A.GATE,WEEK_COUNT,A.WEEK_DAY, CAST(COUNT(DISTINCT B.VCHRNO) AS DECIMAL(5,2)) [No of Bill Generated],
+	SELECT A.AD,A.SAL,A.MAHINA,A.MAHINANAME,A.GATE,WEEK_COUNT,A.WEEK_DAY, CAST(COUNT(DISTINCT B.VCHRNO) AS DECIMAL(10,2)) [No of Bill Generated],
 	SUM(REALQTY) [Qty Solds],
 	CASE WHEN @OPT_VATINCLUSIVE = 0 THEN SUM(AMOUNT-DISCOUNT) ELSE SUM(NETAMOUNT) END [Value Realized],
 	CASE WHEN @OPT_VATINCLUSIVE = 0 THEN SUM(AMOUNT-DISCOUNT) ELSE SUM(NETAMOUNT) END/CASE WHEN COUNT(DISTINCT B.VCHRNO)=0 THEN NULL ELSE COUNT(DISTINCT B.VCHRNO) END [Average Ticket Value],

@@ -36,6 +36,7 @@ NUM_TOWORDS.txt
 ---RDLPRINTING.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt
+ReportContextMenus.txt
 RMD_BillOnlinePaymentInfo.txt
 ---RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt
@@ -123,6 +124,9 @@ VEHICLE_WAREHOUSE.txt
 /Reports/LedgerReport/NSP_LEDGERREPORT_SUMMARY_FCURRENCY.txt
 /Reports/LedgerReport/RSP_LEDGERREPORT.txt
 /Reports/MembershipReports/MEMBERSHIPREPORT_PROC.txt
+/Reports/MembershipReports/RSP_MEMBERSALES_DETAIL.txt
+/Reports/MembershipReports/RSP_MEMBERSALES_SUMMARY.txt
+/Reports/MembershipReports/RSP_MEMBERSHIPREPORT_SUMMARY.txt
 /Reports/MembershipReports/RSP_TOPNMEMBERSHIPSALES.txt
 /Reports/NSP_STOCKVARIANCEREPORT.txt
 ---/Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt

@@ -1,0 +1,103 @@
+create or alter procedure RSP_SALESREPORT_DEPARTMENTWISE_AUTOMOBILE
+@OPT_WISE VARCHAR(50) = 'ITEM',            			--Mgroup:Group,Parent:Parent,MCat:Category,Item:Item
+@DATE1 DATETIME,
+@DATE2 DATETIME,
+@DIVISION VARCHAR(3) = '%'
+AS
+--DECLARE @FLAG VARCHAR(100)='Category'
+--DECLARE @DATE1 DATETIME = '2020-07-16'
+--DECLARE @DATE2 DATETIME = '2020-09-16'
+--DECLARE @DIVISION VARCHAR(3) = '%'
+
+declare @salesanalysis table([ITEM GROUP OR CATEGORY] varchar(100),Qty numeric(18,0),[Gross Amt] numeric(30,12),Discount numeric(25,12),[Taxable Amt] numeric(30,12),
+        Vat  numeric(25,12),[Net Amount] numeric(30,12),[Cash Sales] numeric(30,12),[Credit Sales] numeric(30,12),[Sales Return] numeric(30,12),category varchar(100),sn int);
+
+insert into @salesanalysis 
+SELECT CASE @OPT_WISE WHEN 'Category' THEN  M.MCAT 
+	WHEN 'Parent' THEN MP.DESCA
+	WHEN 'Item' THEN M.DESCA
+	ELSE MG.DESCA END [ITEM GROUP OR CATEGORY],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.RealQty-tp.REALQTY_IN ELSE -(TP.RealQty-tp.REALQTY_IN)  END) Qty,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.AMOUNT ELSE -TP.AMOUNT END) [Gross Amt],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.DISCOUNT ELSE -TP.DISCOUNT END)  Discount,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.TAXABLE ELSE -TP.TAXABLE END) [Taxable Amt],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.VAT ELSE -TP.VAT END) Vat,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) [Net Amount],
+sum(case when tm.trnmode in ('Cash','Credit Card') then (CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) else 0 end) [Cash Sales],
+sum(case when tm.trnmode in ('Credit') then (CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) else 0 end) [Credit Sales],
+sum(case when TM.VCHRNO like 'CN%'  THEN TP.NETAMOUNT ELSE 0 END) [Sales Return],'COUNTER PARTS SALES' category,1 sn
+from trnmain tm join TRNPROD tp on tm.VCHRNO=tp.VCHRNO
+join MENUITEM m on m.MCODE=tp.MCODE
+JOIN MENUITEM MG ON M.MGROUP = MG.MCODE 
+JOIN MENUITEM MP ON M.PARENT = MP.MCODE 
+where tm.JOBNO is null AND M.PTYPE <> 4 AND TM.TRNDATE BETWEEN @DATE1 AND @DATE2 AND TM.DIVISION LIKE @DIVISION
+group by CASE @OPT_WISE WHEN 'Category' THEN  M.MCAT 
+			WHEN 'Parent' THEN MP.DESCA
+			WHEN 'Item' THEN M.DESCA
+			ELSE MG.DESCA END
+            
+insert into @salesanalysis 
+SELECT CASE @OPT_WISE WHEN 'Category' THEN  M.MCAT 
+	WHEN 'Parent' THEN MP.DESCA
+	WHEN 'Item' THEN M.DESCA
+	ELSE MG.DESCA END [ITEM GROUP OR CATEGORY],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.RealQty-tp.REALQTY_IN ELSE -(TP.RealQty-tp.REALQTY_IN)  END) Qty,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.AMOUNT ELSE -TP.AMOUNT END) [Gross Amt],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.DISCOUNT ELSE -TP.DISCOUNT END)  Discount,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.TAXABLE ELSE -TP.TAXABLE END) [Taxable Amt],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.VAT ELSE -TP.VAT END) Vat,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) [Net Amount],
+sum(case when tm.trnmode in ('Cash','Credit Card') then (CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) else 0 end) [Cash Sales],
+sum(case when tm.trnmode in ('Credit') then (CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) else 0 end) [Credit Sales],
+sum(case when TM.VCHRNO like 'CN%'  THEN TP.NETAMOUNT ELSE 0 END) [Sales Return],'DELIVERY PARTS SALES'  category ,2 sn 
+from trnmain tm join TRNPROD tp on tm.VCHRNO=tp.VCHRNO
+join MENUITEM m on m.MCODE=tp.MCODE
+JOIN MENUITEM MG ON M.MGROUP = MG.MCODE 
+JOIN MENUITEM MP ON M.PARENT = MP.MCODE 
+where tm.JOBNO is not null AND M.PTYPE <> 4 AND TM.TRNDATE BETWEEN @DATE1 AND @DATE2 AND TM.DIVISION LIKE @DIVISION
+group by CASE @OPT_WISE WHEN 'Category' THEN  M.MCAT 
+			WHEN 'Parent' THEN MP.DESCA
+			WHEN 'Item' THEN M.DESCA
+			ELSE MG.DESCA END
+            
+insert into @salesanalysis 
+SELECT CASE @OPT_WISE WHEN 'Category' THEN  M.MCAT 
+	WHEN 'Parent' THEN MP.DESCA
+	WHEN 'Item' THEN M.DESCA
+	ELSE MG.DESCA END [ITEM GROUP OR CATEGORY],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.RealQty-tp.REALQTY_IN ELSE -(TP.RealQty-tp.REALQTY_IN)  END) Qty,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.AMOUNT ELSE -TP.AMOUNT END) [Gross Amt],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.DISCOUNT ELSE -TP.DISCOUNT END)  Discount,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.TAXABLE ELSE -TP.TAXABLE END) [Taxable Amt],
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.VAT ELSE -TP.VAT END) Vat,
+sum(CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) [Net Amount],
+sum(case when tm.trnmode in ('Cash','Credit Card') then (CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) else 0 end) [Cash Sales],
+sum(case when tm.trnmode in ('Credit') then (CASE WHEN LEFT(TM.VCHRNO,2) IN ('SI','TI') THEN TP.NETAMOUNT ELSE -TP.NETAMOUNT END) else 0 end) [Credit Sales],
+sum(case when TM.VCHRNO like 'CN%'  THEN TP.NETAMOUNT ELSE 0 END) [Sales Return] ,'VEHICLE SALES',3 sn
+from trnmain tm join TRNPROD tp on tm.VCHRNO=tp.VCHRNO
+join MENUITEM m on m.MCODE=tp.MCODE 
+JOIN MENUITEM MG ON M.MGROUP = MG.MCODE 
+JOIN MENUITEM MP ON M.PARENT = MP.MCODE 
+where M.PTYPE=4   AND TM.TRNDATE BETWEEN @DATE1 AND @DATE2 AND TM.DIVISION LIKE @DIVISION
+group by CASE @OPT_WISE WHEN 'Category' THEN  M.MCAT 
+			WHEN 'Parent' THEN MP.DESCA
+			WHEN 'Item' THEN M.DESCA
+			ELSE MG.DESCA END
+            
+select [ITEM GROUP OR CATEGORY],Qty,[Gross Amt],Discount,[Taxable Amt],Vat,[Net Amount],[Cash Sales],[Credit Sales],[Sales Return] from (
+select distinct category [ITEM GROUP OR CATEGORY],null Qty,null [Gross Amt],null Discount,null [Taxable Amt],null Vat,null [Net Amount],null [Cash Sales],null [Credit Sales],null [Sales Return],sn,'A' ORD,0 ord1 from @salesanalysis
+union all 
+select  [ITEM GROUP OR CATEGORY],Qty,[Gross Amt],Discount,[Taxable Amt],Vat,[Net Amount],[Cash Sales],[Credit Sales],[Sales Return],sn,'B' ORD,0 ord1 from @salesanalysis
+union all
+select 'Total' [ITEM GROUP OR CATEGORY],sum(Qty),sum([Gross Amt]),sum(Discount),sum([Taxable Amt]),sum(Vat),sum([Net Amount]),sum([Cash Sales]),sum([Credit Sales]),sum([Sales Return]),sn,'C' ORD,0 ord1 from @salesanalysis group by category,sn
+union all
+select distinct null,null,null,null,null,null,null,null,null,null,sn,'C' ORD,1 ord1 from @salesanalysis 
+union all
+select 'Total Sales' [ITEM GROUP OR CATEGORY],sum(Qty),sum([Gross Amt]),sum(Discount),sum([Taxable Amt]),sum(Vat),sum([Net Amount]),sum([Cash Sales]),sum([Credit Sales]),sum([Sales Return]),4 sn,'D' ORD,0 ord1 from @salesanalysis 
+)a order by sn,ORD,ord1
+
+
+
+
+
+
