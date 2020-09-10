@@ -8,7 +8,7 @@ CREATE OR ALTER   PROCEDURE [dbo].[RSP_SALESBOOKREPORT]
 	@OPT_REPORT_TYPE TINYINT = 1,										--VoucherWise:1,DayWise:2,MonthWise:3
 	@OPT_SHOWDETAL_REPORT TINYINT = 0,									--Summary:0,Detail:1
 	@VCHR VARCHAR(25) = 'A',
-	@ACID VARCHAR(25) = '%',
+	@CUSTOMER VARCHAR(25) = '%',
 	@SALESMAN VARCHAR(25) = '%',
 	@OPT_INAD TINYINT = 0,												--AD:1,BS:0
 	@OPT_DISCOUNTEDSALES TINYINT = 0,									--NoDiscountSales:0,DiscountedSales:1,CardDiscountSales:2,ComplimentarySales:3
@@ -27,7 +27,7 @@ EXEC [dbo].[NSP_SALESBOOKREPORT]
 	@REPORT_TYPE = @OPT_REPORT_TYPE,										--  0 VOUCHER WISE  1 DAY WISE  2 MONTH WISE	
 	@SHOWDETAL_REPORT = @OPT_SHOWDETAL_REPORT,								--  0 SUMMARY REPORT  1 DETAIL REPORT
 	@VCHR =@VCHR,
-	@PARTY =@ACID,
+	@PARTY =@CUSTOMER,
 	@SMAN =@SALESMAN,
 	@INAD =@OPT_INAD,												        -- 0 ENGLISH DATE  1 NEPALI DATE
 	@DISCOUNTEDSALES = @OPT_DISCOUNTEDSALES,						    	-- 0 No Discount Sales, 1 Discounted Sales, 2 Card Discount Sales
