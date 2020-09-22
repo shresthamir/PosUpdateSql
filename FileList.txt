@@ -160,7 +160,9 @@ VEHICLE_WAREHOUSE.txt
 /Reports/SalesBookReport/GETNEPALIMONTH.txt
 /Reports/SalesBookReport/GETNEPALIMONTHLIST.txt
 /Reports/SalesBookReport/NSP_SALESBOOKREPORT.txt
+/Reports/SalesBookReport/NSP_SALESBOOKREPORT_VEHICLE.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT.txt
+/Reports/SalesBookReport/RSP_SALESBOOKREPORT_VEHICLE.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_NEW.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW.txt
 /Reports/SalesPosition/RSP_DAILYSALESPOSITION.txt
