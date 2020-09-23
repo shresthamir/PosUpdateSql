@@ -33,6 +33,7 @@ Indexes.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
 NUM_TOWORDS.txt
+PK_TableList.txt
 ---PRODUCT_EDIT_LOG.txt
 ---RDLPRINTING.txt
 ---ReceipeProd.txt
