@@ -1,0 +1,45 @@
+CREATE OR ALTER Function [dbo].[TreeExpand_function] (@current VARchar(20),@CurrentDesc varchar(300),@GroupOnly tinyint) 
+returns @ResultTable table (ID INT IDENTITY(1,1) NOT NULL,MCODE VARCHAR(20),TYPE VARCHAR(2),LEVEL TINYINT,CODE VARCHAR(50),DESCRIPTION VARCHAR(300),PATH VARCHAR(300),PARENT VARCHAR(20))
+as	--This is a non-recursive preorder traversal.
+Begin 
+--SET NOCOUNT ON
+ DECLARE @lvl int, @line varchar(300),@Type varchar(20),@MENUCODE VARCHAR(50),@PathLine varchar(500),@PathName varchar(500),@PARENT VARCHAR(20)
+ set @Type = 'G';SET @MENUCODE = '0'
+-- CREATE TABLE #RESULT (ID INT IDENTITY(1,1) NOT NULL,MCODE VARCHAR(20),TYPE VARCHAR(2),LEVEL TINYINT,CODE VARCHAR(20),DESCRIPTION VARCHAR(300))
+ Declare @Stack TABLE  (item varchar(20), lvl int,DESCA VARCHAR(300),TYPE VARCHAR(2),MENUCODE VARCHAR(50),PATHNAME VARCHAR(500),PARENT VARCHAR(20))	--Create a tempory stack.
+ INSERT INTO @Stack VALUES (@current, 1,@currentdesc,@type,@MENUCODE,'','' )	--Insert current node to the stack.
+ SELECT @lvl = 1				
+ WHILE @lvl > 0					--From the top level going down.
+	BEGIN
+	    IF EXISTS (SELECT * FROM @Stack WHERE lvl = @lvl)
+	        BEGIN
+	            SELECT @current = item,@CurrentDesc = desca,@TYPE=TYPE,@MENUCODE=MENUCODE,@PathName=PATHNAME,@PARENT=PARENT	--Find the first node that matches current node's name.
+	            FROM @Stack
+	            WHERE lvl = @lvl order by desca desc
+
+	            SELECT @line = space(@lvl - 1 ) + space(@lvl - 1) + @CurrentDesc	--@lvl - 1 s spaces before the node name.
+				SELECT @PathLine  = @PathName +'\' + @CurrentDesc 	--@lvl - 1 s spaces before the node name.
+	            --PRINT @line					--Print it.
+				INSERT INTO @ResultTable (MCODE,TYPE,LEVEL,CODE,DESCRIPTION,PATH,PARENT ) VALUES (@CURRENT,@TYPE,@LVL,@MENUCODE,@LINE,@PathLine,@PARENT )
+	            DELETE FROM @Stack
+	            WHERE lvl = @lvl
+	                AND item = @current	--Remove the current node from the stack.
+				if @GroupOnly = 0
+					INSERT @Stack		--Insert the childnodes of the current node into the stack.
+						SELECT MCODE, @lvl + 1,desca,TYPE,MENUCODE,@PathLine,PARENT 
+						FROM MENUITEM
+						WHERE parent = @current order by desca 
+				else
+					INSERT @Stack		--Insert the childnodes of the current node into the stack.
+						SELECT MCODE, @lvl + 1,desca,TYPE,MENUCODE,@PathLine,PARENT
+						FROM MENUITEM
+						WHERE parent = @current and type='G' order by desca 
+	            IF @@ROWCOUNT > 0		--If the previous statement added one or more nodes, go down for its first child.
+                        SELECT @lvl = @lvl + 1	--If no nodes are added, check its brother nodes.
+		END
+    	    ELSE
+	      	SELECT @lvl = @lvl - 1		--Back to the level immediately above.
+       	
+END 
+return 
+End
