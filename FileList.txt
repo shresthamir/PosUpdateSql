@@ -127,6 +127,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/LedgerReport/NSP_LEDGERREPORT_SUMMARY_FCURRENCY.txt
 /Reports/LedgerReport/RSP_LEDGERREPORT.txt
 /Reports/MembershipReports/MEMBERSHIPREPORT_PROC.txt
+/Reports/MembershipReports/RSP_MEMBERPOINTSTATUS.txt
 /Reports/MembershipReports/RSP_MEMBERSALES_DETAIL.txt
 /Reports/MembershipReports/RSP_MEMBERSALES_SUMMARY.txt
 /Reports/MembershipReports/RSP_MEMBERSHIPREPORT_SUMMARY.txt
@@ -156,6 +157,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_LAKMEDSR.txt
 /Reports/RSP_ITEMSEARCH.txt
 /Reports/RSP_ORDERVSSALES.txt
+/Reports/RSP_PARTYSTATMENT.txt
 /Reports/RSP_SALESREPORT_DEPARTMENTWISE_AUTOMOBILE.txt
 /Reports/RSP_STOCKLEDGER.txt
 /Reports/SalesBookReport/GETMONTHLIST.txt
