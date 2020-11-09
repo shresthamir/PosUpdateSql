@@ -1,0 +1,28 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'tbl_Answer')
+CREATE TABLE [dbo].[tbl_Answer](
+	[username] [varchar](30) NOT NULL,
+	[questionid] [int] NOT NULL,
+	[answer] [varchar](100) NULL,
+ CONSTRAINT [PK_tbl_Answer] PRIMARY KEY CLUSTERED 
+(
+	[username] ASC,
+	[questionid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Questions')
+CREATE TABLE [dbo].[Questions](
+	[SN] [int] NOT NULL,
+	[Question] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED 
+(
+	[SN] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+IF NOT EXISTS (SELECT * FROM Questions)
+BEGIN
+	INSERT INTO QUESTIONS VALUES (1, 'What was your childhood nickname?')
+	INSERT INTO QUESTIONS VALUES (2, 'What primary school did you attend?')
+	INSERT INTO QUESTIONS VALUES (3, 'What was the house number and street name you lived in as a child?')
+END

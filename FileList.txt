@@ -2,7 +2,7 @@
 ---ADDITIONALCOST_JSON.txt
 ---BARCODE_LOG.txt
 ---BARCODE_DETAIL_STAMP.txt
----BATCHPRICE_MASTER.txt
+BATCHPRICE_MASTER.txt
 ---CapitalPurchaseConstraint.txt
 ---CloudBackupSetting.txt
 ---COMBO_GROUP.txt
@@ -34,6 +34,7 @@ MEMGRADETRAN_VIEW.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
 NUM_TOWORDS.txt
+PharmacyFields.txt
 PK_TableList.txt
 ---PRODUCT_EDIT_LOG.txt
 ---RDLPRINTING.txt
@@ -57,6 +58,7 @@ RMD_TRNPROD_FN.txt
 RMD_TRNTRAN_FN.txt
 ---SALES_TRNMAIN.txt
 ---SALES_TRNPROD.txt
+SequrityQuestions.txt
 SETTINGS.txt
 ---ShippingInfo.txt
 SizeColorMaster.txt
