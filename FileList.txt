@@ -136,6 +136,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/MembershipReports/RSP_TOPNMEMBERSHIPSALES.txt
 /Reports/NSP_STOCKVARIANCEREPORT.txt
 ---/Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
+/Reports/PromotionReports/RSP_PromotionSalesReport.txt
 /Reports/ReportPrintParameter.txt
 /Reports/RSP_SHIFTCLOSEREPORT.txt
 /Reports/PL_Report/NSP_PLACCOUNT.txt

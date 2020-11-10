@@ -1,0 +1,20 @@
+ CREATE OR ALTER PROCEDURE RSP_PromotionSalesReport
+        @DATE1 DATETIME,
+		@DATE2 DATETIME
+ AS
+SET NOCOUNT ON;
+--declare @DATE1 DATETIME='2020-1-1',@DATE2 DATETIME='2020-8-30'
+  
+SELECT D.NAME Branch, CAST(tm.TRNDATE AS DATE) [Bill Date], tm.BSDATE [Bill Miti], tm.VCHRNO [Bill Number], MG.DESCA [Main Group], PG.DESCA [Parent Group], mi.MCAT [Item Category],mi.MENUCODE [Item Code],MI.DESCA [Item Name],tp.BC Barcode ,
+		CONVERT(NUMERIC(18,2),case when MI.vat = 1 then rate * 1.13 else rate end) MRP,
+        case when tm.VoucherType in ('SI','TI') then RealQty else -1 * REALQTY_IN  end [Sales Qty],null [Promotion MRP],
+        JSON_VALUE(SCHEMESAPPLIED, '$.scheme') AS [Promotion Name],
+		CONVERT(NUMERIC(18,2), CASE WHEN TM.VoucherType IN ('SI', 'TI') THEN tp.PROMOTION ELSE -1 * TP.PROMOTION END) [Promtion Discount Amount],tm.BILLTO  [Party Name]
+FROM RMD_SALESPROD tp join RMD_trnmain tm on tm.VCHRNO=tp.VCHRNO
+    JOIN MENUITEM mi on mi.MCODE=tp.MCODE
+	JOIN MENUITEM MG ON MI.MGROUP = MG.MCODE
+	JOIN MENUITEM PG ON MI.PARENT = PG.MCODE
+	JOIN DIVISION D ON TM.DIVISION = D.INITIAL
+WHERE tm.VoucherType in ('SI','TI','CN') AND ISNULL(JSON_VALUE(SCHEMESAPPLIED, '$.scheme'), '') <> '' AND TM.TRNDATE BETWEEN @DATE1 AND @DATE2
+ORDER BY TRNDATE,TRNTIME
+
