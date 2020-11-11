@@ -12,7 +12,6 @@ CREATE TABLE [dbo].[AppPayModeMapping](
 	[BillPayMode] [varchar](25) NULL,
 	[DisplayPayMode] [varchar](25) NULL
 ) ON [PRIMARY]
-GO
 
 
 
