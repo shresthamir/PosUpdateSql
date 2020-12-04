@@ -5,7 +5,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_DEBTORSREPORT]
 	@CHK_STATUS TINYINT = 1,			--Status:1:0
 	@CHK_SHOWDETAIL TINYINT = 0,		--ShowDetail:1:0
 	@CHK_OPNINGONLY TINYINT = 0,		--OpeningOnly:1:0
-	@OPT_EXNEGETIVE TINYINT=0,			--ShowNotZero:0,ShowGreater0:1,ShowLess0:2,ShowAll:10
+	@OPT_EXNEGETIVE TINYINT = 10,			--ShowNotZero:0,ShowGreater0:1,ShowLess0:2,ShowAll:10
 	@CostCenter varchar(25) = '%',
 	@OPT_TREE TINYINT=0,				--LedgerWise:0,GroupWise:1
 	@FX_DebtorOrCreditor char(1) = 'C',
