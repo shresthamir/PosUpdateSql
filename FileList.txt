@@ -15,6 +15,7 @@ DISCOUNT_PRESETS.txt
 ---Footfall.txt
 ---GetDefaultParamenterOfStoredProcedure.txt
 ---PREBILL_TABLES.txt
+PROD_EXRATE.txt
 getPrintFormat.txt
 ---GROUP_ITEM.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS.txt
