@@ -175,6 +175,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_NEW.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW.txt
 /Reports/SalesPosition/RSP_DAILYSALESPOSITION.txt
+/Reports/SalesPosition/RSP_HOURLYSALESREPORT.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW_TIMEWISE.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW.txt
