@@ -73,6 +73,7 @@ SizeColorMaster.txt
 ---USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+/Reports/vwItemHeirarchy.txt
 ---/Reports/BranchTransferReport/NSP_TRANSFER_INOUT_REPORT.txt
 ---/Reports/BranchTransferReport/RSP_TRANSFER_INOUT_REPORT.txt
 ---/Reports/BILLTENDER.TXT
@@ -139,9 +140,10 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/PromotionReports/RSP_PromotionSalesReport.txt
 ---/Reports/ReportPrintParameter.txt
+/Reports/RSP_ITEM_PURCHASE_RATE_HISTORY.txt
 /Reports/RSP_SHIFTCLOSEREPORT.txt
 ---/Reports/PL_Report/NSP_PLACCOUNT.txt
----/Reports/PL_Report/NSP_PLACCOUNT_HORIZONTAL.txt
+/Reports/PL_Report/NSP_PLACCOUNT_HORIZONTAL.txt
 ---/Reports/PL_Report/NSP_PLACCOUNT_REPORT.txt
 ---/Reports/PL_Report/RSP_PLACCOUNT.txt
 ---/Reports/ProfitablitySalesAnalysis/NSP_PROFITIBILITYSALESANALYSIS.txt

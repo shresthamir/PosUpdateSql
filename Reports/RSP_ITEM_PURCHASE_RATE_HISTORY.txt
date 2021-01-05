@@ -1,0 +1,79 @@
+CREATE PROC RSP_ITEM_PURCHASE_RATE_HISTORY
+@DATE1 DATETIME,
+@DATE2 DATETIME,
+@DIVISION VARCHAR(3),
+@MCODE VARCHAR(25) = '%',
+@MGROUP VARCHAR(25) = '%',
+@MENUCAT VARCHAR(50) = '%',
+@PTYPE INT = 0,
+@SUPPLIER_ACID VARCHAR(25) = '%'
+AS
+
+;with cte AS
+(
+	SELECT TRNDATE,RATE PRATE,mcode,PARAC, ROW_NUMBER() OVER(partition by PARAC, mcode ORDER BY trndate desc) SN 
+	FROM
+	(
+		select DISTINCT CAST(tm.TRNDATE AS DATE) TRNDATE,tp.RATE ,tp.mcode, tm.PARAC from rmd_trnmain tm 
+		join rmd_trnprod tp on tp.VCHRNO=tm.VCHRNO
+		JOIN MENUITEM X ON TP.MCODE = X.MCODE
+		WHERE tm.VoucherType in ('PI')
+		AND	tm.TRNDATE BETWEEN @DATE1 AND @DATE2 
+		AND tm.DIVISION LIKE @DIVISION 
+		AND X.MCODE LIKE @MCODE 	
+		AND X.MGROUP LIKE @MGROUP 
+		AND X.MCAT LIKE @MENUCAT
+		AND	((@PTYPE = 100 AND ISNULL(X.PTYPE,0) < @PTYPE) OR (@PTYPE <> 100 AND ISNULL(X.PTYPE,0) = @PTYPE))
+		AND ISNULL(X.SUPCODE,'') LIKE @SUPPLIER_ACID
+	)A
+)
+          
+SELECT * into #temp
+FROM CTE WHERE SN<6
+
+declare @colname AS NVARCHAR(MAX)=N'',@colQTY AS NVARCHAR(MAX)=N'',@colVALUE AS NVARCHAR(MAX)=N'',@query  AS NVARCHAR(MAX)=N'',@colSUM  AS NVARCHAR(MAX)=N'';
+
+SET @colname = STUFF((SELECT distinct ',max(' + QUOTENAME(CONVERT(VARCHAR(5),sn)) 
+				+')' 
+				+ QUOTENAME('Date ' + CONVERT(VARCHAR(5),sn))
+				+ ',max(' 
+				+ QUOTENAME(CONVERT(VARCHAR(5),sn)+'prate') 
+				+') ' 
+				+ QUOTENAME('PRATE ' 
+				+ CONVERT(VARCHAR(5),sn))
+FROM #temp FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+
+print @colname          
+
+SET @colQTY = STUFF((SELECT DISTINCT ',' + QUOTENAME(CONVERT(VARCHAR(5),sn))  FROM #temp FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+SET @colVALUE = STUFF((SELECT DISTINCT ',' + QUOTENAME(CONVERT(VARCHAR(5),sn)+ 'prate') FROM #temp FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+SET @colSUM = STUFF((SELECT  ',' +  QUOTENAME('Date '+CONVERT(VARCHAR(5),sn)) +       
+',CONVERT(NUMERIC(25,2),' + QUOTENAME('PRATE ' + CONVERT(VARCHAR(5),sn))+')' +QUOTENAME('PRATE ' + CONVERT(VARCHAR(5),sn))
+from (select distinct sn  FROM #temp )a ORDER BY SN  FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+		
+set @query = ' 
+SELECT MCODE, PARAC, ' + @colname + ' into #report  from
+(
+	select PARAC, MCODE,CONVERT(VARCHAR(5),sn) SN,TRNDATE,PRATE,CONVERT(VARCHAR(5),sn)+''prate'' SNPRATE from #temp
+) x
+pivot (max(TRNDATE) for SN in (' + @colQTY + ')) p 
+pivot (max(PRATE) for SNPRATE in (' + @colVALUE + ')) p1
+group by PARAC, mcode
+select A.ACID, r.MCODE, A.ACNAME, M.MENUCODE [Product Code],m.DESCA [Prooduct Name], M.BCODE BARCODE, '+@colSUM+' from #report r 
+	JOIN 
+	(	
+		SELECT MI.MCODE, MI.MENUCODE, MI.DESCA, B.BCODE, ROW_NUMBER() OVER (PARTITION BY mi.MCODE ORDER BY mi.MCODE) SN FROM MENUITEM MI
+		LEFT JOIN BARCODE B ON MI.MCODE = B.MCODE AND MI.MENUCODE <> B.BCODE
+		WHERE TYPE = ''A''	
+	
+	)m on r.mcode=m.MCODE 
+	JOIN RMD_ACLIST A ON R.PARAC = A.ACID
+	WHERE M.SN = 1
+	ORDER BY ACNAME
+drop table #report
+'
+PRINT @query
+execute(@query)
+DROP TABLE #temp
+
+		
