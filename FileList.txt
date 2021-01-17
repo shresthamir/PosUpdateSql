@@ -74,6 +74,8 @@ SizeColorMaster.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
 /Reports/vwItemHeirarchy.txt
+/Reports/BatchPriceReport.txt
+/Reports/RSP_ANNEX13REPORT.txt
 ---/Reports/BranchTransferReport/NSP_TRANSFER_INOUT_REPORT.txt
 ---/Reports/BranchTransferReport/RSP_TRANSFER_INOUT_REPORT.txt
 ---/Reports/BILLTENDER.TXT
