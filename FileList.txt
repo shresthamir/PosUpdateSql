@@ -42,6 +42,7 @@ PK_TableList.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt
 ReportContextMenus.txt
+RMD_ACLIST.txt
 RMD_BillOnlinePaymentInfo.txt
 ---RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt

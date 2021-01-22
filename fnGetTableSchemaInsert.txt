@@ -1,0 +1,62 @@
+CREATE OR ALTER   FUNCTION [dbo].[fnGetTableSchemaInsert]
+(
+@TableName varchar(50)
+)
+RETURNS varchar(MAX)
+AS
+BEGIN
+
+DECLARE @ResultVar varchar(MAX)
+
+DECLARE @i int, @sSql varchar(MAX)
+
+SELECT @sSql = '' 
+
+SELECT @i = MIN(ordinal_Position)
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE [TABLE_NAME] = @TableName 
+AND Column_Name not in 
+(SELECT c.name AS ColumnName
+FROM sys.columns AS c INNER JOIN sys.tables AS t ON t.[object_id] = c.[object_id]
+WHERE c.is_identity = 1 and t.name = @TableName)
+AND data_Type <> 'timestamp' 
+
+WHILE @i is not null
+BEGIN 
+
+SELECT @sSql = @sSql + CASE data_type
+WHEN 'varchar' THEN 
+CASE WHEN character_maximum_length = -1 THEN
+'[' + replace(replace(column_name,' ',''),'/','') + '] ' + data_type + '(MAX), '
+ELSE 
+'[' + replace(replace(column_name,' ',''),'/','') + '] ' + data_type + '(' + cast(isnull(character_maximum_length,numeric_precision) as varchar(60)) + '), '
+END
+WHEN 'nvarchar' THEN '[' + replace(replace(column_name,' ',''),'/','') + '] ' + data_type + '(' + cast(isnull(character_maximum_length,numeric_precision) as varchar(60)) + '), '
+WHEN 'char' THEN '[' + replace(replace(column_name,' ',''),'/','') + '] ' + data_type + '(' + cast(isnull(character_maximum_length,numeric_precision) as varchar(60)) + '), '
+WHEN 'numeric' THEN '[' + replace(replace(column_name,' ',''),'/','') + '] ' + data_type + '(18,6), '
+ELSE '[' + replace(replace(column_name,' ',''),'/','') + '] ' + data_type + ', '
+END
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE [TABLE_NAME] = @TableName 
+AND ordinal_Position = @i
+AND data_Type <> 'timestamp'
+
+SELECT @i = min(ordinal_Position) 
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE [TABLE_NAME] = @TableName 
+AND Column_Name not in 
+(SELECT c.name AS ColumnName
+FROM sys.columns AS c INNER JOIN sys.tables AS t ON t.[object_id] = c.[object_id]
+WHERE c.is_identity = 1 and t.name = @TableName) 
+AND data_Type <> 'timestamp' 
+AND ordinal_Position > @i
+END
+
+SET @sSql = @sSql + '//'
+
+SET @ResultVar = replace(@sSql, ', //','')
+
+-- Return the result of the function
+RETURN @ResultVar
+
+END
