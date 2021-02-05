@@ -32,4 +32,3 @@ ROUND(CASE WHEN A.RATE <> 0 THEN @BaseRate * (1 + A.RATE/100) * VATCONRATE ELSE 
 ) A WHERE A.RateGroup_ID = @RateGroup   
 RETURN 
 END
-GO

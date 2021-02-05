@@ -1,4 +1,4 @@
-CREATE VIEW vwValidRateGroup
+CREATE OR ALTER VIEW vwValidRateGroup
 AS
 SELECT A.RateGroup_ID, A.RateGroup_Name, A.RateGroup_Type, B.MGroup, B.Parent, B.MCode, B.MCat, B.Rate, B.Amount
 FROM RATEGROUP_MASTER A    
