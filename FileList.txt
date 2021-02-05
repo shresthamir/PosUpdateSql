@@ -38,6 +38,12 @@ NUM_TOWORDS.txt
 PharmacyFields.txt
 PK_TableList.txt
 ---PRODUCT_EDIT_LOG.txt
+/RateGroup/RateGroupTables.txt
+/RateGroup/vwValidRateGroup.txt
+/RateGroup/fnGetRateGroup.txt
+/RateGroup/OSP_GETITEMLIST.txt
+/RateGroup/OSP_GetItemBatch.txt
+/RateGroup/OSP_GetItemAltUnits.txt
 ---RDLPRINTING.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt

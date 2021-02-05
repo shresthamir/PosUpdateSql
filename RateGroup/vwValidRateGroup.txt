@@ -1,0 +1,6 @@
+CREATE VIEW vwValidRateGroup
+AS
+SELECT A.RateGroup_ID, A.RateGroup_Name, A.RateGroup_Type, B.MGroup, B.Parent, B.MCode, B.MCat, B.Rate, B.Amount
+FROM RATEGROUP_MASTER A    
+JOIN RateGroup_Detail B on A.RateGroup_ID=B.RateGroup_ID
+WHERE A.IsDeleted = 0 AND A.Discontinued = 0

@@ -4,13 +4,13 @@ CREATE OR ALTER PROC RSP_HOURLYSALESREPORT
 @DIVISION VARCHAR(3) = '%'
 AS
 SET NOCOUNT ON;
---declare @DATE1 DATE='2019-5-01', @DATE2 DATE='2020-12-1'
+--declare @DATE1 DATE='2019-5-01', @DATE2 DATE='2020-12-1',@DIVISION varchar(20)='%'
 SELECT hr [HOUR],
 sum(bills) [TOTAL NUMBER OF BILLS],		  
-sum(overallsales) [TOTAL SALES],
+convert(numeric(30,2),sum(overallsales)) [TOTAL SALES],
 sum(return_bills) [TOTAL RETURN BILLS],
-sum(overallsalesreturn) [TOTAL SALES RETURN],
-sum(overallsales - overallsalesreturn) [NET SALES] from
+convert(numeric(30,2),sum(overallsalesreturn)) [TOTAL SALES RETURN],
+convert(numeric(30,2),sum(overallsales - overallsalesreturn)) [NET SALES] from
 (  
 	select case when TRNTIME between  '00:00' and '01:00' then '12:00 AM' when TRNTIME between  '01:00' and '02:00' then '01:00 AM'
     when TRNTIME between  '02:00' and '03:00' then '02:00 AM' when TRNTIME between  '03:00' and '04:00' then '03:00 AM'
@@ -24,6 +24,18 @@ sum(overallsales - overallsalesreturn) [NET SALES] from
     when TRNTIME between  '18:00' and '19:00' then '06:00 PM' when TRNTIME between  '19:00' and '20:00' then '07:00 PM'
     when TRNTIME between  '20:00' and '21:00' then '08:00 PM' when TRNTIME between  '21:00' and '22:00' then '09:00 PM'
     when TRNTIME between  '22:00' and '23:00' then '10:00 PM' when TRNTIME between  '23:00' and '24:00' then '11:00 PM'	end hr,
+	case when TRNTIME between  '00:00' and '01:00' then '00:00' when TRNTIME between  '01:00' and '02:00' then '01:00'
+    when TRNTIME between  '02:00' and '03:00' then '02:00' when TRNTIME between  '03:00' and '04:00' then '03:00'
+    when TRNTIME between  '04:00' and '05:00' then '04:00' when TRNTIME between  '05:00' and '06:00' then '05:00'
+    when TRNTIME between  '06:00' and '07:00' then '06:00' when TRNTIME between  '07:00' and '08:00' then '07:00'
+    when TRNTIME between  '08:00' and '09:00' then '08:00' when TRNTIME between  '09:00' and '10:00' then '09:00'
+    when TRNTIME between  '10:00' and '11:00' then '10:00' when TRNTIME between  '11:00' and '12:00' then '11:00'
+    when TRNTIME between  '12:00' and '13:00' then '12:00' when TRNTIME between  '13:00' and '14:00' then '13:00'
+    when TRNTIME between  '14:00' and '15:00' then '14:00' when TRNTIME between  '15:00' and '16:00' then '15:00'
+    when TRNTIME between  '16:00' and '17:00' then '16:00' when TRNTIME between  '17:00' and '18:00' then '17:00'
+    when TRNTIME between  '18:00' and '19:00' then '18:00' when TRNTIME between  '19:00' and '20:00' then '19:00'
+    when TRNTIME between  '20:00' and '21:00' then '20:00' when TRNTIME between  '21:00' and '22:00' then '21:00'
+    when TRNTIME between  '22:00' and '23:00' then '22:00' when TRNTIME between  '23:00' and '24:00' then '23:00'	end trntime,
 	case when LEFT(VCHRNO,2) IN ('SI','TI') then 1 else 0 end bills,
 	case when LEFT(VCHRNO,2) = 'CN' then 1 else 0 end return_bills,
 	case when LEFT(VCHRNO,2) IN ('SI','TI') then (TOTAMNT-DCAMNT) else 0 end overallsales,  
@@ -31,8 +43,5 @@ sum(overallsales - overallsalesreturn) [NET SALES] from
 	FROM RMD_TRNMAIN A 
 	WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','RE') and TRNDATE BETWEEN @DATE1 AND @DATE2 AND A.DIVISION LIKE @DIVISION
 )a
-group by hr
-ORDER BY RIGHT(hr, 2), hr
-
-
-
+group by hr,a.trntime
+ORDER BY a.trntime,RIGHT(hr, 2)
