@@ -1,0 +1,35 @@
+CREATE OR ALTER PROCEDURE [dbo].[RSP_SALESBOOKREPORT]
+--DECLARE
+	@DATE1 DATETIME,
+	@DATE2 DATETIME,
+	@DIVISION varchar(10)='%',
+	@FX_VOUCHER_TYPE CHAR(2) = 'SI',									--VoucherType:SI
+	@CHK_INCLUDE_RETURN TINYINT = 0,									--IncludeReturn:1:0
+	@OPT_REPORT_TYPE TINYINT = 1,										--VoucherWise:1,DayWise:2,MonthWise:3
+	@OPT_SHOWDETAL_REPORT TINYINT = 0,									--Summary:0,Detail:1
+	@VCHR VARCHAR(25) = 'A',
+	@ACID VARCHAR(25) = '%',
+	@SALESMAN VARCHAR(25) = '%',
+	@OPT_INAD TINYINT = 0,												--AD:0,BS:1
+	@OPT_DISCOUNTEDSALES TINYINT = 0,									--NoDiscountSales:0,DiscountedSales:1,CardDiscountSales:2
+	@DISRATE NUMERIC(18,8) = 0,										    
+	@OPT_COUNTERSALES TINYINT = 0,										--All:0,CounterSales:1,TableSales:2
+	@CHK_SALESMANWISESUMMARY TINYINT = 0								--SalesManWise:1:0
+AS
+
+EXEC [dbo].[NSP_SALESBOOKREPORT]
+	@DATE1 =@DATE1 ,
+	@DATE2 =@DATE2,
+	@DIV=@DIVISION,
+	@VOUCHER_TYPE =@FX_VOUCHER_TYPE,
+	@INCLUDE_RETURN = @CHK_INCLUDE_RETURN,									--	0 Exclude Return   1 Include Return
+	@REPORT_TYPE = @OPT_REPORT_TYPE,										--  0 VOUCHER WISE  1 DAY WISE  2 MONTH WISE	
+	@SHOWDETAL_REPORT = @OPT_SHOWDETAL_REPORT,								--  0 SUMMARY REPORT  1 DETAIL REPORT
+	@VCHR =@VCHR,
+	@PARTY =@ACID,
+	@SMAN =@SALESMAN,
+	@INAD =@OPT_INAD,												        -- 0 ENGLISH DATE  1 NEPALI DATE
+	@DISCOUNTEDSALES = @OPT_DISCOUNTEDSALES,						    	-- 0 No Discount Sales, 1 Discounted Sales, 2 Card Discount Sales
+	@DISRATE =@DISRATE,						                 				-- Discount Rate
+	@COUNTERSALES =@OPT_COUNTERSALES,										-- 0 ALL   1 COUNTER SALES  2 TABLE SALES  
+	@SALESMANWISESUMMARY =@CHK_SALESMANWISESUMMARY	

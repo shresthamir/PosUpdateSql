@@ -1,0 +1,6 @@
+ALTER view [dbo].[SalesView]-- WITH SCHEMABINDING
+as
+select a.division as storeid,f.NAME storename,b.MCODE productcode,c.DESCA product_desc,c.MCAT product_category ,d.DESCA as product_subcategory,e.DESCA as product_majorcategory,b.PRATE purchase_rate,b.CRATE cost_rate,RATE retailprice,TRNDATE ,BSDATE,TRNTIME from DBO.RMD_TRNMAIN a inner join DBO.RMD_TRNPROD b on a.VCHRNO=b.VCHRNO  
+inner join DBO.menuitem c on b.MCODE= c.MCODE inner join DBO.MENUITEM d on c.PARENT=d.MCODE inner join DBO.menuitem e on c.MGROUP=e.MCODE
+inner join DBO.division f on a.DIVISION=f.INITIAL 
+where b.VoucherType in ('SI','TI') 

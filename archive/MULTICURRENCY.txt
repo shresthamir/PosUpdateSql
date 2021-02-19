@@ -1,0 +1,20 @@
+﻿IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'FCURRENCY')
+CREATE TABLE [dbo].[FCURRENCY](
+	[VCHRNO] [varchar](25) NOT NULL,
+	[DIVISION] [char](3) NOT NULL,
+	[PhiscalID] [varchar](20) NOT NULL,
+	[guid] [varchar](100) NULL,
+	[stamp] [float] NULL,
+	[FCurrency] [varchar](20) NULL,
+	[XRate] [numeric](18, 4) NULL,
+	[FCurrencyRate] [numeric](18, 10) NULL
+) ON [PRIMARY]
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'FOREX')
+CREATE TABLE [dbo].[FOREX](
+	[COUNTRY] [varchar](50) NULL,
+	[SYMBOL] [varchar](10) NULL,
+	[CURRATE] [decimal](18, 0) NULL,
+	[CDATE] [date] NULL
+) ON [PRIMARY]
+

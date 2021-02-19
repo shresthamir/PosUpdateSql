@@ -1,0 +1,52 @@
+CREATE OR ALTER PROCEDURE [dbo].[RSP_DEBTORSREPORT]
+	@DATE1 VARCHAR(25),
+	@DATE2 VARCHAR(25),
+	@DIVISION  VARCHAR(15) = '%',
+	@CHK_STATUS TINYINT = 1,			--Status:1:0
+	@CHK_SHOWDETAIL TINYINT = 0,		--ShowDetail:1:0
+	@CHK_OPNINGONLY TINYINT = 0,		--OpeningOnly:1:0
+	@OPT_EXNEGETIVE TINYINT=0,			--ShowNotZero:0,ShowGreater0:1,ShowLess0:2,ShowAll:10
+	@CostCenter varchar(25) = '%',
+	@OPT_TREE TINYINT=0,				--LedgerWise:0,GroupWise:1
+	@FX_DebtorOrCreditor char(1) = 'C',
+	@CHK_SHOWFALLOWUPRMK TINYINT = 0,       --ShowFallowUpRemark:1:0
+	@D1 NUMERIC=1,
+	@D2 NUMERIC=1,
+	@D3 NUMERIC=1,
+	@D4 NUMERIC=1,
+	@CHK_AGEINGOFPARTYOPENING TINYINT=1,           --AgeingOfPartyOpening:1:0
+	@CHK_SHOWAGEINGREPORT TINYINT = 0              --ShowAgeingReport:1:0
+	AS
+	if @DIVISION is null set @DIVISION = '%';
+	IF @CHK_STATUS is null SET  @CHK_STATUS=1
+	IF @CHK_SHOWDETAIL is null set @CHK_SHOWDETAIL = 0
+	IF @CHK_OPNINGONLY is null set @CHK_OPNINGONLY = 0
+	IF @OPT_EXNEGETIVE is null set @OPT_EXNEGETIVE=0
+	IF @CostCenter is null set @CostCenter = '%'
+	IF @OPT_TREE  is null set @OPT_TREE=0
+	IF @FX_DebtorOrCreditor is null set  @FX_DebtorOrCreditor = 'C'
+	IF @CHK_SHOWFALLOWUPRMK is null set  @CHK_SHOWFALLOWUPRMK = 0
+	IF @D1 is null set  @D1=1 
+	IF @D2 is null set  @D2=1
+	IF @D3 is null set  @D3=1
+	IF @D4  is null set @D4=1
+	IF @CHK_AGEINGOFPARTYOPENING  is null set @CHK_AGEINGOFPARTYOPENING=1
+	IF @CHK_SHOWAGEINGREPORT is null set  @CHK_SHOWAGEINGREPORT = 0
+	EXEC NSP_DEBTORSREPORT
+		@DATE1 =@DATE1 ,
+		@DATE2 =@DATE2,
+		@DIV =@DIVISION,
+		@FLG =@CHK_STATUS,
+		@SHOWDETAIL =@CHK_SHOWDETAIL,
+		@OPNINGONLY =@CHK_OPNINGONLY,
+		@EXNEGETIVE =@OPT_EXNEGETIVE,
+		@CostCenter =@CostCenter,
+		@TREE =@OPT_TREE,
+		@DebtorOrCreditor =@FX_DebtorOrCreditor,
+		@SHOWFALLOWUPRMK =@CHK_SHOWFALLOWUPRMK,
+		@D1 =@D1,
+		@D2 =@D2,
+		@D3 =@D3,
+		@D4 =@D4,
+		@AGEINGOFPARTYOPENING =@CHK_AGEINGOFPARTYOPENING,
+		@SHOWAGEINGREPORT =@CHK_SHOWAGEINGREPORT

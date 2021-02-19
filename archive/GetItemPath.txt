@@ -1,0 +1,18 @@
+create or alter function GetItemPath(@MCODE VARCHAR(50)) returns varchar(max)
+as
+begin
+declare @path varchar(max)
+IF @MCODE = 'MI'
+set @path = 'Products'
+ELSE 
+SELECT @path = dbo.GetItemPath(Parent) + '\' + DESCA FROM MENUITEM WHERE MCODE = @MCODE
+return @Path
+end
+go
+select dbo.getitempath(mi.mcode) PATH,
+MI.DESCA ItemDescription, convert(decimal(18,2), MI.RATE_A * 1.13) MRP, MI.PRATE_A PRATE, MI.MCAT,
+b.bcode barcode
+from menuitem mi left join barcode b on mi.mcode = b.mcode where mi.type = 'a'
+
+
+--select * from barcode_detail

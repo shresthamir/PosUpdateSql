@@ -1,0 +1,7 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Footfall')
+CREATE TABLE [dbo].[Footfall](
+	[Date] [datetime] NULL,
+	[TotalFootfalls] [int] NULL,
+	[Remarks] [varchar](100) NULL,
+	[LoginUser] [varchar](20) NULL
+) ON [PRIMARY]
