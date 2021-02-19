@@ -155,7 +155,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/PL_Report/NSP_PLACCOUNT_HORIZONTAL.txt
 ---/Reports/PL_Report/NSP_PLACCOUNT_REPORT.txt
 ---/Reports/PL_Report/RSP_PLACCOUNT.txt
----/Reports/ProfitablitySalesAnalysis/NSP_PROFITIBILITYSALESANALYSIS.txt
+/Reports/ProfitablitySalesAnalysis/NSP_PROFITIBILITYSALESANALYSIS.txt
 ---/Reports/ProfitablitySalesAnalysis/RSP_PROFITIBILITYSALESANALYSIS.txt
 /Reports/PurchaseBookReport/NSP_PURCHASEBOOKREPORT.txt
 ---/Reports/PurchaseBookReport/RSP_PURCHASEBOOKREPORT.txt
