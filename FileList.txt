@@ -72,7 +72,8 @@ SETTINGS.txt
 SizeColorMaster.txt
 ---SP_GETSCHEMEDISCOUNT.txt
 ---SP_GetTotalDiscount.txt
----TRNMAIN_VIEW.txt
+TRNMAIN_VIEW.txt
+TRNPROD_VIEW.txt
 TRNMAIN_BRANCH_OUT.txt
 TRNPROD_BRANCH_OUT.txt
 ---TRNCONPROD.txt
