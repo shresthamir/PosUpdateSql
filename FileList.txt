@@ -253,4 +253,5 @@ VEHICLE_WAREHOUSE.txt
 /Reports/VehicleReports/RSP_VEHICLESALESREGISTER.txt
 /Reports/VoucherBookReport/NSP_VOUCHERBOOKREPORT.txt
 /Reports/VoucherBookReport/RSP_VOUCHERBOOKREPORT.txt
-
+/Reports/RSP_BranchWiseSales.txt
+/Reports/RSP_DUEVOUCHERREPORT.txt

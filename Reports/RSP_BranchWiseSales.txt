@@ -1,0 +1,25 @@
+CREATE OR ALTER PROC RSP_BranchWiseSales
+@DATE1 DATETIME,
+@DATE2 DATETIME
+AS
+--declare @DATE1 datetime='2020-07-16',@DATE2 DATETIME='2021-12-29'
+SELECT ra.ACCODE[Branch Code],A.DIVISION [Branch Division], D.NAME [Branch Name],a.[Gross Amount],a.[Discount Amount],a.[Vat Amount],a.NetAmount,a.Cash,a.CreditCard,a.Credit,a.FonePay,a.[No Of Transaction]
+from 
+(
+	SELECT A.DIVISION,
+	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN (TOTAMNT) * -1 ELSE (TOTAMNT) END) as numeric(32,2)) AS [Gross Amount],
+	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN A.DCAMNT *-1 ELSE A.DCAMNT END)as numeric(32,2)) AS [Discount Amount],
+	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN A.VATAMNT * -1 ELSE A.VATAMNT END)as numeric(32,2)) AS [Vat Amount],
+	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END)as numeric(32,2)) AS NetAmount,
+	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE) = 'CASH') THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS Cash,
+	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE)= 'CreditCard') THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS CreditCard,
+	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE) = 'CREDIT') THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS Credit,
+	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE) in ('online','FonePay')) THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS FonePay,
+	count(distinct a.vchrno) [No Of Transaction]
+	FROM RMD_TRNMAIN A JOIN RMD_ACLIST B ON A.TRNAC = B.ACID
+	LEFT JOIN RMD_BILLTENDER RB ON RB.VCHRNO=A.VCHRNO
+	WHERE LEFT(a.VCHRNO,2) IN ('SI','TI','CN') AND (TRNDATE BETWEEN @DATE1 AND @DATE2) 
+	group by A.DIVISION
+)A
+left join DIVISION D ON A.DIVISION=D.INITIAL
+left join RMD_ACLIST ra on ra.ACID=d.ACID 
