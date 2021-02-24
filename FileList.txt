@@ -13,7 +13,7 @@ DISCOUNT_PRESETS.txt
 ---DISCOUNT_SCHEME.txt
 ---FIX_ACTYPE.TXT
 ---Footfall.txt
----GetDefaultParamenterOfStoredProcedure.txt
+GetDefaultParamenterOfStoredProcedure.txt
 ---PREBILL_TABLES.txt
 PROD_EXRATE.txt
 getPrintFormat.txt

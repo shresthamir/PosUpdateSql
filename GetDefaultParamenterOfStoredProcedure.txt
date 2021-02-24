@@ -49,7 +49,7 @@ FROM (
                 SELECT 
                       sm2.[object_id]
                     , sm2.[type]
-                    , tokens = REVERSE(SUBSTRING(sm2.tokens, ISNULL(CHARINDEX('SA', sm2.tokens) + 2, 0), LEN(sm2.tokens))) 
+                    , tokens = REVERSE(SUBSTRING(sm2.tokens, ISNULL(CHARINDEX(CHAR(13) + 'SA', sm2.tokens) + 3, 0), LEN(sm2.tokens))) 
                 FROM (
                     SELECT 
                           sm.[object_id]
@@ -83,6 +83,3 @@ FROM (
 ) data3
 return 
 END
-
-
-
