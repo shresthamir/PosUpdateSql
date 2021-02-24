@@ -73,8 +73,8 @@ SizeColorMaster.txt
 ---SP_GETSCHEMEDISCOUNT.txt
 ---SP_GetTotalDiscount.txt
 ---TRNMAIN_VIEW.txt
----TRNMAIN_BRANCH_OUT.txt
----TRNPROD_BRANCH_OUT.txt
+TRNMAIN_BRANCH_OUT.txt
+TRNPROD_BRANCH_OUT.txt
 ---TRNCONPROD.txt
 ---UserProfiles.txt
 ---USERPROFILESABB.txt
