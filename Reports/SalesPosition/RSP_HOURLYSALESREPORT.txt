@@ -1,47 +1,84 @@
-CREATE OR ALTER PROC RSP_HOURLYSALESREPORT
+CREATE OR ALTER PROC [dbo].[RSP_HOURLYSALESREPORT]
 @DATE1 DATEtime, 
 @DATE2 DATETIME,
-@DIVISION VARCHAR(3) = '%'
+@DIVISION VARCHAR(3) = '%',
+@CHK_ShowIncVat TINYINT = 0,   --CHK_ShowIncVat:1:0
+@CHK_ShowDayWise TINYINT = 0  --CHK_ShowDayWise:1:0
 AS
 SET NOCOUNT ON;
---declare @DATE1 DATE='2019-5-01', @DATE2 DATE='2020-12-1',@DIVISION varchar(20)='%'
-SELECT hr [HOUR],
+--declare @DATE1 DATE='2019-5-01', @DATE2 DATE='2020-12-1',@DIVISION varchar(20)='%', @CHK_ShowIncVat TINYINT =0,@CHK_ShowDayWise TINYINT='0'
+SELECT hr [HOUR],TRNDATE,trntime,
 sum(bills) [TOTAL NUMBER OF BILLS],		  
-convert(numeric(30,2),sum(overallsales)) [TOTAL SALES],
+sum(overallsales) [TOTAL SALES],
 sum(return_bills) [TOTAL RETURN BILLS],
-convert(numeric(30,2),sum(overallsalesreturn)) [TOTAL SALES RETURN],
-convert(numeric(30,2),sum(overallsales - overallsalesreturn)) [NET SALES] from
+sum(overallsalesreturn) [TOTAL SALES RETURN],
+sum(overallsales - overallsalesreturn) [NET SALES]  into #HourlySales from
 (  
-	select case when TRNTIME between  '00:00' and '01:00' then '12:00 AM' when TRNTIME between  '01:00' and '02:00' then '01:00 AM'
-    when TRNTIME between  '02:00' and '03:00' then '02:00 AM' when TRNTIME between  '03:00' and '04:00' then '03:00 AM'
-    when TRNTIME between  '04:00' and '05:00' then '04:00 AM' when TRNTIME between  '05:00' and '06:00' then '05:00 AM'
-    when TRNTIME between  '06:00' and '07:00' then '06:00 AM' when TRNTIME between  '07:00' and '08:00' then '07:00 AM'
-    when TRNTIME between  '08:00' and '09:00' then '08:00 AM' when TRNTIME between  '09:00' and '10:00' then '09:00 AM'
-    when TRNTIME between  '10:00' and '11:00' then '10:00 AM' when TRNTIME between  '11:00' and '12:00' then '11:00 AM'
-    when TRNTIME between  '12:00' and '13:00' then '12:00 PM' when TRNTIME between  '13:00' and '14:00' then '01:00 PM'
-    when TRNTIME between  '14:00' and '15:00' then '02:00 PM' when TRNTIME between  '15:00' and '16:00' then '03:00 PM'
-    when TRNTIME between  '16:00' and '17:00' then '04:00 PM' when TRNTIME between  '17:00' and '18:00' then '05:00 PM'
-    when TRNTIME between  '18:00' and '19:00' then '06:00 PM' when TRNTIME between  '19:00' and '20:00' then '07:00 PM'
-    when TRNTIME between  '20:00' and '21:00' then '08:00 PM' when TRNTIME between  '21:00' and '22:00' then '09:00 PM'
-    when TRNTIME between  '22:00' and '23:00' then '10:00 PM' when TRNTIME between  '23:00' and '24:00' then '11:00 PM'	end hr,
+	select TRNDATE,case when TRNTIME between  '00:00' and '01:00' then '12:00 AM' when TRNTIME between  '01:00' and '02:00' then '01:00 AM'
+	when TRNTIME between  '02:00' and '03:00' then '02:00 AM' when TRNTIME between  '03:00' and '04:00' then '03:00 AM'
+	when TRNTIME between  '04:00' and '05:00' then '04:00 AM' when TRNTIME between  '05:00' and '06:00' then '05:00 AM'
+	when TRNTIME between  '06:00' and '07:00' then '06:00 AM' when TRNTIME between  '07:00' and '08:00' then '07:00 AM'
+	when TRNTIME between  '08:00' and '09:00' then '08:00 AM' when TRNTIME between  '09:00' and '10:00' then '09:00 AM'
+	when TRNTIME between  '10:00' and '11:00' then '10:00 AM' when TRNTIME between  '11:00' and '12:00' then '11:00 AM'
+	when TRNTIME between  '12:00' and '13:00' then '12:00 PM' when TRNTIME between  '13:00' and '14:00' then '01:00 PM'
+	when TRNTIME between  '14:00' and '15:00' then '02:00 PM' when TRNTIME between  '15:00' and '16:00' then '03:00 PM'
+	when TRNTIME between  '16:00' and '17:00' then '04:00 PM' when TRNTIME between  '17:00' and '18:00' then '05:00 PM'
+	when TRNTIME between  '18:00' and '19:00' then '06:00 PM' when TRNTIME between  '19:00' and '20:00' then '07:00 PM'
+	when TRNTIME between  '20:00' and '21:00' then '08:00 PM' when TRNTIME between  '21:00' and '22:00' then '09:00 PM'
+	when TRNTIME between  '22:00' and '23:00' then '10:00 PM' when TRNTIME between  '23:00' and '24:00' then '11:00 PM'	end hr,
 	case when TRNTIME between  '00:00' and '01:00' then '00:00' when TRNTIME between  '01:00' and '02:00' then '01:00'
-    when TRNTIME between  '02:00' and '03:00' then '02:00' when TRNTIME between  '03:00' and '04:00' then '03:00'
-    when TRNTIME between  '04:00' and '05:00' then '04:00' when TRNTIME between  '05:00' and '06:00' then '05:00'
-    when TRNTIME between  '06:00' and '07:00' then '06:00' when TRNTIME between  '07:00' and '08:00' then '07:00'
-    when TRNTIME between  '08:00' and '09:00' then '08:00' when TRNTIME between  '09:00' and '10:00' then '09:00'
-    when TRNTIME between  '10:00' and '11:00' then '10:00' when TRNTIME between  '11:00' and '12:00' then '11:00'
-    when TRNTIME between  '12:00' and '13:00' then '12:00' when TRNTIME between  '13:00' and '14:00' then '13:00'
-    when TRNTIME between  '14:00' and '15:00' then '14:00' when TRNTIME between  '15:00' and '16:00' then '15:00'
-    when TRNTIME between  '16:00' and '17:00' then '16:00' when TRNTIME between  '17:00' and '18:00' then '17:00'
-    when TRNTIME between  '18:00' and '19:00' then '18:00' when TRNTIME between  '19:00' and '20:00' then '19:00'
-    when TRNTIME between  '20:00' and '21:00' then '20:00' when TRNTIME between  '21:00' and '22:00' then '21:00'
-    when TRNTIME between  '22:00' and '23:00' then '22:00' when TRNTIME between  '23:00' and '24:00' then '23:00'	end trntime,
+	when TRNTIME between  '02:00' and '03:00' then '02:00' when TRNTIME between  '03:00' and '04:00' then '03:00'
+	when TRNTIME between  '04:00' and '05:00' then '04:00' when TRNTIME between  '05:00' and '06:00' then '05:00'
+	when TRNTIME between  '06:00' and '07:00' then '06:00' when TRNTIME between  '07:00' and '08:00' then '07:00'
+	when TRNTIME between  '08:00' and '09:00' then '08:00' when TRNTIME between  '09:00' and '10:00' then '09:00'
+	when TRNTIME between  '10:00' and '11:00' then '10:00' when TRNTIME between  '11:00' and '12:00' then '11:00'
+	when TRNTIME between  '12:00' and '13:00' then '12:00' when TRNTIME between  '13:00' and '14:00' then '13:00'
+	when TRNTIME between  '14:00' and '15:00' then '14:00' when TRNTIME between  '15:00' and '16:00' then '15:00'
+	when TRNTIME between  '16:00' and '17:00' then '16:00' when TRNTIME between  '17:00' and '18:00' then '17:00'
+	when TRNTIME between  '18:00' and '19:00' then '18:00' when TRNTIME between  '19:00' and '20:00' then '19:00'
+	when TRNTIME between  '20:00' and '21:00' then '20:00' when TRNTIME between  '21:00' and '22:00' then '21:00'
+	when TRNTIME between  '22:00' and '23:00' then '22:00' when TRNTIME between  '23:00' and '24:00' then '23:00'	end trntime,
 	case when LEFT(VCHRNO,2) IN ('SI','TI') then 1 else 0 end bills,
 	case when LEFT(VCHRNO,2) = 'CN' then 1 else 0 end return_bills,
-	case when LEFT(VCHRNO,2) IN ('SI','TI') then (TOTAMNT-DCAMNT) else 0 end overallsales,  
-	case when LEFT(VCHRNO,2) = 'CN' then (TOTAMNT-DCAMNT) else 0 end overallsalesreturn
+	case when LEFT(VCHRNO,2) IN ('SI','TI') then case when @CHK_ShowIncVat=0 then (TOTAMNT-DCAMNT) else (TOTAMNT-DCAMNT+VATAMNT) end else 0 end overallsales,  
+	case when LEFT(VCHRNO,2) = 'CN' then case when @CHK_ShowIncVat=0 then (TOTAMNT-DCAMNT) else (TOTAMNT-DCAMNT+VATAMNT) end else 0 end overallsalesreturn
 	FROM RMD_TRNMAIN A 
 	WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','RE') and TRNDATE BETWEEN @DATE1 AND @DATE2 AND A.DIVISION LIKE @DIVISION
 )a
-group by hr,a.trntime
+group by hr,TRNDATE,a.trntime
 ORDER BY a.trntime,RIGHT(hr, 2)
+
+if @CHK_ShowDayWise=0
+	begin
+		SELECT  [HOUR],
+		sum([TOTAL NUMBER OF BILLS]) [TOTAL NUMBER OF BILLS],		  
+		convert(numeric(30,2),sum([TOTAL SALES])) [TOTAL SALES],
+		sum([TOTAL RETURN BILLS]) [TOTAL RETURN BILLS],
+		convert(numeric(30,2),sum([TOTAL SALES RETURN])) [TOTAL SALES RETURN],
+		convert(numeric(30,2),sum([NET SALES])) [NET SALES] from
+		#HourlySales  a
+		group by [HOUR],a.trntime
+		ORDER BY a.trntime,RIGHT([HOUR], 2) 
+	end 
+else
+	select Convert(varchar(10),[Date/Hour]),[TOTAL NUMBER OF BILLS],[TOTAL SALES],[TOTAL RETURN BILLS],[TOTAL SALES RETURN],[NET SALES] from 
+	(
+		select distinct format(TRNDATE,'dd/MM/yyyy') [Date/Hour],null trntime,null [TOTAL NUMBER OF BILLS],null [TOTAL SALES],null [TOTAL RETURN BILLS],null [TOTAL SALES RETURN],
+		null [NET SALES],TRNDATE [Date],0 flg from #HourlySales
+		
+		union   all
+		
+		SELECT [HOUR],trntime,sum([TOTAL NUMBER OF BILLS]) [TOTAL NUMBER OF BILLS],convert(numeric(30,2),sum([TOTAL SALES])) [TOTAL SALES],
+		sum([TOTAL RETURN BILLS]) [TOTAL RETURN BILLS],convert(numeric(30,2),sum([TOTAL SALES RETURN])) [TOTAL SALES RETURN],convert(numeric(30,2),sum([NET SALES])) [NET SALES],
+		TRNDATE [Date],1 flg from #HourlySales  
+		group by TRNDATE,[HOUR],trntime  
+		
+		union   all
+		
+		SELECT 'Total:'[HOUR],null trntime,sum([TOTAL NUMBER OF BILLS]),sum([TOTAL SALES]), sum([TOTAL RETURN BILLS]) ,sum([TOTAL SALES RETURN]),sum([NET SALES]),TRNDATE [Date],2 flg
+		from #HourlySales 
+		group by TRNDATE 
+	)a ORDER BY [Date],flg asc,RIGHT([Date/Hour], 2),trntime--,TRNDATE
+drop table #HourlySales
+  
+            
