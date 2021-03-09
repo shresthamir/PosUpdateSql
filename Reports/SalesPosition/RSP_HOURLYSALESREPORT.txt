@@ -6,7 +6,7 @@ CREATE OR ALTER PROC [dbo].[RSP_HOURLYSALESREPORT]
 @CHK_ShowDayWise TINYINT = 0  --CHK_ShowDayWise:1:0
 AS
 SET NOCOUNT ON;
---declare @DATE1 DATE='2019-5-01', @DATE2 DATE='2020-12-1',@DIVISION varchar(20)='%', @CHK_ShowIncVat TINYINT =0,@CHK_ShowDayWise TINYINT='0'
+--declare @DATE1 DATE='2019-5-01', @DATE2 DATE='2020-12-1',@DIVISION varchar(20)='%', @CHK_ShowIncVat TINYINT =0,@CHK_ShowDayWise TINYINT=1
 SELECT hr [HOUR],TRNDATE,trntime,
 sum(bills) [TOTAL NUMBER OF BILLS],		  
 sum(overallsales) [TOTAL SALES],
@@ -50,34 +50,42 @@ ORDER BY a.trntime,RIGHT(hr, 2)
 
 if @CHK_ShowDayWise=0
 	begin
-		SELECT  [HOUR],
+		SELECT  [HOUR] [TOD],
 		sum([TOTAL NUMBER OF BILLS]) [TOTAL NUMBER OF BILLS],		  
-		convert(numeric(30,2),sum([TOTAL SALES])) [TOTAL SALES],
+		convert(numeric(12,2),sum([TOTAL SALES])) [TOTAL SALES],
 		sum([TOTAL RETURN BILLS]) [TOTAL RETURN BILLS],
-		convert(numeric(30,2),sum([TOTAL SALES RETURN])) [TOTAL SALES RETURN],
-		convert(numeric(30,2),sum([NET SALES])) [NET SALES] from
+		convert(numeric(12,2),sum([TOTAL SALES RETURN])) [TOTAL SALES RETURN],
+		convert(numeric(12,2),sum([NET SALES])) [NET SALES] from
 		#HourlySales  a
 		group by [HOUR],a.trntime
 		ORDER BY a.trntime,RIGHT([HOUR], 2) 
 	end 
 else
-	select Convert(varchar(10),[Date/Hour]),[TOTAL NUMBER OF BILLS],[TOTAL SALES],[TOTAL RETURN BILLS],[TOTAL SALES RETURN],[NET SALES] from 
+	select Convert(varchar(10),[Date/Hour]) [TOD],[TOTAL NUMBER OF BILLS],
+	convert(numeric(12,2),[TOTAL SALES]) [TOTAL SALES],
+	[TOTAL RETURN BILLS],
+	convert(numeric(12,2),[TOTAL SALES RETURN]) [TOTAL SALES  RETURN],
+	convert(numeric(12,2),[NET SALES]) [NET SALES], [TYPE] from 
 	(
 		select distinct format(TRNDATE,'dd/MM/yyyy') [Date/Hour],null trntime,null [TOTAL NUMBER OF BILLS],null [TOTAL SALES],null [TOTAL RETURN BILLS],null [TOTAL SALES RETURN],
-		null [NET SALES],TRNDATE [Date],0 flg from #HourlySales
+		null [NET SALES],TRNDATE [Date],0 flg, 'G' TYPE from #HourlySales
 		
-		union   all
+		UNION ALL 
 		
-		SELECT [HOUR],trntime,sum([TOTAL NUMBER OF BILLS]) [TOTAL NUMBER OF BILLS],convert(numeric(30,2),sum([TOTAL SALES])) [TOTAL SALES],
-		sum([TOTAL RETURN BILLS]) [TOTAL RETURN BILLS],convert(numeric(30,2),sum([TOTAL SALES RETURN])) [TOTAL SALES RETURN],convert(numeric(30,2),sum([NET SALES])) [NET SALES],
-		TRNDATE [Date],1 flg from #HourlySales  
+		SELECT [HOUR],trntime, sum([TOTAL NUMBER OF BILLS]) [TOTAL NUMBER OF BILLS],sum([TOTAL SALES]) [TOTAL SALES],
+		sum([TOTAL RETURN BILLS]) [TOTAL RETURN BILLS], sum([TOTAL SALES RETURN]) [TOTAL SALES RETURN], sum([NET SALES]) [NET SALES],
+		TRNDATE [Date],1 flg, '1' TYPE from #HourlySales  
 		group by TRNDATE,[HOUR],trntime  
 		
-		union   all
+		UNION ALL 
 		
-		SELECT 'Total:'[HOUR],null trntime,sum([TOTAL NUMBER OF BILLS]),sum([TOTAL SALES]), sum([TOTAL RETURN BILLS]) ,sum([TOTAL SALES RETURN]),sum([NET SALES]),TRNDATE [Date],2 flg
+		SELECT 'Total:',null trntime,sum([TOTAL NUMBER OF BILLS]),sum([TOTAL SALES]), sum([TOTAL RETURN BILLS]) ,sum([TOTAL SALES RETURN]),sum([NET SALES]),TRNDATE [Date],2 flg, 'G' TYPE
 		from #HourlySales 
 		group by TRNDATE 
+
+		UNION ALL 
+		
+		select DISTINCT NULL,null ,null ,null ,null ,null ,Null ,  TRNDATE ,3 flg, 'A' TYPE from #HourlySales
 	)a ORDER BY [Date],flg asc,RIGHT([Date/Hour], 2),trntime--,TRNDATE
 drop table #HourlySales
   
