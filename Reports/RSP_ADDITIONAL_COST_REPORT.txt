@@ -1,0 +1,64 @@
+CREATE OR ALTER PROC RSP_ADDITIONAL_COST_REPORT
+@DATE1 DATETIME,
+@DATE2 DATETIME
+AS
+
+DECLARE @colname AS NVARCHAR(MAX),@header AS NVARCHAR(MAX),@header1 AS NVARCHAR(MAX),@query AS NVARCHAR(MAX);
+
+SELECT distinct c.[key] INTO #KEYS FROM ADDITIONALCOST_JSON a 
+		cross apply OPENJSON (a.jsonadditionalcost)  B
+		CROSS APPLY OPENJSON(B.VALUE) C
+		where c.[key] not in ('Unit','Mcode','Rate','Code','Amount','Quantity','Sno','Total','Description','ExRate','NRate','UnitCost')	        
+
+SET @colname = STUFF((SELECT distinct   ','  + CHAR(13) + CHAR(10) + QUOTENAME(a.[key])  +' varchar(50) ''$."'+a.[key]+'"''' FROM
+	#KEYS a FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+	
+	SET @header = STUFF((SELECT distinct ','  + QUOTENAME(a.[key]) FROM 
+	#KEYS a FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+
+	SET @header1 = STUFF((SELECT distinct ',null '  + QUOTENAME(a.[key]) FROM 
+	#KEYS a FOR XML PATH(''), TYPE  ).value('.', 'NVARCHAR(MAX)')  ,1,1,'')
+
+	set @query = ' 
+SELECT distinct a.pivchrno [Invoice No], P.TRNDATE, P.PARAC,Sno,Mcode,Code,[Description],Unit,ExRate,Rate,NRate,Quantity,Amount,'+@header+',Total,UnitCost
+into #temp from additionalcost_json a 
+JOIN PURMAIN P ON A.PIVCHRNO = P.VCHRNO
+cross apply OPENJSON (a.jsonadditionalcost) WITH 
+(
+	Sno int  ''$.Sno'', 
+	Mcode varchar(50) ''$.Mcode'', 
+	Code varchar(50) ''$.Code'', 
+	[Description] varchar(50) ''$.Description'',
+	Unit varchar(50) ''$.Unit'', 
+	ExRate decimal(12,3) ''$.ExRate'', 
+	Rate decimal(12,3) ''$.Rate'',
+	NRate decimal(20,3) ''$.NRate'', 
+	Quantity decimal(12,0) ''$.Quantity'', 
+	Amount decimal(25,5) ''$.Amount'',	'+@colname+',
+	Total decimal(25,5) ''$.Total'', 
+	UnitCost decimal(25,5) ''$.UnitCost''
+)  AS AttsData
+WHERE P.TRNDATE BETWEEN '''  + CONVERT(VARCHAR(10), @DATE1, 101) + ''' AND  ''' + CONVERT(VARCHAR(10), @DATE2, 101) + '''
+
+SELECT Sno,Mcode ,Code [Item Code],[Description] [Item Name],Unit,ExRate [ExChance Rate],Rate,NRate [Net Rate],Quantity,
+Amount,'+@header+',Total,UnitCost, TYPE 
+FROM
+(
+	SELECT T.TRNDATE, T.[Invoice No],NULL Sno, NULL Mcode, T.[Invoice No] Code, A.ACNAME [Description], CONVERT(VARCHAR(12), T.TRNDATE, 100) Unit, NULL ExRate, NULL Rate, NULL NRate,NULL Quantity,NULL Amount,'+@header1+',NULL Total,NULL UnitCost,-1 FLG,[Invoice No] inv, ''G'' TYPE FROM #TEMP T 	
+	JOIN RMD_ACLIST A ON T.PARAC = A.ACID WHERE T.SNO IS NULL 
+	UNION ALL
+
+	SELECT TRNDATE,[Invoice No],Sno,Mcode,Code,[Description],Unit,ExRate,Rate,NRate,Quantity,Amount,'+@header+',Total,UnitCost,0 FLG,[Invoice No] inv, ''A'' TYPE FROM #TEMP WHERE SNO IS NOT NULL 
+	UNION ALL
+
+	SELECT distinct TRNDATE, [Invoice No],Sno, Mcode, Code, [Description], Unit, ExRate, Rate, NRate, Quantity, Amount,'+@header+', Total, UnitCost,1 FLG,[Invoice No] inv, ''G'' TYPE FROM #TEMP  where SNO IS  NULL 
+	union all
+
+	SELECT distinct TRNDATE, null [Invoice No],NULL Sno,NULL Mcode,NULL Code,NULL [Description],NULL Unit,NULL ExRate,NULL Rate,NULL NRate,NULL Quantity,NULL Amount,'+@header1+',NULL Total,NULL UnitCost,2 FLG,[Invoice No] inv, NULL TYPE FROM #TEMP
+            
+)A ORDER BY TRNDATE,FLG 
+drop table #temp
+'
+--print @query
+execute(@query)
+drop table #keys	
