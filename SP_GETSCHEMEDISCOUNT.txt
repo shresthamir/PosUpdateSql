@@ -38,30 +38,38 @@ if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
   select A.DisID AS schemeID,c.Mcode,c.disrate as SchemeDisRate,c.disamount as SchemeDisAmount,a.ComboId,a.SchemeName,a.priority,1 as MinQty,a.SchemeType  from Discount_Rate a 
    inner join #schedules b on a.ScheduleID=b.DisID	
    inner join Discount_SchemeDiscount c on a.DisID=c.DisID
-   where c.Mcode = @CODE and a.SchemeType ='Mcode' 
+   inner join menuitem d on c.mcode = d.MCODE
+   where c.Mcode = @CODE and a.SchemeType ='Mcode' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE'
    AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
   union all 
   select a.DisID,c.mcode,d.disrate,d.disamount,a.comboid,a.schemename,a.priority,1 as MinQty,a.SchemeType from Discount_Rate a inner join #schedules b on a.ScheduleID=b.DisID
 	inner join Discount_SchemeDiscount d on a.DisID=d.DisID
 	inner join menuitem c on c.mgroup = d.mgroup 
-	where C.MCODE  = @CODE and a.SchemeType ='Mgroup' 
+	where C.MCODE  = @CODE and a.SchemeType ='Mgroup' AND ISNULL(C.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
  union all 
   select a.DisID,c.mcode,d.disrate,d.disamount,a.comboid,a.schemename,a.priority,1 as MinQty,a.SchemeType from Discount_Rate a inner join #schedules b on a.ScheduleID=b.DisID
 	inner join Discount_SchemeDiscount d on a.DisID=d.DisID
-	inner join menuitem c on d.Parent = c.PARENT  where C.Mcode   = @CODE and a.SchemeType ='Parent' 
+	inner join menuitem c on d.Parent = c.PARENT  
+	where C.Mcode   = @CODE and a.SchemeType ='Parent' AND ISNULL(C.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
  union all 
   select a.DisID,c.mcode,c.disrate,c.disamount,a.comboid,a.schemename,a.priority,c.Quantity MinQty,a.SchemeType from Discount_Rate a inner join #schedules b on a.ScheduleID=b.DisID
-	inner join discount_combolist c on a.DisID  = c.disid  where c.mcode   = @CODE and a.SchemeType ='Combo'
+	inner join discount_combolist c on a.DisID  = c.disid  
+	inner join menuitem d on c.mcode = d.MCODE
+	where c.mcode   = @CODE and a.SchemeType ='Combo' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
  union all 
   select a.DisID,c.mcode,a.disrate,a.disamount,a.comboid,a.schemename,a.priority,a.quantity MinQty,a.SchemeType from Discount_Rate a inner join #schedules b on a.ScheduleID=b.DisID
-	inner join discount_ifAnyItemsList c on a.DisID  = c.disid  where c.mcode   = @CODE and a.SchemeType ='AnyItems'
+	inner join discount_ifAnyItemsList c on a.DisID  = c.disid 
+	inner join menuitem d on c.mcode = d.MCODE
+	where c.mcode   = @CODE and a.SchemeType ='AnyItems' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
  union all 
   select a.DisID,C.mcode,C.disrate,C.disamount,a.comboid,a.schemename,a.priority,a.quantity MinQty,a.SchemeType from Discount_Rate a inner join #schedules b on a.ScheduleID=b.DisID
-	inner join discount_ifAnyItemsList c on a.DisID  = c.disid  where c.mcode   = @CODE  and a.SchemeType ='Bulk'
+	inner join discount_ifAnyItemsList c on a.DisID  = c.disid  
+	inner join menuitem d on c.mcode = d.MCODE
+	where c.mcode   = @CODE  and a.SchemeType ='Bulk' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
 order by priority
 

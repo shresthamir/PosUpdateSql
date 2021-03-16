@@ -37,7 +37,12 @@ if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
 	inner join discount_SchemeDiscount c on a.DisID  = c.disid 
 	JOIN MEMBERSCHEME MS ON MS.SCHEMEID = a.schemetype
 	LEFT join menuitem P on P.Parent = c.PARENT
-	LEFT join menuitem M on M.MGROUP = c.MGroup  where (c.mcode   = @CODE OR ISNULL(P.MCODE, '') = @CODE OR ISNULL(M.MCODE, '') = @CODE)
+	LEFT join menuitem M on M.MGROUP = c.MGroup  
+	LEFT JOIN MENUITEM I ON I.MCODE = C.Mcode
+	where (c.mcode   = @CODE OR ISNULL(P.MCODE, '') = @CODE OR ISNULL(M.MCODE, '') = @CODE)
 	AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) 
+	AND ISNULL(P.DISMODE, 'DISCOUNTABLE') = 'DISCOUNTABLE'
+	AND ISNULL(M.DISMODE, 'DISCOUNTABLE') = 'DISCOUNTABLE'
+	AND ISNULL(I.DISMODE, 'DISCOUNTABLE') = 'DISCOUNTABLE'
 	
 order by priority
