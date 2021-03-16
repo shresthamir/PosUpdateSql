@@ -36,6 +36,7 @@ MENUITEM_ECOMMERCE_DETAIL.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
 NUM_TOWORDS.txt
+Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt
 ---PRODUCT_EDIT_LOG.txt
