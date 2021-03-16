@@ -1,13 +1,4 @@
-CREATE TABLE [dbo].[Party_Payment_Info](
-	[ACID] [varchar](25) NOT NULL,
-	[BankId] [int] NULL,
-	[Branch] [varchar](50) NULL,
-	[AccountNumber] [varchar](100) NULL,
-	CONSTRAINT PK_Party_Payment_Info PRIMARY KEY (ACID),
-	CONSTRAINT FK_Party_Payment_Info_RMD_ACLIST FOREIGN KEY (ACID) REFERENCES RMD_ACLIST(ACID),
-	CONSTRAINT FK_Party_Payment_Info_TblBankList FOREIGN KEY (BankId) REFERENCES TblBankList(BankId)
-) ON [PRIMARY]
-
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'TblBankList')
 CREATE TABLE [dbo].[TblBankList](
 	[BankId] [int] NOT NULL,
 	[Bank] [varchar](50) NOT NULL,
@@ -16,4 +7,15 @@ PRIMARY KEY CLUSTERED
 (
 	[BankId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Party_Payment_Info')
+CREATE TABLE [dbo].[Party_Payment_Info](
+	[ACID] [varchar](25) NOT NULL,
+	[BankId] [int] NULL,
+	[Branch] [varchar](50) NULL,
+	[AccountNumber] [varchar](100) NULL,
+	CONSTRAINT PK_Party_Payment_Info PRIMARY KEY (ACID),
+	CONSTRAINT FK_Party_Payment_Info_RMD_ACLIST FOREIGN KEY (ACID) REFERENCES RMD_ACLIST(ACID),
+	CONSTRAINT FK_Party_Payment_Info_TblBankList FOREIGN KEY (BankId) REFERENCES TblBankList(BankId)
 ) ON [PRIMARY]
