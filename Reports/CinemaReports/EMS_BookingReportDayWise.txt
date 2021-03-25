@@ -1,0 +1,21 @@
+CREATE OR ALTER PROCEDURE EMS_BookingReportDayWise
+@DATE1 DATETIME,
+@DATE2 DATETIME
+AS
+	select row_number() over (order by SD.showdate)Sn,SD.showdate [Show Date],sum(isnull(res.booked,0))Booked,sum(isnull(res.converted,0)) [Converted],sum(isnull(res.cancelled,0)) [Cancelled]
+    from ems_ShowDetails SD 
+    left join
+	(
+		select r.showid ,sum(case when status=0 then rd.BOOKED else 0  end)  active,
+            sum(case when status=1 then rd.BOOKED else 0  end)  converted,
+            sum(case when status=2 then rd.BOOKED else 0  end)  cancelled,sum(booked) booked
+		from ems_Reservation R
+		join 
+		(
+			select resid,count(*) BOOKED from ems_ResDetails group by resid
+		)RD ON R.ResID=RD.ResID
+		group by r.showid 
+    )res on res.showid=sd.showid
+	WHERE SD.ShowDate BETWEEN @DATE1 AND @DATE2
+    group by SD.showdate 
+    --having sum(isnull(res.booked,0))<>0

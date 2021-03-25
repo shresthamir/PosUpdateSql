@@ -223,6 +223,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/StockPosition/RSP_STOCKREPORT.txt
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTREGISTER.txt
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTSTATUS.txt
+/Reports/StockSettlementReports/SP_STOCKADJUSTMENTREGISTER_TIMEWISE.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT_DIVISIONWISE.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATIONREPORT.txt

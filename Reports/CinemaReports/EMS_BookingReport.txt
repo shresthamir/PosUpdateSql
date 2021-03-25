@@ -1,0 +1,11 @@
+CREATE OR ALTER PROC EMS_BookingReport
+@DATE1 DATETIME,
+@DATE2 DATETIME,
+@OPT_RepMode TINYINT           --DayWise:0,MovieWise:1,ShowWise:2
+AS
+IF @OPT_RepMode = 0 
+	EXEC EMS_BookingReportDayWise @DATE1, @DATE2
+ELSE IF @OPT_RepMode = 1 
+	EXEC EMS_BookingReportMovieWise @DATE1, @DATE2
+ELSE 
+	EXEC EMS_BookingReportShowWise @DATE1, @DATE2
