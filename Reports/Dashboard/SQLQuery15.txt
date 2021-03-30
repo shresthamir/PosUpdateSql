@@ -1,0 +1,16 @@
+ create    procedure  [dbo].[DSP_Categorywise_Sales_Report]
+ @Date1 datetime ,@Date2 datetime,@CompanyId varchar(20)='%',@CategoryId varchar(100)='%'
+as
+--declare @Date1 datetime ='2020-11-1',@Date2 datetime='2020-11-30',@CompanyId varchar(20)='STF0016',@CategoryId varchar(100)='%'
+     
+
+        select ROW_NUMBER() over (order by tp.mcode) SN, 
+              tp.mcode [Sku Code],mi.DESCA [Item Name],sum(RealQty-REALQTY_IN) Qty,
+			  convert(numeric(30,4),sum(case when  tm.vouchertype in ('SI','TI') then tp.AMOUNT  else -tp.AMOUNT  end)) SalesValue,
+			  convert(numeric(30,4),sum(case when  tm.vouchertype in ('SI','TI') then tp.DISCOUNT  else -tp.DISCOUNT  end)) Discount,
+			  convert(numeric(30,4),sum(case when  tm.vouchertype in ('SI','TI') then tp.VAT  else -tp.VAT  end)) Tax,
+			  convert(numeric(30,4),sum(case when  tm.vouchertype in ('SI','TI') then tp.NETAMOUNT  else -tp.NETAMOUNT end))  Gross
+        from rmd_trnmain tm (nolock) join rmd_trnprod TP (nolock) ON TM.VCHRNO=TP.VCHRNO join MENUITEM mi (nolock) on mi.mcode=tp.MCODE
+        where tm.trndate between @Date1 and @Date2 and tm.VoucherType in  ('SI','TI','cn') and mi.MGROUP like @CategoryId and tm.COMPANYID like  @CompanyId
+		group by mi.desca,mi.MGROUP,tp.mcode 
+		having sum(RealQty-REALQTY_IN)<>0

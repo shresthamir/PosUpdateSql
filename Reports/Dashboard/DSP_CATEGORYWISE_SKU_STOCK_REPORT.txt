@@ -1,0 +1,12 @@
+create     PROCEDURE [dbo].[DSP_CATEGORYWISE_SKU_STOCK_REPORT]
+  @Date1 datetime,@Date2 datetime,@COMPANYID VARCHAR(30)='%',@CategoryId varchar(100)='%'
+AS
+		--declare @Date1 datetime ='2020-11-1',@Date2 datetime='2020-11-30',@COMPANYID VARCHAR(30)='STF0033',@CategoryId varchar(100)='%'
+  
+		select ROW_NUMBER() over (order by tp.mcode) SN,  
+              tp.mcode [Sku Code],mi.DESCA [Item Name],sum(REALQTY_IN) [Stock In],sum(REALQTY) [Stock Out],sum(REALQTY_IN-REALQTY) Balance
+        from rmd_trnmain tm  join rmd_trnprod TP ON TM.VCHRNO=TP.VCHRNO join MENUITEM mi on mi.mcode=tp.MCODE right join MENUITEM m on mi.MGROUP=m.MCODE,SETTING
+        where tm.trndate between @Date1 and @Date2 --and tm.VoucherType in  ('SI','TI','cn') 
+		and tm.COMPANYID like @companyid
+	    group by mi.DESCA,m.MCODE,tp.mcode 
+		HAVING SUM(REALQTY_IN-RealQty)<>0

@@ -1,0 +1,18 @@
+ CREATE   PROCEDURE [dbo].[DSP_CATEGORYWISE_STOCK_REPORT]
+  @Date1 datetime,@Date2 datetime,@COMPANYID VARCHAR(30)='%'
+ AS
+		--declare @Date1 datetime ='2020-11-1',@Date2 datetime='2020-11-30',@COMPANYID VARCHAR(30)='STF0033'
+  
+		  select  
+              m.MCODE,m.DESCA [NAME], 
+			 --sum(case when SETTING.ShowDashboardInNet=1 then (case when  tm.vouchertype in ('SI','TI') then tp.AMOUNT  else -tp.AMOUNT end) else (case when  tm.vouchertype in ('SI','TI') then tp.NETAMOUNT  else -tp.NETAMOUNT end) end) SALESVALUE,
+			  SUM(REALQTY_IN-RealQty)  STOCK,
+			  CONVERT(NUMERIC(30,2),sum(mi.PRATE_A*(REALQTY_IN-RealQty))) STOCKVALUE
+        from rmd_trnmain tm  join rmd_trnprod TP ON TM.VCHRNO=TP.VCHRNO join MENUITEM mi on mi.mcode=tp.MCODE right join MENUITEM m on mi.MGROUP=m.MCODE,SETTING
+        where tm.trndate between @Date1 and @Date2 --and tm.VoucherType in  ('SI','TI','cn') 
+		and tm.COMPANYID like @companyid
+	    group by m.DESCA,m.MCODE
+		HAVING SUM(REALQTY_IN-RealQty)<>0
+		order by m.MCODE
+
+
