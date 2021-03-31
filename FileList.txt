@@ -79,8 +79,8 @@ TRNPROD_VIEW.txt
 TRNMAIN_BRANCH_OUT.txt
 TRNPROD_BRANCH_OUT.txt
 ---TRNCONPROD.txt
----UserProfiles.txt
----USERPROFILESABB.txt
+UserProfiles.txt
+USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
 /Reports/vwItemHeirarchy.txt
