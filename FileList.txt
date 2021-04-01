@@ -32,6 +32,7 @@ getPrintFormat.txt
 Indexes.txt
 MEMGRADETRAN_VIEW.txt
 MENUITEM_ECOMMERCE_DETAIL.txt
+MasterDeleteFlag.txt
 ---MULTICURRENCY.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
