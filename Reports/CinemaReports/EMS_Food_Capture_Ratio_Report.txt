@@ -1,0 +1,23 @@
+create or alter procedure EMS_Food_Capture_Ratio_Report
+@DATE1 datetime,
+@DATE2 datetime
+as
+--declare @Date1 datetime ,@Date2 datetime
+--SET @DATE1='2021-01-01'
+--SET @DATE2 = '2021-04-01'
+select [Item Name],Quantity, CONVERT(NUMERIC(18,2),Rate) Rate, CONVERT(NUMERIC(18,2),Amount) Amount, CONVERT(NUMERIC(18,2),Discount),CONVERT(NUMERIC(18,2),Gross),
+CONVERT(NUMERIC(18,2),Quantity/(case when isnull(b.ticketcount,0)=0 then 1 else b.ticketcount end)) [Items Per Ticket],
+CONVERT(NUMERIC(18,2),(Amount)/(case when isnull(b.ticketcount,0)=0 then 1 else b.ticketcount end)) [Sales Per Ticket] 
+from 
+(
+	select MI.DESCA [Item Name],sum(RealQty-REALQTY_IN) Quantity,ap.Rate,sum(CASE WHEN  am.VoucherType in ('TI','SI') THEN ap.Amount ELSE -ap.Amount END) Amount,
+	sum(CASE WHEN  am.VoucherType in ('TI','SI') THEN ap.Discount ELSE -ap.Discount END ) Discount,sum(CASE WHEN  am.VoucherType in ('TI','SI') THEN ap.NETAMOUNT ELSE -ap.NETAMOUNT END) Gross
+	FROM rmd_trnmain  AM JOIN rmd_trnprod AP  ON AM.VCHRNO=AP.VCHRNO JOIN MENUITEM MI ON AP.MCODE=MI.MCODE
+	where am.VoucherType in ('TI','SI','CN') and am.TRNDATE between @Date1 and @Date2
+	group by MI.DESCA,ap.Rate
+)a,
+(
+	select count(*) ticketcount from ems_Sales where [Date] between @Date1 and @Date2
+)b
+
+
