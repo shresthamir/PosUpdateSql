@@ -1,16 +1,47 @@
- CREATE   PROCEDURE [dbo].[DSP_CATEGORY_WISE_SALLES_REPORT]
-  @Date1 datetime,@Date2 datetime,@COMPANYID VARCHAR(30)='%'
+ALTER   PROCEDURE [dbo].[DSP_CATEGORY_WISE_SALLES_REPORT]
+  @Date1 datetime,@Date2 datetime,@COMPANYID VARCHAR(30)='%',@DIVISION VARCHAR(20)='%'
  AS
-        --declare @Date1 datetime ='2020-11-1',@Date2 datetime='2020-11-30',@COMPANYID VARCHAR(30)='STF0033'
+--declare @Date1 datetime ='2021-04-10',@Date2 datetime='2021-04-16',@COMPANYID VARCHAR(30)='GS001',@DIVISION VARCHAR(20)='LSI'
+		DECLARE @FLAG VARCHAR(100) = 'SubCategory' --MGROUP, MainCategory, SubCategory, SuperCategory,MCAT
 
-		select m.MCODE,m.DESCA [NAME], SUM(case when  tm.vouchertype in ('SI','TI') then tp.RealQty  else -tp.REALQTY_IN end) QTY,
-		CONVERT(NUMERIC(30,2),sum(case when SETTING.ShowDashboardInNet=1 then (case when  tm.vouchertype in ('SI','TI') then tp.AMOUNT  else -tp.AMOUNT end) else (case when  tm.vouchertype in ('SI','TI') then tp.NETAMOUNT  else -tp.NETAMOUNT end) end)) [VALUE]
-        from rmd_trnmain tm  join rmd_trnprod TP ON TM.VCHRNO=TP.VCHRNO join MENUITEM mi on mi.mcode=tp.MCODE right join MENUITEM m on mi.MGROUP=m.MCODE,SETTING
-        where tm.trndate between @Date1 and @Date2 and tm.VoucherType in  ('SI','TI','cn') AND TM.COMPANYID LIKE @COMPANYID 
-		group by m.DESCA,m.MCODE
-		HAVING SUM(REALQTY_IN-RealQty)<>0
-		order by m.MCODE
+		SELECT TP.MCODE, TM.VoucherType, TP.REALQTY, TP.REALQTY_IN, TP.AMOUNT, TP.NETAMOUNT INTO #ITEMTRAN FROM RMD_TRNPROD TP
+		JOIN RMD_TRNMAIN tm  ON TM.VCHRNO=TP.VCHRNO 
+		where tm.trndate between @Date1 and @Date2 and tm.VoucherType in  ('SI','TI','cn') AND TM.COMPANYID LIKE @COMPANYID AND TM.DIVISION LIKE @DIVISION
 
+		select 
+		     case when @FLAG='MGROUP' then mi.MGCode
+				when @FLAG='MainCategory' then mi.MCCode
+				when @FLAG='SubCategory' then mi.SCCode
+				when @FLAG='SuperCategory' then mi.SPCode
+				when @FLAG='MCAT' then MCATEGORY END MCODE,
 
-GO
+		     case when @FLAG='MGROUP' then mi.[Main Group]
+				when @FLAG='MainCategory' then mi.[Main Category] 
+				when @FLAG='SubCategory' then mi.[Sub Category]
+				when @FLAG='SuperCategory' then mi.[Super Category]
+				when @FLAG='MCAT' then CASE WHEN ISNULL(MI.MCATEGORY, '') ='' THEN 'N/A' ELSE MI.MCATEGORY END end [NAME], 
 
+		     SUM(case when  TP.vouchertype in ('SI','TI') then tp.RealQty  else -tp.REALQTY_IN end) QTY,
+		     CONVERT(NUMERIC(30,2),sum(case when SETTING.ShowDashboardInNet=1 then (case when  TP.vouchertype in ('SI','TI') then tp.AMOUNT  else -tp.AMOUNT end) else (case when  TP.vouchertype in ('SI','TI') then tp.NETAMOUNT  else -tp.NETAMOUNT end) end)) [VALUE]
+        from vwItemHeirarchy MI 
+		LEFT JOIN #ITEMTRAN TP ON mi.mcode = tp.MCODE
+		,SETTING
+		group by 
+		case when @FLAG='MGROUP' then mi.[Main Group]
+			when @FLAG='MainCategory' then mi.[Main Category] 
+			when @FLAG='SubCategory' then mi.[Sub Category]
+			when @FLAG='SuperCategory' then mi.[Super Category]
+			when @FLAG='MCAT' then CASE WHEN ISNULL(MI.MCATEGORY, '') ='' THEN 'N/A' ELSE MI.MCATEGORY END end,
+		
+		case when @FLAG='MGROUP' then mi.MGCode
+			when @FLAG='MainCategory' then mi.MCCode
+			when @FLAG='SubCategory' then mi.SCCode
+			when @FLAG='SuperCategory' then mi.SPCode
+			when @FLAG='MCAT' then MCATEGORY END 
+		--HAVING SUM(REALQTY_IN-RealQty)<>0
+		order by 
+		case when @FLAG='MGROUP' then mi.[Main Group]
+			when @FLAG='MainCategory' then mi.[Main Category] 
+			when @FLAG='SubCategory' then mi.[Sub Category]
+			when @FLAG='SuperCategory' then mi.[Super Category]
+			when @FLAG='MCAT' then CASE WHEN ISNULL(MI.MCATEGORY, '') ='' THEN 'N/A' ELSE MI.MCATEGORY END end
