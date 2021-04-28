@@ -69,6 +69,7 @@ RMD_TRNMAIN_FN.txt
 ---RMD_TRNTRAN_FN.txt
 ---SALES_TRNMAIN.txt
 ---SALES_TRNPROD.txt
+SalesTerminal.txt
 SecurityQuestions.txt
 SETTINGS.txt
 ---ShippingInfo.txt
