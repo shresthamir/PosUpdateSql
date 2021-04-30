@@ -1,4 +1,4 @@
-ALTER   VIEW [dbo].[vwItemHeirarchy]
+CREATE OR ALTER   VIEW [dbo].[vwItemHeirarchy]
 AS
 SELECT MI.MCODE,MG.MCODE MGCode, MG.DESCA [Main Group],null MCCODE, NULL [Main Category], NULL SCCode, NULL [Sub Category], NULL SPCode, NULL [Super Category],mi.MCAT MCATEGORY FROM MENUITEM MI 
 JOIN MENUITEM MG ON MI.PARENT = MG.MCODE
