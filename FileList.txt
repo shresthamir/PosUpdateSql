@@ -132,8 +132,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/GetParticularForLedger.txt
 ---/Reports/GroupLedger/NSP_GROUPLEDGER.txt
 ---/Reports/GroupLedger/RSP_GROUPLEDGER.txt
-/Report/ItemExpiryReport/RSP_ITEMEXPIRYREPORT.txt
-/Report/ItemExpiryReport/RSP_ITEMEXPIRYREPORT_BATCHWISE.txt
+/Reports/ItemExpiryReport/RSP_ITEMEXPIRYREPORT.txt
+/Reports/ItemExpiryReport/RSP_ITEMEXPIRYREPORT_BATCHWISE.txt
 ---/Reports/ItemLocation.txt
 ---/Reports/JournalBookReport/NSP_JOURNALBOOK.txt
 ---/Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.txt
