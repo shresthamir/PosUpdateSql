@@ -12,6 +12,7 @@ BATCHPRICE_MASTER.txt
 DISCOUNT_PRESETS.txt
 ---DISCOUNT_SCHEME.txt
 DIVISION.txt
+EpaymentStatus.txt
 ---FIX_ACTYPE.TXT
 ---Footfall.txt
 GetDefaultParamenterOfStoredProcedure.txt
@@ -70,12 +71,14 @@ RMD_TRNMAIN_FN.txt
 ---RMD_TRNTRAN_FN.txt
 ---SALES_TRNMAIN.txt
 ---SALES_TRNPROD.txt
+SchemeScheduleView.txt
 SalesTerminal.txt
 SecurityQuestions.txt
 SETTINGS.txt
 ---ShippingInfo.txt
 SizeColorMaster.txt
----SP_GETSCHEMEDISCOUNT.txt
+SP_CheckTenderBasedScheme.txt
+SP_GETSCHEMEDISCOUNT.txt
 ---SP_GetTotalDiscount.txt
 TRNMAIN_VIEW.txt
 TRNPROD_VIEW.txt

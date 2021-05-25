@@ -1,0 +1,6 @@
+CREATE OR ALTER PROC OSP_CheckTenderBasedScheme
+@TenderMode VARCHAR(50) = ''
+AS
+SELECT COUNT(*) FROM Discount_Rate A 
+JOIN vwSchemeSchedule B on A.ScheduleID = B.DisID
+WHERE A.TenderMode = @TenderMode AND A.SchemeType IN ('Mcode', 'Mgroup', 'Parent', 'Combo', 'AnyItems', 'Bulk')

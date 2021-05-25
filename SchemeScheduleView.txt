@@ -1,0 +1,7 @@
+CREATE OR ALTER VIEW vwSchemeSchedule
+AS
+SELECT * FROM Discount_Scheme 
+		WHERE CONVERT(DATE,GETDATE()) BETWEEN DateStart AND DateEnd
+		AND (ISNULL([DayOfWeek],'') ='' 
+		OR Charindex(LEFT(DateName(dw,GETDATE()), 2),ISNULL([DayOfWeek],'')) > 0)
+		AND CONVERT(TIME,GETDATE()) BETWEEN CONVERT(TIME, ISNULL(TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(TimeEnd,'00:00:00'))
