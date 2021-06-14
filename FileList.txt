@@ -1,7 +1,7 @@
 ---ABBCONPROD.txt
 ---ADDITIONALCOST_JSON.txt
 ---BARCODE_LOG.txt
----BARCODE_DETAIL_STAMP.txt
+BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.txt
 ---CapitalPurchaseConstraint.txt
 ---CloudBackupSetting.txt
@@ -32,6 +32,7 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_DETAILS.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
+Membership.txt
 MEMGRADETRAN_VIEW.txt
 MENUITEM_ECOMMERCE_DETAIL.txt
 MasterDeleteFlag.txt
@@ -177,6 +178,8 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
 /Reports/PurchaseReportSupplierWise/RSP_PURCHASEFIGURE_SUPPLIERWISE.txt
 /Reports/PurchaseReportSupplierWise/SP_PURCHASEFIGURE_SUPPLIERWISE.txt
+/Reports/RSP_BillScheduleReport.txt
+/Reports/RSP_DayEndReport.txt
 /Reports/RSP_DAILYTRIAL.txt
 /Reports/RSP_DSR.txt
 /Reports/RSP_DUEVOUCHERREPORT_VTRACK.txt
