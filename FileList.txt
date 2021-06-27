@@ -274,3 +274,4 @@ VEHICLE_WAREHOUSE.txt
 /Reports/VoucherBookReport/RSP_VOUCHERBOOKREPORT.txt
 /Reports/RSP_BranchWiseSales.txt
 /Reports/RSP_DUEVOUCHERREPORT.txt
+/Reports/WSP_OVERALLCUSTOMERPERFORMANCE.txt
