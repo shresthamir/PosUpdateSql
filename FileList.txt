@@ -7,6 +7,7 @@ BATCHPRICE_MASTER.txt
 ---CloudBackupSetting.txt
 ---COMBO_GROUP.txt
 ---CurrencyNumberToWords.txt
+DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
 ---DATEMITI_FULL.txt
 DISCOUNT_PRESETS.txt
@@ -78,6 +79,7 @@ SecurityQuestions.txt
 SETTINGS.txt
 ---ShippingInfo.txt
 SizeColorMaster.txt
+SP_CALCULATE_RE_ORDER_QUANTITY.txt
 SP_CheckTenderBasedScheme.txt
 SP_GETSCHEMEDISCOUNT.txt
 ---SP_GetTotalDiscount.txt
@@ -186,6 +188,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_HJ_FRANCHISE_ROYALTY_REPORT.txt
 /Reports/RSP_ITEMLIST.txt
 /Reports/RSP_LAKMEDSR.txt
+/Reports/RSP_ItemPriceChangeLog.txt
 /Reports/RSP_ITEMSEARCH.txt
 /Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_PARTYSTATMENT.txt
@@ -204,6 +207,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/SalesBookReport/NSP_SALESBOOKREPORT_VEHICLE.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT_VEHICLE.txt
+/Reports/SalesCollectionReport/RSP_SALESCOLLECTION.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_NEW.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW.txt
 /Reports/SalesPosition/RSP_DAILYSALESPOSITION.txt

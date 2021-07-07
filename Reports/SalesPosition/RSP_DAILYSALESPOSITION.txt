@@ -7,7 +7,8 @@ CREATE OR ALTER     PROCEDURE [dbo].[RSP_DAILYSALESPOSITION]
 @TIME1  time,  
 @TIME2  time,  
 @CHKSHOWTIMEWISE TINYINT=0,  
-@USER VARCHAR(50) = '%'  
+@USER VARCHAR(50) = '%',
+@CHK_FilterByDayStartDate TINYINT = 0    --FilterByDayStartDate:1:0
 AS  
   
 DECLARE @datetime1 datetime,@datetime2 datetime
@@ -20,7 +21,8 @@ BEGIN
   @DATE1 =@DATE1 ,  
   @DATE2 =@DATE2 ,  
   @DIV =@DIVISION,  
-  @COUNTER =@SALESTERMINAL   
+  @COUNTER =@SALESTERMINAL,
+  @FLAG = @CHK_FilterByDayStartDate
  ELSE  
   EXEC SP_DAILYSALESPOSITION_NEW_TIMEWISE   
   @DATE1 =@DATE1 ,  
@@ -28,7 +30,8 @@ BEGIN
   @DIV =@DIVISION,  
   @TIME1 =@datetime1 ,  
   @TIME2=@datetime2 ,  
-  @COUNTER =@SALESTERMINAL   
+  @COUNTER =@SALESTERMINAL,
+  @FLAG = @CHK_FilterByDayStartDate   
 END  
 ELSE  
 BEGIN  
@@ -37,7 +40,8 @@ BEGIN
   @DATE1 =@DATE1 ,  
   @DATE2 =@DATE2 ,  
   @DIV =@DIVISION,  
-  @USER =@USER   
+  @USER =@USER,
+  @FLAG = @CHK_FilterByDayStartDate   
  ELSE  
   EXEC SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE   
   @DATE1 =@DATE1 ,  
@@ -45,6 +49,6 @@ BEGIN
   @DIV =@DIVISION,  
   @TIME1 =@datetime1 ,  
   @TIME2=@datetime2 ,  
-  @USER =@USER  
+  @USER =@USER,
+  @FLAG = @CHK_FilterByDayStartDate  
 END  
-
