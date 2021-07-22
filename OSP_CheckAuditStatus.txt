@@ -1,4 +1,4 @@
-CREATE PROC OSP_CheckAuditStatus
+CREATE OR ALTER PROC OSP_CheckAuditStatus
 AS
 DECLARE @audit_guid VARCHAR(50)
 SELECT @audit_guid = audit_guid FROM sys.database_audit_specifications WHERE is_state_enabled = 1

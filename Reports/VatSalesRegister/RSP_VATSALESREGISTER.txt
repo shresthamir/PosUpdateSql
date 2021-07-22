@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_VATSALESREGISTER]
 @DIVISION VARCHAR(25) = '%',
 @CHK_INCLUDEABBSALES VARCHAR(2) = '',              --IncludeAbbSales:SI:1
 @CHK_INCLUDECREDITNOTE VARCHAR(2) = '',          --IncludeCreditNotes:CN:0
-@OPT_RepMode TINYINT = 0                             --Details:0,Summary:1
+@OPT_RepMode TINYINT = 0,                             --Details:0,Summary:1
 @CHK_OLDFORMAT TINYINT = 0                       --OldFomrat:1:0
 AS
 DECLARE @V1 VARCHAR(2) = '', @V2 VARCHAR(2) = ''
