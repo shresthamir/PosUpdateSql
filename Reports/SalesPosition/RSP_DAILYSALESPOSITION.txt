@@ -21,8 +21,8 @@ BEGIN
   @DATE1 =@DATE1 ,  
   @DATE2 =@DATE2 ,  
   @DIV =@DIVISION,  
-  @COUNTER =@SALESTERMINAL,
-  @FLAG = @CHK_FilterByDayStartDate
+  @COUNTER =@SALESTERMINAL--,
+  --@FLAG = @CHK_FilterByDayStartDate
  ELSE  
   EXEC SP_DAILYSALESPOSITION_NEW_TIMEWISE   
   @DATE1 =@DATE1 ,  
@@ -30,8 +30,8 @@ BEGIN
   @DIV =@DIVISION,  
   @TIME1 =@datetime1 ,  
   @TIME2=@datetime2 ,  
-  @COUNTER =@SALESTERMINAL,
-  @FLAG = @CHK_FilterByDayStartDate   
+  @COUNTER =@SALESTERMINAL--,
+  --@FLAG = @CHK_FilterByDayStartDate   
 END  
 ELSE  
 BEGIN  
@@ -40,8 +40,8 @@ BEGIN
   @DATE1 =@DATE1 ,  
   @DATE2 =@DATE2 ,  
   @DIV =@DIVISION,  
-  @USER =@USER,
-  @FLAG = @CHK_FilterByDayStartDate   
+  @USER =@USER--,
+  --@FLAG = @CHK_FilterByDayStartDate   
  ELSE  
   EXEC SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE   
   @DATE1 =@DATE1 ,  
@@ -49,6 +49,6 @@ BEGIN
   @DIV =@DIVISION,  
   @TIME1 =@datetime1 ,  
   @TIME2=@datetime2 ,  
-  @USER =@USER,
-  @FLAG = @CHK_FilterByDayStartDate  
+  @USER =@USER--,
+  --@FLAG = @CHK_FilterByDayStartDate  
 END  

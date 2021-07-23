@@ -22,8 +22,8 @@ IF @OPT_WISE ='TerminalWise'
 		@div = @DIVISION,
 		@VCHR1 =@CHK_VCHR1,
 		@SMODE =@SALESMODE,
-		@TERMINAL =@SALESTERMINAL,
-		@FLAG  = @CHK_FilterByDayStartDate
+		@TERMINAL =@SALESTERMINAL--,
+		--@FLAG  = @CHK_FilterByDayStartDate
 ELSE
 	EXEC SP_SALESCOLLECTION_USER_NEW
 		@DATE1 = @DATE1,
@@ -31,5 +31,5 @@ ELSE
 		@div =@DIVISION,
 		@VCHR1 =@CHK_VCHR1,			
 		@SMODE =@SALESMODE,
-		@USER =@USER,
-		@FLAG  = @CHK_FilterByDayStartDate
+		@USER =@USER--,
+		--@FLAG  = @CHK_FilterByDayStartDate
