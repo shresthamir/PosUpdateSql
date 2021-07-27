@@ -5,7 +5,7 @@ CREATE OR ALTER PROCEDURE  RSP_PLACCOUNT
 	@OSTOCK NUMERIC(22,10),
 	@CSTOCK NUMERIC(22,10),
 	@OPT_SHOWSUMMARY_REPORT TINYINT = 1,               --Summary:1,Detail:0
-	@CHK_SHOWSUBLEDGER TINYINT = 0,                    --ShowSubledger:0:0
+	@CHK_SHOWSUBLEDGER TINYINT = 0,                    --ShowSubledger:1:0
 	@GroupLevel INTEGER = 2,
 	@OPT_ISVERTICAL_REPORT TINYINT = 1                      --vertical:1,horizontal:0
 AS

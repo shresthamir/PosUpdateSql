@@ -6,6 +6,10 @@ BATCHPRICE_MASTER.txt
 ---CapitalPurchaseConstraint.txt
 ---CloudBackupSetting.txt
 ---COMBO_GROUP.txt
+CompanyId_Company_Column.txt
+CompanyId_Company_Set.txt
+CompanyId_Function.txt
+CompanyId_TranTables.txt
 ---CurrencyNumberToWords.txt
 DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
@@ -42,6 +46,7 @@ MasterDeleteFlag.txt
 ---NEPMONTH_FISCAL.txt
 NUM_TOWORDS.txt
 OSP_CheckAuditStatus.txt
+OSP_GetEditableStock.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt

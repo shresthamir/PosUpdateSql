@@ -1,0 +1,7 @@
+CREATE OR ALTER Function [dbo].[GetCompanyId]() returns varchar(25)
+as
+Begin
+	Declare @COMPANYID varchar(25)
+	select @COMPANYID=COMPANYID from COMPANY 
+	return (@COMPANYID)
+End
