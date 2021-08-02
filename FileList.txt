@@ -47,6 +47,7 @@ MasterDeleteFlag.txt
 NUM_TOWORDS.txt
 OSP_CheckAuditStatus.txt
 OSP_GetEditableStock.txt
+OSP_ValidateStockEdit.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt
@@ -73,14 +74,14 @@ RMD_KOTMAIN_STATUS.txt
 ---RMD_ORDERMAIN_VCHRNO_SCHEMABINDING.txt
 RMD_ORDERPROD.txt
 RMD_SALESPROD.txt
----RMD_TRNMAIN.txt
+RMD_TRNMAIN.txt
 RMD_TRNMAIN_FN.txt
----RMD_TRNPROD.txt
----RMD_TRNPROD_FN.txt
----RMD_TRNTRAN.txt
----RMD_TRNTRAN_FN.txt
----SALES_TRNMAIN.txt
----SALES_TRNPROD.txt
+RMD_TRNPROD.txt
+RMD_TRNPROD_FN.txt
+RMD_TRNTRAN.txt
+RMD_TRNTRAN_FN.txt
+SALES_TRNMAIN.txt
+SALES_TRNPROD.txt
 SchemeScheduleView.txt
 SalesTerminal.txt
 SecurityQuestions.txt
@@ -189,6 +190,9 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
 /Reports/PurchaseReportSupplierWise/RSP_PURCHASEFIGURE_SUPPLIERWISE.txt
 /Reports/PurchaseReportSupplierWise/SP_PURCHASEFIGURE_SUPPLIERWISE.txt
+/Reports/fnGetBarcodeDetail.sql
+/Reports/fnPArtyFilter.sql
+/Reports/fnProductFilter.sql
 /Reports/RSP_BillScheduleReport.txt
 /Reports/RSP_DayEndReport.txt
 /Reports/RSP_DAILYTRIAL.txt
@@ -202,6 +206,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_PARTYSTATMENT.txt
 /Reports/RSP_PARTYMASTER.txt
+/Reports/RSP_PartyVsProductSalesReport.sql
 /Reports/RSP_PAYOUTREPORT.txt
 /Reports/RSP_RECEIPEREPORT.txt
 /Reports/RSP_SALESREPORT_DEPARTMENTWISE_AUTOMOBILE.txt
