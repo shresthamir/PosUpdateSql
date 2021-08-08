@@ -33,7 +33,10 @@ CASE WHEN @RateGroupByDiscount = 1 AND @BaseRate<>0 THEN ABS((@BaseRate - RG_RAT
 	ROUND(CASE WHEN A.RATE <> 0 THEN @BaseRate * (1 + A.RATE/100) * VATCONRATE ELSE (@BaseRate + A.Amount/VATCONRATE) * VATCONRATE END, 0) RG_MRP,
 	ROUND(CASE WHEN A.RATE <> 0 THEN @BaseRate * (1 + A.RATE/100) * VATCONRATE ELSE (@BaseRate + A.Amount/VATCONRATE) * VATCONRATE END, 0) / VATCONRATE RG_RATE FROM
 	(
-		SELECT A.*,CASE WHEN B.VAT = 1 AND (A.Rate <> 0 OR @ExclusiveVatRate = 0) THEN 1.13 ELSE 1 END VATCONRATE FROM vwValidRateGroup A 
+		SELECT A.RateGroup_ID, A.RateGroup_Name, A.RateGroup_Type, A.MGroup, A.Parent, A.MCode, A.MCat
+		,IIF(@RateGroupByDiscount = 1, ABS(A.Rate), A.RATE) * IIF(@RateGroupByDiscount = 1,-1,1) Rate		
+		,IIF(@RateGroupByDiscount = 1, ABS(A.Amount), A.AMOUNT) * IIF(@RateGroupByDiscount = 1,-1,1) Amount
+		,CASE WHEN B.VAT = 1 AND (A.Rate <> 0 OR @ExclusiveVatRate = 0) THEN 1.13 ELSE 1 END VATCONRATE FROM vwValidRateGroup A 
 		JOIN MENUITEM B ON A.MCODE = B.MCODE OR A.PARENT = B.PARENT OR A.MGroup = B.MGROUP OR A.MCAT = B.MCAT
 		WHERE B.MCODE = @CODE 
 		AND A.RateGroup_ID = @RateGroup 	
