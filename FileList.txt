@@ -190,9 +190,9 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
 /Reports/PurchaseReportSupplierWise/RSP_PURCHASEFIGURE_SUPPLIERWISE.txt
 /Reports/PurchaseReportSupplierWise/SP_PURCHASEFIGURE_SUPPLIERWISE.txt
-/Reports/fnGetBarcodeDetail.sql
-/Reports/fnPArtyFilter.sql
-/Reports/fnProductFilter.sql
+/Reports/fnGetBarcodeDetail.txt
+/Reports/fnPArtyFilter.txt
+/Reports/fnProductFilter.txt
 /Reports/RSP_BillScheduleReport.txt
 /Reports/RSP_DayEndReport.txt
 /Reports/RSP_DAILYTRIAL.txt
@@ -206,7 +206,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_PARTYSTATMENT.txt
 /Reports/RSP_PARTYMASTER.txt
-/Reports/RSP_PartyVsProductSalesReport.sql
+/Reports/RSP_PartyVsProductSalesReport.txt
 /Reports/RSP_PAYOUTREPORT.txt
 /Reports/RSP_RECEIPEREPORT.txt
 /Reports/RSP_SALESREPORT_DEPARTMENTWISE_AUTOMOBILE.txt
