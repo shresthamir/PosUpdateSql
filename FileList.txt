@@ -45,6 +45,7 @@ MasterDeleteFlag.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
 NUM_TOWORDS.txt
+OrderMode.txt
 OSP_CheckAuditStatus.txt
 OSP_GetEditableStock.txt
 OSP_ValidateStockEdit.txt
@@ -91,7 +92,7 @@ SizeColorMaster.txt
 SP_CALCULATE_RE_ORDER_QUANTITY.txt
 SP_CheckTenderBasedScheme.txt
 SP_GETSCHEMEDISCOUNT.txt
----SP_GetTotalDiscount.txt
+SP_GetTotalDiscount.txt
 tblPartyCategory.txt
 TRNMAIN_VIEW.txt
 TRNPROD_VIEW.txt
@@ -191,7 +192,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/PurchaseReportSupplierWise/RSP_PURCHASEFIGURE_SUPPLIERWISE.txt
 /Reports/PurchaseReportSupplierWise/SP_PURCHASEFIGURE_SUPPLIERWISE.txt
 /Reports/fnGetBarcodeDetail.txt
-/Reports/fnPArtyFilter.txt
+/Reports/fnPartyFilter.txt
 /Reports/fnProductFilter.txt
 /Reports/RSP_BillScheduleReport.txt
 /Reports/RSP_DayEndReport.txt
