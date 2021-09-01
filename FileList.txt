@@ -48,6 +48,7 @@ NUM_TOWORDS.txt
 OrderMode.txt
 OSP_CheckAuditStatus.txt
 OSP_GetEditableStock.txt
+OSP_GetStockDetail
 OSP_ValidateStockEdit.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
