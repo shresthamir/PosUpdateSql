@@ -1,4 +1,4 @@
-CREATE OR ALTER   procedure [dbo].[sp_PurchaseRegister]
+CREATE OR ALTER   procedure [dbo].[sp_PurchaseRegister_OldFormat]
 --DECLARE 
 @DATE1 DATETIME,
 @DATE2 DATETIME,

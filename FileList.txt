@@ -290,6 +290,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/VatSalesRegister/RSP_VATSALESREGISTER.txt
 /Reports/VatSalesRegister/SP_DEBITNOTEREGISTER.txt
 /Reports/VatSalesRegister/SP_PURCHASEREGISTER.txt
+/Reports/VatSalesRegister/SP_PURCHASEREGISTER_NEWFORMAT.txt
 /Reports/VehicleReports/RSP_VEHICLEPURCHASEREGISTER.txt
 /Reports/VehicleReports/RSP_VEHICLESALESREGISTER.txt
 /Reports/VoucherBookReport/NSP_VOUCHERBOOKREPORT.txt
