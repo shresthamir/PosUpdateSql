@@ -1,0 +1,57 @@
+CREATE OR ALTER   procedure [dbo].[sp_PurchaseRegister]
+--DECLARE 
+@DATE1 DATETIME,
+@DATE2 DATETIME,
+@DIVISION VARCHAR(10)='%', 
+@CHK_INCLUDEDEBITNOTE VARCHAR(2) = '',          --IncludeDebitNotes:DN:0
+@FYID VARCHAR(10)='',
+@CHK_OLDFORMAT TINYINT = 0                       --OldFomrat:1:0
+AS
+--set @DATE1='2020-07-16';set @DATE2='2021-07-16'
+IF @CHK_OLDFORMAT = 1 
+	EXEC sp_PurchaseRegister_OldFormat @DATE1, @DATE2, @DIVISION, @CHK_INCLUDEDEBITNOTE, @FYID
+ELSE 
+BEGIN
+	IF @FYID='' SELECT @FYID= PhiscalID  FROM COMPANY
+
+	SELECT * FROM 
+	(
+		SELECT TRNDATE [Date],BSDATE [Miti],A.VCHRNO,A.CHALANNO [Bill No],	
+		NULL PragyapanPatraNo,
+		CASE WHEN ISNULL(A.BILLTO,'') = '' THEN B.ACNAME ELSE A.BILLTO END [Supplier Name],
+		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTO END [Supplier PAN]
+		,P.ITEMDESC ItemName, p.Quantity,
+		P.TAXABLE + P.NONTAXABLE+VATAMNT AS [Total Amount], P.NONTAXABLE [Non Taxable Amount],
+		CASE WHEN ISNULL(VMODE,1) <=1 THEN  P.TAXABLE else null end as[Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,0)<=1 THEN  P.VAT ELSE NULL END AS [Tax Amount],
+		CASE WHEN ISNULL(VMODE,1) =2 THEN  P.TAXABLE else null end as[Import Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,1)=2 THEN  P.VAT ELSE NULL END AS [Tax Amount1],
+		CASE WHEN ISNULL(VMODE,1) =3 THEN  P.TAXABLE else null end as[Capitalized Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,1)=3 THEN  P.VAT ELSE NULL END AS [Tax Amount2],
+		VNUM
+		FROM RMD_TRNMAIN A JOIN RMD_TRNPROD P ON A.VCHRNO = P.VCHRNO
+		LEFT JOIN RMD_ACLIST B ON A.PARAC=B.ACID 
+		LEFT JOIN RMD_ACLIST C ON A.PARAC= C.ACID where A.VoucherType IN ('PI', 'CP') and isnull(a.status,0) = 0
+		and A.PhiscalID = @FYID  and A.DIVISION like @DIVISION and trndate between @DATE1 and @DATE2
+
+		UNION ALL
+
+		SELECT TRNDATE [Date],BSDATE [Miti],A.VCHRNO,A.CHALANNO [Bill No],	
+		NULL PragyapanPatraNo,
+		CASE WHEN ISNULL(A.BILLTO,'') = '' THEN B.ACNAME ELSE A.BILLTO END [Supplier Name],
+		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTO END [Supplier PAN]
+		,P.ITEMDESC ItemName, p.Quantity,
+		(P.TAXABLE+P.NONTAXABLE+P.VAT) * -1 AS [Total Amount], P.NONTAXABLE * -1 [Non Taxable Amount],
+		CASE WHEN ISNULL(VMODE,1) <=1 THEN  P.TAXABLE * -1 else null end as[Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,0)<=1 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount],
+		CASE WHEN ISNULL(VMODE,1) =2 THEN  P.TAXABLE * -1 else null end as[Import Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,1)=2 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount1],
+		CASE WHEN ISNULL(VMODE,1) =3 THEN  P.TAXABLE * -1 else null end as[Capitalized Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,1)=3 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount2],
+		VNUM
+		FROM RMD_TRNMAIN A JOIN RMD_TRNPROD P ON A.VCHRNO = P.VCHRNO
+		LEFT JOIN RMD_ACLIST B ON A.PARAC=B.ACID 
+		LEFT JOIN RMD_ACLIST C ON A.PARAC= C.ACID where A.VoucherType IN (@CHK_INCLUDEDEBITNOTE) and isnull(a.status,0) = 0
+		and A.PhiscalID = @FYID  and A.DIVISION like @DIVISION and trndate between @DATE1 and @DATE2
+	) A ORDER BY [Date],CAST(SUBSTRING(VNUM,3,LEN(VNUM)) AS NUMERIC)
+END
