@@ -19,9 +19,9 @@ BEGIN
 		SELECT TRNDATE [Date],BSDATE [Miti],A.VCHRNO,A.CHALANNO [Bill No],	
 		NULL PragyapanPatraNo,
 		CASE WHEN ISNULL(A.BILLTO,'') = '' THEN B.ACNAME ELSE A.BILLTO END [Supplier Name],
-		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTO END [Supplier PAN]
+		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTOTEL END [Supplier PAN]
 		,P.ITEMDESC ItemName, p.Quantity,
-		P.TAXABLE + P.NONTAXABLE+VATAMNT AS [Total Amount], P.NONTAXABLE [Non Taxable Amount],
+		P.TAXABLE + P.NONTAXABLE + P.VAT AS [Total Amount], P.NONTAXABLE [Non Taxable Amount],
 		CASE WHEN ISNULL(VMODE,1) <=1 THEN  P.TAXABLE else null end as[Purchase Amount] , 
 		CASE WHEN ISNULL(VMODE,0)<=1 THEN  P.VAT ELSE NULL END AS [Tax Amount],
 		CASE WHEN ISNULL(VMODE,1) =2 THEN  P.TAXABLE else null end as[Import Purchase Amount] , 
@@ -39,12 +39,12 @@ BEGIN
 		SELECT TRNDATE [Date],BSDATE [Miti],A.VCHRNO,A.CHALANNO [Bill No],	
 		NULL PragyapanPatraNo,
 		CASE WHEN ISNULL(A.BILLTO,'') = '' THEN B.ACNAME ELSE A.BILLTO END [Supplier Name],
-		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTO END [Supplier PAN]
+		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTOTEL END [Supplier PAN]
 		,P.ITEMDESC ItemName, p.Quantity,
-		(P.TAXABLE+P.NONTAXABLE+P.VAT) * -1 AS [Total Amount], P.NONTAXABLE * -1 [Non Taxable Amount],
+		(P.TAXABLE + P.NONTAXABLE + P.VAT) * -1 AS [Total Amount], P.NONTAXABLE * -1 [Non Taxable Amount],
 		CASE WHEN ISNULL(VMODE,1) <=1 THEN  P.TAXABLE * -1 else null end as[Purchase Amount] , 
 		CASE WHEN ISNULL(VMODE,0)<=1 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount],
-		CASE WHEN ISNULL(VMODE,1) =2 THEN  P.TAXABLE * -1 else null end as[Import Purchase Amount] , 
+		CASE WHEN ISNULL(VMODE,1) =2 THEN  P.TAXABLE * -1 else null end as[Import Purchase Amount] , 10:15 AM 9/3/2021
 		CASE WHEN ISNULL(VMODE,1)=2 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount1],
 		CASE WHEN ISNULL(VMODE,1) =3 THEN  P.TAXABLE * -1 else null end as[Capitalized Purchase Amount] , 
 		CASE WHEN ISNULL(VMODE,1)=3 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount2],
