@@ -6,14 +6,30 @@ CREATE OR ALTER     PROCEDURE [dbo].[RSP_PROFITIBILITYSALESANALYSIS]
 	@SUPPLIER_ACID VARCHAR(25) = '%',
 	@SCHEME VARCHAR(15) = '%',
 	@CHK_EXCLUDEVAT TINYINT = 0,          --ExcludeVat:1:0
-	@OPT_WISE TINYINT = 0              --Mgroup:0,Item:1,Date:2,Customer:3,MCat:4
+	@OPT_WISE TINYINT = 0,              --Mgroup:0,Item:1,Date:2,Customer:3,MCat:4
+	@FYID VARCHAR(10) = ''
 AS
-EXEC [dbo].[NSP_PROFITIBILITYSALESANALYSIS]
-	@MGROUP = @MGROUP,
-	@DIV = @DIVISION,
-	@DATE1 = @DATE1,
-	@DATE2 = @DATE2,
-	@SCHEME = @SCHEME,
-	@PARTY = @SUPPLIER_ACID,
-	@EXVAT = @CHK_EXCLUDEVAT,
-	@Flg = @OPT_WISE
+DECLARE @DailyCostingCompile VARCHAR(50)
+SELECT @DailyCostingCompile = SettingValue FROM ReportSetting WHERE ReportName = 'Profitability Sales Analysis Report' AND SettingName = 'DailyCostingCompiled'
+
+IF COALESCE(@DailyCostingCompile,'') = ''
+	EXEC [dbo].[NSP_PROFITIBILITYSALESANALYSIS]
+		@MGROUP = @MGROUP,
+		@DIV = @DIVISION,
+		@DATE1 = @DATE1,
+		@DATE2 = @DATE2,
+		@SCHEME = @SCHEME,
+		@PARTY = @SUPPLIER_ACID,
+		@EXVAT = @CHK_EXCLUDEVAT,
+		@Flg = @OPT_WISE
+ELSE 
+	EXEC [dbo].[NSP_PROFITIBILITYSALESANALYSIS_DCC]
+		@MGROUP = @MGROUP,
+		@DIV = @DIVISION,
+		@DATE1 = @DATE1,
+		@DATE2 = @DATE2,
+		@SCHEME = @SCHEME,
+		@PARTY = @SUPPLIER_ACID,
+		@EXVAT = @CHK_EXCLUDEVAT,
+		@Flg = @OPT_WISE,
+		@FYID = @FYID

@@ -1,0 +1,9 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'ReportSetting')
+CREATE TABLE ReportSetting 
+(
+	ReportName VARCHAR(50) NOT NULL, 
+	SettingName VARCHAR(50) NOT NULL, 
+	SettingValue VARCHAR(50) NOT NULL, 
+	SettingDescription VARCHAR(500),
+	CONSTRAINT PK_ReportSetting PRIMARY KEY (ReportName, SettingName)
+) 
