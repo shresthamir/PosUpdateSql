@@ -16,39 +16,55 @@ if @TIME1 IS NOT null select @datetime1 = cast('01-01-2000' as datetime) + cast(
 if @TIME2 IS NOT NULL select @datetime2 = cast('01-01-2000' as datetime) + cast(@TIME2 as datetime) 
 if @OPT_WISE='CounterWise'  
 BEGIN  
- IF @CHKSHOWTIMEWISE=0  
-  EXEC SP_DAILYSALESPOSITION_NEW   
-  @DATE1 =@DATE1 ,  
-  @DATE2 =@DATE2 ,  
-  @DIV =@DIVISION,  
-  @COUNTER =@SALESTERMINAL--,
-  --@FLAG = @CHK_FilterByDayStartDate
- ELSE  
-  EXEC SP_DAILYSALESPOSITION_NEW_TIMEWISE   
-  @DATE1 =@DATE1 ,  
-  @DATE2 =@DATE2 ,  
-  @DIV =@DIVISION,  
-  @TIME1 =@datetime1 ,  
-  @TIME2=@datetime2 ,  
-  @COUNTER =@SALESTERMINAL--,
-  --@FLAG = @CHK_FilterByDayStartDate   
+	IF @CHKSHOWTIMEWISE=0
+		IF @CHK_FilterByDayStartDate = 0
+			EXEC SP_DAILYSALESPOSITION_NEW   
+			@DATE1 =@DATE1 ,  
+			@DATE2 =@DATE2 ,  
+			@DIV =@DIVISION,  
+			@COUNTER =@SALESTERMINAL--,
+			--@FLAG = @CHK_FilterByDayStartDate
+		ELSE
+			EXEC SP_DAILYSALESPOSITION_NEW_DAYWISE   
+			@DATE1 =@DATE1 ,  
+			@DATE2 =@DATE2 ,  
+			@DIV =@DIVISION,  
+			@COUNTER =@SALESTERMINAL--,
+			,@FLAG = @CHK_FilterByDayStartDate
+	ELSE  
+		EXEC SP_DAILYSALESPOSITION_NEW_TIMEWISE   
+		@DATE1 =@DATE1 ,  
+		@DATE2 =@DATE2 ,  
+		@DIV =@DIVISION,  
+		@TIME1 =@datetime1 ,  
+		@TIME2=@datetime2 ,  
+		@COUNTER =@SALESTERMINAL--,
+		--@FLAG = @CHK_FilterByDayStartDate   
 END  
 ELSE  
 BEGIN  
- IF @CHKSHOWTIMEWISE=0  
-  EXEC SP_DAILYSALESPOSITION_USERWISE_NEW   
-  @DATE1 =@DATE1 ,  
-  @DATE2 =@DATE2 ,  
-  @DIV =@DIVISION,  
-  @USER =@USER--,
-  --@FLAG = @CHK_FilterByDayStartDate   
- ELSE  
-  EXEC SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE   
-  @DATE1 =@DATE1 ,  
-  @DATE2 =@DATE2 ,  
-  @DIV =@DIVISION,  
-  @TIME1 =@datetime1 ,  
-  @TIME2=@datetime2 ,  
-  @USER =@USER--,
-  --@FLAG = @CHK_FilterByDayStartDate  
+	IF @CHKSHOWTIMEWISE=0
+		IF @CHK_FilterByDayStartDate = 0
+			EXEC SP_DAILYSALESPOSITION_USERWISE_NEW   
+			@DATE1 =@DATE1 ,  
+			@DATE2 =@DATE2 ,  
+			@DIV =@DIVISION,  
+			@USER =@USER--,
+			--@FLAG = @CHK_FilterByDayStartDate
+		ELSE 
+			EXEC SP_DAILYSALESPOSITION_USERWISE_NEW_DAYWISE  
+			@DATE1 =@DATE1 ,  
+			@DATE2 =@DATE2 ,  
+			@DIV =@DIVISION,  
+			@USER =@USER--,
+			,@FLAG = @CHK_FilterByDayStartDate
+	ELSE  
+		EXEC SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE   
+		@DATE1 =@DATE1 ,  
+		@DATE2 =@DATE2 ,  
+		@DIV =@DIVISION,  
+		@TIME1 =@datetime1 ,  
+		@TIME2=@datetime2 ,  
+		@USER =@USER--,
+		--@FLAG = @CHK_FilterByDayStartDate  
 END  
