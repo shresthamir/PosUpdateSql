@@ -7,7 +7,8 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_SALESCOLLECTION]
 @USER VARCHAR(25)='%',		
 @SALESTERMINAL VARCHAR(25)='%',
 @OPT_WISE VARCHAR(25)='TerminalWise',	--TerminalWise:TerminalWise,UserWise:UserWise
-@CHK_FilterByDayStartDate TINYINT = 0   --FilterByDayStartDate:1:0
+@CHK_FilterByDayStartDate TINYINT = 0,   --FilterByDayStartDate:1:0
+@CHK_OLDFORMAT TINYINT = 0                       --OldFomrat:1:0
 AS
 if UPPER(@SALESMODE) = 'ALL' SET @SALESMODE ='%'
 if @SALESMODE = '' SET @SALESMODE ='%'
@@ -16,20 +17,51 @@ if UPPER(@USER) ='ALL'  SET @USER='%'
 --set @DATE1 = CAST(@DATE1 AS date);
 --SET @DATE2 = CAST(@DATE2 AS DATE);
 IF @OPT_WISE ='TerminalWise'
-	EXEC SP_SALESCOLLECTION_TERMINAL_NEW 
-		@DATE1 =@DATE1,
-		@DATE2 =@DATE2,
-		@div = @DIVISION,
-		@VCHR1 =@CHK_VCHR1,
-		@SMODE =@SALESMODE,
-		@TERMINAL =@SALESTERMINAL--,
-		--@FLAG  = @CHK_FilterByDayStartDate
+	IF @CHK_FilterByDayStartDate = 0
+		IF @CHK_OLDFORMAT = 0
+			EXEC SP_SALESCOLLECTION_TERMINAL_DYNAMIC
+				@DATE1 =@DATE1,
+				@DATE2 =@DATE2,
+				@div = @DIVISION,
+				@VCHR1 =@CHK_VCHR1,
+				@SMODE =@SALESMODE,
+				@TERMINAL =@SALESTERMINAL--,
+				--@FLAG  = @CHK_FilterByDayStartDate
+		ELSE
+			EXEC SP_SALESCOLLECTION_TERMINAL_NEW
+				@DATE1 =@DATE1,
+				@DATE2 =@DATE2,
+				@div = @DIVISION,
+				@VCHR1 =@CHK_VCHR1,
+				@SMODE =@SALESMODE,
+				@TERMINAL =@SALESTERMINAL--,
+				--@FLAG  = @CHK_FilterByDayStartDate
+	ELSE
+		EXEC SP_SALESCOLLECTION_TERMINAL_NEW_DAYWISE
+				@DATE1 =@DATE1,
+				@DATE2 =@DATE2,
+				@div = @DIVISION,
+				@VCHR1 =@CHK_VCHR1,
+				@SMODE =@SALESMODE,
+				@TERMINAL =@SALESTERMINAL--,
+				,@FLAG  = 1
 ELSE
-	EXEC SP_SALESCOLLECTION_USER_NEW
-		@DATE1 = @DATE1,
-		@DATE2 = @DATE2,
-		@div =@DIVISION,
-		@VCHR1 =@CHK_VCHR1,			
-		@SMODE =@SALESMODE,
-		@USER =@USER--,
-		--@FLAG  = @CHK_FilterByDayStartDate
+	IF @CHK_FilterByDayStartDate = 0
+		EXEC SP_SALESCOLLECTION_USER_NEW
+			@DATE1 = @DATE1,
+			@DATE2 = @DATE2,
+			@div =@DIVISION,
+			@VCHR1 =@CHK_VCHR1,			
+			@SMODE =@SALESMODE,
+			@USER =@USER--,
+			--@FLAG  = @CHK_FilterByDayStartDate
+	ELSE
+		EXEC SP_SALESCOLLECTION_USER_NEW_DAYWISE
+			@DATE1 = @DATE1,
+			@DATE2 = @DATE2,
+			@div =@DIVISION,
+			@VCHR1 =@CHK_VCHR1,			
+			@SMODE =@SALESMODE,
+			@USER =@USER
+			,@FLAG  = @CHK_FilterByDayStartDate
+

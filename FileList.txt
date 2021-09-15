@@ -49,6 +49,9 @@ OrderMode.txt
 OSP_CheckAuditStatus.txt
 OSP_GetEditableStock.txt
 OSP_GetStockDetail.txt
+OSP_GetSupplierWiseItemForPO.txt
+OSP_PopulateTblBillTender.txt
+OSP_UpdateBillTenderTable.txt
 OSP_ValidateStockEdit.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
@@ -94,6 +97,7 @@ SP_CALCULATE_RE_ORDER_QUANTITY.txt
 SP_CheckTenderBasedScheme.txt
 SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
+tblBillTender.txt
 tblPartyCategory.txt
 TRNMAIN_VIEW.txt
 TRNPROD_VIEW.txt
@@ -226,12 +230,17 @@ VEHICLE_WAREHOUSE.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT_VEHICLE.txt
 /Reports/SalesCollectionReport/RSP_SALESCOLLECTION.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_NEW.txt
+/Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_DYNAMIC.txt
+/Reports/SalesCollectionReport/SP_SALESCOLLECTION_TERMINAL_NEW_DAYWISE.txt
 /Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW.txt
+/Reports/SalesCollectionReport/SP_SALESCOLLECTION_USER_NEW_DAYWISE.txt
 /Reports/SalesPosition/RSP_DAILYSALESPOSITION.txt
 /Reports/SalesPosition/RSP_HOURLYSALESREPORT.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW.txt
+/Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW_DAYWISE.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_NEW_TIMEWISE.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW.txt
+/Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW_DAYWISE.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE.txt
 /Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE.txt
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE.txt
