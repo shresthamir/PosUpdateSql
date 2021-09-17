@@ -199,6 +199,7 @@ VEHICLE_WAREHOUSE.txt
 /Reports/fnGetBarcodeDetail.txt
 /Reports/fnPartyFilter.txt
 /Reports/fnProductFilter.txt
+/Reports/ReportSetting.txt
 /Reports/RSP_BillScheduleReport.txt
 /Reports/RSP_DayEndReport.txt
 /Reports/RSP_DAILYTRIAL.txt

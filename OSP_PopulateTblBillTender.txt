@@ -1,5 +1,8 @@
 CREATE OR ALTER PROC OSP_PopulateTblBillTender
 AS
+
+EXEC OSP_UpdateBillTenderTable
+
 IF OBJECT_ID('TEMPDB..#TRNMODE') is not null drop table #TRNMODE
 IF OBJECT_ID('TEMPDB..#TRNMODE') is not null drop table #BILLTENDER
 select distinct IIF(ISNULL(T.TRNMODE,'')='','Others',T.TRNMODE) trnmode into #TRNMODE from SALES_TRNMAIN M JOIN RMD_BILLTENDER T ON M.VCHRNO = T.VCHRNO 
