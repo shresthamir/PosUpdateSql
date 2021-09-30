@@ -1,25 +1,38 @@
-CREATE OR ALTER PROC RSP_BranchWiseSales
-@DATE1 DATETIME,
+CREATE OR ALTER    PROCEDURE [dbo].[RSP_BranchWiseSale]
+--DECLARE 
+@DATE1 DATETIME, 
 @DATE2 DATETIME
 AS
---declare @DATE1 datetime='2020-07-16',@DATE2 DATETIME='2021-12-29'
-SELECT ra.ACCODE[Branch Code],A.DIVISION [Branch Division], D.NAME [Branch Name],a.[Gross Amount],a.[Discount Amount],a.[Vat Amount],a.NetAmount,a.Cash,a.CreditCard,a.Credit,a.FonePay,a.[No Of Transaction]
-from 
+--SET @DATE1 ='2020-08-16'; SET @DATE2 ='2020-09-16'
+DECLARE @PaymentSumCols NVARCHAR(MAX),
+    @query  AS NVARCHAR(MAX);
+
+SET @PaymentSumCols = STUFF((SELECT distinct ',SUM(' + QUOTENAME(COLUMN_NAME) + ')'+QUOTENAME(COLUMN_NAME)+'' FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = 'tblBillTender' AND COLUMN_NAME NOT IN ('VCHRNO','DIVISION','PHISCALID', 'COMPANYID','TRANSACTIONID') FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)') ,1,1,'')
+	
+	
+IF OBJECT_ID('TEMPDB..#DATA') is not null drop table #DATA
+
+SELECT ra.ACCODE [Branch Code], A.DIVISION [Branch Division], D.NAME [Branch Name],
+CONVERT(NUMERIC(18,2), (A.TOTAMNT * A.MULTIPLIER)) [Gross Amount],
+CONVERT(NUMERIC(18,2), (A.DCAMNT * A.MULTIPLIER)) [Discount Amount],
+CONVERT(NUMERIC(18,2), (A.VATAMNT * A.MULTIPLIER)) [Vat Amount],
+CONVERT(NUMERIC(18,2), (A.NETAMNT * A.MULTIPLIER)) [Net Amount],
+X.*, A.VNO INTO #DATA
+FROM 
 (
-	SELECT A.DIVISION,
-	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN (TOTAMNT) * -1 ELSE (TOTAMNT) END) as numeric(32,2)) AS [Gross Amount],
-	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN A.DCAMNT *-1 ELSE A.DCAMNT END)as numeric(32,2)) AS [Discount Amount],
-	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN A.VATAMNT * -1 ELSE A.VATAMNT END)as numeric(32,2)) AS [Vat Amount],
-	cast(sum(CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END)as numeric(32,2)) AS NetAmount,
-	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE) = 'CASH') THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS Cash,
-	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE)= 'CreditCard') THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS CreditCard,
-	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE) = 'CREDIT') THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS Credit,
-	cast(sum(CASE WHEN (ISNULL(RB.TRNMODE,A.TRNMODE) in ('online','FonePay')) THEN CASE WHEN A.VoucherType LIKE 'CN' THEN (A.NETAMNT) *-1 ELSE A.NETAMNT END ELSE 0 END)as numeric(24,2)) AS FonePay,
-	count(distinct a.vchrno) [No Of Transaction]
+	SELECT A.VCHRNO VNO ,A.DIVISION, A.TOTAMNT, A.DCAMNT, A.VATAMNT, A.NETAMNT,
+	IIF(A.VoucherType = 'CN',-1, 1) Multiplier, A.PhiscalID
 	FROM RMD_TRNMAIN A JOIN RMD_ACLIST B ON A.TRNAC = B.ACID
-	LEFT JOIN RMD_BILLTENDER RB ON RB.VCHRNO=A.VCHRNO
-	WHERE LEFT(a.VCHRNO,2) IN ('SI','TI','CN') AND (TRNDATE BETWEEN @DATE1 AND @DATE2) 
-	group by A.DIVISION
-)A
-left join DIVISION D ON A.DIVISION=D.INITIAL
-left join RMD_ACLIST ra on ra.ACID=d.ACID 
+	WHERE A.VoucherType IN ('SI','TI','CN') AND (A.TRNDATE BETWEEN @DATE1 AND @DATE2)
+)A 
+LEFT JOIN tblBillTender X ON A.VNO = X.VCHRNO AND A.DIVISION = X.DIVISION AND A.PHISCALID = X.PHISCALID  
+LEFT JOIN DIVISION D ON A.DIVISION=D.INITIAL
+LEFT JOIN RMD_ACLIST ra on ra.ACID=d.ACID
+
+SET @query =N'SELECT D.[Branch Code], D.[Branch Division],D.[Branch Name], SUM(D.[Gross Amount]) [Gross Amount], SUM(D.[Discount Amount]) [Discount Amount],
+			SUM(D.[Vat Amount]) [Vat Amount], SUM(D.[Net Amount]) [Net Amount],'+@PaymentSumCols+', COUNT(DISTINCT(D.VNO)) [No Of Transaction]
+			FROM #DATA D GROUP BY D.[Branch Division], D.[Branch Code], D.[Branch Name] ORDER BY D.[Branch Code] DESC'
+
+--PRINT @query
+EXECUTE(@QUERY)

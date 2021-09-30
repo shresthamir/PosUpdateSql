@@ -47,14 +47,24 @@ IF @OPT_WISE ='TerminalWise'
 				,@FLAG  = 1
 ELSE
 	IF @CHK_FilterByDayStartDate = 0
-		EXEC SP_SALESCOLLECTION_USER_NEW
-			@DATE1 = @DATE1,
-			@DATE2 = @DATE2,
-			@div =@DIVISION,
-			@VCHR1 =@CHK_VCHR1,			
-			@SMODE =@SALESMODE,
-			@USER =@USER--,
-			--@FLAG  = @CHK_FilterByDayStartDate
+		IF @CHK_OLDFORMAT = 0
+			EXEC SP_SALESCOLLECTION_USER_DYNAMIC
+				@DATE1 = @DATE1,
+				@DATE2 = @DATE2,
+			 	@div =@DIVISION,
+				@VCHR1 =@CHK_VCHR1,			
+				@SMODE =@SALESMODE,
+				@USER =@USER--,
+				--@FLAG  = @CHK_FilterByDayStartDate
+		ELSE 
+			EXEC SP_SALESCOLLECTION_USER_NEW
+				@DATE1 = @DATE1,
+				@DATE2 = @DATE2,
+			 	@div =@DIVISION,
+				@VCHR1 =@CHK_VCHR1,			
+				@SMODE =@SALESMODE,
+				@USER =@USER--,
+				--@FLAG  = @CHK_FilterByDayStartDate
 	ELSE
 		EXEC SP_SALESCOLLECTION_USER_NEW_DAYWISE
 			@DATE1 = @DATE1,
