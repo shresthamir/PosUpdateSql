@@ -35,13 +35,13 @@ if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
   select @MaxAmount = max(c.LessThan)  from Discount_Rate a 
    inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
    where  a.SchemeType ='TotalAmount' 
-   AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
+   AND ((@DIVISION ='%' and isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
 
    SELECT DISTINCT schemeID,GreaterThan,LessThan,GiftVoucher,DisRate,SchemeName, DisAmount FROM (
   select  A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount   from Discount_Rate a 
    inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
    where  a.SchemeType ='TotalAmount' and @AMOUNT between c.GreaterThan and c.LessThan 
-   AND ((@DIVISION ='%' and isnull(a.divisions,'') like '%') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
+   AND ((@DIVISION ='%' and isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
   union all
   select A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount  from Discount_Rate a 
    inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	

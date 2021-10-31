@@ -133,8 +133,8 @@ VEHICLE_WAREHOUSE.txt
 ---/Reports/DayReport/RSP_DAYREPORT.txt
 /Reports/DebtorsReport/NSP_DEBTORS_REPORT.txt
 /Reports/DebtorsReport/NSP_DEBTORSCREDITORS_AGEING.txt
----/Reports/DebtorsReport/NSP_DEBTORSREPORT.txt
----/Reports/DebtorsReport/RSP_DEBTORSREPORT.txt
+/Reports/DebtorsReport/NSP_DEBTORSREPORT.txt
+/Reports/DebtorsReport/RSP_DEBTORSREPORT.txt
 ---/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.txt
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT_VEHICLEDETAILS.txt
 /Reports/DeliveryRegisterReport/RSP_DELIVERYREGISTER_REPORT.txt
