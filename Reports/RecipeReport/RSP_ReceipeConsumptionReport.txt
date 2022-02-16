@@ -1,0 +1,59 @@
+CREATE OR ALTER PROC RSP_ReceipeConsumptionReport
+--DECLARE
+@DATE1 DATE,
+@DATE2 DATE,
+@DIVISION VARCHAR(3) = '%',
+@MCODE VARCHAR(25) = '%',
+@SELECTEDITEMLIST VARCHAR(500) = ''
+AS
+
+SET NOCOUNT ON
+--SET @DATE1='2021-10-20 00:00:00'; SET @DATE2='2022-01-20 00:00:00'; SET @DIVISION=N'%'; SET @MCODE=N'%'; SET @SELECTEDITEMLIST=N'M1010,M1011'
+
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL
+DROP TABLE tempdb..#RESULT
+
+IF ISNULL(@SELECTEDITEMLIST,'') != '' SET @MCODE = @SELECTEDITEMLIST
+
+SELECT CON.MCODE RawMCode, CON.UNIT, SUM(CON.Quantity) ConsumedQty, SUM(CON.AMOUNT) ConsumedAmount, TP.MCODE ReceipeMCode, SUM(TP.RealQty-TP.REALQTY_IN) SoldQty, SUM(Taxable + NonTaxable) SoldAmount 
+INTO #RESULT FROM
+(
+	SELECT IM.VCHRNO, IM.TRNDATE, IM.REFBILL, IP.MCODE, IP.UNIT, (IP.RealQty - IP.REALQTY_IN) Quantity, IP.RATE, IP.AMOUNT, IP.REFSERIAL FROM INVMAIN IM (NOLOCK)
+	JOIN INVPROD IP (NOLOCK) ON IM.VCHRNO = IP.VCHRNO 
+	WHERE IM.TRNDATE BETWEEN @DATE1 AND @DATE2 AND  IM.VoucherType = 'RC' AND REFSERIAL IS NOT NULL AND IM.DIVISION LIKE @DIVISION 
+	AND (@MCODE = '%' OR IP.MCODE in (select * from dbo.split(@MCODE,',')))
+) CON 
+JOIN TRNPROD TP ON CON.REFBILL = TP.VCHRNO AND CON.REFSERIAL = TP.SNO
+GROUP BY CON.MCODE, CON.UNIT, TP.MCODE
+
+
+
+--SELECT *, ConsumedQty/ SUM(ConsumedQty) OVER (PARTITION BY RawMCode) * 100 ConRatioQty, ConsumedAmount/ SUM(ConsumedAmount) OVER (PARTITION BY RawMCode) * 100 ConRatioAmount FROM #RESULT
+
+
+SELECT MCODE, MENUCODE, DESCA, ConsumedUnit, CONVERT(NUMERIC(18,2), ConsumedQty) ConsumedQty, CONVERT(NUMERIC(18,2),ConRatioQty) ConRatioQty, CONVERT(NUMERIC(18,2),SoldQty) SoldQty,
+CONVERT(NUMERIC(18,2),ConsumedAmount) ConsumedAmount, CONVERT(NUMERIC(18,2),ConRatioAmount) ConRatioAmount, FLG, [TYPE]  FROM 
+(
+	SELECT DISTINCT M.MCODE, M.MENUCODE, M.DESCA, NULL ConsumedUnit, NULL ConsumedQty, NULL ConRatioQty, NULL SoldQty, NULL ConsumedAmount, NULL ConRatioAmount--, NULL SoldAmount
+	, 1 FLG, 'G' [TYPE] FROM #RESULT R 
+	JOIN MENUITEM M ON R.RawMcode = M.MCODE
+	UNION ALL 
+	SELECT R.RawMcode, R.MENUCODE, R.DESCA, R.UNIT, R.ConsumedQty, R.ConsumedQty / iif(TotalConsumed =0,1,TotalConsumed) *100 , R.SoldQty, 
+	R.ConsumedAmount ,  R.ConsumedAmount / iif(TotalConsumedAmount = 0,1,TotalConsumedAmount) * 100--, R.SoldAmount
+	, 2 FLG, 'A' [TYPE] FROM
+	(
+		SELECT R.RawMcode, M.MENUCODE, M.DESCA, R.UNIT, R.ConsumedQty, SUM(ConsumedQty) OVER (PARTITION BY RawMCode) TotalConsumed, R.SoldQty, 
+		R.ConsumedAmount, SUM(ConsumedAmount) OVER (PARTITION BY RawMCode) TotalConsumedAmount--, R.SoldAmount
+		, 2 FLG, 'A' [TYPE] FROM #RESULT R 
+		JOIN MENUITEM M ON R.ReceipeMCode = M.MCODE
+	) R
+	UNION ALL
+	SELECT R.RawMcode, NULL, 'TOTAL >>', NULL, SUM(R.ConsumedQty), 100, SUM(R.SoldQty), SUM(R.ConsumedAmount), 100--, SUM(R.SoldAmount)
+	, 3 FLG, 'G' [TYPE] FROM #RESULT R
+	GROUP BY R.RawMcode
+	UNION ALL
+	SELECT DISTINCT R.RawMcode, NULL, NULL, NULL, NULL,NULL,NULL,NULL, NULL, 4 FLG, 'G' [TYPE] FROM #RESULT R 
+) A ORDER BY MCODE, FLG
+
+SET NOCOUNT OFF
+

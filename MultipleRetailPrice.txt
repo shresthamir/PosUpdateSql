@@ -1,0 +1,9 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'MultipleRetailPrice')
+CREATE TABLE MultipleRetailPrice (
+    MCODE varchar(25) FOREIGN KEY REFERENCES MENUITEM(MCODE),
+    RATE numeric(20,12) NOT NULL,
+	EXPDATE date ,
+	ISACTIVE tinyint ,
+	CreatedBy varchar(100),
+	STAMP datetime	
+);

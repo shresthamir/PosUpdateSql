@@ -1,0 +1,19 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'MarginScheme')
+CREATE TABLE MarginScheme (
+    MSchemId int NOT NULL PRIMARY KEY,
+    MSchmeName varchar(200) NOT NULL,
+	MemberScheme VARCHAR(20) NULL,
+	ScheduleId NUMERIC(18,0) NOT NULL,
+	CONSTRAINT FK_MarginScheme_DiscountSchedule FOREIGN KEY (ScheduleId) REFERENCES DISCOUNT_SCHEME(DisId),
+    
+);
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'MarginSchemeDetails')
+CREATE TABLE MarginSchemeDetails (
+    MSchemeId int FOREIGN KEY REFERENCES MarginScheme(MSchemId),
+    [Description] varchar(200) NOT NULL,
+	[FromMargin] numeric(20,12) NOT NULL ,
+	[ToMargin] numeric(20,12) NOT NULL,
+    DiscountRate numeric(5,2) NOT NULL,
+	DiscountAmount numeric(9,2) NOT NULL,
+);

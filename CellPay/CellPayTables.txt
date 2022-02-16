@@ -1,0 +1,89 @@
+IF OBJECT_ID('BANKNAMELIST') IS NULL
+CREATE TABLE [dbo].[BANKNAMELIST](
+	[BankCode] [varchar](50) NOT NULL,
+	[BankName] [varchar](200) NOT NULL,
+	CONSTRAINT PK_BANKNAMELIST PRIMARY KEY (BankCode)
+) ON [PRIMARY]
+
+IF OBJECT_ID('RMD_ACLIST_BANKLIST') IS NULL
+CREATE TABLE RMD_ACLIST_BANKLIST
+(
+	ACID VARCHAR(25) NOT NULL,
+	BANKCODE VARCHAR(20) NOT NULL,
+	BANKNAME VARCHAR(200) NOT NULL,
+	BANKACCOUNTNUMBER VARCHAR (100) NOT NULL,
+	CONSTRAINT PK_RMD_ACLIST_BANKLIST PRIMARY KEY (ACID, BANKACCOUNTNUMBER),
+	CONSTRAINT FK_RMD_ACLIST_BANKLIST FOREIGN KEY (ACID) REFERENCES RMD_ACLIST(ACID) ON DELETE CASCADE
+)
+
+IF OBJECT_ID('RMD_SUBLEDGER_ACLIST') IS NULL
+CREATE TABLE [dbo].[RMD_SUBLEDGER_ACLIST](
+	[SL_ACID] [varchar](25) NOT NULL PRIMARY KEY,
+	[SL_ACNAME] [varchar](100) NULL,
+	[STAMP] [float] NULL
+)
+
+IF OBJECT_ID('VOUCHERTYPE') IS NULL
+CREATE TABLE [dbo].[VOUCHERTYPE](
+	[VOUCHER_ID] [varchar](2) NOT NULL PRIMARY KEY,
+	[VOUCHER_TYPE] [varchar](25) NULL,
+	[VOUCHER_NAME] [varchar](50) NULL,
+	[MAIN_VOUCHER_ID] [varchar](2) NULL
+)
+
+IF NOT EXISTS (SELECT * FROM BANKNAMELIST)
+BEGIN
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('ADBL', 'Agricultural Development Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('BFC', 'Best Finance Company Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('BOKLTD', 'Bank of Kathmandu Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('CCBL', 'Century Commercial Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('CFCL', 'Central Finance Ltd')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('CIVIL', 'Civil Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('CTZN', 'Citizens Bank International Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('EBLTD', 'Everest Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('EDBL', 'Excel Development Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('GBBL', 'Garima Bikas Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('GFCL', 'Goodwill Finance Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('GIBL', 'Global IME Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('GMFIL', 'Guheswori Merchant Banking and Finance Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('GRDBL', 'Green Development Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('GUFL', 'Gurkhas Finance Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('HBLTD', 'Himalayan Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('ICFC', 'ICFC Finance Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('JBBL', 'Jyoti Bikash Bank Ltd')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('KSBL', 'Kamana Sewa Bikas Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('KUMBK', 'Kumari Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('LAXMI', 'Laxmi Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('LUBL', 'Lumbini Bikas Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('MBL', 'Machhapuchchhre Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('MDB', 'Miteri Development Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('MEGA', 'Mega Bank Nepal Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('MFIL', 'Manjushree Finance Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('MLBL', 'Mahalaxmi Bikas Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('MNBBL', 'Muktinath Bikas Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NABIL', 'Nabil Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NBBL', 'Nepal Bangladesh Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NBL', 'Nepal Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NCCB', 'Nepal Credit and Commerce Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NIBL', 'Nepal Investment Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NICASIA', 'NIC ASIA Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('NMBB', 'NMB Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('PCBL', 'Prime Commercial Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('PFL', 'Pokhara Finance Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('PROFL', 'Progressive Finance Co. Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('PRVU', 'Prabhu Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('RBBL', 'Rastriya Banijya Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('RLFL', 'Reliance Finance Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SADBL', 'Shangrila Development Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SANIMA', 'Sanima Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SBI', 'Nepal SBI Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SBL', 'Siddhartha Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SCB', 'Standard Chartered Bank Nepal')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SFCL', 'Samriddhi Finance Company Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SHDBL', 'Shine Resunga Development Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SIFC', 'Shree Investment & Finance Co. Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SKDBL', 'Saptakoshi Development Bank Ltd.')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('SRBL', 'Sunrise Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('TNBL', 'Tinau Mission Development Bank Limited')
+INSERT INTO BANKNAMELIST(BankCode, BankName) VALUES ('UFL', 'United Finance Ltd.')
+END
