@@ -82,7 +82,7 @@ BEGIN
 		SELECT TRNDATE [Date],RIGHT(BSDATE,4) + '.' + SUBSTRING(BSDATE,4,2) +'.'+LEFT(BSDATE,2) [Miti],A.VCHRNO,A.VCHRNO [Bill No],	NULL,
 		CASE WHEN ISNULL(A.BILLTO,'') = '' THEN B.ACNAME ELSE A.BILLTO END [Supplier Name],
 		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTOTEL END [Supplier PAN]
-		,P.ITEMDESC ItemName, p.AltQty, P.ALTUNIT,
+		,P.ITEMDESC ItemName, p.AltQty * -1 Quantity, P.ALTUNIT Unit,
 		(P.TAXABLE + P.NONTAXABLE + P.VAT) * -1 AS [Total Amount], P.NONTAXABLE * -1 [Non Taxable Amount],
 		CASE WHEN ISNULL(VMODE,1) <=1 THEN  P.TAXABLE * -1 else null end as[Purchase Amount] , 
 		CASE WHEN ISNULL(VMODE,0)<=1 THEN  P.VAT * -1 ELSE NULL END AS [Tax Amount],
