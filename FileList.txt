@@ -121,6 +121,7 @@ USERPROFILESABB.txt
 VEHICLE_WAREHOUSE.txt
 /Reports/vwItemHeirarchy.txt
 /Reports/BatchPriceReport.txt
+/Reports/RSP_ADDITIONAL_COST_REPORT.txt
 /Reports/RSP_ANNEX13REPORT.txt
 /Reports/BranchTransferReport/BranchTransferVariance.txt
 ---/Reports/BranchTransferReport/NSP_TRANSFER_INOUT_REPORT.txt
