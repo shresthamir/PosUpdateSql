@@ -33,7 +33,7 @@ WHERE datediff(DAY,TRNDATE,@date)<=MG.SHELFLIFE
 GROUP BY A.MCODE
 
 SELECT ROW_NUMBER() over (order by menucode) SN,VH.[Main Group] [Major Group], vh.[Main Category], vh.[Sub Category], vh.[Super Category], vh.MCATEGORY, vh.MENUCODE [Item Code],vh.DESCA [Item Name] , vh.SHELFLIFE [Shelf Life],
-s.SALES [Sales in last Cycle Period],sk.stockqty [Closing Stock],s.SALES-sk.stockqty [Quantity Required], A.ACNAME [Supplier Name]
+ISNULL(s.SALES,0) [Sales in last Cycle Period], ISNULL(sk.stockqty,0) [Closing Stock], ISNULL(s.SALES,0)-ISNULL(sk.stockqty,0) [Quantity Required], A.ACNAME [Supplier Name]
 FROM vwItemHeirarchy vh
 JOIN RMD_ACLIST A ON vh.SUPCODE = A.ACID
 LEFT JOIN #SHELF S ON S.MCODE = vh.MCODE
