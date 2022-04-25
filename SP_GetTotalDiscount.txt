@@ -1,50 +1,30 @@
-CREATE OR ALTER PROCEDURE [dbo].[SP_GetTotalDiscount] @AMOUNT decimal, @DIVISION CHAR(3) = '%'
+CREATE OR ALTER PROCEDURE [dbo].[SP_GetTotalDiscount] 
+@AMOUNT decimal, 
+@DIVISION CHAR(3) = '%'
 AS
---SET NOCOUNT ON
+SET NOCOUNT ON
 --DECLARE @AMOUNT decimal
---SET @AMOUNT= 10000
-DECLARE @WEEKDAY CHAR(1)
-DECLARE @DIS_RATE NUMERIC(18,2),@CARD_PRIORITY TINYINT,@PRIORITY_C TINYINT,@SchemeID numeric,@Dis_Amount numeric(18,2)
-Declare @Date1 Datetime,@Date2 Datetime,@Dayofweek VArchar(10),@TimeStart Datetime,@TimeEnd Datetime,@ScheduleType varchar(10),@priority tinyint,@CardPriority tinyint
-Declare @DisID numeric,@Mgroup varchar(20),@Parent varchar(20),@Mcode varchar(20),@Disrate numeric(18,2),@DisAmount numeric(18,2)
+--SET @AMOUNT= 10000 
+Declare @MaxAmount decimal;
 
+SELECT @MaxAmount = max(c.LessThan)  FROM Discount_Rate a 
+	JOIN vwSchemeSchedule b on a.ScheduleID = b.DisID 
+	JOIN Discount_IfAnyItemsList c on a.DisID=c.DisID 	
+	WHERE  a.SchemeType ='TotalAmount' AND a.IsActive = 1
+	AND ((@DIVISION ='%' AND isnull(a.divisions,'') = '') or (@DIVISION <> '%' AND @division IN (SELECT * FROM split(a.divisions,','))))
 
-if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
-	select * into #schedules from discount_scheme 
-		where  convert(datetime,convert(varchar,getdate(),106)) between isnull(DateStart,getdate()) and isnull(Dateend,getdate())
-		 and (isnull(DayOfWeek,'') ='' or Charindex(Case datename(dw,getdate()) when 'Sunday' then 'SU' when 'Monday' then 'MO' 
-						when 'Tuesday' then 'TU' When 'Wednesday' then 'WE'
-						when 'Thursday' then 'TH' when 'Friday' then 'FR' when 'Saturday' then 'SA' End,
-						isnull(DayOfWeek,'')) > 0)
-		 and convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) between 
-	case when isnull(Timestart,0)=0 then convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
-		else  Case when convert(numeric(18,4),convert(datetime,convert(varchar,timestart,108)))=0 then 
-				convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
-				else convert(numeric(18,4),convert(datetime,convert(varchar,timestart,108))) end
-		end 
-    and
-	case when isnull(Timeend,0)=0 then convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
-		else  case when convert(numeric(18,4),convert(datetime,convert(varchar,timeend,108)))=0 then 
-				convert(numeric(18,4),convert(datetime,convert(varchar,getdate(),108))) 
-				else convert(numeric(18,4),convert(datetime,convert(varchar,timeend,108)))
-				end 
-		end
-		--Date Filter
-  
-  Declare @MaxAmount decimal;
-  select @MaxAmount = max(c.LessThan)  from Discount_Rate a 
-   inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
-   where  a.SchemeType ='TotalAmount' 
-   AND ((@DIVISION ='%' and isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
-
-   SELECT DISTINCT schemeID,GreaterThan,LessThan,GiftVoucher,DisRate,SchemeName, DisAmount FROM (
-  select  A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount   from Discount_Rate a 
-   inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
-   where  a.SchemeType ='TotalAmount' and @AMOUNT between c.GreaterThan and c.LessThan 
-   AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
-  union all
-  select A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount  from Discount_Rate a 
-   inner join #schedules b on a.ScheduleID=b.DisID inner join Discount_IfAnyItemsList c on a.DisID=c.DisID 	
-   where  a.SchemeType ='TotalAmount' and (  @AMOUNT  > c.LessThan and c.LessThan =@MaxAmount )
-   AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,','))))
-  ) A
+SELECT DISTINCT schemeID,GreaterThan,LessThan,GiftVoucher,DisRate,SchemeName, DisAmount FROM 
+(
+	SELECT  A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount   FROM Discount_Rate a 
+		JOIN vwSchemeSchedule b on a.ScheduleID = b.DisID 
+		JOIN Discount_IfAnyItemsList c on a.DisID = c.DisID 	
+		WHERE  a.SchemeType ='TotalAmount' AND @AMOUNT BETWEEN c.GreaterThan AND c.LessThan 
+		AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' AND @division IN (SELECT * FROM split(a.divisions,',')))) AND a.IsActive = 1
+	
+	UNION ALL
+	SELECT A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount  FROM Discount_Rate a 
+		JOIN vwSchemeSchedule b on a.ScheduleID = b.DisID 
+		JOIN Discount_IfAnyItemsList c on a.DisID = c.DisID 	
+		WHERE  a.SchemeType ='TotalAmount' AND (  @AMOUNT  > c.LessThan AND c.LessThan =@MaxAmount )
+		AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' AND @division IN (SELECT * FROM split(a.divisions,',')))) AND a.IsActive = 1
+) A

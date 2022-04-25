@@ -46,6 +46,7 @@ MarginSchemeTables.txt
 Membership.txt
 MEMGRADETRAN_VIEW.txt
 MENUITEM_ECOMMERCE_DETAIL.txt
+MenuItem_Yield.txt
 MasterDeleteFlag.txt
 ---MULTICURRENCY.txt
 MultipleRetailPrice.txt
@@ -219,6 +220,8 @@ VEHICLE_WAREHOUSE.txt
 /Reports/fnPartyFilter.txt
 /Reports/fnProductFilter.txt
 /Reports/ReportSetting.txt
+/Reports/RSP_BRANCHWISE_CONSOLIDATED_LEDGERS.txt
+/Reports/RSP_BRANCHWISE_CONSOLIDATED_SALES.txt
 /Reports/RSP_BillScheduleReport.txt
 /Reports/RSP_DayEndReport.txt
 /Reports/RSP_DAILYTRIAL.txt

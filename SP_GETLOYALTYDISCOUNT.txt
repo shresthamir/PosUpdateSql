@@ -32,7 +32,7 @@ if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
 		end
 		--Date Filter
   
-  select a.DisID schemeID, ISNULL(ISNULL(C.mcode, P.MCODE),M.MCODE) MCODE,C.disrate SchemeDisRate,C.disamount SchemeDisAmount,a.comboid,a.schemename,a.priority,1 MinQty,a.SchemeType from Discount_Rate a 
+  select a.DisID schemeID, ISNULL(ISNULL(C.mcode, P.MCODE),M.MCODE) MCODE,C.disrate SchemeDisRate,C.disamount SchemeDisAmount,a.comboid,a.schemename,a.priority,1 MinQty,a.SchemeType, a.IntervalLimitBy,a.LimitIntervalReset, a.IntervalLimitAmount, a.IntervalLimitQty, a.IsActive from Discount_Rate a 
   inner join #schedules b on a.ScheduleID=b.DisID
 	inner join discount_SchemeDiscount c on a.DisID  = c.disid 
 	JOIN MEMBERSCHEME MS ON MS.SCHEMEID = a.schemetype
@@ -44,5 +44,6 @@ if OBJECT_ID('tempdb..#schedules') is not null drop table #schedules
 	AND ISNULL(P.DISMODE, 'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ISNULL(M.DISMODE, 'DISCOUNTABLE') = 'DISCOUNTABLE'
 	AND ISNULL(I.DISMODE, 'DISCOUNTABLE') = 'DISCOUNTABLE'
+	AND  a.IsActive = 1
 	
 order by priority
