@@ -1,0 +1,5 @@
+IF NOT EXISTS (SELECT * FROM PrintFormat WHERE VNAME = 'Sales Reverse')
+INSERT INTO PrintFormat SELECT 'Sales Reverse', 0, 40, header, [table], footer, printType, pdfData FROM PrintFormat WHERE VNAME = 'Credit Note'
+
+IF NOT EXISTS (SELECT * FROM PrintFormat WHERE VNAME = 'Reverse Credit Note')
+INSERT INTO PrintFormat SELECT 'Reverse Credit Note', 0, 40, header, [table], footer, printType, pdfData FROM PrintFormat WHERE VNAME = 'Credit Note'
