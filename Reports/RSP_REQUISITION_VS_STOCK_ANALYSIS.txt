@@ -1,0 +1,60 @@
+CREATE OR ALTER procedure [dbo].[RSP_REQUISITION_VS_STOCK_ANALYSIS]
+@DATE1 DATETIME ,
+@DIVISION VARCHAR(3)
+as
+declare @cols nvarchar(max), @column nvarchar(max) =N'',@sql nvarchar(max)=N''
+       ,@total nvarchar(1000)
+
+		
+SELECT @cols = STUFF((SELECT DISTINCT ',' + QUOTENAME(D.NAME) 
+                    FROM tbl_requisition R JOIN DIVISION D ON R.FromDivision = D.INITIAL WHERE TDATE = @DATE1
+            FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)') 
+        ,1,1,'')
+
+SELECT @total = STUFF((SELECT DISTINCT '+' + QUOTENAME(D.NAME) 
+                    FROM tbl_requisition R JOIN DIVISION D ON R.FromDivision = D.INITIAL WHERE TDATE = @DATE1
+            FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)') 
+        ,1,1,'')
+
+SELECT @column = STUFF((SELECT DISTINCT ','+'sum(isnull(' + QUOTENAME(D.NAME)+',0))' + ' ['+D.NAME+']'
+                    FROM tbl_requisition R JOIN DIVISION D ON R.FromDivision = D.INITIAL WHERE TDATE = @DATE1
+            FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)') 
+        ,1,1,'')
+
+set @sql='
+with cte as
+( 
+	select mcode,'+@column+' from
+	(
+		SELECT D.[NAME],MCODE,sum(isnull(Quantity,0)) reqquantity 
+        from TBL_REQUISITION_DETAILS rd join tbl_requisition r on rd.ReqId=r.ReqId
+		JOIN DIVISION D ON R.FromDivision = D.INITIAL
+		where tdate='''+CONVERT(VARCHAR(10),@DATE1,101)+'''	AND R.ToDivision = ''' + @DIVISION + '''
+        group by D.[NAME],Mcode
+	)as soucetable
+	pivot
+	(
+		sum(reqquantity) for [NAME] in ('+@cols+')
+	)as pivottable group by mcode
+)
+
+SELECT row_number() over (order by [ITEM CODE]) SN,*,([STOCK BALANCE]-[TOTAL REQUISITION]) [EXCESS_SHORT] FROM
+(
+	SELECT A.MCODE, A.MENUCODE [ITEM CODE],A.DESCA [ITEM NAME],'+@COLS+','+@TOTAL+' [TOTAL REQUISITION],A.STOCKBALANCE [STOCK BALANCE]
+	FROM CTE C JOIN
+	(
+		select tp.mcode, MI.MENUCODE, mi.DESCA,(sum(REALQTY_IN)-sum(RealQty)) stockbalance 
+        from rmd_trnmain tm join rmd_trnprod tp on tm.vchrno=tp.vchrno
+		left join MENUITEM mi on mi.MCODE=tp.mcode
+		WHERE TM.DIVISION = ''' + @DIVISION + '''
+        group by tp.MCODE,DESCA, MI.MENUCODE
+	)a on a.mcode=c.mcode
+)b'
+
+--print @sql
+exec(@sql)
+
+
