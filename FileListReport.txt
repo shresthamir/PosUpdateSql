@@ -73,7 +73,6 @@
 /Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/PromotionReports/RSP_PromotionSalesReport.txt
 /Reports/RecipeReport/OSP_GetReceipeConsumptionList.txt
-/Reports/RecipeReport/RC_Columns.txt
 /Reports/RecipeReport/RSP_PendingConsumptionStockDetail.txt
 /Reports/RecipeReport/RSP_ReceipeConsumptionReport.txt
 /Reports/RecipeReport/TRNPROD_RECEIPE.txt
