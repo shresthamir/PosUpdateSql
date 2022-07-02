@@ -2,7 +2,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_BRANCHWISE_CONSOLIDATED_LEDGERS]
 --DECLARE
 	@DATE1 VARCHAR(25),
 	@DATE2 VARCHAR(25),
-	@OPT_Summary TINYINT = 0,			--Detail:0,ClosingSummary:1,OpeningSummary:2
+	@OPT_Summary TINYINT = 2,			--Detail:0,ClosingSummary:1,OpeningSummary:2
 	@CHK_STATUS TINYINT = 0,			--Status:1:0
 	@CostCenter varchar(25) = '%',
 	@OPT_TREE TINYINT=0,				--LedgerWise:0,GroupWise:1
@@ -10,12 +10,17 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_BRANCHWISE_CONSOLIDATED_LEDGERS]
 	@OPT_DebtorOrCreditor char(1) = 'C',      --Debtors:C,Creditors:V
 	@FYID VARCHAR(10) = '%',
 	@AREA_ID INT=0,
-	@CATEGORY_ID INT =0
+	@CATEGORY_ID INT =0,
+	@ACID VARCHAR(25) = '%',
+	@SELECTEDACIDLIST VARCHAR(500) = ''
 AS
---SET @DATE1 = '07/16/21';SET @DATE2 = '07/16/22';SET @OPT_Summary = 0;SET @OPT_TREE =0;SET @FYID='78/79'
+--SET @DATE1 = '07/16/21';SET @DATE2 = '08/16/21';SET @OPT_Summary = 0;SET @OPT_TREE =0;SET @FYID='78/79'
+--SET @SELECTEDACIDLIST = 'AT01002,DE01002'
 set nocount on
+IF @SELECTEDACIDLIST != ''
+SET @ACID = @SELECTEDACIDLIST
 if OBJECT_ID('tempdb..#PARTYFILTER') is not null drop table #PARTYFILTER
-select * INTO #PARTYFILTER from fnPartyFilter(@AREA_ID,@CATEGORY_ID,'%',0,0,0,0,0)
+select * INTO #PARTYFILTER from fnPartyFilter(@AREA_ID,@CATEGORY_ID,@ACID,0,0,0,0,0)
 
 if OBJECT_ID('tempdb..#result') is not null drop table #result
 if OBJECT_ID('tempdb..#result1') is not null drop table #result1
