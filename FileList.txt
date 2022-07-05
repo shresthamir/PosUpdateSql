@@ -82,6 +82,7 @@ RC_Columns.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt
 ReportContextMenus.txt
+Requisition.txt
 RMD_ACLIST.txt
 RMD_BillOnlinePaymentInfo.txt
 ---RMD_BILLTENDER_UPDATE.txt
