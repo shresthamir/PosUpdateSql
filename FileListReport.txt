@@ -102,6 +102,7 @@
 /Reports/RSP_BRANCHWISE_CONSOLIDATED_LEDGERS.txt
 /Reports/RSP_BRANCHWISE_CONSOLIDATED_SALES.txt
 /Reports/RSP_BillScheduleReport.txt
+/Reports/RSP_CashDropDetails.txt
 /Reports/RSP_DayEndReport.txt
 /Reports/RSP_DAILYTRIAL.txt
 /Reports/RSP_DSR.txt
