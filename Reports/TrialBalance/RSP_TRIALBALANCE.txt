@@ -13,7 +13,8 @@ CREATE  OR ALTER   PROCEDURE [dbo].[RSP_TRIALBALANCE]
 	@CHK_SHOWZEROBL TINYINT = 0,					  --ShowZeroBal:1:0
 	@FYID VARCHAR(10) = '%',
 	@OSTOCK NUMERIC(22,10) = 0,
-	@CSTOCK NUMERIC(22,10) = 0
+	@CSTOCK NUMERIC(22,10) = 0,
+	@CHK_IsUserInput BIT = 0                       --IsUserInput:1:0
 AS
 exec [dbo].[NSP_TRIALBALANCE]
 	@DATE1 = @DATE1,
@@ -29,4 +30,5 @@ exec [dbo].[NSP_TRIALBALANCE]
 	@SHOWZEROBL = @CHK_SHOWZEROBL,
 	@FYID = @FYID,
 	@OSTOCK = @OSTOCK,
-	@CSTOCK = @CSTOCK
+	@CSTOCK = @CSTOCK,
+	@IsUserInput = @CHK_IsUserInput
