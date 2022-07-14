@@ -7,7 +7,8 @@ CREATE OR ALTER PROCEDURE  RSP_PLACCOUNT
 	@OPT_SHOWSUMMARY_REPORT TINYINT = 1,               --Summary:1,Detail:0
 	@CHK_SHOWSUBLEDGER TINYINT = 0,                    --ShowSubledger:1:0
 	@GroupLevel INTEGER = 2,
-	@OPT_ISVERTICAL_REPORT TINYINT = 1                      --vertical:1,horizontal:0
+	@OPT_ISVERTICAL_REPORT TINYINT = 1,                      --vertical:1,horizontal:0
+	@CHK_IsUserInput BIT = 0                       --IsUserInput:1:0
 AS
 EXEC NSP_PLACCOUNT_REPORT
 @DATE1 = @DATE1,
@@ -18,4 +19,5 @@ EXEC NSP_PLACCOUNT_REPORT
 	@SUMMARY = @OPT_SHOWSUMMARY_REPORT,
 	@SHOWSUBLEDGER = @CHK_SHOWSUBLEDGER,
 	@LEV = @GroupLevel,
-	@ISIVREPORT = @OPT_ISVERTICAL_REPORT
+	@ISIVREPORT = @OPT_ISVERTICAL_REPORT,
+	@IsUserInput = @CHK_IsUserInput
