@@ -7,7 +7,7 @@ CREATE OR ALTER PROCEDURE [dbo].[NSP_BALANCESHEET]
 	@SUMMARY TINYINT = 0,
 	@LEV INTEGER = 2,
 	@FYID VARCHAR(10) = '%',
-	@IsUserInput BIT = 1
+	@IsUserInput BIT = 0
 AS
 
 set nocount on
