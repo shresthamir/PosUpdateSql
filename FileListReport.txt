@@ -1,4 +1,4 @@
-
+/Reports/vwSessionDay.txt
 /Reports/vwItemHeirarchy.txt
 /Reports/BatchPriceReport.txt
 /Reports/RSP_ADDITIONAL_COST_REPORT.txt

@@ -1,0 +1,4 @@
+CREATE OR ALTER VIEW vwSessionDay 
+AS
+SELECT D.DAYSTARTID, D.DAYSTARTDATE, D.DAYENDDATE, D.DAYDATE, D.DIVISION, D.PhiscalID,  S.SessionID, S.TerminalID, S.UserID, S.ComputerID, S.SessionStartDate, S.SessionEndDate, S.SessionEndUser FROM [Session] S 
+JOIN [DAYS] D ON S.DAYSTARTID = D.DAYSTARTID AND S.PhiscalID = D.PhiscalID AND S.Division = D.DIVISION
