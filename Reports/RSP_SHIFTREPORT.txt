@@ -3,12 +3,28 @@ CREATE OR ALTER   PROC[dbo].[RSP_SHIFTREPORT]
 @DIVISION  varchar(20)='',
 @PHISCALID  varchar(20)=''
 AS
---set @DIVISION  ='PKR';
---set @PHISCALID  ='79/80';
-select  A.DAYSTARTID, CAST( A.DAYSTARTDATE as date) DAYSTARTDATE, FORMAT(CAST( A.DAYSTARTDATE as datetime2), N'hh:mm tt') DAYSTARTTIME, B.SessionID, c.NAME TERMINAL,B.UserID, CAST(B.SessionStartDate as date) SessionStartDate, FORMAT(CAST( B.SessionStartDate as datetime2), N'hh:mm tt') SessionStartTime,
- IIF(B.SessionEndDate is null ,'ACTIVE','CLOSED') SessionStatus,D.BILLS TotalBills,IIF(B.SessionEndDate is null,0,CAST(D.TOTALSALES AS decimal(20,2))) TOTALSALES, CAST(ISNULL(E.AMOUNT, 0) AS decimal(20,2)) AS COUNTERAMOUNT,CAST(ISNULL(P.AMOUNT, 0) AS decimal(20,2)) AS PAYOUTAMOUNT, CAST(ISNULL(Q.AMOUNT, 0) AS decimal(20,2)) AS CASHDROPAMOUNT From [DAYS] A inner join [Session] B ON A.DAYSTARTID=B.DAYSTARTID AND A.DIVISION=B.Division AND A.PhiscalID=B.PhiscalID 
- left join SALESTERMINAL c on b.TerminalID=c.INITIAL
- INNER JOIN 
+/*
+set @DIVISION  ='PKR';
+set @PHISCALID  ='79/80';
+*/
+SELECT  A.DAYSTARTID, 
+	CAST( A.DAYSTARTDATE as date) DAYSTARTDATE, 
+	FORMAT(CAST( A.DAYSTARTDATE as datetime2), N'hh:mm tt') DAYSTARTTIME, 
+	B.SessionID, 
+	c.NAME TERMINAL,
+	B.UserID, 
+	CAST(B.SessionStartDate as date) SessionStartDate, 
+	FORMAT(CAST( B.SessionStartDate as datetime2), N'hh:mm tt') SessionStartTime,
+	IIF(B.SessionEndDate is null ,'ACTIVE','CLOSED') SessionStatus,
+	D.BILLS TotalBills,
+	IIF(B.SessionEndDate is null,0,CAST(D.TOTALSALES AS decimal(20,2))) TOTALSALES, 
+	CAST(ISNULL(E.AMOUNT, 0) AS decimal(20,2)) AS COUNTERAMOUNT,
+	CAST(ISNULL(P.AMOUNT, 0) AS decimal(20,2)) AS PAYOUTAMOUNT, 
+	CAST(ISNULL(Q.AMOUNT, 0) AS decimal(20,2)) AS CASHDROPAMOUNT 
+From [DAYS] A 
+JOIN [Session] B ON A.DAYSTARTID=B.DAYSTARTID AND A.DIVISION=B.Division AND A.PhiscalID=B.PhiscalID 
+JOIN SALESTERMINAL c on b.TerminalID=c.INITIAL
+LEFT JOIN 
 ( 
 	SELECT SHIFT SESSIONID,DIVISION,PhiscalID , SUM(BILLS) BILLS,
 	SUM( NETAMNT * MPLR) TOTALSALES FROM 
