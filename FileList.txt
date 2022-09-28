@@ -130,3 +130,4 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+vwVehicleBarcode.txt
