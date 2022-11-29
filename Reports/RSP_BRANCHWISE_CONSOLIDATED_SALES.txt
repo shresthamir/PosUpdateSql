@@ -14,11 +14,13 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_BRANCHWISE_CONSOLIDATED_SALES]
 	@OPT_TREE TINYINT = 0            --NonTree:0,Tree:1
 AS
 
---SET @DATE1 = '1 NOV 2021'; SET @DATE2 = '1 NOV 2021' ; 
+--SET @DATE1 = '1 NOV 2021'; SET @DATE2 = '1 NOV 2022' ; 
 SET NOCOUNT ON
 
-DECLARE @SHOWBARCODEDETAIL TINYINT
+	
+DECLARE @SHOWBARCODEDETAIL TINYINT,@SalesFigureIncVat TINYINT
 SELECT @SHOWBARCODEDETAIL = CONVERT(TINYINT, EnableBarcodeDetails) | ISNULL(HASVEHICLESALE,0) FROM SETTING
+SELECT TOP 1 @SalesFigureIncVat = SettingValue FROM ReportSetting WHERE ReportName = 'Branchwise Consolidated Sales' AND SettingName = 'SalesFigureIncVat'
 
 IF OBJECT_ID('TEMPDB..#REPDATA') is not null drop table #REPDATA
 IF OBJECT_ID('TEMPDB..#SALESDATA') is not null drop table #SALESDATA
@@ -163,8 +165,10 @@ DECLARE @query  AS VARCHAR(MAX)
 	,@colheader  AS NVARCHAR(MAX)
 	,@opDrCr AS VARCHAR(MAX) = ''
 	,@clDrCr AS VARCHAR(MAX) = ''
+	,@SalesFigure AS VARCHAR(20) = 'NETSALE'
 	--CONVERT(VARCHAR,CAST(ABS(OPAMNT) AS MONEY),1)
 
+IF @SalesFigureIncVat = 1 SET @SalesFigure = 'NETAMNT'
 
 SET @colheader = 'CONVERT(DECIMAL(18,2), SUM(ISNULL([ZZZ_QTY],0))) [ZZZ_QTY],CONVERT(DECIMAL(18,2), SUM(ISNULL([ZZZ_VALUE],0)))[ZZZ_VALUE],'
 	+ STUFF((SELECT distinct ',' +'CONVERT(DECIMAL(18,2), SUM(ISNULL(' + QUOTENAME(INITIAL+'_QTY') +',0))) ' +QUOTENAME([INITIAL]+'_QTY')
@@ -186,7 +190,7 @@ SELECT [Main Group], [Main Category], [Sub Category], [Super Category], [ID], [S
 (    
     SELECT IH.[Main Group], IH.[Main Category], IH.[Sub Category], IH.[Super Category], A.[ID], A.[SYMBOL], A.DESCA, A.MENUCODE, A.BC,' + IIF(@HasVariant = 1,' SIZE, COLOR, ','') + ' A.UNIT, A.DIVISION + ''_QTY'' DIV_QTY
 	, A.DIVISION + ''_VALUE'' DIV_VALUE
-	, A.NETQTY, A.NETSALE, A.SUPPLIER, A.MCODE, A.[TYPE]  FROM #RESULT A 
+	, A.NETQTY, A.'+@SalesFigure+', A.SUPPLIER, A.MCODE, A.[TYPE]  FROM #RESULT A 
 	LEFT JOIN vwItemHeirarchy IH ON A.MCODE = IH.MCODE'
 	+ IIF(@HasVariant = 1, 'LEFT JOIN BARCODE_DETAIL BD ON A.MCODE = BD.MCODE AND A.BC = BD.BARCODE','') + '
 ) AS S
@@ -196,7 +200,7 @@ PIVOT
 ) AS OP
 PIVOT
 (
-	SUM(NETSALE) for DIV_VALUE in ('+@colValue+')
+	SUM('+@SalesFigure+') for DIV_VALUE in ('+@colValue+')
 ) AS I
 GROUP BY  [Main Group], [Main Category], [Sub Category], [Super Category], [ID], [SYMBOL], DESCA, MENUCODE, BC, UNIT, SUPPLIER, MCODE, [TYPE]
 ORDER BY [ID]'
