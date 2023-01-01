@@ -9,8 +9,8 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_ITEMEXPIRYREPORT]
 	@MGROUP VARCHAR(25) = '%',
 	@GROUP VARCHAR(25)='%',
 	@FYID VARCHAR(10),
-	@CHK_OnlyExpTracked TINYINT = 0,  --CHK_OnlyExpTracked:1:0
-	@CHK_OnlyExpired TINYINT = 1	--CHK_OnlyExpired:1:0
+	@CHK_OnlyExpTracked TINYINT = 0,               --CHK_OnlyExpTracked:1:0
+	@CHK_OnlyExpired TINYINT = 1	                 --CHK_OnlyExpired:1:0
 AS
 --SET @DATE1 = '2022-05-01'; SET @DATE2 = '2022-07-16'; SET @WAREHOUSE = '%'; SET @DIVISION = '%'; SET @FYID = '78/79'
 --DECLARE @DATE DATETIME = '03-27-18',@PATH VARCHAR(200) ='%',@PHISCALID VARCHAR(20)='%',@ITEM VARCHAR(25)= 'M28744P',@DETAIL TINYINT = 0

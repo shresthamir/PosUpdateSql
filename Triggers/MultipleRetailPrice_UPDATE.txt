@@ -1,0 +1,24 @@
+CREATE OR ALTER TRIGGER [dbo].[MultipleRetailPrice_UPDATE] ON [dbo].MultipleRetailPrice AFTER UPDATE, DELETE
+AS 
+BEGIN
+	IF TRIGGER_NESTLEVEL() > 1
+		RETURN;
+	DECLARE @logId INT;
+	DECLARE @user VARCHAR(50) = 'N/A';
+	DECLARE @IsDelete BIT = 1;
+	BEGIN TRANSACTION
+								
+		IF EXISTS(SELECT * FROM inserted)
+		BEGIN
+			SET @IsDelete = 0
+			SELECT @user = CreatedBy, @IsDelete = IIF(IsActive=1,0,1) FROM inserted;
+		END
+
+		UPDATE tblMasterSequences  SET CurNo = CurNo + 1, @logId = CurNo + 1  WHERE VNAME = 'ActivityLog'
+
+		INSERT INTO tblUserWorkingLog(LogID,UserId, UserSessId, FormName, TrnDate, TrnTime, TrnMode, WorkDetail, VchrNo, Remarks)
+		SELECT @LogId, @user, 0, 'Multiple Retail Price',  CONVERT(VARCHAR,GETDATE(),101), CONVERT(VARCHAR, GETDATE(), 108), 
+		iif(@IsDelete = 1, 'Delete', 'Edit'), CONCAT('Id:', Id, ', RATE:', CONVERT(DECIMAL(14,2), RATE), ', EXPDATE :',CONVERT(VARCHAR, EXPDATE, 101) ), MCODE, CreatedBy from deleted
+	
+	COMMIT
+END

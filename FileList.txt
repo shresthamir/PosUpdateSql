@@ -44,6 +44,7 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_DETAILS.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
+KOTCATEGORY.txt
 MarginSchemeTables.txt
 Membership.txt
 MEMGRADETRAN_VIEW.txt
@@ -70,6 +71,7 @@ OSP_ValidateStockEdit.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt
+PROD_COGS.txt
 ---PRODUCT_EDIT_LOG.txt
 RateDiscount.txt
 /RateGroup/RateGroupTables.txt
@@ -118,6 +120,9 @@ SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
 tblBillTender.txt
 tblPartyCategory.txt
+/Triggers/ABBPROD_COGS_UPDATE.txt
+/Triggers/MultipleRetailPrice_UPDATE.txt
+/Triggers/TRNPROD_COGS_UPDATE.txt
 TRNMAIN_SALESMANID.txt
 TRNMAIN_VIEW.txt
 TRNPROD_VIEW.txt
