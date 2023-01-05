@@ -1,0 +1,12 @@
+CREATE OR ALTER  TRIGGER [dbo].[CheckSpiltInProgress_On_RMD_KotProd] ON [dbo].[RMD_KOTPROD]
+FOR Insert
+AS
+DECLARE @KotId int;
+DECLARE @IsSpiltInProgress int;
+SELECT @KotId = i.KOTID FROM inserted i; 
+SELECT @IsSpiltInProgress = RMS.IsSplitInProgress from RMD_KOTMAIN_STATUS RMS where RMS.KOTID = @KotId;
+IF @IsSpiltInProgress = 1
+BEGIN
+	ROLLBACK
+	RAISERROR('Table split is in progress for selected Table. Please complete table split operation to proceed.', 10, 1)
+END

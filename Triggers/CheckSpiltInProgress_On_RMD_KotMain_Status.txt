@@ -1,0 +1,15 @@
+CREATE OR ALTER  TRIGGER [dbo].[CheckSpiltInProgress_On_RMD_KotMain_Status] ON [dbo].[RMD_KOTMAIN_STATUS]
+FOR update
+AS
+DECLARE @InsertedIsSpiltInProgress bit;
+DECLARE @DeletedIsSpiltInProgress bit;
+DECLARE @InsertedStatus varchar(20);
+DECLARE @DeletedStatus varchar(20);
+
+SELECT @DeletedIsSpiltInProgress = D.IsSplitInProgress, @DeletedStatus = D.STATUS  FROM deleted D;
+SELECT @InsertedIsSpiltInProgress = I.IsSplitInProgress, @InsertedStatus = I.STATUS FROM inserted I;
+IF @InsertedIsSpiltInProgress = 1 AND @DeletedIsSpiltInProgress = 1 AND @InsertedStatus <> @DeletedStatus
+BEGIN
+	ROLLBACK
+	RAISERROR('Table split is in progress for selected Table. Please complete table split operation to proceed.', 10, 1)
+END

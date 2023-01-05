@@ -50,6 +50,7 @@ Membership.txt
 MEMGRADETRAN_VIEW.txt
 MEMGRADETRAN_DETAILS.txt
 MENUITEM_ECOMMERCE_DETAIL.txt
+Menuitem_Delete.txt
 MenuItem_Yield.txt
 MasterDeleteFlag.txt
 ---MULTICURRENCY.txt
@@ -118,11 +119,14 @@ SP_GetItemWisePointCalculation.txt
 SP_GetMarginDiscount.txt
 SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
+tblAuditLog.txt
 tblBillTender.txt
 tblPartyCategory.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
 /Triggers/MultipleRetailPrice_UPDATE.txt
 /Triggers/TRNPROD_COGS_UPDATE.txt
+/Triggers/CheckSpiltInProgress_On_RMD_KotMain_Status.txt
+/Triggers/CheckSpiltInProgress_On_RMD_KotProd.txt
 TRNMAIN_SALESMANID.txt
 TRNMAIN_VIEW.txt
 TRNPROD_VIEW.txt
@@ -135,4 +139,5 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+vwCustomerProfile
 vwVehicleBarcode.txt
