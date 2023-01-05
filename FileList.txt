@@ -139,5 +139,5 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
-vwCustomerProfile
+vwCustomerProfile.txt
 vwVehicleBarcode.txt
