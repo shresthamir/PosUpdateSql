@@ -45,6 +45,7 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
 KOTCATEGORY.txt
+KOTTableUpdate.txt
 MarginSchemeTables.txt
 Membership.txt
 MEMGRADETRAN_VIEW.txt
