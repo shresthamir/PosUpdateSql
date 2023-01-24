@@ -70,6 +70,7 @@ OSP_GetSupplierWiseItemForPO.txt
 OSP_PopulateTblBillTender.txt
 OSP_UpdateBillTenderTable.txt
 OSP_ValidateStockEdit.txt
+OSP_TransitStockReconcile.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt
