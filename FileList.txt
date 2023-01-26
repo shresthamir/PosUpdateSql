@@ -21,6 +21,7 @@ DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
 ---DATEMITI_FULL.txt
 DISCOUNT_PRESETS.txt
+DISCOUNT_RATE.txt
 ---DISCOUNT_SCHEME.txt
 DIVISION.txt
 Drop_RMD_TRNMAIN_FN.txt
