@@ -1,33 +1,36 @@
 CREATE OR ALTER   procedure [dbo].[RSP_LastMonthVsThisMonth_Sales]
+@DIV VARCHAR(25)='%'
 as
+--DECLARE @DIV VARCHAR(25)='MMD'
 DECLARE @DATE1 DATE
 SELECT @DATE1 = GETDATE()
+
 declare @thismonthstart date,@prevmonthstart date,@thiscount int,@max int
 SELECT @thiscount=DAY(EOMONTH(@DATE1))
+
 select @thismonthstart=dateadd(day,@thiscount-(day(@DATE1)),@DATE1)
 select @prevmonthstart =dateadd(day,-(day(dateadd(month,-1,@DATE1))-1),dateadd(month,-1,@DATE1))
-
-       
+            
 select cast(ad as date)  Daterange,DATEPART(WEEK, ad) - DATEPART(WEEK, DATEADD(MM, DATEDIFF(MM,0,ad), 0))+ 1 AS WEEK_OF_MONTH,MONTH(ad) [Month]
 into #date
 from DATEMITI where AD between @prevmonthstart and @thismonthstart
 select @max=max(month) from #date
-
+        
 declare @cols nvarchar(1000)=N'',@cols1 nvarchar(1000)=N'',@query nvarchar(max)=N''
 SELECT @cols1 = STUFF((SELECT  ',isnull(' + QUOTENAME( [MONTH])+',0)' +' '+case when [Month]<@max  then 'LastMonth' else'ThisMonth' end
             from(select distinct [MONTH] FROM #date group by [MONTH])a group by [MONTH]
             FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,'')
-
+        
 SELECT @cols = STUFF((SELECT  ',' + QUOTENAME( [MONTH])
             from(select distinct [MONTH] FROM #date)a
             FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,'')
-
+        
 set @query='select ''Week''+cast(WEEK_OF_MONTH as varchar(10)) Week,'+@cols1+' from(
-            SELECT isnull(sum(case when left(tm.VCHRNO ,2) in (''RE'', ''CN'') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end),0) SALES,WEEK_OF_MONTH,Month FROM trnmain tm
-            join TRNPROD tp on tm.VCHRNO = tp.VCHRNO and tm.DIVISION = tp.DIVISION and tm.PhiscalID = tp.PhiscalID
-            right join #date d on d.Daterange=cast(tm.TRNDATE as date)
+            SELECT isnull(sum(case when left(tm.VCHRNO ,2) in (''RE'', ''CN'') then (tp.AMOUNT-tp.DISCOUNT)*-1 else (tp.AMOUNT-tp.DISCOUNT) end),0) SALES,WEEK_OF_MONTH,Month FROM RMD_trnmain tm
+            join RMD_TRNPROD tp on tm.VCHRNO = tp.VCHRNO and tm.DIVISION = tp.DIVISION and tm.PhiscalID = tp.PhiscalID
+            right join #date d on d.Daterange=cast(tm.TRNDATE as date) WHERE TM.DIVISION LIKE '''+@DIV+''' AND TM.VoucherType IN (''SI'',''TI'',''CN'')
             group by Daterange,WEEK_OF_MONTH,Month)as source_table
-			PIVOT (sum(SALES) for [MONTH] in (' + @cols + '))as pivot_table'
+        	PIVOT (sum(SALES) for [MONTH] in (' + @cols + '))as pivot_table'
 --print @query
 exec  (@query)
 drop table #date

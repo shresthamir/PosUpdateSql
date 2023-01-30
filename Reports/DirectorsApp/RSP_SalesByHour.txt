@@ -1,10 +1,12 @@
-CREATE OR ALTER   procedure [dbo].[RSP_SalesByHour]
-@flag varchar(20)
+create or ALTER     procedure [dbo].[RSP_SalesByHour]
+@flag varchar(20),
+@DIV varchar(50)='%'
 as
+--declare @flag varchar(20)='Monthly',@DIV varchar(50)='MMH'
 	set nocount on;
 	declare @DATE1 DATE, @DATE2 DATE
 	SELECT @DATE2 = GETDATE()
-	--SET @DATE2 = '2019-12-09'
+	--SET @DATE2 = '2020-08-29'
 	if @flag='hourly'
 	begin
 		--set @parameter='TRNDATE='2019-07-18''
@@ -50,7 +52,7 @@ as
 				FROM RMD_TRNMAIN A 
 				LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
 				left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
-				WHERE --(TRNDATE > = @DATE1 AND TRNDATE < = @DATE2) AND DIVISION LIKE @DIV AND
+				WHERE  DIVISION LIKE @DIV AND
 				LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','RE') and TRNDATE BETWEEN @DATE1 AND @DATE2
 		)a
 		group by hr

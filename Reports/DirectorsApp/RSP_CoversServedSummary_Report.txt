@@ -1,16 +1,18 @@
 CREATE OR ALTER procedure [dbo].[RSP_CoversServedSummary_Report]
+@DIV VARCHAR(25)='%'
 as
 set nocount on;
+--declare @DIV VARCHAR(25)='JHM'
+
 DECLARE @DATE1 DATE
 SELECT @DATE1 = GETDATE()
-select tables_served,
-covers_served,
-current_orders_value_served,
+
+select tables_served,covers_served,current_orders_value_served,
 (current_orders_value_served/tables_served) average_orders_value_served_per_table,
 (current_orders_value_served/covers_served) average_orders_value_served_per_cover
 from 
 (
     SELECT count(distinct rkm.KOTID) tables_served,sum(rkm.pax) covers_served,sum(TOTAMNT-DCAMNT) current_orders_value_served
     FROM RMD_KOTMAIN rkm JOIN RMD_KOTMAIN_STATUS S ON rkm.KOTID = S.KOTID
-    WHERE S.STATUS = 'BILLED' AND rkm.TRNDATE = @DATE1
+    WHERE S.STATUS = 'BILLED' AND rkm.TRNDATE = @DATE1 and rkm.DIVISION like @DIV
 )a

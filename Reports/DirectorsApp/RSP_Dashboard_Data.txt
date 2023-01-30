@@ -1,5 +1,7 @@
 CREATE OR ALTER   procedure [dbo].[RSP_Dashboard_Data]
+@DIV varchar(50)='%'
 as
+--declare @DIV varchar(50)='%'
 declare @DATE2 date,@DATE1 date
 SELECT @DATE2 = GETDATE()
 set @DATE1 = DATEADD(d, -29,@DATE2)
@@ -15,7 +17,7 @@ case when LEFT(VCHRNO,2) IN ('SI','CN','TI') then (case when LEFT(VCHRNO,2) IN (
 cast (TRNDATE as date) TRNDATE into #temp
 FROM RMD_TRNMAIN A LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
 left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
-WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','CN') and TRNDATE BETWEEN @DATE1 AND @DATE2
+WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','CN') and TRNDATE BETWEEN @DATE1 AND @DATE2 and a.DIVISION like @DIV
 
 select  type,number_of_bills,number_of_return_bills,total_credit_amount,total_cash_amount,total_creditcard_amount,total_epayment_sales,total_other_sales,total_sales from
 (

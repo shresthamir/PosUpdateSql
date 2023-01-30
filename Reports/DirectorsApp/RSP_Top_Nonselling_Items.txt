@@ -1,10 +1,10 @@
 CREATE OR ALTER   procedure [dbo].[RSP_Top_Nonselling_Items]
 	@RMODE TINYINT =1,
 	@Daterange varchar(20)='Weekly',
-	@category varchar(50)='%'
+	@category varchar(50)='%',@DIV VARCHAR(25)='%'
 as
 	set nocount on;
-      --declare @RMODE TINYINT =1,@Daterange varchar(20)='Weekly',@category varchar(50)='%'
+    --declare @RMODE TINYINT =1,@Daterange varchar(20)='Monthly',@category varchar(50)='%',@DIV VARCHAR(25)='MMD'
 	declare @DATE1 DATETIME,@DATE2 DATETIME
 	SELECT @DATE2 = GETDATE()
 
@@ -16,13 +16,14 @@ as
 		set @DATE1=dateadd(d,-364,@DATE2)
  
  
-	SELECT A.menucode, A.DESCA Product, B.quantity, B.AMOUNT AS gross
+	SELECT top 100 A.menucode, A.DESCA Product, B.quantity, B.AMOUNT AS gross
 	FROM MENUITEM A INNER JOIN
     (
         SELECT SUM(REALQTY-REALQTY_IN) AS Quantity, SUM(AMOUNT) AS AMOUNT,B.MCODE
         FROM RMD_TRNMAIN A INNER JOIN TRNPROD_VIEW_SREPORT B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION
-        where  (TRNDATE between @DATE1 AND @DATE2)
+        where  (TRNDATE between @DATE1 AND @DATE2) AND A.DIVISION LIKE @DIV
         GROUP BY B.MCODE
     )AS B ON A.MCODE = B.MCODE
 	where a.MCAT1 like @category  and a.PTYPE <> 1
 	ORDER BY CASE WHEN(@RMODE = 1) THEN B.Quantity ELSE (B.AMOUNT) END,A.DESCA
+

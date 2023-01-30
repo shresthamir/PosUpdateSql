@@ -1,9 +1,11 @@
 CREATE OR ALTER   procedure [dbo].[RSP_MontlyYearlyWeeklyCategoryise_Report]  
-@flag varchar(20)
+@flag varchar(20),
+@DIV VARCHAR(25)='%'
 AS
 set nocount on;
-declare @DATE1 date
-
+--DECLARE @flag varchar(20)='Yearly',@DIV VARCHAR(25)='%'
+declare @DATE1 date,@Phiscalid varchar(25)
+select @Phiscalid=PhiscalID from COMPANY
 SELECT @DATE1 = GETDATE()
    
 if @flag='Monthly'
@@ -12,7 +14,7 @@ begin
     (
 		SELECT TRNDATE, CASE WHEN TRNMODE = 'CASH' THEN 'CASH' ELSE 'BANK' END PaymentMode, CONVERT(DECIMAL(18,2), SUM(CASE WHEN VoucherType  = 'CN' THEN NETAMNT * -1 ELSE NETAMNT END)) TOTALSALES
 		FROM RMD_TRNMAIN
-		WHERE VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-29,@DATE1) and  @DATE1
+		WHERE VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-29,@DATE1) and  @DATE1 and DIVISION like @DIV
 		GROUP BY TRNDATE, CASE WHEN TRNMODE = 'CASH' THEN 'CASH' ELSE 'BANK' END
     ) A PIVOT (SUM(totalSales) FOR PAYMENTMODE IN (CASH, BANK)) P
 end
@@ -23,7 +25,7 @@ begin
     (
 		SELECT TRNDATE, CASE WHEN TRNMODE = 'CASH' THEN 'CASH' ELSE 'BANK' END PaymentMode, CONVERT(DECIMAL(18,2), SUM(CASE WHEN VoucherType  = 'CN' THEN NETAMNT * -1 ELSE NETAMNT END)) TOTALSALES
 		FROM RMD_TRNMAIN
-		WHERE VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-6,@DATE1) and @DATE1
+		WHERE VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-6,@DATE1) and @DATE1 and DIVISION like @DIV
 		GROUP BY TRNDATE, CASE WHEN TRNMODE = 'CASH' THEN 'CASH' ELSE 'BANK' END
     ) A
     PIVOT (SUM(totalSales) FOR PAYMENTMODE IN (CASH, BANK)) P
@@ -33,7 +35,7 @@ else if @flag='Yearly'
 begin
 	SELECT DATEPART(YYYY,TRNDATE) year, DATEname(month, TRNDATE) month, CASE WHEN TRNMODE = 'CASH' THEN 'CASH' ELSE 'BANK' END PaymentMode, CONVERT(DECIMAL(18,2), SUM(CASE WHEN VoucherType  = 'CN' THEN NETAMNT * -1 ELSE NETAMNT END)) totalSales
 	FROM RMD_TRNMAIN
-	WHERE VoucherType IN ('SI', 'TI', 'CN') AND PhiscalID = '76/77'
+	WHERE VoucherType IN ('SI', 'TI', 'CN') AND PhiscalID = @Phiscalid and DIVISION like @DIV
 	GROUP BY DATEPART(YYYY,TRNDATE), datename(MM, TRNDATE),DATEPART(MM, TRNDATE), CASE WHEN TRNMODE = 'CASH' THEN 'CASH' ELSE 'BANK' END
 	ORDER BY YEAR, DATEPART(MM, TRNDATE)
 end
@@ -44,6 +46,6 @@ begin
 	FROM RMD_TRNMAIN TM
     JOIN RMD_TRNPROD TP ON TM.VCHRNO = TP.VCHRNO
     JOIN MENUITEM MI ON TP.MCODE = MI.MCODE
-	WHERE TM.VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-29,@DATE1) and @DATE1
+	WHERE TM.VoucherType IN ('SI', 'TI', 'CN') AND TRNDATE between dateadd(d,-29,@DATE1) and @DATE1 and tm.DIVISION like @DIV
 	GROUP BY MCAT1
 end
