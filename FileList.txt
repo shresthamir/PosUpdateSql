@@ -77,6 +77,7 @@ PharmacyFields.txt
 PK_TableList.txt
 PROD_COGS.txt
 ---PRODUCT_EDIT_LOG.txt
+PURMAIN_IMPORTDETAIL.txt
 RateDiscount.txt
 /RateGroup/RateGroupTables.txt
 /RateGroup/vwValidRateGroup.txt
