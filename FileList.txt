@@ -45,6 +45,7 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_DETAILS.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
+INVMAIN_TMP.txt
 KOTCATEGORY.txt
 KOTTableUpdate.txt
 MarginSchemeTables.txt
@@ -75,6 +76,7 @@ OSP_TransitStockReconcile.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt
+PROD_COG.txt
 PROD_COGS.txt
 ---PRODUCT_EDIT_LOG.txt
 PURMAIN_IMPORTDETAIL.txt
