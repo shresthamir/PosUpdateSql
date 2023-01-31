@@ -128,6 +128,7 @@ SP_GetTotalDiscount.txt
 tblAuditLog.txt
 tblBillTender.txt
 tblPartyCategory.txt
+TRAN_A_ACID.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
 /Triggers/MultipleRetailPrice_UPDATE.txt
 /Triggers/TRNPROD_COGS_UPDATE.txt
