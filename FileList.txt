@@ -57,6 +57,7 @@ Menuitem_Delete.txt
 MenuItem_Yield.txt
 MasterDeleteFlag.txt
 ---MULTICURRENCY.txt
+MultiAltUnit_Rate.txt
 MultipleRetailPrice.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
