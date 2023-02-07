@@ -44,7 +44,7 @@ ELSE			-- CREDITORS
 			INNER JOIN #RMD_ACLIST C ON A.A_ACID = C.ACID
 			WHERE B.TRNDATE <=@DATE AND A.DIVISION LIKE @DIV AND C.PTYPE LIKE 'V%' AND C.ACID LIKE 'PA%' and isnull(A.CostCenter,'') like @CostCenter AND B.PhiscalID = @FYID 
 			GROUP BY A_ACID
-			having ((@EXNEGETIVE =0 and  (sum(Cramnt)- sum(Dramnt)) <> 0) or (@EXNEGETIVE =1 and (sum(Cramnt)- sum(Dramnt)) > 0) or (@EXNEGETIVE >1 and (sum(Cramnt)- sum(Dramnt)) < 0 ))
+			having (@EXNEGETIVE = 10 OR (@EXNEGETIVE =0 and  (sum(Cramnt)- sum(Dramnt)) <> 0) or (@EXNEGETIVE =1 and (sum(Cramnt)- sum(Dramnt)) > 0) or (@EXNEGETIVE = 2 and (sum(Cramnt)- sum(Dramnt)) < 0 ))
 			
 		END	
 
