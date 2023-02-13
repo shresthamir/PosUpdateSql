@@ -116,6 +116,7 @@ SALES_TRNMAIN.txt
 SALES_TRNPROD.txt
 SchemeScheduleView.txt
 SalesTerminal.txt
+SCHEMESAPPLIED_PROD.txt
 SecurityQuestions.txt
 SETTINGS.txt
 ---ShippingInfo.txt
