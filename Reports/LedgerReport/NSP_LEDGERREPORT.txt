@@ -31,10 +31,10 @@ BEGIN
 	--TEMPORARY TABLE DECLARATION
 	-----------------------------
 
-	DECLARE @LedgerTable table(Sno numeric,trndate datetime,bsdate varchar(50),vchrno varchar(50),chalanno varchar(50),refbill varchar(25),refordbill varchar(25), trntime varchar(10), particulars varchar(2000),
+	DECLARE @LedgerTable table(Sno numeric,trndate datetime,bsdate varchar(50),vchrno varchar(50),chalanno varchar(50),refbill varchar(max),refordbill varchar(max), trntime varchar(10), particulars varchar(2000),
 		Dramnt numeric(24,10),Cramnt numeric(24,10),naration VARCHAR(2500),B_acid varchar(50),division varchar(20),Balance numeric(24,10),A_acid varchar(50),Ccenter varchar(100), Rmk VARCHAR(2500),stamp numeric(32,18),Cheque varchar(100))
 
-	DECLARE @LedgerTable_tmp table(Sno numeric,trndate datetime,bsdate varchar(30),vchrno varchar(50),chalanno varchar(50),refbill varchar(25),refordbill varchar(25), trntime varchar(10),particulars varchar(2000),
+	DECLARE @LedgerTable_tmp table(Sno numeric,trndate datetime,bsdate varchar(30),vchrno varchar(50),chalanno varchar(50),refbill varchar(max),refordbill varchar(max), trntime varchar(10),particulars varchar(2000),
 		Dramnt numeric(24,10),Cramnt numeric(24,10),naration VARCHAR(2500),B_acid varchar(50),division varchar(20),Balance numeric(24,10),A_acid varchar(50),Ccenter varchar(100), Rmk VARCHAR(2500),stamp numeric(32,18),Cheque varchar(100))
 
 	--DECLARING VARIABLES
