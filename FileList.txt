@@ -53,6 +53,7 @@ Membership.txt
 MEMGRADETRAN_VIEW.txt
 MEMGRADETRAN_DETAILS.txt
 MENUITEM_ECOMMERCE_DETAIL.txt
+Menuitem_Delete_Trigger.txt
 Menuitem_Delete.txt
 MenuItem_Yield.txt
 MasterDeleteFlag.txt
