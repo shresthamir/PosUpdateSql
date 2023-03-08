@@ -1,26 +1,38 @@
-CREATE OR ALTER procedure [dbo].[RSP_TopSellingItems]
-@RMODE TINYINT =1,
-@Daterange varchar(20)='Weekly',
+CREATE OR ALTER PROC [dbo].[RSP_TopSellingItems]
+--DECLARE
+@SortByQty BIT =1,
 @category varchar(50)='%',
-@DIV VARCHAR(25)='%'
-as
-set nocount on;
+@DIV VARCHAR(25)='%',
+@Date1 datetime ='1900-01-01',
+@Date2 datetime ='1900-01-01',
+@IsTop BIT = 1
+AS
+--SET @Date1 ='1 FEB 2023' ; set @Date2 ='1 FEB 2023' ;set @DIV   ='%';
 
-     --declare @RMODE TINYINT =1,@Daterange varchar(20)='Weekly',@category varchar(50)='%',@DIV VARCHAR(25)='MMH'
-     declare @DATE1 DATETIME,@DATE2 DATETIME=GETDATE()
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
 
-       if @Daterange='Weekly'  set @DATE1=dateadd(d,-6,@DATE2)
-       else if @Daterange='Monthly' set @DATE1=dateadd(d,-29,@DATE2)
-       else if @Daterange='Yearly' set @DATE1=dateadd(d,-364,@DATE2)
+SET NOCOUNT ON;
+IF @DATE1 < '1 JAN 2000'
+BEGIN
+	SET @DATE2 = GETDATE()
+	SET @DATE1 = GETDATE()
+END      
        
-       
-       SELECT top 100 A.menucode, A.DESCA Product, B.quantity, CONVERT(NUMERIC(35,5),B.AMOUNT) AS gross
-       FROM MENUITEM A INNER JOIN
-           (
-             SELECT SUM(REALQTY-REALQTY_IN) AS Quantity, SUM(AMOUNT) AS AMOUNT,B.MCODE
-             FROM RMD_TRNMAIN A INNER JOIN TRNPROD_VIEW_SREPORT B ON A.VCHRNO = B.VCHRNO AND A.DIVISION = B.DIVISION
-             where  (TRNDATE between @DATE1 AND @DATE2) AND A.DIVISION LIKE @DIV
-             GROUP BY B.MCODE
-           )AS B ON A.MCODE = B.MCODE
-       where a.MCAT1 like @category 
-       ORDER BY CASE WHEN(@RMODE = 1) THEN B.Quantity ELSE (B.AMOUNT) END DESC,A.DESCA
+SELECT A.menucode, A.DESCA product, B.quantity, CONVERT(decimal(18,2),B.AMOUNT) AS amount
+INTO #RESULT FROM MENUITEM A LEFT JOIN
+(
+    SELECT SUM(B.REALQTY-B.REALQTY_IN) AS Quantity, SUM(B.NETAMOUNT * IIF(A.VoucherType IN ('RE','CN'), -1, 1)) AS AMOUNT,B.MCODE
+    FROM SALES_TRNMAIN A INNER JOIN SALES_TRNPROD B ON A.VCHRNO = B.VCHRNO 
+    WHERE  (A.TRNDATE BETWEEN @DATE1 AND @DATE2) AND A.DIVISION LIKE @DIV
+    GROUP BY B.MCODE
+)AS B ON A.MCODE = B.MCODE
+WHERE A.MCAT1 LIKE @category 
+
+IF @IsTop = 1
+	SELECT TOP 100 * FROM #RESULT A
+	ORDER BY CASE WHEN(@SortByQty = 1) THEN A.Quantity ELSE (A.AMOUNT) END DESC,A.Product
+ELSE 
+	SELECT TOP 100 * FROM #RESULT A
+	ORDER BY CASE WHEN(@SortByQty = 1) THEN A.Quantity ELSE (A.AMOUNT) END,A.Product
+
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT

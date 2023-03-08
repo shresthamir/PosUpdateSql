@@ -1,59 +1,66 @@
-create or ALTER     procedure [dbo].[RSP_SalesByHour]
-@flag varchar(20),
-@DIV varchar(50)='%'
-as
---declare @flag varchar(20)='Monthly',@DIV varchar(50)='MMH'
-	set nocount on;
-	declare @DATE1 DATE, @DATE2 DATE
-	SELECT @DATE2 = GETDATE()
-	--SET @DATE2 = '2020-08-29'
-	if @flag='hourly'
-	begin
-		--set @parameter='TRNDATE='2019-07-18''
-		SET @DATE1 = @DATE2
-	end
-	ELSE IF @flag='Weekly'
-	begin
-		--set @parameter='TRNDATE between DATEADD(d, -6,'2019-07-18') and  '2019-07-18''
-		SELECT @DATE1 = DATEADD(d, -6,@DATE2)
-	end
-	else if @flag='Monthly'
-		--set @parameter='TRNDATE between DATEADD(d, -29,'2019-07-18') and  '2019-07-18''
-		SELECT @DATE1 = DATEADD(d, -29,@DATE2)
+CREATE OR ALTER PROC [dbo].[RSP_SalesByHour]
+--DECLARE
+@Date1 Date = '1 JAN 1900',
+@Date2 Date = '1 JAN 1900',
+@DIV VARCHAR(3)='%'
+AS
+--SET @Date1 ='1 FEB 2023' ; set @Date2 ='1 FEB 2023' ;set @DIV   ='%';
 
-	select hr hour,
-		count(case when bills=1 then 1 end) number_of_bills,
-		count(case when bills=0 then 0 end) number_of_return_bills,
-		sum(cashsales) total_cash_sales,
-		sum(creditsales) total_credit_sales,
-		sum(onlinesales) total_epayment_sales,
-		sum(overallsales) overall_sales
-		from
-		(  
-			select 
-				case when TRNTIME between   '00:00' and '02:00' then '0-2'
-					when TRNTIME between  '02:00' and '04:00' then '2-4'
-					when TRNTIME between  '04:00' and '06:00' then '4-6'
-					when TRNTIME between  '06:00' and '08:00' then '6-8'
-					when TRNTIME between  '08:00' and '10:00' then '8-10'
-					when TRNTIME between  '10:00' and '12:00' then '10-12'
-					when TRNTIME between  '12:00' and '14:00' then '12-14'
-					when TRNTIME between  '14:00' and '16:00' then '14-16'
-					when TRNTIME between  '16:00' and '18:00' then '16-18'
-					when TRNTIME between  '18:00' and '20:00' then '18-20'
-					when TRNTIME between  '20:00' and '22:00' then '20-22'
-					when TRNTIME between '22:00' and '24:00' then '22-24'
-				end hr,
-				case when LEFT(VCHRNO,2) IN ('SI','TI') then 1 else 0 end bills,
-				case when (am.DisplayPayMode in ('Cash') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end cashsales,
-				case when (am.DisplayPayMode in ('Credit') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end creditsales,
-				case when (am.DisplayPayMode in ('Online') and  LEFT(VCHRNO,2) IN ('SI','RE','TI')) then (case when left(VCHRNO,2) IN ('RE') then NETAMNT*-1 else NETAMNT end) else 0  end onlinesales,
-				case when LEFT(VCHRNO,2) IN ('SI','RE','TI') then (case when LEFT(VCHRNO,2) IN ('RE')then NETAMNT*-1 else NETAMNT end) else 0 end overallsales  
-				FROM RMD_TRNMAIN A 
-				LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
-				left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
-				WHERE  DIVISION LIKE @DIV AND
-				LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','RE') and TRNDATE BETWEEN @DATE1 AND @DATE2
-		)a
-		group by hr
-		order by cast(substring(hr,1,CHARINDEX('-',hr)-1) as int)
+SET NOCOUNT ON;
+IF @DATE1 < '1 JAN 2000'
+BEGIN
+	SET @DATE2 = GETDATE()
+	SET @DATE1 = GETDATE()
+END
+
+IF OBJECT_ID('TEMPDB..#DATA') IS NOT NULL DROP TABLE #DATA
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
+
+SELECT M.TRNDATE, M.TRNTIME, T.TRNMODE, (T.AMOUNT - T.CHANGE) * IIF(M.VoucherType IN ('RE','CN'), -1, 1) NETAMNT
+, IIF(M.VoucherType IN ('SI','TI'), 1, 0) Bills
+, IIF(M.VoucherType IN ('RE','CN'), 1, 0) ReturnBills 
+INTO #DATA
+FROM SALES_TRNMAIN M JOIN RMD_BILLTENDER T ON M.VCHRNO= T.VCHRNO
+WHERE M.DIVISION LIKE @DIV AND M.TRNDATE BETWEEN @DATE1 AND @DATE2
+
+SELECT TRNDATE, TRNTIME, IIF(A.TRNMODE IN ('Credit'), NETAMNT, 0) creditsales,
+IIF(A.TRNMODE IN ('Cash'), NETAMNT, 0) cashsales,
+IIF(A.TRNMODE IN ('Credit Card'), NETAMNT, 0) creditcardsales,
+IIF(A.TRNMODE IN ('QR','Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) onlinesales,
+IIF(A.TRNMODE NOT IN ('Cash', 'Credit Card', 'Credit' ,'QR', 'Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) othersales,
+NETAMNT overallsales, Bills, ReturnBills
+INTO #RESULT 
+FROM #DATA A
+
+--SELECT * FROM #RESULT
+	
+SELECT hr [hour],
+SUM(Bills) number_of_bills,
+SUM(ReturnBills) number_of_return_bills,
+CONVERT(DECIMAL(18,2), SUM(cashsales)) total_cash_sales,
+CONVERT(DECIMAL(18,2), SUM(creditcardsales)) total_creditcard_sales,
+CONVERT(DECIMAL(18,2), SUM(creditsales)) total_credit_sales,
+CONVERT(DECIMAL(18,2), SUM(onlinesales)) total_epayment_sales,
+CONVERT(DECIMAL(18,2), SUM(othersales)) total_other_sales,
+CONVERT(DECIMAL(18,2), SUM(overallsales)) overall_sales
+FROM
+(  
+	SELECT 
+		CASE WHEN TRNTIME BETWEEN '00:00' AND '02:00' THEN '0-2'
+			WHEN TRNTIME BETWEEN  '02:00' AND '04:00' THEN '2-4'
+			WHEN TRNTIME BETWEEN  '04:00' AND '06:00' THEN '4-6'
+			WHEN TRNTIME BETWEEN  '06:00' AND '08:00' THEN '6-8'
+			WHEN TRNTIME BETWEEN  '08:00' AND '10:00' THEN '8-10'
+			WHEN TRNTIME BETWEEN  '10:00' AND '12:00' THEN '10-12'
+			WHEN TRNTIME BETWEEN  '12:00' AND '14:00' THEN '12-14'
+			WHEN TRNTIME BETWEEN  '14:00' AND '16:00' THEN '14-16'
+			WHEN TRNTIME BETWEEN  '16:00' AND '18:00' THEN '16-18'
+			WHEN TRNTIME BETWEEN  '18:00' AND '20:00' THEN '18-20'
+			WHEN TRNTIME BETWEEN  '20:00' AND '22:00' THEN '20-22'
+			WHEN TRNTIME BETWEEN '22:00' AND '24:00' THEN '22-24'
+		END hr,
+		A.Bills, A.ReturnBills, A.cashsales, A.creditcardsales, A.creditsales, A.onlinesales, A.othersales, A.overallsales
+		FROM #RESULT A 		
+)a
+GROUP BY hr
+ORDER BY CAST(SUBSTRING(hr,1,CHARINDEX('-',hr)-1) AS INT)

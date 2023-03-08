@@ -1,59 +1,45 @@
 CREATE OR ALTER   procedure [dbo].[RSP_Dashboard_Data]
-@DIV varchar(50)='%'
-as
---declare @DIV varchar(50)='%'
-declare @DATE2 date,@DATE1 date
-SELECT @DATE2 = GETDATE()
-set @DATE1 = DATEADD(d, -29,@DATE2)
+--DECLARE
+@DIV VARCHAR(50) = '%',
+@DATE1 DATE = '1 JAN 1970',
+@DATE2 DATE = '1 JAN 1970'
+AS
 
-select
-A.VOUCHERTYPE,
-case when (a.trnmode in ('Credit') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end creditsales,
-case when (am.DisplayPayMode in ('Cash') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end cashsales,
-case when (a.trnmode in ('Credit Card') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end creditcardsales,
-case when (am.DisplayPayMode in ('Online') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end onlinesales,
-case when (am.DisplayPayMode not in ('Cash','Credit', 'Credit Card', 'Online') and  LEFT(VCHRNO,2) IN ('SI','CN','TI')) then (case when left(VCHRNO,2) IN ('CN') then NETAMNT*-1 else NETAMNT end) else 0  end othersales,
-case when LEFT(VCHRNO,2) IN ('SI','CN','TI') then (case when LEFT(VCHRNO,2) IN ('CN')then NETAMNT*-1 else NETAMNT end) else 0 end overallsales,
-cast (TRNDATE as date) TRNDATE into #temp
-FROM RMD_TRNMAIN A LEFT JOIN BILLTENDER X ON A.VCHRNO = X.VNO AND A.DIVISION = X.DIV AND A.PhiscalID = X.PHISCALID
-left join AppPayModeMapping am on a.TRNMODE=am.BillPayMode
-WHERE LEFT(VCHRNO,2) IN ('SI','SR','TI','CN','CN') and TRNDATE BETWEEN @DATE1 AND @DATE2 and a.DIVISION like @DIV
+IF @DATE1 < '1 JAN 2000'
+BEGIN
+	SET @DATE2 = GETDATE()
+	SET @DATE1 = GETDATE()
+END
 
-select  type,number_of_bills,number_of_return_bills,total_credit_amount,total_cash_amount,total_creditcard_amount,total_epayment_sales,total_other_sales,total_sales from
-(
-	select 'Daily' type,
-    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 1 ELSE 0 END) number_of_bills,
-    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
-    sum(creditsales)  total_credit_amount,
-    sum(cashsales) total_cash_amount,
-    sum(creditcardsales) total_creditcard_amount,
-    sum(onlinesales) total_epayment_sales,
-	sum(othersales) total_other_sales,
-    sum(overallsales) total_sales,1 sn
-	from #temp where TRNDATE=@DATE2
+IF OBJECT_ID('TEMPDB..#DATA') IS NOT NULL DROP TABLE #DATA
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
 
-	UNION ALL
-	select 'Weekly' type,
-    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 1 ELSE 0 END) number_of_bills,
-    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
-	sum(creditsales)  total_credit_sales,
-	sum(cashsales) total_cash_sales,
-	sum(creditcardsales) total_creditcard_sales,
-	sum(onlinesales) total_epayment_sales,
-	sum(othersales) total_other_sales,
-    sum(overallsales) overall_sales,2 sn
-	from #temp where TRNDATE BETWEEN DATEADD(d, -6,@DATE2) and @DATE2  
+SELECT M.TRNDATE, T.TRNMODE, (T.AMOUNT - T.CHANGE) * IIF(M.VoucherType IN ('RE','CN'), -1, 1) NETAMNT
+, IIF(M.VoucherType IN ('SI','TI'), 1, 0) Bills
+, IIF(M.VoucherType IN ('RE','CN'), 1, 0) ReturnBills 
+INTO #DATA
+FROM SALES_TRNMAIN M JOIN RMD_BILLTENDER T ON M.VCHRNO= T.VCHRNO
+WHERE M.DIVISION LIKE @DIV AND M.TRNDATE BETWEEN @DATE1 AND @DATE2
 
-	union all
-	select 'Monthly' type,
-    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 1 ELSE 0 END) number_of_bills,
-    SUM(CASE WHEN VoucherType IN ('SI','TI') THEN 0 ELSE 1 END) number_of_return_bills,
-    sum(creditsales)  total_credit_sales,
-    sum(cashsales) total_cash_sales,
-    sum(creditcardsales) total_creditcard_sales,
-    sum(onlinesales) total_epayment_sales,
-	sum(othersales) total_other_sales,
-    sum(overallsales) overall_sales,3 sn
-	from #temp
- )b order by sn
- drop table #temp
+SELECT TRNDATE, IIF(A.TRNMODE IN ('Credit'), NETAMNT, 0) creditsales,
+IIF(A.TRNMODE IN ('Cash'), NETAMNT, 0) cashsales,
+IIF(A.TRNMODE IN ('Credit Card'), NETAMNT, 0) creditcardsales,
+IIF(A.TRNMODE IN ('QR','Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) onlinesales,
+IIF(A.TRNMODE NOT IN ('Cash', 'Credit Card', 'Credit' ,'QR', 'Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) othersales,
+NETAMNT overallsales, Bills, ReturnBills
+INTO #RESULT 
+FROM #DATA A
+
+SELECT '' [type],
+    	SUM(Bills) number_of_bills,
+    	CONVERT(DECIMAL(18,2), SUM(ReturnBills)) number_of_return_bills,
+    	CONVERT(DECIMAL(18,2), sum(creditsales))  total_credit_amount,
+    	CONVERT(DECIMAL(18,2), sum(cashsales)) total_cash_amount,
+	CONVERT(DECIMAL(18,2), sum(creditcardsales)) total_creditcard_amount,
+    	CONVERT(DECIMAL(18,2), sum(onlinesales)) total_epayment_sales,
+	CONVERT(DECIMAL(18,2), sum(othersales)) total_other_sales,
+    	CONVERT(DECIMAL(18,2), sum(overallsales)) total_sales
+	from #RESULT
+
+IF OBJECT_ID('TEMPDB..#DATA') IS NOT NULL DROP TABLE #DATA
+IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT

@@ -1,42 +1,30 @@
 CREATE OR ALTER   procedure [dbo].[RSP_CategoryWiseSalesVsPlanned]
-@DIV VARCHAR(25)='%'
+--DECLARE
+@DIV VARCHAR(3) ='%',
+@Date1 Date = '1 JAN 1900',
+@Date2 Date = '1 JAN 1900',
+@Year INT = 2000,
+@Month INT = 1
 AS
 SET NOCOUNT ON;
---declare @DIV VARCHAR(25)='MMH'
+--set @date1= '1 JAN 2023';set @date2='31 JAN 2023';SET @DIV = '%'; SET @Year = 2023; SET @Month = 1
 
-IF @DIV <> '%' AND LEN(@DIV) <> 3
-	SET @DIV = '%'
-
-DECLARE @DATE2 DATE,@DATE1 DATE
-
-SELECT @DATE2 = GETDATE()
-SET @DATE1 = DATEADD(d, -29,@DATE2)
-
-SELECT AD, YEAR(AD) [YEAR], MONTH(AD) [MONTH],  MENUCAT INTO #MCAT FROM DATEMITI, MCAT1 WHERE AD BETWEEN @DATE1 AND @DATE2
-
-SELECT  cast(AD as date) TRNDATE,M.[YEAR], M.[MONTH], MENUCAT Category, ISNULL(SUM(SALES), 0) actual_sales, ISNULL(cw.planned_sales/30, 0) planned_sales 
-INTO #temp FROM #MCAT M
-LEFT JOIN
+SELECT MCAT1 Category, CONVERT(DECIMAL(18,2),ISNULL(SUM(SALES), 0)) actual_sales, CONVERT(DECIMAL(18,2),ISNULL(cw.planned_sales, 0)) planned_sales 
+FROM 
 (
-	SELECT TRNDATE,TP.MCODE, MCAT1, 
-	IIF(LEFT(TM.VCHRNO,2) IN ('RE', 'CN'), -1,1) * (TP.TAXABLE + TP.NONTAXABLE + TP.VAT) SALES
-	FROM RMD_TRNMAIN TM 
-	JOIN RMD_TRNPROD TP ON TM.VCHRNO = TP.VCHRNO
-	JOIN MENUITEM MI ON TP.MCODE = MI.MCODE
-	WHERE TM.VOUCHERTYPE IN ('SI', 'TI', 'CN') AND TM.DIVISION LIKE @DIV
-) A ON M.AD = A.TRNDATE AND A.MCAT1 = M.MENUCAT
-LEFT JOIN CategoryWiseMonthlySalesPlan cw on M.[YEAR] = cw.[year] and M.[MONTH]=cw.[month] and M.MENUCAT =cw.Category
-GROUP BY AD, MENUCAT, M.[YEAR], M.[MONTH],cw.planned_sales
-ORDER BY AD
-
-SELECT category,'Daily' type, actual_sales, planned_sales from #temp where TRNDATE=@DATE2 	
-UNION ALL
-SELECT category, 'Weekly' type, SUM(actual_sales) actual_sales, SUM(planned_sales) planned_sales from #temp 
-	WHERE TRNDATE between DATEADD(d, -6,@DATE2)  and @DATE2	GROUP BY Category
-UNION ALL
-SELECT category, 'Monthly' type, SUM(actual_sales) actual_sales, SUM(planned_sales) planned_sales from #temp 
-	WHERE TRNDATE between DATEADD(d, -29,@DATE2)  and @DATE2 group by Category
-
-DROP TABLE #temp
-DROP TABLE #MCAT
+	SELECT A.TRNDATE, A.MCODE, A.SALES, M.MCAT1
+	FROM 
+	(
+		SELECT TM.TRNDATE,TP.MCODE,
+		IIF(TM.VOUCHERTYPE IN ('RE', 'CN'), -1,1) * TP.NETAMOUNT SALES
+		FROM SALES_TRNMAIN TM 
+		JOIN SALES_TRNPROD TP ON TM.VCHRNO = TP.VCHRNO
+		WHERE TM.DIVISION LIKE @DIV AND TM.TRNDATE BETWEEN @DATE1 AND @DATE2
+	) A JOIN MENUITEM M ON A.MCODE = M.MCODE
+) A 
+LEFT JOIN 
+( 
+	SELECT Category, Planned_Sales from CategoryWiseMonthlySalesPlan WHERE [Year] = @Year AND [Month] = @Month
+) cw on a.MCAT1 = cw.Category
+GROUP BY A.MCAT1, ISNULL(cw.planned_sales, 0)
 

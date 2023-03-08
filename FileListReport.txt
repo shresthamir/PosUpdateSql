@@ -44,6 +44,7 @@
 /Reports/DirectorsApp/RSP_TopSellingItems.txt
 /Reports/DirectorsApp/RSP_CoversOccupiedSummary_Report.txt
 /Reports/DirectorsApp/DirectorsAppTables.txt
+/Reports/DirectorsApp/RSP_MonthlySalesComparision.txt
 /Reports/GetParticularForLedger.txt
 ---/Reports/GroupLedger/NSP_GROUPLEDGER.txt
 ---/Reports/GroupLedger/RSP_GROUPLEDGER.txt
@@ -88,6 +89,7 @@
 /Reports/PL_Report/RSP_PLACCOUNT.txt
 /Reports/ProfitablitySalesAnalysis/NSP_PROFITIBILITYSALESANALYSIS.txt
 ---/Reports/ProfitablitySalesAnalysis/RSP_PROFITIBILITYSALESANALYSIS.txt
+/Reports/ProfitablitySalesAnalysis/vwTrnProd_COGS_Summary.txt
 /Reports/PurchaseBookReport/NSP_PURCHASEBOOKREPORT.txt
 ---/Reports/PurchaseBookReport/RSP_PURCHASEBOOKREPORT.txt
 /Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE.txt
