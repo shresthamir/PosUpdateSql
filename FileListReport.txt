@@ -179,6 +179,7 @@
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTSTATUS.txt
 /Reports/StockSettlementReports/SP_STOCKADJUSTMENTREGISTER_TIMEWISE.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO.txt
+/Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT_DIVISIONWISE.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATIONREPORT.txt
