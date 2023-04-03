@@ -151,6 +151,7 @@ USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
 vwCustomerProfile.txt
+vwTableSize.txt
 vwTrnProd_COGS.txt
 vwVehicleBarcode.txt
 
