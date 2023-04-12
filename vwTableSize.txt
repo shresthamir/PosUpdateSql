@@ -1,4 +1,4 @@
-CREATE VIEW vwTableSize
+CREATE OR ALTER VIEW vwTableSize
 AS
 SELECT
 s.Name AS SchemaName,

@@ -1,9 +1,9 @@
-CREATE    PROC[dbo].[OSP_CompileCOGS]    
+CREATE OR ALTER PROC[dbo].[OSP_CompileCOGS]    
 --DECLARE     
-@DIVISION VARCHAR(3) ,    
-@PhiscalId VARCHAR(10) ,    
-@DATE1 DATE ,  
-@DATE2 DATE ,  
+@DIVISION VARCHAR(3),    
+@PhiscalId VARCHAR(10),    
+@DATE1 DATE,  
+@DATE2 DATE,  
 @IgnoreNegativeStock BIT   
 AS    
 --SELECT @DIVISION = 'MHJ',  @PhiscalId ='79/80',  @DATE1 = '17 JUL 2022',@DATE2 = '2 APR 2023',@IgnoreNegativeStock = 1  

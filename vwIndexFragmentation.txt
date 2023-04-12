@@ -1,4 +1,4 @@
-CREATE VIEW vwIndexFragmentation
+CREATE OR ALTER VIEW vwIndexFragmentation
 AS
 SELECT S.name as 'Schema',
 T.name as 'Table',
