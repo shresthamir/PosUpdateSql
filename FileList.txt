@@ -138,6 +138,8 @@ TRAN_A_ACID.txt
 /Triggers/TRNPROD_COGS_UPDATE.txt
 /Triggers/CheckSpiltInProgress_On_RMD_KotMain_Status.txt
 /Triggers/CheckSpiltInProgress_On_RMD_KotProd.txt
+/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREMAIN.txt
+/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREPROD.txt
 TRNMAIN_SALESMANID.txt
 TRNMAIN_VIEW.txt
 TRNPROD_VIEW.txt
