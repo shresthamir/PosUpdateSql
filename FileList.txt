@@ -20,6 +20,7 @@ ContractPrice.txt
 DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
 ---DATEMITI_FULL.txt
+DisablePrebill.txt
 DISCOUNT_PRESETS.txt
 DISCOUNT_RATE.txt
 ---DISCOUNT_SCHEME.txt
