@@ -134,6 +134,7 @@ tblAuditLog.txt
 tblBillTender.txt
 tblPartyCategory.txt
 TRAN_A_ACID.txt
+TRAN_A_ACID_CHECK.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
 /Triggers/MultipleRetailPrice_UPDATE.txt
 /Triggers/TRNPROD_COGS_UPDATE.txt
