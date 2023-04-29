@@ -132,6 +132,7 @@ SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
 tblAuditLog.txt
 tblBillTender.txt
+tblMasterSequences.txt
 tblPartyCategory.txt
 TRAN_A_ACID.txt
 TRAN_A_ACID_CHECK.txt
