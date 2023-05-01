@@ -1,6 +1,6 @@
 CREATE OR ALTER  PROC [dbo].[RSP_DSR]
 --DECLARE 
-@D1 INT = 2018,
+@D1 INT = 2021,
 @D2 INT = 9,
 @DIVISION VARCHAR(3) = '%',
 @TextBoxValue DECIMAL (18,2) = 75000
@@ -23,11 +23,11 @@ WHERE TM.DIVISION LIKE @DIVISION AND TM.VoucherType IN ('SI', 'TI', 'CN') AND TM
 
 
 SELECT DATEPART(D, TRNDATE) D, SUM(Customer_Count) PAX, CONVERT(DECIMAL(18,2), SUM(BILLAMOUNT)) TOTALSALES, COUNT(DISTINCT BILLS) BILLS,
-CONVERT(DECIMAL(18,2), SUM(BILLAMOUNT) / COUNT(DISTINCT BILLS)) AVERAGEPERBILL,
-CONVERT(DECIMAL(18,2), SUM(BILLAMOUNT) / SUM(Customer_Count)) AVERAGEPERPAX,
+CONVERT(DECIMAL(18,2), IIF(COUNT(DISTINCT BILLS)>0, SUM(BILLAMOUNT) / COUNT(DISTINCT BILLS),0)) AVERAGEPERBILL,
+CONVERT(DECIMAL(18,2), IIF(SUM(Customer_Count)>0, SUM(BILLAMOUNT) / SUM(Customer_Count),0)) AVERAGEPERPAX,
 CONVERT(DECIMAL(18,2), SUM(DISCOUNT)) DISCOUNT, CONVERT(DECIMAL(18,2), SUM(CASH)) CASH,  
 CONVERT(DECIMAL(18,2), SUM(CreditCard)) CreditCard,  CONVERT(DECIMAL(18,2), SUM(CREDIT)) CREDIT,
-CONVERT(DECIMAL(18,2), SUM(BILLAMOUNT) * 100 / @TextBoxValue) SALESVSPLAN INTO #OVERALLTOTAL 
+CONVERT(DECIMAL(18,2), IIF(@TextBoxValue>0, SUM(BILLAMOUNT) * 100 / @TextBoxValue,0)) SALESVSPLAN INTO #OVERALLTOTAL 
 FROM
 (
 SELECT TM.TRNDATE, CASE WHEN ISNULL(TM.Customer_Count, 0) = 0 THEN 1 ELSE TM.Customer_Count END Customer_Count, 
@@ -43,7 +43,7 @@ WHERE TM.DIVISION LIKE @DIVISION AND TM.VoucherType IN ('SI', 'TI', 'CN') AND TM
 ) A GROUP BY TRNDATE
 ORDER BY TRNDATE
 
-SELECT SUBSTRING(Particulars, 4, LEN(Particulars) - 3) Particular, * FROM
+SELECT IIF(LEN(Particulars)>3, SUBSTRING(Particulars, 4, LEN(Particulars) - 3), Particulars) Particular, * FROM
 (
 	SELECT * fROM
 	(
@@ -87,14 +87,14 @@ SELECT * FROM
 				(OT.D, '06 Credit Sales', CREDIT),
 				(OT.D, '07 Discount', DISCOUNT),
 				(OT.D, '08 Sales vs Plan', SALESVSPLAN),
-				(OT.D, '09 Food Sales(%)', CT.[   FOOD] * 100 / OT.TOTALSALES),
-				(OT.D, '10 Beverage Sales(%)', CT.[   BEVERAGE] * 100 / OT.TOTALSALES),
+				(OT.D, '09 Food Sales(%)', IIF(OT.TOTALSALES>0, CT.[   FOOD] * 100 / OT.TOTALSALES,0)),
+				(OT.D, '10 Beverage Sales(%)', IIF(OT.TOTALSALES>0, CT.[   BEVERAGE] * 100 / OT.TOTALSALES,0)),
 				(OT.D, '11 MTD Total Sales', [MTD SALES]),
 				(OT.D, '12 MTD Average Sales', [MTD AVG SALES]),
 				(OT.D, '13 MTD Total Transaction', [MTD BILLS]),
 				(OT.D, '14 MTD Average Transaction', [MTD AVG BILLS]),
-				(OT.D, '15 MTD Average Sales per Transaction', [MTD SALES] / [MTD BILLS]),
-				(OT.D, '16 Food Capture Ratio', qt.[   FOOD] * 100 /  OT.PAX),
+				(OT.D, '15 MTD Average Sales per Transaction', IIF([MTD BILLS]>0, [MTD SALES] / [MTD BILLS],0)),
+				(OT.D, '16 Food Capture Ratio', IIF(OT.PAX>0, qt.[   FOOD] * 100 /  OT.PAX, 0)),
 				(OT.D, '17 PAX', OT.PAX)
 				--(OT.D, '18 Food Capture Ratio', qt.[   FOOD])
 		)
