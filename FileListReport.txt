@@ -52,8 +52,8 @@
 /Reports/ItemExpiryReport/RSP_ITEMEXPIRYREPORT_BATCHWISE.txt
 ---/Reports/ItemLocation.txt
 ---/Reports/JournalBookReport/NSP_JOURNALBOOK.txt
----/Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.txt
----/Reports/JournalBookReport/RSP_JOURNALBOOK.txt
+/Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.txt
+/Reports/JournalBookReport/RSP_JOURNALBOOK.txt
 ---/Reports/KOT Reports/KOTRECORD.txt
 /Reports/KOT Reports/NSP_KOTREPORT.txt
 ---/Reports/KOT Reports/RSP_KOTREPORT.txt
@@ -103,6 +103,7 @@
 /Reports/fnPartyFilter.txt
 /Reports/fnProductFilter.txt
 /Reports/ReportSetting.txt
+/Reports/RSP_ANNEX10.txt
 /Reports/RSP_BRANCHWISE_CONSOLIDATED_LEDGERS.txt
 /Reports/RSP_BRANCHWISE_CONSOLIDATED_SALES.txt
 /Reports/RSP_BillScheduleReport.txt
