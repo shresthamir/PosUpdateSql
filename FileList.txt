@@ -162,5 +162,4 @@ vwTableSize.txt
 vwTrnProd_COGS.txt
 vwVehicleBarcode.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
-xPrimaryKeys.txt
 
