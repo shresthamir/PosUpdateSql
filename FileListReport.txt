@@ -160,7 +160,6 @@
 /Reports/SalesReportPartyWise/RSP_SALESFIGURE_PARTYWISE.txt
 /Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_DETAIL.txt
 /Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_SUMMARY.txt
-/Reports/sp_DebitNoteRegister.txt
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
