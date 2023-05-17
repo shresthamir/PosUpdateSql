@@ -1,0 +1,21 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'TrnMain_AdditionalInfo')
+CREATE TABLE TrnMain_AdditionalInfo
+(
+	VCHRNO VARCHAR(25) NOT NULL,
+	VoucherType VARCHAR(2) NOT NULL,
+	IsWholeSale BIT NOT NULL,
+	CONSTRAINT PK_TrnMain_AdditionalInfo PRIMARY KEY (VCHRNO, VoucherType),
+	CONSTRAINT FK_TrnMain_AdditionalInfo FOREIGN KEY (VCHRNO, VoucherType) REFERENCES TRNMAIN (VCHRNO, VoucherType),
+	CONSTRAINT CHK_TrnMain_AdditionalInfo CHECK (VoucherType IN ('TI','CN'))
+)
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AbbMain_AdditionalInfo')
+CREATE TABLE AbbMain_AdditionalInfo
+(
+	VCHRNO VARCHAR(25) NOT NULL,
+	VoucherType VARCHAR(2) NOT NULL,
+	IsWholeSale BIT NOT NULL,
+	CONSTRAINT PK_AbbMain_AdditionalInfo PRIMARY KEY (VCHRNO, VoucherType),
+	CONSTRAINT FK_AbbMain_AdditionalInfo FOREIGN KEY (VCHRNO, VoucherType) REFERENCES ABBMAIN (VCHRNO, VoucherType),
+	CONSTRAINT CHK_AbbMain_AdditionalInfo CHECK (VoucherType IN ('SI'))
+)

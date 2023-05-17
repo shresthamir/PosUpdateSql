@@ -1,0 +1,5 @@
+CREATE OR ALTER VIEW vwTrnMain_AdditionalInfo
+AS
+SELECT VCHRNO, VoucherType, IsWholeSale FROM AbbMain_AdditionalInfo
+UNION ALL
+SELECT VCHRNO, VoucherType, IsWholeSale FROM TrnMain_AdditionalInfo
