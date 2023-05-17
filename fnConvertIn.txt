@@ -1,0 +1,7 @@
+CREATE FUNCTION fnConvertIn(@text VARCHAR(20)) RETURNS INT
+AS
+BEGIN
+DECLARE @result INT;
+SELECT @result = IIF(ISNUMERIC(@text) = 1, CONVERT(INT, @text), 0)
+RETURN @result
+END
