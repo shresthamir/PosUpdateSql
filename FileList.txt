@@ -5,6 +5,7 @@ FiscalYearUpdate.txt
 BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.txt
 CapitalPurchaseConstraint.txt
+CBMS_Tables.txt
 /CellPay/CELLPAY_TRAN.txt
 /CellPay/CellPayTables.txt
 /CellPay/TableUpdates.txt
@@ -158,7 +159,9 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+VIEW_ANNEX7.txt
 vwCustomerProfile.txt
+vwInactiveInvoices.txt
 vwIndexFragmentation.txt
 vwTableSize.txt
 vwTrnMain_AdditionalInfo.txt

@@ -1,0 +1,23 @@
+IF NOT EXISTS ( SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'tblSyncLogStatus')
+CREATE TABLE [dbo].[tblSyncLogStatus](
+	[VCHRNO] [varchar](50) NOT NULL,
+	[SYNC_DATE] [smalldatetime] NULL,
+	[SYNC_TIME] [varchar](20) NULL,
+	[JSON_DATA] [nvarchar](4000) NOT NULL,
+	[STATUS] [tinyint] NOT NULL,
+	[RETURN_CODE] [varchar](8000) NOT NULL,
+	[STAMP] [decimal](25, 16) NOT NULL,
+	[IsRealTime] [tinyint] NULL,
+	CONSTRAINT PK_tblSyncLogStatus PRIMARY KEY (VCHRNO)
+) ON [PRIMARY]
+
+
+IF OBJECT_ID('PK_tblSyncLog') IS NULL
+ALTER TABLE tblSyncLog ADD CONSTRAINT PK_tblSyncLog PRIMARY KEY (VCHRNO)
+
+IF NOT EXISTS (SELECT * FROM sys.indexes where name = 'IX_tblSyncLog_TrnDate')
+CREATE NONCLUSTERED INDEX [IX_tblSyncLog_TrnDate] ON [dbo].[tblSyncLog]
+(
+	[TRNDATE] ASC,
+	[TRNTIME] ASC
+)

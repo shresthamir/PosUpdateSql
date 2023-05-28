@@ -12,3 +12,6 @@
 /fnConvertIn.txt | 17 MAY 2023
 /UserProfiles.txt | 18 MAY 2023
 /USERPROFILESABB.txt | 18 MAY 2023
+/CBMS_Tables.txt | 28 MAY 2023
+/VIEW_ANNEX7.txt | 28 MAY 2023
+/vwInactiveInvoices.txt | 28 MAY 2023
