@@ -93,6 +93,7 @@ RateDiscount.txt
 /RateGroup/OSP_GETITEMLIST.txt
 /RateGroup/OSP_GetItemBatch.txt
 /RateGroup/OSP_GetItemAltUnits.txt
+/Reports/VIEW_ANNEX7.txt
 RC_Columns.txt
 ---RDLPRINTING.txt
 ---ReceipeProd.txt
@@ -159,7 +160,6 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
-VIEW_ANNEX7.txt
 vwCustomerProfile.txt
 vwInactiveInvoices.txt
 vwIndexFragmentation.txt
