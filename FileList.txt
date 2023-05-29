@@ -125,6 +125,7 @@ SalesTerminal.txt
 SCHEMESAPPLIED_PROD.txt
 SecurityQuestions.txt
 SETTINGS.txt
+SettlementModes.txt
 ---ShippingInfo.txt
 SizeColorMaster.txt
 SP_CALCULATE_RE_ORDER_QUANTITY.txt

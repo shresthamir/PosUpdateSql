@@ -15,3 +15,4 @@
 /CBMS_Tables.txt | 28 MAY 2023
 /Reports/VIEW_ANNEX7.txt | 28 MAY 2023
 /vwInactiveInvoices.txt | 28 MAY 2023
+/SettlementModes.txt | 29 MAY 2023

@@ -54,7 +54,7 @@
 ---/Reports/JournalBookReport/NSP_JOURNALBOOK.txt
 /Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.txt
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
----/Reports/KOT Reports/KOTRECORD.txt
+/Reports/KOT Reports/KOTRECORD.txt
 /Reports/KOT Reports/NSP_KOTREPORT.txt
 ---/Reports/KOT Reports/RSP_KOTREPORT.txt
 /Reports/KOT Reports/RSP_KOT_VS_PREBILL_VS_SALES_REPORT.txt
