@@ -49,6 +49,7 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
 INVMAIN_TMP.txt
+KOT_Estimate.txt
 KOTCATEGORY.txt
 KOTTableUpdate.txt
 MarginSchemeTables.txt
