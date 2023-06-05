@@ -1,7 +1,7 @@
 FiscalYearUpdate.txt
 ---ABBCONPROD.txt
 ---ADDITIONALCOST_JSON.txt
----BARCODE_LOG.txt
+BARCODE_LOG.txt
 BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.txt
 CapitalPurchaseConstraint.txt

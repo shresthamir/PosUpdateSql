@@ -16,4 +16,4 @@
 /Reports/VIEW_ANNEX7.txt | 28 MAY 2023
 /vwInactiveInvoices.txt | 28 MAY 2023
 /SettlementModes.txt | 29 MAY 2023
-/KOT_Estimate | 2 JUN 2023
+/KOT_Estimate.txt | 2 JUN 2023
