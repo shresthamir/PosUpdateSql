@@ -4,7 +4,7 @@ CREATE OR ALTER   procedure [dbo].[RSP_Dashboard_Data]
 @DATE1 DATE = '1 JAN 1970',
 @DATE2 DATE = '1 JAN 1970'
 AS
-
+--SELECT @DATE1 ='2022-08-01 00:00:00', @DATE2 ='2022-08-01 00:00:00'
 IF @DATE1 < '1 JAN 2000'
 BEGIN
 	SET @DATE2 = GETDATE()
@@ -13,33 +13,39 @@ END
 
 IF OBJECT_ID('TEMPDB..#DATA') IS NOT NULL DROP TABLE #DATA
 IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
+ 
 
-SELECT M.TRNDATE, T.TRNMODE, (T.AMOUNT - T.CHANGE) * IIF(M.VoucherType IN ('RE','CN'), -1, 1) NETAMNT
-, IIF(M.VoucherType IN ('SI','TI'), 1, 0) Bills
-, IIF(M.VoucherType IN ('RE','CN'), 1, 0) ReturnBills 
+SELECT M.VCHRNO,M.VOUCHERTYPE,M.TRNDATE, T.TRNMODE, (T.AMOUNT - T.CHANGE) * IIF(M.VoucherType IN ('RE','CN'), -1, 1) NETAMNT
+ 
 INTO #DATA
 FROM SALES_TRNMAIN M JOIN RMD_BILLTENDER T ON M.VCHRNO= T.VCHRNO
 WHERE M.DIVISION LIKE @DIV AND M.TRNDATE BETWEEN @DATE1 AND @DATE2
-
-SELECT TRNDATE, IIF(A.TRNMODE IN ('Credit'), NETAMNT, 0) creditsales,
+ 
+  
+ 
+SELECT VCHRNO,VOUCHERTYPE,TRNDATE, IIF(A.TRNMODE IN ('Credit'), NETAMNT, 0) creditsales,
 IIF(A.TRNMODE IN ('Cash'), NETAMNT, 0) cashsales,
 IIF(A.TRNMODE IN ('Credit Card'), NETAMNT, 0) creditcardsales,
 IIF(A.TRNMODE IN ('QR','Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) onlinesales,
 IIF(A.TRNMODE NOT IN ('Cash', 'Credit Card', 'Credit' ,'QR', 'Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) othersales,
-NETAMNT overallsales, Bills, ReturnBills
+NETAMNT overallsales 
 INTO #RESULT 
 FROM #DATA A
-
+  
 SELECT '' [type],
-    	SUM(Bills) number_of_bills,
-    	CONVERT(DECIMAL(18,2), SUM(ReturnBills)) number_of_return_bills,
+    	COUNT (DISTINCT IIF(VoucherType IN ('SI','TI'), VCHRNO,NULL )) number_of_bills,
+    	COUNT(DISTINCT IIF(VOUCHERTYPE IN ('RE','CN') ,VCHRNO,NULL)) number_of_return_bills,
     	CONVERT(DECIMAL(18,2), sum(creditsales))  total_credit_amount,
     	CONVERT(DECIMAL(18,2), sum(cashsales)) total_cash_amount,
 	CONVERT(DECIMAL(18,2), sum(creditcardsales)) total_creditcard_amount,
     	CONVERT(DECIMAL(18,2), sum(onlinesales)) total_epayment_sales,
 	CONVERT(DECIMAL(18,2), sum(othersales)) total_other_sales,
     	CONVERT(DECIMAL(18,2), sum(overallsales)) total_sales
-	from #RESULT
+	from #RESULT R
+ 
+
 
 IF OBJECT_ID('TEMPDB..#DATA') IS NOT NULL DROP TABLE #DATA
 IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
+
+ 
