@@ -41,7 +41,7 @@ SELECT '' [type],
     	CONVERT(DECIMAL(18,2), sum(onlinesales)) total_epayment_sales,
 	CONVERT(DECIMAL(18,2), sum(othersales)) total_other_sales,
     	CONVERT(DECIMAL(18,2), sum(overallsales)) total_sales
-	from #RESULT R
+	from #RESULT
  
 
 
