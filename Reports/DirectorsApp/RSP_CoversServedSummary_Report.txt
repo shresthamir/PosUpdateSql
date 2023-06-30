@@ -5,7 +5,7 @@ CREATE OR ALTER procedure [dbo].[RSP_CoversServedSummary_Report]
 @DATE2 DATE = '01 JAN 1900'
 AS
 set nocount on;
-SET @DIV = '%'; SET @DATE1 = '17 JUL 2021'; SET @DATE2 = '1 MAR 2023'
+--SET @DIV = '%'; SET @DATE1 = '17 JUL 2021'; SET @DATE2 = '1 MAR 2023'
 
 if @DATE1 <='01 JAN 2000' 
 BEGIN
