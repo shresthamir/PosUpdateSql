@@ -47,7 +47,7 @@ SELECT SUBSTRING(Particulars, 4, LEN(Particulars) - 3) Particular, * FROM
 (
 	SELECT * fROM
 	(
-		SELECT D, Particulars, SALES FROM #CATEGORYTOTAL 
+		SELECT D, isnull(nullif(Particulars,''),'  N/A') Particulars, SALES FROM #CATEGORYTOTAL 
 	) A
 PIVOT ( MAX(SALES) FOR D IN ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14], [15], [16], [17], [18], [19], [20], [21], [22], [23], [24], [25], [26], [27], [28], [29], [30],[31])) AS TOTAL
 UNION ALL
