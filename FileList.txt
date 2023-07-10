@@ -73,6 +73,7 @@ OSP_CheckAuditStatus.txt
 OSP_CompileCOGS.txt
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
+OSP_GetDeliveryList.txt
 OSP_GetEditableStock.txt
 OSP_GetStockDetail.txt
 OSP_GetSupplierWiseItemForPO.txt
