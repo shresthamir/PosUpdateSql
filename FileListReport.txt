@@ -71,6 +71,7 @@
 /Reports/MembershipReports/RSP_MEMBERSHIPREPORT_SUMMARY.txt
 /Reports/MembershipReports/RSP_TOPNMEMBERSHIPSALES.txt
 /Reports/NSP_STOCKVARIANCEREPORT.txt
+/Reports/NSP_CostSheet.txt
 /Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/PromotionReports/RSP_PromotionSalesReport.txt
 /Reports/RecipeReport/OSP_GetReceipeConsumptionList.txt

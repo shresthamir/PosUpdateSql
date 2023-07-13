@@ -143,7 +143,10 @@ tblPartyCategory.txt
 TRAN_A_ACID.txt
 TRAN_A_ACID_CHECK.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
+/Triggers/INVPROD_WAREHOUSE_CHECK.txt
 /Triggers/MultipleRetailPrice_UPDATE.txt
+/Triggers/OPPROD_WAREHOUSE_CHECK.txt
+/Triggers/PURPROD_WAREHOUSE_CHECK.txt
 /Triggers/TRNPROD_COGS_UPDATE.txt
 /Triggers/CheckSpiltInProgress_On_RMD_KotMain_Status.txt
 /Triggers/CheckSpiltInProgress_On_RMD_KotProd.txt
