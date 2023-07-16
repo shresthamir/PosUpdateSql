@@ -1,0 +1,42 @@
+CREATE OR ALTER PROC NSP_PopulateDateMiti
+--DECLARE 
+@BS SMALLINT
+AS
+
+--SELECT @BS = 2085
+
+DECLARE @DATEMITI TABLE (AD DATETIME, BS VARCHAR(10))
+
+DECLARE @SDATE DATETIME, @1 TINYINT, @2 TINYINT, @3 TINYINT, @4 TINYINT, @5 TINYINT, @6 TINYINT, @7 TINYINT, @8 TINYINT, @9 TINYINT, @10 TINYINT, @11 TINYINT, @12 TINYINT
+,@I TINYINT ,@D TINYINT, @Days TINYINT
+
+
+SELECT @I = 1, @SDATE = IDATE, @1 = [1], @2 = [2], @3 = [3], @4 = [4], @5 = [5], @6 = [6], @7 = [7], @8 = [8], @9 = [9], @10 = [10], @11 = [11], @12 = [12] FROM NepDate WHERE BS = @BS
+
+WHILE @I <= 12
+BEGIN
+	SET @D = 1
+	IF @I = 1 SET @Days = @1
+	IF @I = 2 SET @Days = @2
+	IF @I = 3 SET @Days = @3
+	IF @I = 4 SET @Days = @4
+	IF @I = 5 SET @Days = @5
+	IF @I = 6 SET @Days = @6
+	IF @I = 7 SET @Days = @7
+	IF @I = 8 SET @Days = @8
+	IF @I = 9 SET @Days = @9
+	IF @I = 10 SET @Days = @10
+	IF @I = 11 SET @Days = @11
+	IF @I = 12 SET @Days = @12
+	WHILE @D <= @Days	
+	BEGIN
+		INSERT INTO @DATEMITI
+		SELECT @SDATE, CONCAT(RIGHT(CONCAT('0', @D),2),'/', RIGHT(CONCAT('0', @I),2), '/', @BS)
+		SET @SDATE = DATEADD(D,1, @SDATE)
+		SET @D = @D+1
+	END	
+
+SET @I = @I + 1
+END
+INSERT INTO DATEMITI
+SELECT * FROM @DATEMITI

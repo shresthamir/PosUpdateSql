@@ -64,8 +64,10 @@ MasterDeleteFlag.txt
 ---MULTICURRENCY.txt
 MultiAltUnit_Rate.txt
 MultipleRetailPrice.txt
+NepDate.txt
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
+NSP_PopulateDateMiti.txt
 NUM_TOWORDS.txt
 OrderMode.txt
 OSP_BranchTransferInTransitClear.txt
