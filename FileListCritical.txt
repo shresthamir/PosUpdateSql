@@ -27,3 +27,4 @@
 /AdvanceAc.txt | 16 JUL 2023
 /Triggers/ABBPROD_COGS_UPDATE.txt | 25 JUL 2023
 /Triggers/TRNPROD_COGS_UPDATE.txt | 25 JUL 2023
+/MultipleRetailPrice.txt | 25 JUL 2023
