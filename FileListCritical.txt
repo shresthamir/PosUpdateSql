@@ -4,7 +4,7 @@
 /DisablePrebill.txt|23 APR 2023
 /TRAN_A_ACID.txt|28 APR 2023
 /TRAN_A_ACID_CHECK.txt|28 APR 2023
-/tblMasterSequences|1 MAY 2023
+/tblMasterSequences.txt|1 MAY 2023
 /USERPROFILESABB.txt|1 MAY 2023
 /xPrimaryKeys.txt|1 MAY 2023
 /TrnMain_AdditionalInfo.txt | 17 MAY 2023
@@ -25,3 +25,5 @@
 /NepDate.txt | 16 JUL 2023
 /NepDate1.txt | 16 JUL 2023
 /AdvanceAc.txt | 16 JUL 2023
+/Triggers/ABBPROD_COGS_UPDATE.txt | 25 JUL 2023
+/Triggers/TRNPROD_COGS_UPDATE.txt | 25 JUL 2023
