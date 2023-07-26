@@ -1,5 +1,5 @@
 CREATE OR ALTER procedure [dbo].[NSP_STOCKAGEING_QUERY]
--- DECLARE
+--DECLARE
  @SUPPLIER AS VARCHAR(25), 
  @DATE DATETIME,
  @D1 NUMERIC,
@@ -15,9 +15,10 @@ CREATE OR ALTER procedure [dbo].[NSP_STOCKAGEING_QUERY]
  @WISE VARCHAR(20) ='ITEM',
  @FYID VARCHAR(10) = '%'
 AS
+
 --set @ByCostRate=N'0';
---set @D1=15;set @D2=30;set @D3=45;set @D4=60;set @D5=75;set @D6=90;set @DATE='2018-05-31 14:12:12.887'; 
---set @DIV=N'%';set @PRODUCT=N'%';set @SUPPLIER=N'%';set @FLG=0
+--SELECT  @D1=15, @D2=30, @D3=45, @D4=60, @D5=75, @D6=90, @DATE='2023-07-26', @FYID = '79/80', @DIV=N'%', @PRODUCT=N'%', @SUPPLIER=N'%', @FLG=0
+
 DECLARE @DATE1 DATETIME,@DATE2 DATETIME
 SELECT @DATE1 = BeginDate FROM PhiscalYear WHERE PhiscalId = @FYID
 SET @DATE2 = CONVERT(DATE,@DATE);
@@ -51,7 +52,9 @@ DATEDIFF(d,trndate,@DATE) daynos,case when DATEDIFF(d,trndate,@DATE) < @D1  then
 	 when DATEDIFF(d,trndate,@DATE) between @D5 and @D6 then @D6 
 	 when DATEDIFF(d,trndate,@DATE) > @D6  then 365 end  days
 ,sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) as cumulative
-, case when total - sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) >= 0 then realqty_in else total - sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) + realQty_in end as remaining
+, case when total - sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) >= 0 
+	then realqty_in 
+	else total - sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) + realQty_in end as remaining
 ,REALQTY_IN + total -sum(realqty_in) over(partition by a.mcode order by trndate desc rows unbounded preceding) as minimum
 from (
 select  CASE @WISE WHEN 'ITEM' THEN a.mcode WHEN 'MGROUP' THEN C.MGROUP WHEN 'MENUCAT' THEN C.MCAT END AS MCODE,b.VCHRNO,b.trndate,a.realqty_in from RMD_TRNPROD_FN(0, @FYID) a inner join rmd_trnmain_FN(0, @FYID) b on a.VCHRNO=b.VCHRNO and a.DIVISION = b.DIVISION and a.PhiscalID=b.PhiscalID 
@@ -60,7 +63,9 @@ where b.VoucherType in ('OP','PI','TR','GR')) as a
 left  join #SUMTABLE  as b on a.MCODE=b.MCODE  
 ) as a where minimum >=0  group by MCODE,total
 
-SELECT null AS SN, B.MENUCODE CODE, CASE WHEN @WISE = 'ITEM'  OR @WISE = 'MGROUP' THEN  B.DESCA ELSE A.MCODE END AS PARTICULAR,
-D1,D2,D3,D4,D5,D6,D7, B.PRATE_A PRATE,TOTAL,A.MCODE 
-FROM #AGINGTABLE A LEFT JOIN MENUITEM B ON A.MCODE= B.MCODE  order by PARTICULAR
-
+SELECT null AS SN, B.MENUCODE CODE, CASE WHEN @WISE = 'ITEM'  OR @WISE = 'MGROUP' THEN  B.DESCA ELSE A.MCODE END AS PARTICULAR,VW.[Main Group] ,VW.[Main Category]  ,VW.[Sub Category],vw.[Super Category] ,
+D1,D2,D3,D4,D5,D6,D7, B.PRATE_A PRATE, IIF(B.VAT = 1, 1.13,1) * B.PRATE_A PRATE_IncVAT, B.RATE_A SRATE,IIF(B.VAT = 1, 1.13,1) * B.RATE_A SRATE_IncVAT, A.TOTAL,A.MCODE, B.BASEUNIT Unit, AC.ACNAME Supplier
+FROM #AGINGTABLE A 
+LEFT JOIN MENUITEM B ON A.MCODE= B.MCODE 
+LEFT JOIN RMD_ACLIST AC ON B.SUPCODE = AC.ACID
+LEFT JOIN vwItemHeirarchy VW ON VW.MCODE=A.MCODE  order by PARTICULAR
