@@ -34,6 +34,7 @@ EpaymentStatus.txt
 fnConvertIn.txt
 ---Footfall.txt
 GetDefaultParamenterOfStoredProcedure.txt
+GetKOTEstimate.txt
 ---PREBILL_TABLES.txt
 PROD_EXRATE.txt
 getPrintFormat.txt
