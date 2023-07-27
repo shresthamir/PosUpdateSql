@@ -29,3 +29,5 @@
 /Triggers/TRNPROD_COGS_UPDATE.txt | 25 JUL 2023
 /MultipleRetailPrice.txt | 25 JUL 2023
 /DISCOUNT_COMBOLIST | 26 JUL 2023
+/GetKOTEstimate.txt | 27 JUL 2023
+/AddOnMapping.txt | 27 JUL 2023
