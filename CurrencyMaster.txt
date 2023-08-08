@@ -1,0 +1,10 @@
+CREATE or ALTER TABLE CurrencyMaster
+(
+	CountryName NVARCHAR(100) NOT NULL,
+	CurrencyName NVARCHAR(50) NOT NULL,
+	CurrencyCode NVARCHAR(10) NOT NULL,
+	CurrencySymbol NVARCHAR(10) NOT NULL,
+	CurrencyRate Numeric(18,8),
+	LastUpdateDate DateTime NOT NULL,
+	CONSTRAINT PK_CurrencyMaster PRIMARY KEY (CountryName, CurrencyName, CurrencyCode),
+)
