@@ -76,6 +76,25 @@ BEGIN
 			LEFT JOIN #RMD_CAPTIALIZEPURCHASEPROD X ON A.VCHRNO = X.VCHRNO AND A.DIVISION = X.DIVISION 
 			WHERE LEFT(A.VCHRNO,2) = 'CP'
 			AND (TRNDATE > = @DATE1 AND TRNDATE < = @DATE2) AND A.DIVISION LIKE @DIVISION	AND A.PhiscalID = @FYID
+
+		UNION ALL
+		SELECT TRNDATE [Date],RIGHT(BSDATE,4) + '.' + SUBSTRING(BSDATE,4,2) +'.'+LEFT(BSDATE,2) [Miti],A.VCHRNO,A.CHALANNO [Bill No], NULL PragyapanPatraNo,	
+		CASE WHEN ISNULL(A.BILLTO,'') = '' THEN B.ACNAME ELSE A.BILLTO END [Supplier Name],
+		CASE WHEN ISNULL(A.BILLTOTEL,'') = '' THEN B.VATNO ELSE A.BILLTOTEL END [Supplier PAN]
+		,P.ITEMDESC ItemName, p.ALTQTY_IN Quantity, p.ALTUNIT Unit,
+		P.TAXABLE + P.NONTAXABLE [Total Amount], 
+		P.NONTAXABLE [Non Taxable Amount],
+		NULL as[Purchase Amount] , 
+		NULL [Tax Amount],
+		NULL as[Import Purchase Amount] , 
+		NULL AS [Tax Amount1],
+		P.TAXABLE AS [Capitalized Purchase Amount] , 
+		P.VAT AS [Tax Amount2],
+		VNUM
+		FROM RMD_TRNMAIN A JOIN TRNPROD_NONTRADING P ON A.VCHRNO = P.VCHRNO
+		LEFT JOIN RMD_ACLIST B ON A.PARAC=B.ACID 
+		LEFT JOIN RMD_ACLIST C ON A.PARAC= C.ACID where A.VoucherType IN ('PI') and isnull(a.status,0) = 0
+		and A.PhiscalID = @FYID  and A.DIVISION like @DIVISION and trndate between @DATE1 and @DATE2 AND ISNULL(VMODE,0)<=1
 		
 		--Debit Note
 		UNION ALL
