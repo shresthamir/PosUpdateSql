@@ -54,6 +54,7 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
 INVMAIN_TMP.txt
+ItemWiseCostCenter.txt
 KOT_Estimate.txt
 KOTCATEGORY.txt
 KOTTableUpdate.txt
@@ -125,6 +126,7 @@ RMD_TRNMAIN_ACTIVE.txt
 RMD_TRNMAIN_FN.txt
 ---RMD_TRNPROD.txt
 RMD_TRNPROD_FN.txt
+RMD_TRNPROD_STATUS.txt
 ---RMD_TRNTRAN.txt
 RMD_TRNTRAN_FN.txt
 SALES_TRNMAIN.txt
@@ -147,6 +149,7 @@ tblAuditLog.txt
 tblBillTender.txt
 tblMasterSequences.txt
 tblPartyCategory.txt
+tblTicket.txt
 TRAN_A_ACID.txt
 TRAN_A_ACID_CHECK.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
