@@ -53,4 +53,5 @@
 ,{"SettingColumn":"CashDropLimit","DisplayText":"Cash Drop Limit.","Description":"Forces user to perform Cash Drop once specified limit is crossed.","DataType":"Text","options":""}
 ,{"SettingColumn":"EnableCreditNoteWithoutReference","DisplayText":"Enable credit note without reference bill.","Description":"Enables user to manually enter credit not without reference bill. (POS Billing)","DataType":"Bool","options":""}
 ,{"SettingColumn":"EnableSeperateReceipeConsumption","DisplayText":"Enable recipe consumption with RC Vouchers.","Description":"Recipe consumption is done via RC voucher in sales.","DataType":"Bool","options":""}
-,{"SettingColumn":"SaveRCVoucherOnDayStartDate","DisplayText":"Save RC Voucher on Day Start Date.","Description":"RC Voucher is saved on day start date if transaction date is later than daystartdate.","DataType":"Bool","options":""}]
+,{"SettingColumn":"SaveRCVoucherOnDayStartDate","DisplayText":"Save RC Voucher on Day Start Date.","Description":"RC Voucher is saved on day start date if transaction date is later than daystartdate.","DataType":"Bool","options":""}
+,{"SettingColumn":"EnableItemWiseCostCenter","DisplayText":"Enable item wise cost center.","Description":"Enable costcenter mapping to item and accounting entry accordingly","DataType":"Bool","options":""}]
