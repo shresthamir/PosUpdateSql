@@ -81,6 +81,7 @@ OSP_CheckAuditStatus.txt
 OSP_CompileCOGS.txt
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
+OSP_GetCounterOrderAdvance.txt
 OSP_GetDeliveryList.txt
 OSP_GetEditableStock.txt
 OSP_GetStockDetail.txt
@@ -114,6 +115,7 @@ RMD_ACLIST.txt
 RMD_BillOnlinePaymentInfo.txt
 RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt
+RMD_Order_AdditionalDetail.txt
 ---RMD_RECPAY_TABLE.txt
 ---RMD_RECPAY_VIEW.txt
 ---RMD_ORDERMAIN_VCHRNO.txt
