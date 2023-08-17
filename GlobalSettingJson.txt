@@ -47,7 +47,7 @@
 ,{"SettingColumn":"EnablePanBill","DisplayText":"Enable PAN Bill.","Description":"Enables PAN company setting.","DataType":"Bool","options":""}
 ,{"SettingColumn":"PrintKotWithBill","DisplayText":"Print KOT with Bill.","Description":"Prints KOT with bill using bill printer.","DataType":"Bool","options":""}
 ,{"SettingColumn":"SendKotBotWithBill","DisplayText":"Send KOT with Bill.","Description":"Sends KOT to kitchen/bar printers using KOT Print Configuration.","DataType":"Bool","options":""}
-,{"SettingColumn":"ABBLIMIT","DisplayText":"Abb. Invoice Limit.","Description":"Maximum amount that can be issued with Abb. Tax Invoice.","DataType":"Bool","options":""}
+,{"SettingColumn":"ABBLIMIT","DisplayText":"Abb. Invoice Limit.","Description":"Maximum amount that can be issued with Abb. Tax Invoice.","DataType":"Text","options":""}
 ,{"SettingColumn":"CompulsoryCostomerEntryAmount","DisplayText":"Compulsory Customer Entry Amount.","Description":"Maximum amount than can be issued withoun customer name/details.","DataType":"Text","options":""}
 ,{"SettingColumn":"AmountValidationLimit","DisplayText":"Amount Validation Limit.","Description":"Margin difference that is allowed while validating transaction amounts.","DataType":"Text","options":""}
 ,{"SettingColumn":"CashDropLimit","DisplayText":"Cash Drop Limit.","Description":"Forces user to perform Cash Drop once specified limit is crossed.","DataType":"Text","options":""}
