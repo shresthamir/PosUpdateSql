@@ -41,4 +41,17 @@
 ,{"SettingColumn":"EnableChangeAmount","DisplayText":"Enable Change Amount","Description":"Allows users to change the line item amount in POS Billing.","DataType":"Bool","options":""}
 ,{"SettingColumn":"SaveSeperateDiscountAccountInPurchase","DisplayText":"Enable Discount accounting in Purchase.","Description":"Enable Discount accounting in Purchase.","DataType":"Bool","options":""}
 ,{"SettingColumn":"PrintOrderStickerInSales","DisplayText":"Print Order detail sticker in sales.","Description":"Prints order details (Choice Items/Addons/Remarks) on Sticker","DataType":"Bool","options":""}
-,{"SettingColumn":"EnableProformaLoadInSales","DisplayText":"Enable Proforma Invoice Load in Sales.","Description":"Enable Proforma Invoice Load in Sales.","DataType":"Bool","options":""}]
+,{"SettingColumn":"EnableProformaLoadInSales","DisplayText":"Enable Proforma Invoice Load in Sales.","Description":"Enable Proforma Invoice Load in Sales.","DataType":"Bool","options":""}
+,{"SettingColumn":"EnableCakeDetails","DisplayText":"Enable Cake Details on Counter Order.","Description":"Opens cake details popup on item selection.","DataType":"Bool","options":[]}
+,{"SettingColumn":"DiscountAmtIncVat","DisplayText":"Discount Amount Includes VAT.","Description":"If discount is given in amount, it includes VAT. (POS Billing)","DataType":"Bool","options":[]}
+,{"SettingColumn":"EnablePanBill","DisplayText":"Enable PAN Bill.","Description":"Enables PAN company setting.","DataType":"Bool","options":""}
+,{"SettingColumn":"PrintKotWithBill","DisplayText":"Print KOT with Bill.","Description":"Prints KOT with bill using bill printer.","DataType":"Bool","options":""}
+,{"SettingColumn":"SendKotBotWithBill","DisplayText":"Send KOT with Bill.","Description":"Sends KOT to kitchen/bar printers using KOT Print Configuration.","DataType":"Bool","options":""}
+,{"SettingColumn":"AbbInvoiceLimitAmount","DisplayText":"Abb. Invoice Limit.","Description":"Maximum amount that can be issued with Abb. Tax Invoice.","DataType":"Bool","options":""}
+,{"SettingColumn":"CompulsoryCostomerEntryAmount","DisplayText":"Compulsory Customer Entry Amount.","Description":"Maximum amount than can be issued withoun customer name/details.","DataType":"Text","options":""}
+,{"SettingColumn":"AmountValidationLimit","DisplayText":"Amount Validation Limit.","Description":"Margin difference that is allowed while validating transaction amounts.","DataType":"Text","options":""}
+,{"SettingColumn":"CashDropLimit","DisplayText":"Cash Drop Limit.","Description":"Forces user to perform Cash Drop once specified limit is crossed.","DataType":"Text","options":""}
+,{"SettingColumn":"DonotListServiceItemInPurchase","DisplayText":"Do not list service items in purchase.","Description":"Do not list service items in purchase.","DataType":"Bool","options":""}
+,{"SettingColumn":"EnableCreditNoteWithoutReference","DisplayText":"Enable credit note without reference bill.","Description":"Enables user to manually enter credit not without reference bill. (POS Billing)","DataType":"Bool","options":""}
+,{"SettingColumn":"EnableSeperateReceipeConsumption","DisplayText":"Enable recipe consumption with RC Vouchers.","Description":"Recipe consumption is done via RC voucher in sales.","DataType":"Bool","options":""}
+,{"SettingColumn":"SaveRCVoucherOnDayStartDate","DisplayText":"Save RC Voucher on Day Start Date.","Description":"RC Voucher is saved on day start date if transaction date is later than daystartdate.","DataType":"Bool","options":""}]
