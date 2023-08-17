@@ -51,7 +51,6 @@
 ,{"SettingColumn":"CompulsoryCostomerEntryAmount","DisplayText":"Compulsory Customer Entry Amount.","Description":"Maximum amount than can be issued withoun customer name/details.","DataType":"Text","options":""}
 ,{"SettingColumn":"AmountValidationLimit","DisplayText":"Amount Validation Limit.","Description":"Margin difference that is allowed while validating transaction amounts.","DataType":"Text","options":""}
 ,{"SettingColumn":"CashDropLimit","DisplayText":"Cash Drop Limit.","Description":"Forces user to perform Cash Drop once specified limit is crossed.","DataType":"Text","options":""}
-,{"SettingColumn":"DonotListServiceItemInPurchase","DisplayText":"Do not list service items in purchase.","Description":"Do not list service items in purchase.","DataType":"Bool","options":""}
 ,{"SettingColumn":"EnableCreditNoteWithoutReference","DisplayText":"Enable credit note without reference bill.","Description":"Enables user to manually enter credit not without reference bill. (POS Billing)","DataType":"Bool","options":""}
 ,{"SettingColumn":"EnableSeperateReceipeConsumption","DisplayText":"Enable recipe consumption with RC Vouchers.","Description":"Recipe consumption is done via RC voucher in sales.","DataType":"Bool","options":""}
 ,{"SettingColumn":"SaveRCVoucherOnDayStartDate","DisplayText":"Save RC Voucher on Day Start Date.","Description":"RC Voucher is saved on day start date if transaction date is later than daystartdate.","DataType":"Bool","options":""}]
