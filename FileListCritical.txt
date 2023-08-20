@@ -35,3 +35,5 @@
 /RMD_TRNPROD_STATUS.txt | 15 AUG 2023
 /tblTicket.txt | 15 AUG 2023
 /ItemWiseCostCenter.txt | 15 AUG 2023
+/CustomerType.txt | 20 AUG 2023
+/vwCustomerProfile.txt | 20 AUG 2023
