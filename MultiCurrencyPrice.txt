@@ -1,0 +1,13 @@
+CREATE  TABLE MultiCurrencyPrice
+(
+	MCODE VARCHAR(25) NOT NULL,
+	CurrencyCode NVARCHAR(10) NOT NULL,
+	CurrencyRATE_A decimal(20,12),
+	CurrencyRATE_B decimal(20,12),
+	IsActive tinyint ,
+    Stamp decimal(32,12),
+	CreatedBy varchar(25),
+	CONSTRAINT PK_MultiCurrencyPrice PRIMARY KEY (MCODE, CurrencyCode),
+    CONSTRAINT FK_MultiCurrencyPrice_MCODE FOREIGN KEY (MCODE) REFERENCES MenuItem (MCODE),
+	CONSTRAINT FK_MultiCurrencyPrice_CurrencyCode FOREIGN KEY (CurrencyCode) REFERENCES CurrencyMaster (CurrencyCode),
+)

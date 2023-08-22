@@ -6,5 +6,6 @@ CREATE or ALTER TABLE CurrencyMaster
 	CurrencySymbol NVARCHAR(10) NOT NULL,
 	CurrencyRate Numeric(18,8),
 	LastUpdateDate DateTime NOT NULL,
+	CONSTRAINT UQ_CurrencyMaster_CurrencyCode UNIQUE (CurrencyCode),
 	CONSTRAINT PK_CurrencyMaster PRIMARY KEY (CountryName, CurrencyName, CurrencyCode),
 )
