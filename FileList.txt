@@ -55,6 +55,9 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
 INVMAIN_TMP.txt
+/InterestCalculation/Add_EMI_LOG_VOUCHER_WISE_RECEIPT_LOG.txt
+/InterestCalculation/OSP_CalculateInterest.txt
+/InterestCalculation/vawDueVoucher.txt
 ItemWiseCostCenter.txt
 KOT_Estimate.txt
 KOTCATEGORY.txt
@@ -97,6 +100,7 @@ PK_TableList.txt
 PROD_COG.txt
 PROD_COGS.txt
 ---PRODUCT_EDIT_LOG.txt
+/Promotions/Add_TrnUser_IsActive_On_Discount_IfAnyItem.txt
 PURMAIN_IMPORTDETAIL.txt
 RateDiscount.txt
 /RateGroup/RateGroupTables.txt
@@ -179,6 +183,7 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+vwContractPrice.txt
 vwCustomerProfile.txt
 vwInactiveInvoices.txt
 vwIndexFragmentation.txt
