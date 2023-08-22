@@ -154,7 +154,8 @@ SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
 tblAuditLog.txt
 tblBillTender.txt
-tblMasterSequences.txt
+/tblMasterSequencePrimaryKey/AlterColumns.txt
+/tblMasterSequencePrimaryKey/AlterPrimaryKey.txt
 tblPartyCategory.txt
 tblTicket.txt
 TRAN_A_ACID.txt
