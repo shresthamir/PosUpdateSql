@@ -38,6 +38,4 @@ ALTER TABLE RMD_Order_AdditionalDetail ADD CONSTRAINT  FK_RMD_Order_AdditionalDe
 IF OBJECT_ID('FK_RMD_Order_AdditionalDetail_MenuItem')  IS NULL
 ALTER TABLE RMD_Order_AdditionalDetail ADD CONSTRAINT  FK_RMD_Order_AdditionalDetail_MenuItem FOREIGN KEY (MCODE) REFERENCES MENUITEM (MCODE)
 
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RMD_Order_AdditionalDetail' AND COLUMN_NAME = 'CakeMessage')
-ALTER TABLE RMD_Order_AdditionalDetail ADD CakeMessage NVARCHAR(500) NULL
 
