@@ -21,6 +21,7 @@ CompanyId_Company_Set.txt
 CompanyId_TranTables.txt
 ContractPrice.txt
 ---CurrencyNumberToWords.txt
+CustomerType.txt
 DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
 ---DATEMITI_FULL.txt
@@ -54,6 +55,10 @@ getPrintFormat.txt
 /Hotel/HTL_CHECKIN_STATUS.txt
 Indexes.txt
 INVMAIN_TMP.txt
+/InterestCalculation/Add_EMI_LOG_VOUCHER_WISE_RECEIPT_LOG.txt
+/InterestCalculation/OSP_CalculateInterest.txt
+/InterestCalculation/vawDueVoucher.txt
+ItemWiseCostCenter.txt
 KOT_Estimate.txt
 KOTCATEGORY.txt
 KOTTableUpdate.txt
@@ -80,6 +85,7 @@ OSP_CheckAuditStatus.txt
 OSP_CompileCOGS.txt
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
+OSP_GetCounterOrderAdvance.txt
 OSP_GetDeliveryList.txt
 OSP_GetEditableStock.txt
 OSP_GetStockDetail.txt
@@ -94,6 +100,7 @@ PK_TableList.txt
 PROD_COG.txt
 PROD_COGS.txt
 ---PRODUCT_EDIT_LOG.txt
+/Promotions/Add_TrnUser_IsActive_On_Discount_IfAnyItem.txt
 PURMAIN_IMPORTDETAIL.txt
 RateDiscount.txt
 /RateGroup/RateGroupTables.txt
@@ -113,6 +120,7 @@ RMD_ACLIST.txt
 RMD_BillOnlinePaymentInfo.txt
 RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt
+RMD_Order_AdditionalDetail.txt
 ---RMD_RECPAY_TABLE.txt
 ---RMD_RECPAY_VIEW.txt
 ---RMD_ORDERMAIN_VCHRNO.txt
@@ -125,6 +133,7 @@ RMD_TRNMAIN_ACTIVE.txt
 RMD_TRNMAIN_FN.txt
 ---RMD_TRNPROD.txt
 RMD_TRNPROD_FN.txt
+RMD_TRNPROD_STATUS.txt
 ---RMD_TRNTRAN.txt
 RMD_TRNTRAN_FN.txt
 SALES_TRNMAIN.txt
@@ -145,8 +154,10 @@ SP_GETSCHEMEDISCOUNT.txt
 SP_GetTotalDiscount.txt
 tblAuditLog.txt
 tblBillTender.txt
-tblMasterSequences.txt
+/tblMasterSequencePrimaryKey/AlterColumns.txt
+/tblMasterSequencePrimaryKey/AlterPrimaryKey.txt
 tblPartyCategory.txt
+tblTicket.txt
 TRAN_A_ACID.txt
 TRAN_A_ACID_CHECK.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
@@ -173,6 +184,7 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+vwContractPrice.txt
 vwCustomerProfile.txt
 vwInactiveInvoices.txt
 vwIndexFragmentation.txt
