@@ -1,4 +1,4 @@
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'CurrencyMaster')
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'CurrencyMaster') 
 CREATE TABLE CurrencyMaster
 (
 	CountryName NVARCHAR(100) NOT NULL,
@@ -7,5 +7,6 @@ CREATE TABLE CurrencyMaster
 	CurrencySymbol NVARCHAR(10) NOT NULL,
 	CurrencyRate Numeric(18,8),
 	LastUpdateDate DateTime NOT NULL,
+	CONSTRAINT UQ_CurrencyMaster_CurrencyCode UNIQUE (CurrencyCode),
 	CONSTRAINT PK_CurrencyMaster PRIMARY KEY (CountryName, CurrencyName, CurrencyCode),
 )

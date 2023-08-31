@@ -1,15 +1,3 @@
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'CurrencyMaster')
-CREATE TABLE CurrencyMaster
-(
-	CountryName NVARCHAR(100) NOT NULL,
-	CurrencyName NVARCHAR(50) NOT NULL,
-	CurrencyCode NVARCHAR(10) NOT NULL,
-	CurrencySymbol NVARCHAR(10) NOT NULL,
-	CurrencyRate Numeric(18,8),
-	LastUpdateDate DateTime NOT NULL,
-	CONSTRAINT PK_CurrencyMaster PRIMARY KEY (CountryName, CurrencyName, CurrencyCode),
-)
-
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'MultiCurrencyPrice')
 CREATE TABLE MultiCurrencyPrice
 (
@@ -19,7 +7,9 @@ CREATE TABLE MultiCurrencyPrice
 	CurrencyRATE_B decimal(20,12),
 	IsActive tinyint ,
     Stamp decimal(32,12),
-	CreatedBy varchar(25) NULL,
+	CreatedBy varchar(25),
 	CONSTRAINT PK_MultiCurrencyPrice PRIMARY KEY (MCODE, CurrencyCode),
-    CONSTRAINT FK_MultiCurrencyPrice_MCODE FOREIGN KEY (MCODE) REFERENCES MenuItem (MCODE)
+    CONSTRAINT FK_MultiCurrencyPrice_MCODE FOREIGN KEY (MCODE) REFERENCES MenuItem (MCODE),
+	CONSTRAINT FK_MultiCurrencyPrice_CurrencyCode FOREIGN KEY (CurrencyCode) REFERENCES CurrencyMaster (CurrencyCode),
+
 )
