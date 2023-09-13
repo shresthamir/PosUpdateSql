@@ -209,7 +209,7 @@
 /Reports/TRNPROD_PURCHASEVIEW.txt
 /Reports/TRNPROD_VIEW_SREPORT.txt
 /Reports/VatSalesRegister/NSP_CNREGISTER_OLDFORMAT.txt
-/Reports/VatSalesRegister/NSP_CREDITNOTEREGISTER.txt
+/Reports/VatSalesRegister/NSP_CREDITNOTEREGISTER.sql
 /Reports/VatSalesRegister/NSP_VATSALESREGISTER.txt
 /Reports/VatSalesRegister/NSP_VATSALESREGISTER_NEWFORMAT.txt
 /Reports/VatSalesRegister/RSP_VATOTHERADJUSTMENTREPORT.txt
