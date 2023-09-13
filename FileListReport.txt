@@ -225,3 +225,4 @@
 /Reports/RSP_BranchWiseSales.txt
 /Reports/RSP_DUEVOUCHERREPORT.txt
 /Reports/WSP_OVERALLCUSTOMERPERFORMANCE.txt
+/vwPartyHierarchy.sql

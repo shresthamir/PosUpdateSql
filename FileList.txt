@@ -188,6 +188,7 @@ vwContractPrice.txt
 vwCustomerProfile.txt
 vwInactiveInvoices.txt
 vwIndexFragmentation.txt
+vwSchemeItems.txt
 vwTableSize.txt
 vwTrnMain_AdditionalInfo.txt
 vwTrnProd_COGS.txt
