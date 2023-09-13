@@ -122,7 +122,7 @@
 /Reports/RSP_ORDERVSSALES.txt
 /Reports/RSP_PARTYSTATMENT.txt
 /Reports/RSP_PARTYMASTER.txt
-/Reports/RSP_PartyVsProductSalesReport.txt
+/Reports/RSP_PartyVsProductSalesReport.sql
 /Reports/RSP_PAYOUTREPORT.txt
 /Reports/RSP_RECEIPEREPORT.txt
 /Reports/RSP_ROL_BY_SHELF_LIFE.txt
