@@ -6,11 +6,13 @@ CREATE OR ALTER PROCEDURE OSP_GETITEMLIST
 @RateGroupId INT = 0 ,   
 @MCODE VARCHAR(50) = '%'  
 AS      
-DECLARE @ItemWiseWarehouse TINYINT      
+DECLARE @ItemWiseWarehouse TINYINT, @hideRawItemsInBilling TINYINT = 1      
 DECLARE @PRODUCTMAP TINYINT      
 DECLARE @ItemWiseSCTax BIT      
 DECLARE @EnableSTax BIT      
-SELECT @PRODUCTMAP = PRODUCTMAP, @ItemWiseWarehouse =ItemWiseWarehouse, @EnableSTax = EnableServiceCharge, @ItemWiseSCTax = EnableServiceCharge & ItemWiseSchargeApply FROM SETTING      
+SELECT @PRODUCTMAP = PRODUCTMAP, @ItemWiseWarehouse =ItemWiseWarehouse, @EnableSTax = EnableServiceCharge, @ItemWiseSCTax = EnableServiceCharge & ItemWiseSchargeApply FROM SETTING   
+
+SELECT @hideRawItemsInBilling = IIF(showRawItemsInBilling =1, 255,1) FROM SETTING
 --DECLARE @RateGroupId INT      
 --SELECT @RateGroupId = RateGroupID FROM DIVISION WHERE INITIAL = @DIVISION      
 PRINT @ITEMWISESCTAX      
@@ -32,7 +34,7 @@ FROM MENUITEM A OUTER APPLY DBO.FNGETRATEGROUP(A.MCODE, A.RATE_A, @RateGroupId) 
 LEFT JOIN COUNTERPRODUCT CP ON A.MGROUP = CP.PRODUCT       
 LEFT JOIN ptype D on a.ptype= d.ptypeid      
 left join TBL_ITEM_LOCATIONS l on a.MCODE=l.ITEM      
-WHERE A.PTYPE NOT IN (1, 12) AND      
+WHERE A.PTYPE NOT IN (@hideRawItemsInBilling, 12) AND      
 A.DISCONTINUE NOT IN(1,2) AND ISNULL(A.DIVISIONS, @DIVISION) LIKE '%'+@DIVISION+'%'       
 AND (@PRODUCTMAP = 0 OR CP.COUNTER = @TERMINAL) AND A.IsActive = 1   
 AND (@MCODE = '%' OR A.MCODE like @MCODE OR A.MGROUP like @MCODE OR A.PARENT like @MCODE) 

@@ -103,10 +103,11 @@ PROD_COGS.txt
 /Promotions/Add_TrnUser_IsActive_On_Discount_IfAnyItem.txt
 PURMAIN_IMPORTDETAIL.txt
 RateDiscount.txt
+/RateGroup/hideRawItemsInBilling.sql
 /RateGroup/RateGroupTables.txt
 /RateGroup/vwValidRateGroup.txt
 /RateGroup/fnGetRateGroup.txt
-/RateGroup/OSP_GETITEMLIST.txt
+/RateGroup/OSP_GETITEMLIST.sql
 /RateGroup/OSP_GetItemBatch.txt
 /RateGroup/OSP_GetItemAltUnits.txt
 /Reports/VIEW_ANNEX7.txt
