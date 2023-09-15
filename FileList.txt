@@ -140,7 +140,7 @@ RMD_TRNTRAN_FN.txt
 SALES_TRNMAIN.txt
 SALES_TRNPROD.txt
 SchemeScheduleView.txt
-SalesTerminal.txt
+SalesTerminal.sql
 SCHEMESAPPLIED_PROD.txt
 SecurityQuestions.txt
 SETTINGS.txt
@@ -195,5 +195,6 @@ vwTrnMain_AdditionalInfo.txt
 vwTrnProd_COGS.txt
 vwVehicleBarcode.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
+Warehouse.sql
 xPrimaryKeys.txt
 

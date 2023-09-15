@@ -44,3 +44,5 @@
 /tblMasterSequencePrimaryKey/AlterPrimaryKey.txt | 22 AUG 2023
 /SP_GETSCHEMEDISCOUNT.txt | 23 AUG 2023
 /vwSchemeSchedule.txt | 23 AUG 2023
+/SalesTerminal.sql | 15 SEP 2023
+/Warehouse.sql | 15 SEP 2023
