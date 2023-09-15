@@ -117,7 +117,7 @@ RC_Columns.txt
 ---RemoveUn-NecessaryTables.txt
 ReportContextMenus.txt
 Requisition.txt
-RMD_ACLIST.txt
+RMD_ACLIST.sql
 RMD_BillOnlinePaymentInfo.txt
 RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt
