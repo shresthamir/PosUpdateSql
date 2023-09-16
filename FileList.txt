@@ -25,7 +25,7 @@ CustomerType.txt
 DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
 ---DATEMITI_FULL.txt
-DisablePrebill.txt
+---DisablePrebill.txt
 DISCOUNT_COMBOLIST.txt
 DISCOUNT_PRESETS.txt
 DISCOUNT_RATE.txt
