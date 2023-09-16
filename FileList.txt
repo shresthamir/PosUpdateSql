@@ -35,6 +35,7 @@ Drop_RMD_TRNMAIN_FN.txt
 EpaymentStatus.txt
 ---FIX_ACTYPE.TXT
 fnConvertIn.txt
+fnPascalCase.sql
 ---Footfall.txt
 GetDefaultParamenterOfStoredProcedure.txt
 GetKOTEstimate.txt
@@ -162,6 +163,7 @@ tblTicket.txt
 TRAN_A_ACID.txt
 TRAN_A_ACID_CHECK.txt
 /Triggers/ABBPROD_COGS_UPDATE.txt
+/Triggers/DROP_PREBILL_TRIGGERS.sql
 /Triggers/INVPROD_WAREHOUSE_CHECK.txt
 /Triggers/MultipleRetailPrice_UPDATE.txt
 /Triggers/OPPROD_WAREHOUSE_CHECK.txt
@@ -169,8 +171,8 @@ TRAN_A_ACID_CHECK.txt
 /Triggers/TRNPROD_COGS_UPDATE.txt
 /Triggers/CheckSpiltInProgress_On_RMD_KotMain_Status.txt
 /Triggers/CheckSpiltInProgress_On_RMD_KotProd.txt
-/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREMAIN.txt
-/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREPROD.txt
+---/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREMAIN.txt
+---/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREPROD.txt
 TrnMain_AdditionalInfo.txt
 TRNMAIN_SALESMANID.txt
 TRNMAIN_VIEW.txt
