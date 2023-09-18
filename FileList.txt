@@ -38,7 +38,7 @@ fnConvertIn.txt
 fnPascalCase.sql
 ---Footfall.txt
 GetDefaultParamenterOfStoredProcedure.txt
-GetKOTEstimate.txt
+GetKOTEstimate.sql
 ---PREBILL_TABLES.txt
 PROD_EXRATE.txt
 getPrintFormat.txt
@@ -60,7 +60,7 @@ INVMAIN_TMP.txt
 /InterestCalculation/OSP_CalculateInterest.txt
 /InterestCalculation/vawDueVoucher.txt
 ItemWiseCostCenter.txt
-KOT_Estimate.txt
+KOT_Estimate.sql
 KOTCATEGORY.txt
 KOTTableUpdate.txt
 MarginSchemeTables.txt
@@ -86,7 +86,7 @@ OSP_CheckAuditStatus.txt
 OSP_CompileCOGS.txt
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
-OSP_GetCounterOrderAdvance.txt
+OSP_GetCounterOrderAdvance.sql
 OSP_GetDeliveryList.txt
 OSP_GetEditableStock.txt
 OSP_GetStockDetail.txt
@@ -122,7 +122,8 @@ RMD_ACLIST.sql
 RMD_BillOnlinePaymentInfo.txt
 RMD_BILLTENDER_UPDATE.txt
 RMD_KOTMAIN_STATUS.txt
-RMD_Order_AdditionalDetail.txt
+RMD_Order_AdditionalDetail.sql
+RMD_Order_AdditionalDetailConstraints.sql
 ---RMD_RECPAY_TABLE.txt
 ---RMD_RECPAY_VIEW.txt
 ---RMD_ORDERMAIN_VCHRNO.txt
@@ -144,7 +145,7 @@ SchemeScheduleView.txt
 SalesTerminal.sql
 SCHEMESAPPLIED_PROD.txt
 SecurityQuestions.txt
-SETTINGS.txt
+SETTINGS.sql
 SettlementModes.txt
 ---ShippingInfo.txt
 SizeColorMaster.txt
@@ -176,7 +177,7 @@ TRAN_A_ACID_CHECK.txt
 TrnMain_AdditionalInfo.txt
 TRNMAIN_SALESMANID.txt
 TRNMAIN_VIEW.txt
-TRNPROD_VIEW.txt
+TRNPROD_VIEW.sql
 TRNPROD_NONTRADING.txt
 PURPROD_VIEW.txt
 TRNMAIN_BRANCH_OUT.txt
