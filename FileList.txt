@@ -4,7 +4,7 @@ FiscalYearUpdate.txt
 ---ADDITIONALCOST_JSON.txt
 AddOnMapping.txt
 AdvanceAc.txt
-BARCODE_LOG.txt
+BARCODE_LOG.sql
 BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.txt
 CapitalPurchaseConstraint.txt
@@ -183,7 +183,7 @@ PURPROD_VIEW.txt
 TRNMAIN_BRANCH_OUT.txt
 TRNPROD_BRANCH_OUT.txt
 ---TRNCONPROD.txt
-UniqueIndexes.txt
+UniqueIndexes.sql
 UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
