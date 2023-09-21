@@ -29,6 +29,7 @@
 /Reports/DebtorsReport/NSP_DEBTORSREPORT.txt
 /Reports/DebtorsReport/RSP_DEBTORSREPORT.txt
 ---/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.txt
+/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.sql
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT_VEHICLEDETAILS.txt
 /Reports/DeliveryRegisterReport/RSP_DELIVERYREGISTER_REPORT.txt
 /Reports/DirectorsApp/RSP_Dashboard_Data.txt
