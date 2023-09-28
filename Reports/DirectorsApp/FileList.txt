@@ -1,0 +1,14 @@
+RSP_Dashboard_Data.sql
+RSP_CategoryWise_Sales_Report.sql
+RSP_CategoryWiseSalesVsPlanned.txt
+RSP_SalesByHour.txt
+RSP_LastMonthVsThisMonthSales_Daily_Report.txt
+RSP_LastMonthVsThisMonth_Sales.txt
+RSP_Top_Nonselling_Items.txt
+RSP_MontlyYearlyWeeklyCategoryise_Report.txt
+RSP_CoversServedSummary_Report.txt
+RSP_TakeAway_Vs_DineIn_Sales.txt
+RSP_TopSellingItems.txt
+RSP_CoversOccupiedSummary_Report.txt
+DirectorsAppTables.txt
+RSP_MonthlySalesComparision.txt

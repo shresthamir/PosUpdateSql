@@ -32,8 +32,8 @@
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.sql
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT_VEHICLEDETAILS.txt
 /Reports/DeliveryRegisterReport/RSP_DELIVERYREGISTER_REPORT.txt
-/Reports/DirectorsApp/RSP_Dashboard_Data.txt
-/Reports/DirectorsApp/RSP_CategoryWise_Sales_Report.txt
+/Reports/DirectorsApp/RSP_Dashboard_Data.sql
+/Reports/DirectorsApp/RSP_CategoryWise_Sales_Report.sql
 /Reports/DirectorsApp/RSP_CategoryWiseSalesVsPlanned.txt
 /Reports/DirectorsApp/RSP_SalesByHour.txt
 /Reports/DirectorsApp/RSP_LastMonthVsThisMonthSales_Daily_Report.txt

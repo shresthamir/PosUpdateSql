@@ -6,7 +6,7 @@ AddOnMapping.txt
 AdvanceAc.txt
 BARCODE_LOG.sql
 BARCODE_DETAIL_STAMP.txt
-BATCHPRICE_MASTER.txt
+BATCHPRICE_MASTER.sql
 CapitalPurchaseConstraint.txt
 CBMS_Tables.txt
 /CellPay/CELLPAY_TRAN.txt
@@ -42,6 +42,7 @@ GetKOTEstimate.sql
 ---PREBILL_TABLES.txt
 PROD_EXRATE.txt
 getPrintFormat.txt
+getPrintFormat_Order.sql
 ---GROUP_ITEM.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS_AGGREGATE.txt
@@ -109,7 +110,7 @@ RateDiscount.txt
 /RateGroup/vwValidRateGroup.txt
 /RateGroup/fnGetRateGroup.txt
 /RateGroup/OSP_GETITEMLIST.sql
-/RateGroup/OSP_GetItemBatch.txt
+/RateGroup/OSP_GetItemBatch.sql
 /RateGroup/OSP_GetItemAltUnits.txt
 /Reports/VIEW_ANNEX7.txt
 RC_Columns.txt
