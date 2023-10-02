@@ -1,4 +1,5 @@
 CREATE OR ALTER PROCEDURE [dbo].[SP_GetTotalDiscount] 
+--DECLARE
 @AMOUNT decimal, 
 @DIVISION CHAR(3) = '%'
 AS
@@ -10,7 +11,7 @@ Declare @MaxAmount decimal;
 SELECT @MaxAmount = max(c.LessThan)  FROM Discount_Rate a   
  JOIN vwSchemeSchedule b on a.ScheduleID = b.DisID   
  JOIN Discount_IfAnyItemsList c on a.DisID=c.DisID    
- WHERE  a.SchemeType ='TotalAmount' AND a.IsActive = 1  
+ WHERE  (a.SchemeType ='TotalAmount'  OR a.SchemeType ='SLAB') AND a.IsActive = 1  
  AND ((@DIVISION ='%' AND isnull(a.divisions,'') = '') or (@DIVISION <> '%' AND @division IN (SELECT * FROM split(a.divisions,',')))) 
  AND CONVERT(TIME,GETDATE()) BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))
   
@@ -19,7 +20,7 @@ SELECT DISTINCT schemeID,GreaterThan,LessThan,GiftVoucher,DisRate,SchemeName, Di
  SELECT  A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount   FROM Discount_Rate a   
   JOIN vwSchemeSchedule b on a.ScheduleID = b.DisID   
   JOIN Discount_IfAnyItemsList c on a.DisID = c.DisID    
-  WHERE  a.SchemeType ='TotalAmount' AND @AMOUNT BETWEEN c.GreaterThan AND c.LessThan   
+  WHERE  (a.SchemeType ='TotalAmount' OR a.SchemeType ='SLAB') AND @AMOUNT BETWEEN c.GreaterThan AND c.LessThan   
   AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' AND @division IN (SELECT * FROM split(a.divisions,',')))) AND a.IsActive = 1 
   AND CONVERT(TIME,GETDATE()) BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))
    
@@ -27,7 +28,7 @@ SELECT DISTINCT schemeID,GreaterThan,LessThan,GiftVoucher,DisRate,SchemeName, Di
  SELECT A.DisID AS schemeID,c.GreaterThan,c.LessThan,c.GiftVoucher,c.DisRate,a.SchemeName, c.DisAmount  FROM Discount_Rate a   
   JOIN vwSchemeSchedule b on a.ScheduleID = b.DisID   
   JOIN Discount_IfAnyItemsList c on a.DisID = c.DisID    
-  WHERE  a.SchemeType ='TotalAmount' AND (  @AMOUNT  > c.LessThan AND c.LessThan =@MaxAmount )  
+  WHERE (a.SchemeType ='TotalAmount' OR a.SchemeType ='SLAB') AND (  @AMOUNT  > c.LessThan AND c.LessThan =@MaxAmount )  
   AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' AND @division IN (SELECT * FROM split(a.divisions,',')))) AND a.IsActive = 1 
   AND CONVERT(TIME,GETDATE()) BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))
 ) A
