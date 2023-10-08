@@ -41,7 +41,7 @@ GetDefaultParamenterOfStoredProcedure.txt
 GetKOTEstimate.sql
 ---PREBILL_TABLES.txt
 PROD_EXRATE.txt
-getPrintFormat.txt
+getPrintFormat.sql
 getPrintFormat_Order.sql
 ---GROUP_ITEM.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS.txt
