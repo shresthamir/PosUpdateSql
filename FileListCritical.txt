@@ -43,3 +43,4 @@
 /vwSchemeSchedule.txt | 23 AUG 2023
 /SalesTerminal.sql | 15 SEP 2023
 /Warehouse.sql | 15 SEP 2023
+/PaymentModesUpdate.sql | 8 OCT 2023
