@@ -53,7 +53,7 @@
 /Reports/ItemExpiryReport/RSP_ITEMEXPIRYREPORT_BATCHWISE.txt
 ---/Reports/ItemLocation.txt
 ---/Reports/JournalBookReport/NSP_JOURNALBOOK.txt
-/Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.txt
+/Reports/JournalBookReport/NSP_JOURNALBOOK_ACID.sql
 /Reports/JournalBookReport/RSP_JOURNALBOOK.txt
 /Reports/KOT Reports/KOTRECORD.txt
 /Reports/KOT Reports/NSP_KOTREPORT.txt

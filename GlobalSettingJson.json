@@ -60,4 +60,5 @@
 ,{"SettingColumn":"DisableDefaultItemACMapping","DisplayText":"Enable item wise Account Mapping.","Description":"Enable Sales/Purchase/Return A/C mapping to item and accounting entry accordingly","DataType":"Bool","options":""}
 ,{"SettingColumn":"EnableOrderTimeValidationOnPromotion","DisplayText":"Enable order time validation on promotions.","Description":"Validates order time instead of Bill time while validating promotion schedule.","DataType":"Bool","options":[]}
 ,{"SettingColumn": "CentralizedDbMode","DisplayText": "Enable Centralized Db Mode","Description": "CentralizedDbMode","DataType": "Bool","options": []}
-,{"SettingColumn": "ServiceChargeRate","DisplayText": "Service Charge Rate","Description": "Service Tax Rate","DataType": "Text","options": []}]
+,{"SettingColumn": "ServiceChargeRate","DisplayText": "Service Charge Rate","Description": "Service Tax Rate","DataType": "Text","options": []}
+,{"SettingColumn": "EnableBarcodeDetails","DisplayText": "Enable Variant Module","Description": "Enable Variant (Size/Color) Module","DataType": "Bool","options": []}]
