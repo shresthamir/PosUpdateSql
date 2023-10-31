@@ -84,7 +84,7 @@ NUM_TOWORDS.txt
 OrderMode.txt
 OSP_BranchTransferInTransitClear.txt
 OSP_CheckAuditStatus.txt
-OSP_CompileCOGS.txt
+OSP_CompileCOGS.sql
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
 OSP_GetCounterOrderAdvance.sql
