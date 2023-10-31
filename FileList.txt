@@ -99,8 +99,8 @@ OSP_TransitStockReconcile.txt
 Party_Payment_Info.txt
 PharmacyFields.txt
 PK_TableList.txt
-PROD_COG.txt
-PROD_COGS.txt
+PROD_COG.sql
+PROD_COGS.sql
 ---PRODUCT_EDIT_LOG.txt
 /Promotions/Add_TrnUser_IsActive_On_Discount_IfAnyItem.txt
 PURMAIN_IMPORTDETAIL.txt
@@ -113,7 +113,7 @@ RateDiscount.txt
 /RateGroup/OSP_GetItemBatch.sql
 /RateGroup/OSP_GetItemAltUnits.txt
 /Reports/VIEW_ANNEX7.txt
-RC_Columns.txt
+RC_Columns.sql
 ---RDLPRINTING.txt
 ---ReceipeProd.txt
 ---RemoveUn-NecessaryTables.txt
@@ -196,7 +196,7 @@ vwIndexFragmentation.txt
 vwSchemeItems.txt
 vwTableSize.txt
 vwTrnMain_AdditionalInfo.txt
-vwTrnProd_COGS.txt
+vwTrnProd_COGS.sql
 vwVehicleBarcode.txt
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
 Warehouse.sql

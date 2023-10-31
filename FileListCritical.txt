@@ -44,3 +44,7 @@
 /SalesTerminal.sql | 15 SEP 2023
 /Warehouse.sql | 15 SEP 2023
 /PaymentModesUpdate.sql | 8 OCT 2023
+/PROD_COG.sql | 30 OCT 2023
+/PROD_COGS.sql | 30 OCT 2023
+/vwTrnProd_COGS.sql | 30 OCT 2023
+/RC_Columns.sql | 30 OCT 2023
