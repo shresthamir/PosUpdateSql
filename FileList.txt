@@ -184,6 +184,10 @@ PURPROD_VIEW.txt
 TRNMAIN_BRANCH_OUT.txt
 TRNPROD_BRANCH_OUT.txt
 ---TRNCONPROD.txt
+/trnTaxDetails/JewelleryDetails.sql
+/trnTaxDetails/trnTaxDetails.sql
+/trnTaxDetails/vwMain_TaxDetails.sql
+/trnTaxDetails/vwProd_TaxDetails.sql
 UniqueIndexes.sql
 UserProfiles.txt
 USERPROFILESABB.txt
