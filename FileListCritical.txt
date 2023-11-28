@@ -12,7 +12,7 @@
 /Reports/VIEW_ANNEX7.txt | 28 MAY 2023
 /vwInactiveInvoices.txt | 28 MAY 2023
 /SettlementModes.txt | 29 MAY 2023
-/KOT_Estimate.txt | 2 JUN 2023
+/KOT_Estimate.sql | 2 JUN 2023
 /OSP_GetDeliveryList.txt | 10 JUL 2023
 /Triggers/INVPROD_WAREHOUSE_CHECK.txt | 14 JUL 2023
 /Triggers/OPPROD_WAREHOUSE_CHECK.txt | 14 JUL 2023
@@ -25,7 +25,7 @@
 /Triggers/TRNPROD_COGS_UPDATE.txt | 25 JUL 2023
 /MultipleRetailPrice.txt | 25 JUL 2023
 /DISCOUNT_COMBOLIST.txt | 31 JUL 2023
-/GetKOTEstimate.txt | 27 JUL 2023
+/GetKOTEstimate.sql | 27 JUL 2023
 /AddOnMapping.txt | 27 JUL 2023
 /DIVISION.txt | 7 AUG 2023
 /RMD_TRNPROD_STATUS.txt | 15 AUG 2023

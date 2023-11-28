@@ -61,4 +61,8 @@
 ,{"SettingColumn":"EnableOrderTimeValidationOnPromotion","DisplayText":"Enable order time validation on promotions.","Description":"Validates order time instead of Bill time while validating promotion schedule.","DataType":"Bool","options":[]}
 ,{"SettingColumn": "CentralizedDbMode","DisplayText": "Enable Centralized Db Mode","Description": "CentralizedDbMode","DataType": "Bool","options": []}
 ,{"SettingColumn": "ServiceChargeRate","DisplayText": "Service Charge Rate","Description": "Service Tax Rate","DataType": "Text","options": []}
-,{"SettingColumn": "EnableBarcodeDetails","DisplayText": "Enable Variant Module","Description": "Enable Variant (Size/Color) Module","DataType": "Bool","options": []}]
+,{"SettingColumn": "EnableBarcodeDetails","DisplayText": "Enable Variant Module","Description": "Enable Variant (Size/Color) Module","DataType": "Bool","options": []}
+,{"SettingColumn": "EnableAcBaseBrnTransfer","DisplayText": "Enable Accounting in Branch Transfer","Description": "Accounting entry is auto entered on Branch In/Out.","DataType": "Bool","options": []}
+,{"SettingColumn": "EnableManualBTransferIn","DisplayText": "Enable Manual Branch In.","Description": "Enable branch in without branch out reference.","DataType": "Bool","options": []}
+,{"SettingColumn": "EnableRT_COGS","DisplayText": "Enable real-time COGS calculation in Sales.","Description": "Enable real-time COGS calculation in Sales.","DataType": "Bool","options": []}
+]
