@@ -47,7 +47,7 @@ getPrintFormat_Order.sql
 /Hotel/HSP_GET_AVAILABLE_ROOMS.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS_AGGREGATE.txt
 /Hotel/HSP_GET_ROOM_STATEMENT.txt
-/Hotel/HSP_HOTEL_REGISTER.txt
+/Hotel/HSP_HOTEL_REGISTER.sql
 /Hotel/HSP_OCCUPENCY_REPORT.txt
 /Hotel/HTL_ROOM_CATEGORY.txt
 /Hotel/HTL_ROOM.txt
@@ -121,7 +121,7 @@ ReportContextMenus.txt
 Requisition.txt
 RMD_ACLIST.sql
 RMD_BillOnlinePaymentInfo.txt
-RMD_BILLTENDER_UPDATE.txt
+RMD_BILLTENDER_UPDATE.sql
 RMD_KOTMAIN_STATUS.txt
 RMD_Order_AdditionalDetail.sql
 RMD_Order_AdditionalDetailConstraints.sql

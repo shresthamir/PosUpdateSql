@@ -49,3 +49,4 @@
 /vwTrnProd_COGS.sql | 31 OCT 2023
 /RC_Columns.sql | 1 NOV 2023
 /SETTINGS.sql | 2 NOV 2023
+/RMD_BILLTENDER_UPDATE.sql | 3 NOV 2023

@@ -83,7 +83,7 @@
 /Reports/ReportPrintParameter.txt
 /Reports/RSP_REQUISITION_VS_STOCK_ANALYSIS.txt
 /Reports/RSP_ITEM_PURCHASE_RATE_HISTORY.txt
-/Reports/RSP_SHIFTCLOSEREPORT.txt
+/Reports/RSP_SHIFTCLOSEREPORT.sql
 /Reports/RSP_SHIFTREPORT.txt
 /Reports/PL_Report/NSP_PLACCOUNT.txt
 /Reports/PL_Report/NSP_PLACCOUNT_HORIZONTAL.txt
@@ -132,7 +132,7 @@
 /Reports/RAW/RSP_PURCHASERETURN_RAW.txt
 /Reports/RAW/RSP_SALESDATA_RAW.txt
 /Reports/RAW/RSP_SALESRETURN_RAW.txt
-/Reports/RSP_STOCKLEDGER.txt
+/Reports/RSP_STOCKLEDGER.sql
 ---/Reports/SalesBookReport/GETMONTHLIST.txt
 ---/Reports/SalesBookReport/GETNEPALIMONTH.txt
 ---/Reports/SalesBookReport/GETNEPALIMONTHLIST.txt
@@ -227,3 +227,5 @@
 /Reports/RSP_DUEVOUCHERREPORT.txt
 /Reports/WSP_OVERALLCUSTOMERPERFORMANCE.txt
 /vwPartyHierarchy.sql
+/Reports/vwBillTender.sql
+/Reports/OSP_UpdateDynamicTender.sql
