@@ -54,3 +54,4 @@
 /RMD_TRNMAIN_SYNC.sql | 5 NOV 2023
 /Sync/SyncCheckSum_FiscalYear_view_local.sql | 5 NOV 2023
 /Sync/SyncTable_Client.sql | 4 NOV 2023
+/tblDenomination.sql | 5 NOV 2023
