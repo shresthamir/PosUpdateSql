@@ -51,7 +51,7 @@
 /SETTINGS.sql | 2 NOV 2023
 /RMD_BILLTENDER_UPDATE.sql | 3 NOV 2023
 /Sync/TrnMain_RowVersion.sql | 4 NOV 2023
+/Sync/SyncTable_Client.sql | 4 NOV 2023
 /RMD_TRNMAIN_SYNC.sql | 5 NOV 2023
 /Sync/SyncCheckSum_FiscalYear_view_local.sql | 5 NOV 2023
-/Sync/SyncTable_Client.sql | 4 NOV 2023
-/tblDenomination.sql | 5 NOV 2023
+/tblDenomination.sql | 6 NOV 2023
