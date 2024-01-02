@@ -159,9 +159,9 @@
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE.txt
 /Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE_DETAIL.txt
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE_DETAIL.txt
-/Reports/SalesReportPartyWise/RSP_SALESFIGURE_PARTYWISE.txt
-/Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_DETAIL.txt
-/Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_SUMMARY.txt
+/Reports/SalesReportPartyWise/RSP_SALESFIGURE_PARTYWISE.sql
+/Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_DETAIL.sql
+/Reports/SalesReportPartyWise/SP_SALESFIGURE_PARTYWISE_SUMMARY.sql
 /Reports/StockABCReport/NSP_STOCKABCREPORT.txt
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
@@ -206,7 +206,7 @@
 /Reports/TreeExpand_function.txt
 /Reports/TrialBalance/NSP_TRIALBALANCE.txt
 /Reports/TrialBalance/RSP_TRIALBALANCE.txt
-/Reports/TRNMAIN_VIEW_SREPORT.txt
+/Reports/TRNMAIN_VIEW_SREPORT.sql
 /Reports/TRNPROD_PURCHASEVIEW.txt
 /Reports/TRNPROD_VIEW_SREPORT.txt
 /Reports/VatSalesRegister/NSP_CNREGISTER_OLDFORMAT.txt
