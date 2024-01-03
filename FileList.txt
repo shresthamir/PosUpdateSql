@@ -4,6 +4,14 @@ FiscalYearUpdate.txt
 ---ADDITIONALCOST_JSON.txt
 AddOnMapping.txt
 AdvanceAc.txt
+/AuditLog/tblAuditLog.sql
+/AuditLog/vwTableKeys.sql
+/AuditLog/Compare_JsonObject.sql
+/AuditLog/spSaveAuditLog.sql
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_MENUITEM.sql
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEMAIN.sql
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEPROD.sql
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RMD_ACLIST.sql
 BARCODE_LOG.sql
 BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.sql

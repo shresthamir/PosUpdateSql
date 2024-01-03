@@ -56,3 +56,9 @@
 /Sync/SyncCheckSum_FiscalYear_view_local.sql | 5 NOV 2023
 /tblDenomination.sql | 6 NOV 2023
 /RateGroup/OSP_GetItemAltUnits.sql | 7 NOV 2023
+/AuditLog/tblAuditLog.sql | 8 NOV 2023
+/AuditLog/vwTableKeys.sql | 8 NOV 2023
+/AuditLog/Compare_JsonObject.sql | 8 NOV 2023
+/AuditLog/spSaveAuditLog.sql | 8 NOV 2023
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEMAIN.sql | 8 NOV 2023
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEPROD.sql | 8 NOV 2023
