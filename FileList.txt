@@ -111,7 +111,7 @@ RateDiscount.txt
 /RateGroup/fnGetRateGroup.txt
 /RateGroup/OSP_GETITEMLIST.sql
 /RateGroup/OSP_GetItemBatch.sql
-/RateGroup/OSP_GetItemAltUnits.txt
+/RateGroup/OSP_GetItemAltUnits.sql
 /Reports/VIEW_ANNEX7.txt
 RC_Columns.sql
 ---RDLPRINTING.txt

@@ -55,3 +55,4 @@
 /RMD_TRNMAIN_SYNC.sql | 5 NOV 2023
 /Sync/SyncCheckSum_FiscalYear_view_local.sql | 5 NOV 2023
 /tblDenomination.sql | 6 NOV 2023
+/RateGroup/OSP_GetItemAltUnits.sql | 7 NOV 2023
