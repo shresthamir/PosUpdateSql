@@ -75,11 +75,11 @@
 /Reports/NSP_CostSheet.txt
 /Reports/OpeningStockPosition/RSP_OPENINGSTOCK.txt
 /Reports/PromotionReports/RSP_PromotionSalesReport.txt
-/Reports/RecipeReport/OSP_GetReceipeConsumptionList.txt
-/Reports/RecipeReport/RSP_PendingConsumptionStockDetail.txt
-/Reports/RecipeReport/RSP_ReceipeConsumptionReport.txt
-/Reports/RecipeReport/TRNPROD_RECEIPE.txt
-/Reports/RecipeReport/vwPendingConsumptionList.txt
+/Reports/RecipeReport/OSP_GetReceipeConsumptionList.sql
+/Reports/RecipeReport/RSP_PendingConsumptionStockDetail.sql
+/Reports/RecipeReport/RSP_ReceipeConsumptionReport.sql
+/Reports/RecipeReport/TRNPROD_RECEIPE.sql
+/Reports/RecipeReport/vwPendingConsumptionList.sql
 /Reports/ReportPrintParameter.txt
 /Reports/RSP_REQUISITION_VS_STOCK_ANALYSIS.txt
 /Reports/RSP_ITEM_PURCHASE_RATE_HISTORY.txt
@@ -125,7 +125,7 @@
 /Reports/RSP_PARTYMASTER.txt
 /Reports/RSP_PartyVsProductSalesReport.sql
 /Reports/RSP_PAYOUTREPORT.txt
-/Reports/RSP_RECEIPEREPORT.txt
+/Reports/RSP_RECEIPEREPORT.sql
 /Reports/RSP_ROL_BY_SHELF_LIFE.txt
 /Reports/RSP_SALESREPORT_DEPARTMENTWISE_AUTOMOBILE.txt
 /Reports/RAW/RSP_PURCHASEDATA_RAW.txt

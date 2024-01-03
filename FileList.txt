@@ -115,7 +115,7 @@ RateDiscount.txt
 /Reports/VIEW_ANNEX7.txt
 RC_Columns.sql
 ---RDLPRINTING.txt
----ReceipeProd.txt
+ReceipeProd.sql
 ---RemoveUn-NecessaryTables.txt
 ReportContextMenus.txt
 Requisition.txt
@@ -193,6 +193,8 @@ UserProfiles.txt
 USERPROFILESABB.txt
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+vwActiveRecipeMain.sql
+vwActiveRecipeProd.sql
 vwContractPrice.txt
 vwCustomerProfile.txt
 vwInactiveInvoices.txt
