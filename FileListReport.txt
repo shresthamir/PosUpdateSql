@@ -227,5 +227,5 @@
 /Reports/RSP_DUEVOUCHERREPORT.txt
 /Reports/WSP_OVERALLCUSTOMERPERFORMANCE.txt
 /vwPartyHierarchy.sql
-/Reports/vwBillTender.sql
-/Reports/OSP_UpdateDynamicTender.sql
+/Reports/BillTender/vwBillTender.sql
+/Reports/BillTender/OSP_UpdateDynamicTender.sql
