@@ -1,4 +1,3 @@
-
 FiscalYearUpdate.txt
 ---ABBCONPROD.txt
 ---ADDITIONALCOST_JSON.txt
@@ -73,7 +72,7 @@ KOT_Estimate.sql
 KOTCATEGORY.txt
 KOTTableUpdate.txt
 MarginSchemeTables.txt
-Membership.txt
+Membership.sql
 MEMGRADETRAN_VIEW.txt
 MEMGRADETRAN_DETAILS.txt
 MENUITEM_ECOMMERCE_DETAIL.txt
