@@ -1,9 +1,9 @@
 CREATE or alter    PROC [dbo].[spSaveAuditLog] (@TableName varchar(50),  @InsertedJson nvarchar(max), @DeletedJson nvarchar(max))      
 AS      
 BEGIN TRY           
- Declare @KeyValue varchar(1000)      
+ Declare @KeyValue varchar(1000), @IgnoreFields VARCHAR(MAX)      
  Declare @TUser varchar(1000)  
- set @KeyValue = (SELECT KeyFielD FROM vwTableKeys where TableName = @TableName)      
+ SELECT @KeyValue = KeyFielD, @IgnoreFields = IgnoreFields FROM vwTableKeys where TableName = @TableName
    Declare @KValue varchar(1000)  
  IF ((@InsertedJson IS NULL OR @InsertedJson =  '') AND @DeletedJson IS NOT NULL AND  @DeletedJson <> '')      
  BEGIN      
@@ -22,7 +22,7 @@ BEGIN TRY
  END      
  ELSE       
  BEGIN      
-    select * INTO #UpdateResultTable from dbo.compare_jsonobject(@InsertedJson,@DeletedJson,@KeyValue) where SideIndicator Not In ('==');  
+    select * INTO #UpdateResultTable from dbo.compare_jsonobject(@InsertedJson,@DeletedJson,@KeyValue) where SideIndicator Not In ('==') AND TheKey NOT IN (SELECT * FROM Split(@IgnoreFields, ','));  
     IF((select count(*) from #UpdateResultTable) > 0)      
     BEGIN      
      Insert into tblAuditLog      
