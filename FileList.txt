@@ -98,7 +98,7 @@ OSP_GetCounterOrderAdvance.sql
 OSP_GetDeliveryList.txt
 OSP_GetEditableStock.txt
 OSP_GetStockDetail.txt
-OSP_GetSupplierWiseItemForPO.txt
+OSP_GetSupplierWiseItemForPO.sql
 OSP_PopulateTblBillTender.txt
 OSP_UpdateBillTenderTable.txt
 OSP_ValidateStockEdit.txt
