@@ -1,6 +1,6 @@
 CREATE OR ALTER PROC SP_GetItemWisePointCalculation
 --DECLARE
-@JSON VARCHAR(5000),
+@JSON VARCHAR(MAX),
 @MemberScheme VARCHAR(50) = ''
 AS
 
