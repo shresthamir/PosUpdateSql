@@ -70,7 +70,7 @@ INVMAIN_TMP.txt
 ItemWiseCostCenter.txt
 KOT_Estimate.sql
 KOTCATEGORY.txt
-KOTTableUpdate.txt
+KOTTableUpdate.sql
 MarginSchemeTables.txt
 Membership.sql
 MEMGRADETRAN_VIEW.txt

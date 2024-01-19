@@ -65,3 +65,4 @@
 /AuditLog/Compare_JsonObject.sql | 11 NOV 2023
 /SP_GetMarginDiscount.sql | 12 NOV 2023
 /SP_GetItemWisePointCalculation.sql | 12 NOV 2023
+/KOTTableUpdate.sql | 13 NOV 2023
