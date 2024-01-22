@@ -66,3 +66,6 @@
 /SP_GetMarginDiscount.sql | 12 NOV 2023
 /SP_GetItemWisePointCalculation.sql | 12 NOV 2023
 /KOTTableUpdate.sql | 13 NOV 2023
+/USERPROFILESABB.sql | 14 NOV 2023
+/RMD_KOTMAIN_STATUS.sql | 14 NOV 2023
+/UserProfiles.sql | 14 NOV 2023

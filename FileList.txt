@@ -130,7 +130,7 @@ Requisition.txt
 RMD_ACLIST.sql
 RMD_BillOnlinePaymentInfo.txt
 RMD_BILLTENDER_UPDATE.sql
-RMD_KOTMAIN_STATUS.txt
+RMD_KOTMAIN_STATUS.sql
 RMD_Order_AdditionalDetail.sql
 RMD_Order_AdditionalDetailConstraints.sql
 ---RMD_RECPAY_TABLE.txt
@@ -197,8 +197,8 @@ TRNPROD_BRANCH_OUT.txt
 /trnTaxDetails/vwMain_TaxDetails.sql
 /trnTaxDetails/vwProd_TaxDetails.sql
 UniqueIndexes.sql
-UserProfiles.txt
-USERPROFILESABB.txt
+UserProfiles.sql
+USERPROFILESABB.sql
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
 vwActiveRecipeMain.sql
