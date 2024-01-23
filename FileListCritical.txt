@@ -70,3 +70,4 @@
 /RMD_KOTMAIN_STATUS.sql | 14 NOV 2023
 /UserProfiles.sql | 14 NOV 2023
 /Reports/ReportMaster.sql | 16 NOV 2023
+/KotProd_ChoiceItems.sql | 17 NOV 2023
