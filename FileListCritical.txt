@@ -69,4 +69,4 @@
 /USERPROFILESABB.sql | 14 NOV 2023
 /RMD_KOTMAIN_STATUS.sql | 14 NOV 2023
 /UserProfiles.sql | 14 NOV 2023
-/Report/ReportMaster.sql | 15 NOV 2023
+/Reports/ReportMaster.sql | 16 NOV 2023
