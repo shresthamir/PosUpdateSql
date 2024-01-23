@@ -20,5 +20,5 @@ EXEC [dbo].[RSP_STOCKVALUATION_FIFO]
 		@ITEM =@MCODE , 
 		@DoValuation =@DoValuation ,
 		@FIFO =@OPT_FIFO ,
-		@DIVISION =@DIVISION
+		@DIVISION =@DIVISION,
 		@FYID = @FYID
