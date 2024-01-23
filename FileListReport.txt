@@ -106,6 +106,7 @@
 /Reports/fnGetBarcodeDetail.txt
 /Reports/fnPartyFilter.txt
 /Reports/fnProductFilter.txt
+/Reports/ReportMaster.sql
 /Reports/ReportSetting.txt
 /Reports/RSP_ANNEX10.txt
 /Reports/RSP_BRANCHWISE_CONSOLIDATED_LEDGERS.txt
