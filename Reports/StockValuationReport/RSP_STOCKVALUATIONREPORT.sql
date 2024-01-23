@@ -15,10 +15,7 @@ SET @PATH = @PATH + '%'
 EXEC [dbo].[RSP_STOCKVALUATION_FIFO] 
 		@DATE =@DATE2 ,
 		@PATH =@PATH ,
-		@PHISCALID =@FYID ,
 		@DETAIL =@DETAIL ,
-		@ITEM =@MCODE , 
-		@DoValuation =@DoValuation ,
-		@FIFO =@OPT_FIFO ,
+		@ITEM =@MCODE,
 		@DIVISION =@DIVISION,
 		@FYID = @FYID
