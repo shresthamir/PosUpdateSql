@@ -39,7 +39,7 @@ DISCOUNT_RATE.txt
 ---DISCOUNT_SCHEME.txt
 DIVISION.txt
 Drop_RMD_TRNMAIN_FN.txt
-EpaymentStatus.txt
+EpaymentStatus.sql
 ---FIX_ACTYPE.TXT
 fnConvertIn.txt
 fnPascalCase.sql
@@ -105,6 +105,7 @@ OSP_UpdateBillTenderTable.txt
 OSP_ValidateStockEdit.txt
 OSP_TransitStockReconcile.txt
 Party_Payment_Info.txt
+PaymentModeOrder.sql
 PharmacyFields.txt
 PK_TableList.txt
 PROD_COG.sql
