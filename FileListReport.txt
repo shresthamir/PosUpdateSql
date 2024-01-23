@@ -190,7 +190,7 @@
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT.txt
 /Reports/StockValuationReport/NSP_STOCKVALUATIONREPORT_DIVISIONWISE.txt
-/Reports/StockValuationReport/RSP_STOCKVALUATIONREPORT.txt
+/Reports/StockValuationReport/RSP_STOCKVALUATIONREPORT.sql
 /Reports/SupplierVsProductAnalysis/SP_SUPPLIERVSPRODUCT.txt
 /Reports/SupplierVsProductAnalysis/SP_SUPPLIERVSPRODUCT_EXVAT.txt
 /Reports/SupplierVsProductAnalysis/RSP_SUPPLIERVSPRODUCT.txt
