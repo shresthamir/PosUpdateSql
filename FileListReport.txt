@@ -177,11 +177,11 @@
 /Reports/StockLevelReports/SP_MAXSTOCK.txt
 /Reports/StockLevelReports/SP_MINSTOCK.txt
 /Reports/StockLevelReports/SP_ROSTOCK.txt
-/Reports/StockPosition/NSP_STOCKREPORT.txt
-/Reports/StockPosition/RSP_STOCKREPORT.txt
-/Reports/StockPosition/NSP_STOCKREPORT_CONSOLIDATED.txt
-/Reports/StockPosition/RSP_STOCKREPORT_CONSOLIDATED.txt
-/Reports/StockPosition/RSP_STOCKREPORT_SUMMARY.txt
+/Reports/StockPosition/NSP_STOCKREPORT.sql
+/Reports/StockPosition/RSP_STOCKREPORT.sql
+/Reports/StockPosition/NSP_STOCKREPORT_CONSOLIDATED.sql
+/Reports/StockPosition/RSP_STOCKREPORT_CONSOLIDATED.sql
+/Reports/StockPosition/RSP_STOCKREPORT_SUMMARY.sql
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTREGISTER.txt
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTSTATUS.txt
 /Reports/StockSettlementReports/SP_STOCKADJUSTMENTREGISTER_TIMEWISE.txt
