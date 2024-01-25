@@ -14,7 +14,7 @@ AdvanceAc.txt
 BARCODE_LOG.sql
 BARCODE_DETAIL_STAMP.txt
 BATCHPRICE_MASTER.sql
-CapitalPurchaseConstraint.txt
+CapitalPurchaseConstraint.sql
 CBMS_Tables.txt
 /CellPay/CELLPAY_TRAN.txt
 /CellPay/CellPayTables.txt
