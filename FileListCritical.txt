@@ -75,3 +75,4 @@
 /PaymentModeOrder.sql | 19 NOV 2023
 /CapitalPurchaseConstraint.sql | 21 NOV 2023
 /OSP_GetSupplierWiseItemForPO.sql | 22 NOV 2023
+/Reports/RSP_DayEndReport.sql | 23 NOV 2023
