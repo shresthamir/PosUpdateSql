@@ -30,9 +30,8 @@
 /Reports/DebtorsReport/NSP_DEBTORSCREDITORS_AGEING.txt
 /Reports/DebtorsReport/NSP_DEBTORSREPORT.txt
 /Reports/DebtorsReport/RSP_DEBTORSREPORT.txt
----/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.txt
 /Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT.sql
-/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT_VEHICLEDETAILS.txt
+/Reports/DeliveryRegisterReport/NSP_DELIVERYREGISTER_REPORT_VEHICLEDETAILS.sql
 /Reports/DeliveryRegisterReport/RSP_DELIVERYREGISTER_REPORT.txt
 /Reports/DirectorsApp/RSP_Dashboard_Data.sql
 /Reports/DirectorsApp/RSP_CategoryWise_Sales_Report.sql
