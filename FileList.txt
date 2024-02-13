@@ -35,7 +35,7 @@ DayEndTimeSchedule.txt
 ---DisablePrebill.txt
 DISCOUNT_COMBOLIST.txt
 DISCOUNT_PRESETS.txt
-DISCOUNT_RATE.txt
+DISCOUNT_RATE.sql
 ---DISCOUNT_SCHEME.txt
 DIVISION.txt
 Drop_RMD_TRNMAIN_FN.txt
@@ -163,7 +163,7 @@ SP_CALCULATE_RE_ORDER_QUANTITY.txt
 SP_CheckTenderBasedScheme.txt
 SP_GetItemWisePointCalculation.sql
 SP_GetMarginDiscount.sql
-SP_GETSCHEMEDISCOUNT.txt
+SP_GETSCHEMEDISCOUNT.sql
 SP_GetTotalDiscount.txt
 tblAuditLog.txt
 tblBillTender.txt
