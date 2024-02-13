@@ -23,7 +23,7 @@ WHERE M.DIVISION LIKE @DIV AND M.TRNDATE BETWEEN @DATE1 AND @DATE2
 
 SELECT TRNDATE, IIF(A.TRNMODE IN ('Credit'), NETAMNT, 0) creditsales,
 IIF(A.TRNMODE IN ('Cash'), NETAMNT, 0) cashsales,
-IIF(A.TRNMODE IN ('Credit Card'), NETAMNT, 0) creditcardsales,
+IIF(A.TRNMODE IN ('Credit Card', 'CreditCard'), NETAMNT, 0) creditcardsales,
 IIF(A.TRNMODE IN ('QR','Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) onlinesales,
 IIF(A.TRNMODE NOT IN ('Cash', 'Credit Card', 'Credit' ,'QR', 'Esewa', 'Fonepay', 'Moco', 'Nepal Pay', 'Smart Qr', 'Khalti', 'IME Pay'), NETAMNT, 0) othersales,
 NETAMNT overallsales, Bills, ReturnBills
