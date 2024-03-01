@@ -48,7 +48,6 @@
 /PROD_COGS.sql | 31 OCT 2023
 /vwTrnProd_COGS.sql | 31 OCT 2023
 /RC_Columns.sql | 1 NOV 2023
-/SETTINGS.sql | 2 NOV 2023
 /RMD_BILLTENDER_UPDATE.sql | 3 NOV 2023
 /Sync/TrnMain_RowVersion.sql | 4 NOV 2023
 /Sync/SyncTable_Client.sql | 4 NOV 2023
@@ -79,3 +78,4 @@
 /DISCOUNT_RATE.sql | 24 NOV 2023
 /SP_GETSCHEMEDISCOUNT.sql | 25 NOV 2023
 /RMD_ORDERPROD.sql | 26 NOV 2023
+/SETTINGS.sql | 27 NOV 2023
