@@ -168,8 +168,8 @@
 /Reports/StockABCReport/RSP_STOCKABCREPORT.txt
 /Reports/StockAgeingReport/NSP_STOCKAGEING_QUERY.txt
 /Reports/StockAgeingReport/RSP_STOCKAGEING.txt
-/Reports/StockIssueRegister/NSP_STOCKISSUEREGISTER.txt
-/Reports/StockIssueRegister/RSP_STOCKISSUEREGISTER.txt
+/Reports/StockIssueRegister/NSP_STOCKISSUEREGISTER.sql
+/Reports/StockIssueRegister/RSP_STOCKISSUEREGISTER.sql
 /Reports/StockLevelReports/RSP_MAXSTOCK.txt
 /Reports/StockLevelReports/RSP_MINSTOCK.txt
 /Reports/StockLevelReports/RSP_ROSTOCK.txt
