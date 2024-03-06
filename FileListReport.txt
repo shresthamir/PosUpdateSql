@@ -1,3 +1,6 @@
+/Reports/BillTender/vwBillTender.sql
+/Reports/BillTender/OSP_UpdateDynamicTender.sql
+/Reports/BillTender/vwDynamicTender.sql
 /Reports/vwSessionDay.txt
 /Reports/vwItemHeirarchy.txt
 /Reports/BatchPriceReport.txt
@@ -228,5 +231,3 @@
 /Reports/RSP_BranchWiseSales.txt
 /Reports/RSP_DUEVOUCHERREPORT.txt
 /vwPartyHierarchy.sql
-/Reports/BillTender/vwBillTender.sql
-/Reports/BillTender/OSP_UpdateDynamicTender.sql

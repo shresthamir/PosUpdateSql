@@ -13,6 +13,12 @@ IF OBJECT_ID('TEMPDB..#SETTLEMENT') IS NOT NULL DROP TABLE #SETTLEMENT
 
 DECLARE @PaymentSumCols NVARCHAR(MAX), @query  AS NVARCHAR(MAX);
 
+/*
+ * Drop dummy table vwDynamicTender so  that OSP_UpdateDynamicTender can create dynamic view
+ */
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'vwDynamicTender' AND TABLE_TYPE = 'BASE TABLE')
+DROP TABLE vwDynamicTender
+
 EXEC OSP_UpdateDynamicTender
 
 select S.SESSIONID, S.DIVISION, S.PhiscalID, S.USERID, S.SessionStartDate, S.SessionEndDate, S.SessionEndUser, S.TerminalID
