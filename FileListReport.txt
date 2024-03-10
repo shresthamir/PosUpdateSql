@@ -130,6 +130,7 @@
 /Reports/RSP_PARTYMASTER.txt
 /Reports/RSP_PartyVsProductSalesReport.sql
 /Reports/RSP_PAYOUTREPORT.txt
+/Reports/RSP_ProductionReport.sql
 /Reports/RSP_RECEIPEREPORT.sql
 /Reports/RSP_ROL_BY_SHELF_LIFE.txt
 /Reports/RSP_SALESREPORT_DEPARTMENTWISE_AUTOMOBILE.txt
