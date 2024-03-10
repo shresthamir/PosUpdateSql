@@ -104,6 +104,7 @@ OSP_PopulateTblBillTender.txt
 OSP_UpdateBillTenderTable.txt
 OSP_ValidateStockEdit.txt
 OSP_TransitStockReconcile.txt
+OSP_ValidateWarehouseDiscontinue.sql
 Party_Payment_Info.txt
 PaymentModeOrder.sql
 PharmacyFields.txt

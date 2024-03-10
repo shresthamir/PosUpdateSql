@@ -79,3 +79,5 @@
 /SP_GETSCHEMEDISCOUNT.sql | 25 NOV 2023
 /RMD_ORDERPROD.sql | 26 NOV 2023
 /SETTINGS.sql | 27 NOV 2023
+/OSP_ValidateWarehouseDiscontinue.sql | 28 NOV 2023
+/Warehouse.sql | 28 NOV 2023
