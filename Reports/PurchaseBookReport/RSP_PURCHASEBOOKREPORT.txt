@@ -3,7 +3,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_PURCHASEBOOKREPORT]
 	@DATE1 DATETIME,
 	@DATE2 DATETIME,
 	@DIVISION varchar(10)='%',
-	@FX_VOUCHER_TYPE CHAR(2) = 'SI',									--VoucherType:SI
+	@FX_VOUCHER_TYPE CHAR(2) = 'PI',									--VoucherType:PI
 	@CHK_INCLUDE_RETURN TINYINT = 0,									--IncludeReturn:1:0
 	@OPT_REPORT_TYPE TINYINT = 0,										--VoucherWise:0,DayWise:1,MonthWise:2
 	@OPT_SHOWDETAL_REPORT TINYINT = 0,									--Summary:0,Detail:1
