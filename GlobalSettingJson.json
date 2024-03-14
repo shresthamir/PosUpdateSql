@@ -66,4 +66,5 @@
 ,{"SettingColumn": "EnableManualBTransferIn","DisplayText": "Enable Manual Branch In.","Description": "Enable branch in without branch out reference.","DataType": "Bool","options": []}
 ,{"SettingColumn": "EnableRT_COGS","DisplayText": "Enable real-time COGS calculation in Sales.","Description": "Enable real-time COGS calculation in Sales.","DataType": "Bool","options": []}
 ,{"SettingColumn": "ItemWiseWarehouse","DisplayText": "Enable Item Wise Default Warehouse.","Description": "Overwrite System/UI Warehouse if warehouse is set on item.","DataType": "Bool","options": []}
+,{"SettingColumn": "QueryTimeout","DisplayText": "SQL Server Query Execution Timeout.","Description": "Time in seconds before timeout error is shown if query execution takes too long.","DataType": "Text","options": []}
 ]
