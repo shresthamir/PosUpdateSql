@@ -212,7 +212,7 @@ ELSE
 	ORDER BY A.DESCA
 
 IF @TREEFORMAT=0
-	SELECT B.[Main Group], B.[Main Category], B.[Sub Category], B.[Super Category], A.* FROM #RESULT A JOIN vwItemHeirarchy B ON A.MCODE = B.MCODE ORDER BY DESCA
+	SELECT B.[Main Group], B.[Main Category], B.[Sub Category], B.[Super Category], A.* FROM #RESULT A LEFT JOIN vwItemHeirarchy B ON A.MCODE = B.MCODE ORDER BY DESCA
 ELSE
 	BEGIN
 		DECLARE @GROUPNAME AS VARCHAR(max)
