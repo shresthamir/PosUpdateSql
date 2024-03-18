@@ -81,3 +81,4 @@
 /SETTINGS.sql | 27 NOV 2023
 /OSP_ValidateWarehouseDiscontinue.sql | 28 NOV 2023
 /Warehouse.sql | 28 NOV 2023
+/excludeRecipeConsumption.sql | 29 NOV 2023

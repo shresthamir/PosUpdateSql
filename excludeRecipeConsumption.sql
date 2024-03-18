@@ -1,0 +1,9 @@
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'excludeRecipeConsumption')
+CREATE TABLE [dbo].[excludeRecipeConsumption](
+	[VOUCHERNO] [varchar](30) NOT NULL PRIMARY KEY,
+	[DIVISION] [varchar](10) NOT NULL,
+	[PHISCALID] [varchar](10) NOT NULL,
+	[REMARKS] [varchar](1000) NOT NULL,
+	[ENTRY_DATE] [datetime] NOT NULL,
+	[ENTRY_USER] [varchar](100) NOT NULL
+) ON [PRIMARY]
