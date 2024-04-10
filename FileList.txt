@@ -27,7 +27,7 @@ CompanyId_Company_Set.txt
 ---CompanyId_Function.txt
 CompanyId_TranTables.txt
 ContractPrice.txt
----CurrencyNumberToWords.txt
+CurrencyNumberToWords.sql
 CustomerType.txt
 DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
