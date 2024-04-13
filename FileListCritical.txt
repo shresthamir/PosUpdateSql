@@ -19,7 +19,6 @@
 /Triggers/PURPROD_WAREHOUSE_CHECK.txt | 14 JUL 2023
 /NSP_PopulateDateMiti.txt | 15 JUL 2023
 /NepDate.txt | 16 JUL 2023
-/NepDate1.txt | 16 JUL 2023
 /AdvanceAc.txt | 16 JUL 2023
 /Triggers/ABBPROD_COGS_UPDATE.txt | 25 JUL 2023
 /Triggers/TRNPROD_COGS_UPDATE.txt | 25 JUL 2023
@@ -83,3 +82,4 @@
 /Warehouse.sql | 28 NOV 2023
 /excludeRecipeConsumption.sql | 29 NOV 2023
 /CurrencyNumberToWords.sql | 30 NOV 2023
+/NepDate1.txt | 01 DEC 2023
