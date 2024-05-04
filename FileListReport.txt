@@ -99,7 +99,7 @@
 /Reports/ProfitablitySalesAnalysis/vwTrnProd_COGS_Summary.txt
 /Reports/PurchaseBookReport/NSP_PURCHASEBOOKREPORT.txt
 ---/Reports/PurchaseBookReport/RSP_PURCHASEBOOKREPORT.txt
-/Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE.txt
+/Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE.sql
 /Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE.txt
 ---/Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
 ---/Reports/PurchaseReport-ItemWise/RSP_PURCHASEREPORT_ITEMWISE_DETAIL.txt
@@ -161,7 +161,7 @@
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW_DAYWISE.txt
 /Reports/SalesPosition/SP_DAILYSALESPOSITION_USERWISE_NEW_TIMEWISE.txt
-/Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE.txt
+/Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE.sql
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE.txt
 /Reports/SalesReportItemWise/NSP_SALESREPORT_ITEMWISE_DETAIL.txt
 /Reports/SalesReportItemWise/RSP_SALESREPORT_ITEMWISE_DETAIL.txt
