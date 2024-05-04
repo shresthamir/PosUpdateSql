@@ -72,7 +72,6 @@
 /EpaymentStatus.sql | 18 NOV 2023
 /PaymentModeOrder.sql | 19 NOV 2023
 /CapitalPurchaseConstraint.sql | 21 NOV 2023
-/OSP_GetSupplierWiseItemForPO.sql | 22 NOV 2023
 /Reports/RSP_DayEndReport.sql | 23 NOV 2023
 /DISCOUNT_RATE.sql | 24 NOV 2023
 /SP_GETSCHEMEDISCOUNT.sql | 25 NOV 2023
@@ -83,3 +82,4 @@
 /excludeRecipeConsumption.sql | 29 NOV 2023
 /CurrencyNumberToWords.sql | 30 NOV 2023
 /NepDate1.txt | 02 DEC 2023
+/OSP_GetSupplierWiseItemForPO.sql | 03 DEC 2023
