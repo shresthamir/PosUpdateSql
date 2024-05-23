@@ -53,7 +53,6 @@
 /RMD_TRNMAIN_SYNC.sql | 5 NOV 2023
 /Sync/SyncCheckSum_FiscalYear_view_local.sql | 5 NOV 2023
 /tblDenomination.sql | 6 NOV 2023
-/RateGroup/OSP_GetItemAltUnits.sql | 7 NOV 2023
 /AuditLog/tblAuditLog.sql | 9 NOV 2023
 /AuditLog/vwTableKeys.sql | 9 NOV 2023
 /AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEMAIN.sql | 9 NOV 2023
@@ -83,3 +82,4 @@
 /CurrencyNumberToWords.sql | 30 NOV 2023
 /NepDate1.txt | 02 DEC 2023
 /OSP_GetSupplierWiseItemForPO.sql | 03 DEC 2023
+/RateGroup/OSP_GetItemAltUnits.sql | 04 DEC 2023
