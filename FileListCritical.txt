@@ -81,5 +81,5 @@
 /CurrencyNumberToWords.sql | 30 NOV 2023
 /NepDate1.txt | 02 DEC 2023
 /OSP_GetSupplierWiseItemForPO.sql | 03 DEC 2023
-/RateGroup/OSP_GetItemAltUnits.sql | 04 DEC 2023
-/Reports/RSP_DayEndReport.sql | 05 NOV 2023
+/Reports/RSP_DayEndReport.sql | 05 DEC 2023
+/RateGroup/OSP_GetItemAltUnits.sql | 05 DEC 2023
