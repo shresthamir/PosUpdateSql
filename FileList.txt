@@ -28,7 +28,7 @@ CompanyId_Company_Set.txt
 CompanyId_TranTables.txt
 ContractPrice.txt
 CurrencyNumberToWords.sql
-CustomerType.txt
+CustomerType.sql
 DayEndTimeSchedule.txt
 ---DefaultUserRights.txt
 ---DATEMITI_FULL.txt
@@ -207,7 +207,7 @@ VEHICLE_WAREHOUSE.txt
 vwActiveRecipeMain.sql
 vwActiveRecipeProd.sql
 vwContractPrice.txt
-vwCustomerProfile.txt
+vwCustomerProfile.sql
 vwInactiveInvoices.txt
 vwIndexFragmentation.txt
 vwSchemeItems.txt

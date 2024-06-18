@@ -30,8 +30,6 @@
 /RMD_TRNPROD_STATUS.txt | 15 AUG 2023
 /tblTicket.txt | 15 AUG 2023
 /ItemWiseCostCenter.txt | 15 AUG 2023
-/CustomerType.txt | 20 AUG 2023
-/vwCustomerProfile.txt | 20 AUG 2023
 /InterestCalculation/Add_EMI_LOG_VOUCHER_WISE_RECEIPT_LOG.txt | 22 AUG 2023
 /InterestCalculation/OSP_CalculateInterest.txt | 22 AUG 2023
 /InterestCalculation/vawDueVoucher.txt | 22 AUG 2023
@@ -83,3 +81,5 @@
 /OSP_GetSupplierWiseItemForPO.sql | 03 DEC 2023
 /Reports/RSP_DayEndReport.sql | 05 DEC 2023
 /RateGroup/OSP_GetItemAltUnits.sql | 05 DEC 2023
+/vwCustomerProfile.sql | 06 DEC 2023
+/CustomerType.sql | 06 DEC 2023
