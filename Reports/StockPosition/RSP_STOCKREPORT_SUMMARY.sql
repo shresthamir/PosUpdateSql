@@ -187,16 +187,16 @@ SELECT @columns = STRING_AGG(SELECTION_COLS, ',' + CHAR(10)), @agg_columns = STR
 
 --print @columns
 
-SET @fixedColumns = 'A.[Main Group], A.[Main Category], A.[Sub Category], A.[Super Category], A.ITEMCODE, A.DESCA, A.BASEUNIT,A.PRATE, A.SRATE, A.SUPPLIER, A.MCODE, A.BARCODE ' + IIF(@HasVariant = 1,', BD.SIZE, BD.COLOR ','')
+SET @fixedColumns = 'A.[Main Group], A.[Main Category], A.[Sub Category], A.[Super Category], A.ITEMCODE, A.DESCA, A.BASEUNIT,A.PRATE, A.SRATE, A.SUPPLIER, A.MCODE, A.BARCODE '
 --PRINT @colOp
 SET @query = '
-	SELECT ' + @fixedColumns + ',' + CHAR(10) + @agg_columns + ' FROM
+	SELECT ' + @fixedColumns + IIF(@HasVariant = 1,', A.SIZE, A.COLOR ','') + ',' + CHAR(10) + @agg_columns + ' FROM
 	(
-		SELECT ' + @fixedColumns + ',' + CHAR(10) + @columns + ' 
+		SELECT ' + @fixedColumns + IIF(@HasVariant = 1,', BD.SIZE, BD.COLOR ','') + ',' + CHAR(10) + @columns + ' 
 		FROM #RESULT A ' 
 		+ IIF(@HasVariant = 1, 'LEFT JOIN BARCODE_DETAIL BD ON A.MCODE = BD.MCODE AND A.BARCODE = BD.BARCODE','') + '
 	) A
-	GROUP BY ' + @fixedColumns + '
+	GROUP BY ' + @fixedColumns + IIF(@HasVariant = 1,', A.SIZE, A.COLOR ','') + '
 	ORDER BY A.DESCA
 '
 PRINT @QUERY
@@ -209,4 +209,3 @@ IF OBJECT_ID('TEMPDB..##STOCK_WithItemDetail') IS NOT NULL DROP TABLE #STOCK_Wit
 IF OBJECT_ID('TEMPDB..#RESULT') IS NOT NULL DROP TABLE #RESULT
 IF OBJECT_ID('TEMPDB..#DIV_WAREHOUSE') IS NOT NULL DROP TABLE #DIV_WAREHOUSE
 IF OBJECT_ID('TEMPDB..#COLS') is not NULL drop table #COLS
-
