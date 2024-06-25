@@ -1,6 +1,6 @@
 CREATE OR ALTER   PROC [dbo].[OSP_GetReceipeConsumptionList]
 --DECLARE 
-@Warehouse VARCHAR(25), 
+@Warehouse VARCHAR(50), 
 @VCHRNO VARCHAR(25)
 AS
 --SET @VCHRNO ='TI1519-PKR-78/79'; SET @Warehouse = 'Main Warehouse'

@@ -83,3 +83,4 @@
 /RateGroup/OSP_GetItemAltUnits.sql | 05 DEC 2023
 /vwCustomerProfile.sql | 06 DEC 2023
 /CustomerType.sql | 06 DEC 2023
+/Reports/RecipeReport/OSP_GetReceipeConsumptionList.sql | 07 DEC 2023
