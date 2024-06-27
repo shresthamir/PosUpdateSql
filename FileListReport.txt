@@ -231,4 +231,5 @@
 /Reports/VoucherBookReport/RSP_VOUCHERBOOKREPORT.txt
 /Reports/RSP_BranchWiseSales.txt
 /Reports/RSP_DUEVOUCHERREPORT.sql
+/Reports/vwVoucherLedgerParticulars.sql
 /vwPartyHierarchy.sql
