@@ -80,7 +80,8 @@
 /NepDate1.txt | 02 DEC 2023
 /OSP_GetSupplierWiseItemForPO.sql | 03 DEC 2023
 /Reports/RSP_DayEndReport.sql | 05 DEC 2023
-/RateGroup/OSP_GetItemAltUnits.sql | 05 DEC 2023
-/vwCustomerProfile.sql | 06 DEC 2023
-/CustomerType.sql | 06 DEC 2023
 /Reports/RecipeReport/OSP_GetReceipeConsumptionList.sql | 07 DEC 2023
+/PURPROD_VIEW.sql | 08 DEC 2023
+/RateGroup/OSP_GetItemAltUnits.sql | 05 DEC 2023
+/CustomerType.sql | 08 DEC 2023
+/vwCustomerProfile.sql | 08 DEC 2023
