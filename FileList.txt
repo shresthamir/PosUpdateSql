@@ -147,7 +147,7 @@ RMD_SALESPROD.txt
 RMD_TRNMAIN_ACTIVE.txt
 RMD_TRNMAIN_FN.txt
 ---RMD_TRNPROD.txt
-RMD_TRNPROD_FN.txt
+RMD_TRNPROD_FN.sql
 RMD_TRNPROD_STATUS.txt
 ---RMD_TRNTRAN.txt
 RMD_TRNTRAN_FN.txt
@@ -214,7 +214,7 @@ vwSchemeItems.txt
 vwTableSize.txt
 vwTrnMain_AdditionalInfo.txt
 vwTrnProd_COGS.sql
-vwVehicleBarcode.txt
+vwVehicleBarcode.sql
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
 Warehouse.sql
 xPrimaryKeys.txt
