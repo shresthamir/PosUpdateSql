@@ -1,4 +1,4 @@
-FiscalYearUpdate.txt
+FiscalYearUpdate.sql
 ---ABBCONPROD.txt
 ---ADDITIONALCOST_JSON.txt
 AddOnMapping.txt
