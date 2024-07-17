@@ -82,8 +82,8 @@
 /Reports/RSP_DayEndReport.sql | 05 DEC 2023
 /Reports/RecipeReport/OSP_GetReceipeConsumptionList.sql | 07 DEC 2023
 /PURPROD_VIEW.sql | 08 DEC 2023
-/RateGroup/OSP_GetItemAltUnits.sql | 05 DEC 2023
 /CustomerType.sql | 08 DEC 2023
 /vwCustomerProfile.sql | 08 DEC 2023
 /FiscalYearUpdate.sql | 09 DEC 2023
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO.sql | 10 DEC 2023
+/RateGroup/OSP_GetItemAltUnits.sql | 11 DEC 2023
