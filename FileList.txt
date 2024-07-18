@@ -216,6 +216,7 @@ vwTrnMain_AdditionalInfo.txt
 vwTrnProd_COGS.sql
 vwVehicleBarcode.sql
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO_DIVISIONWISE.txt
+/Reports/RSP_DUEVOUCHERREPORT.sql
 Warehouse.sql
 xPrimaryKeys.txt
 

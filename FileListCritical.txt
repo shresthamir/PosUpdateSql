@@ -87,3 +87,4 @@
 /FiscalYearUpdate.sql | 09 DEC 2023
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO.sql | 10 DEC 2023
 /RateGroup/OSP_GetItemAltUnits.sql | 11 DEC 2023
+/Reports/RSP_DUEVOUCHERREPORT.sql | 12 DEC 2023
