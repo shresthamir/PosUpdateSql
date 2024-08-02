@@ -90,6 +90,6 @@
 /MENUITEM_ECOMMERCE_DETAIL.sql | 14 DEC 2023
 /SETTINGS.sql | 14 DEC 2023
 /RateGroup/OSP_GETITEMLIST.sql | 14 DEC 2023
-/RateGroup/OSP_GetItemBatch.sql | 14 DEC 2023
+/RateGroup/OSP_GetItemBatch.sql | 15 DEC 2023
 
 
