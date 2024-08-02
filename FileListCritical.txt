@@ -70,7 +70,6 @@
 /DISCOUNT_RATE.sql | 24 NOV 2023
 /SP_GETSCHEMEDISCOUNT.sql | 25 NOV 2023
 /RMD_ORDERPROD.sql | 26 NOV 2023
-/SETTINGS.sql | 27 NOV 2023
 /OSP_ValidateWarehouseDiscontinue.sql | 28 NOV 2023
 /Warehouse.sql | 28 NOV 2023
 /excludeRecipeConsumption.sql | 29 NOV 2023
@@ -86,5 +85,11 @@
 /Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO.sql | 10 DEC 2023
 /RateGroup/OSP_GetItemAltUnits.sql | 11 DEC 2023
 /Reports/RSP_DUEVOUCHERREPORT.sql | 12 DEC 2023
-/PaymentModeOrder.sql | 13 DEC 2023
 /EpaymentStatus.sql | 13 DEC 2023
+/PaymentModeOrder.sql | 14 DEC 2023
+/MENUITEM_ECOMMERCE_DETAIL.sql | 14 DEC 2023
+/SETTINGS.sql | 14 DEC 2023
+/RateGroup/OSP_GETITEMLIST.sql | 14 DEC 2023
+/RateGroup/OSP_GetItemBatch.sql | 14 DEC 2023
+
+

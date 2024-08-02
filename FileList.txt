@@ -76,7 +76,7 @@ MarginSchemeTables.txt
 Membership.sql
 MEMGRADETRAN_VIEW.txt
 MEMGRADETRAN_DETAILS.txt
-MENUITEM_ECOMMERCE_DETAIL.txt
+MENUITEM_ECOMMERCE_DETAIL.sql
 Menuitem_Delete_Trigger.txt
 Menuitem_Delete.txt
 MenuItem_Yield.txt
