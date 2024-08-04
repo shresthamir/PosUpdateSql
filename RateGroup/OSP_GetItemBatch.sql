@@ -6,7 +6,7 @@ CREATE OR ALTER PROC [dbo].[OSP_GetItemBatch]
 @WAREHOUSE VARCHAR(50),      
 @PhiscalId VARCHAR(10),      
 @BatchCode VARCHAR(50) = '%',      
-@OnlyInStock TINYINT = 0,      
+@OnlyInStock TINYINT = 1,      
 @RateGroupId INT,      
 @RateGroupId_WSale INT = 0      
 AS      
