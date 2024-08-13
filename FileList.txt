@@ -206,6 +206,7 @@ USERPROFILESABB.sql
 VEHICLE_WAREHOUSE.txt
 vwActiveRecipeMain.sql
 vwActiveRecipeProd.sql
+vwBarcode_Detail.sql
 vwContractPrice.txt
 vwCustomerProfile.sql
 vwInactiveInvoices.txt
