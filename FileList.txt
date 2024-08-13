@@ -12,7 +12,7 @@ AdvanceAc.txt
 /AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEPROD.sql
 /AuditLog/AuditTriggers/TRIGGER_AUDIT_RMD_ACLIST.sql
 BARCODE_LOG.sql
-BARCODE_DETAIL_STAMP.txt
+BARCODE_DETAIL_STAMP.sql
 BATCHPRICE_MASTER.sql
 CapitalPurchaseConstraint.sql
 CBMS_Tables.txt

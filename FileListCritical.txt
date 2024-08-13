@@ -91,6 +91,7 @@
 /SETTINGS.sql | 14 DEC 2023
 /RateGroup/OSP_GETITEMLIST.sql | 14 DEC 2023
 /RateGroup/OSP_GetItemBatch.sql | 16 DEC 2023
-/vwBarcode_Detail.sql | 17 DEC 2023
+/vwBarcode_Detail.sql | 18 DEC 2023
+/BARCODE_DETAIL_STAMP.sql | 18 DEC 2023
 
 
