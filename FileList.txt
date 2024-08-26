@@ -96,6 +96,7 @@ OSP_CheckAuditStatus.txt
 OSP_CompileCOGS.sql
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
+OSP_GetBillPreviewProd.sql
 OSP_GetCounterOrderAdvance.sql
 OSP_GetDeliveryList.txt
 OSP_GetEditableStock.txt

@@ -94,5 +94,5 @@
 /Membership.sql | 20 NOV 2023
 /vwCustomerProfile.sql | 20 DEC 2023
 /vwMemberProfile.sql | 20 DEC 2023
-
+/OSP_GetBillPreviewProd.sql | 21 DEC 2023
 
