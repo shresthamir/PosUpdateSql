@@ -93,6 +93,6 @@
 /vwCustomerProfile.sql | 20 DEC 2023
 /vwMemberProfile.sql | 20 DEC 2023
 /OSP_GetBillPreviewProd.sql | 21 DEC 2023
-/UserProfiles.txt | 22 DEC 2024
-/USERPROFILESABB.txt | 12 DEC 2024
+/UserProfiles.txt | 23 DEC 2024
+/USERPROFILESABB.txt | 23 DEC 2024
 
