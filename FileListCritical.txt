@@ -82,7 +82,6 @@
 /RateGroup/OSP_GetItemAltUnits.sql | 11 DEC 2023
 /Reports/RSP_DUEVOUCHERREPORT.sql | 12 DEC 2023
 /EpaymentStatus.sql | 13 DEC 2023
-/PaymentModeOrder.sql | 14 DEC 2023
 /MENUITEM_ECOMMERCE_DETAIL.sql | 14 DEC 2023
 /SETTINGS.sql | 14 DEC 2023
 /RateGroup/OSP_GETITEMLIST.sql | 14 DEC 2023
@@ -95,4 +94,5 @@
 /OSP_GetBillPreviewProd.sql | 21 DEC 2023
 /UserProfiles.txt | 23 DEC 2024
 /USERPROFILESABB.txt | 24 DEC 2024
+/PaymentModeOrder.sql | 24 DEC 2024
 

@@ -28,4 +28,4 @@ UPDATE PaymentModes SET SNO = 9 WHERE PAYMENTMODENAME = 'MOCO'
 IF EXISTS (SELECT * FROM PaymentModes WHERE PAYMENTMODENAME = 'Hamro Pay' AND ISNULL(SNO, 99) <> 10)
 UPDATE PaymentModes SET SNO = 10 WHERE PAYMENTMODENAME = 'Hamro Pay'
 
-UPDATE PaymentModes SET SNO = 999 WHERE PAYMENTMODENAME NOT IN ('Cash', 'Credit', 'Credit Card', 'Smart QR', 'Nepal Pay', 'FonePay', 'IME Pay', 'Khalti', 'MOCO', 'Hamro Pay') AND SNO <> 999
+UPDATE PaymentModes SET SNO = 127 WHERE PAYMENTMODENAME NOT IN ('Cash', 'Credit', 'Credit Card', 'Smart QR', 'Nepal Pay', 'FonePay', 'IME Pay', 'Khalti', 'MOCO', 'Hamro Pay') AND SNO <> 999
