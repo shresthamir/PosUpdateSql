@@ -94,5 +94,5 @@
 /OSP_GetBillPreviewProd.sql | 21 DEC 2023
 /PaymentModeOrder.sql | 24 DEC 2024
 /UserProfiles.sql | 25 DEC 2024
-/USERPROFILESABB.sql | 25 DEC 2024
+/USERPROFILESABB.sql | 26 DEC 2024
 
