@@ -90,9 +90,9 @@
 /BARCODE_DETAIL_STAMP.sql | 19 DEC 2023
 /Membership.sql | 20 NOV 2023
 /vwCustomerProfile.sql | 20 DEC 2023
-/vwMemberProfile.sql | 20 DEC 2023
 /OSP_GetBillPreviewProd.sql | 21 DEC 2023
 /PaymentModeOrder.sql | 24 DEC 2024
 /UserProfiles.sql | 25 DEC 2024
 /USERPROFILESABB.sql | 26 DEC 2024
+/vwMemberProfile.sql | 27 DEC 2024
 
