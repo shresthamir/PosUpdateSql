@@ -1,39 +1,98 @@
 /DISCOUNT_RATE.txt|21 APR 2023
-/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREMAIN.txt|21 APR 2023
-/Triggers/TRIGGER_PREVENT_CHANGE_ON_PREPROD.txt|21 APR 2023
-/DisablePrebill.txt|23 APR 2023
 /TRAN_A_ACID.txt|28 APR 2023
 /TRAN_A_ACID_CHECK.txt|28 APR 2023
-/tblMasterSequences.txt|1 MAY 2023
 /USERPROFILESABB.txt|1 MAY 2023
 /xPrimaryKeys.txt|1 MAY 2023
 /TrnMain_AdditionalInfo.txt | 17 MAY 2023
 /vwTrnMain_AdditionalInfo.txt | 17 MAY 2023
 /fnConvertIn.txt | 17 MAY 2023
-/UserProfiles.txt | 18 MAY 2023
-/USERPROFILESABB.txt | 18 MAY 2023
 /CBMS_Tables.txt | 28 MAY 2023
 /Reports/VIEW_ANNEX7.txt | 28 MAY 2023
 /vwInactiveInvoices.txt | 28 MAY 2023
 /SettlementModes.txt | 29 MAY 2023
-/KOT_Estimate.txt | 2 JUN 2023
+/KOT_Estimate.sql | 2 JUN 2023
 /OSP_GetDeliveryList.txt | 10 JUL 2023
 /Triggers/INVPROD_WAREHOUSE_CHECK.txt | 14 JUL 2023
 /Triggers/OPPROD_WAREHOUSE_CHECK.txt | 14 JUL 2023
 /Triggers/PURPROD_WAREHOUSE_CHECK.txt | 14 JUL 2023
 /NSP_PopulateDateMiti.txt | 15 JUL 2023
 /NepDate.txt | 16 JUL 2023
-/NepDate1.txt | 16 JUL 2023
 /AdvanceAc.txt | 16 JUL 2023
 /Triggers/ABBPROD_COGS_UPDATE.txt | 25 JUL 2023
 /Triggers/TRNPROD_COGS_UPDATE.txt | 25 JUL 2023
 /MultipleRetailPrice.txt | 25 JUL 2023
 /DISCOUNT_COMBOLIST.txt | 31 JUL 2023
-/GetKOTEstimate.txt | 27 JUL 2023
+/GetKOTEstimate.sql | 27 JUL 2023
 /AddOnMapping.txt | 27 JUL 2023
 /DIVISION.txt | 7 AUG 2023
 /RMD_TRNPROD_STATUS.txt | 15 AUG 2023
 /tblTicket.txt | 15 AUG 2023
 /ItemWiseCostCenter.txt | 15 AUG 2023
-/CustomerType.txt | 20 AUG 2023
-/vwCustomerProfile.txt | 20 AUG 2023
+/InterestCalculation/Add_EMI_LOG_VOUCHER_WISE_RECEIPT_LOG.txt | 22 AUG 2023
+/InterestCalculation/OSP_CalculateInterest.txt | 22 AUG 2023
+/InterestCalculation/vawDueVoucher.txt | 22 AUG 2023
+/Promotions/Add_TrnUser_IsActive_On_Discount_IfAnyItem.txt | 22 AUG 2023
+/tblMasterSequencePrimaryKey/AlterColumns.txt | 23 AUG 2023
+/tblMasterSequencePrimaryKey/AlterPrimaryKey.txt | 22 AUG 2023
+/SP_GETSCHEMEDISCOUNT.txt | 23 AUG 2023
+/vwSchemeSchedule.txt | 23 AUG 2023
+/SalesTerminal.sql | 15 SEP 2023
+/Warehouse.sql | 15 SEP 2023
+/PaymentModesUpdate.sql | 8 OCT 2023
+/PROD_COG.sql | 31 OCT 2023
+/PROD_COGS.sql | 31 OCT 2023
+/vwTrnProd_COGS.sql | 31 OCT 2023
+/RC_Columns.sql | 1 NOV 2023
+/RMD_BILLTENDER_UPDATE.sql | 3 NOV 2023
+/Sync/TrnMain_RowVersion.sql | 4 NOV 2023
+/Sync/SyncTable_Client.sql | 4 NOV 2023
+/RMD_TRNMAIN_SYNC.sql | 5 NOV 2023
+/Sync/SyncCheckSum_FiscalYear_view_local.sql | 5 NOV 2023
+/tblDenomination.sql | 6 NOV 2023
+/AuditLog/tblAuditLog.sql | 9 NOV 2023
+/AuditLog/vwTableKeys.sql | 9 NOV 2023
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEMAIN.sql | 9 NOV 2023
+/AuditLog/AuditTriggers/TRIGGER_AUDIT_RECIPEPROD.sql | 9 NOV 2023
+/AuditLog/spSaveAuditLog.sql | 11 NOV 2023
+/AuditLog/Compare_JsonObject.sql | 11 NOV 2023
+/SP_GetMarginDiscount.sql | 12 NOV 2023
+/SP_GetItemWisePointCalculation.sql | 12 NOV 2023
+/KOTTableUpdate.sql | 13 NOV 2023
+/USERPROFILESABB.sql | 14 NOV 2023
+/RMD_KOTMAIN_STATUS.sql | 14 NOV 2023
+/UserProfiles.sql | 14 NOV 2023
+/Reports/ReportMaster.sql | 16 NOV 2023
+/KotProd_ChoiceItems.sql | 17 NOV 2023
+/CapitalPurchaseConstraint.sql | 21 NOV 2023
+/DISCOUNT_RATE.sql | 24 NOV 2023
+/SP_GETSCHEMEDISCOUNT.sql | 25 NOV 2023
+/RMD_ORDERPROD.sql | 26 NOV 2023
+/OSP_ValidateWarehouseDiscontinue.sql | 28 NOV 2023
+/Warehouse.sql | 28 NOV 2023
+/excludeRecipeConsumption.sql | 29 NOV 2023
+/CurrencyNumberToWords.sql | 30 NOV 2023
+/NepDate1.txt | 02 DEC 2023
+/OSP_GetSupplierWiseItemForPO.sql | 03 DEC 2023
+/Reports/RSP_DayEndReport.sql | 05 DEC 2023
+/Reports/RecipeReport/OSP_GetReceipeConsumptionList.sql | 07 DEC 2023
+/PURPROD_VIEW.sql | 08 DEC 2023
+/CustomerType.sql | 08 DEC 2023
+/FiscalYearUpdate.sql | 09 DEC 2023
+/Reports/StockValuationReport/RSP_STOCKVALUATION_FIFO.sql | 10 DEC 2023
+/RateGroup/OSP_GetItemAltUnits.sql | 11 DEC 2023
+/Reports/RSP_DUEVOUCHERREPORT.sql | 12 DEC 2023
+/EpaymentStatus.sql | 13 DEC 2023
+/MENUITEM_ECOMMERCE_DETAIL.sql | 14 DEC 2023
+/SETTINGS.sql | 14 DEC 2023
+/RateGroup/OSP_GETITEMLIST.sql | 14 DEC 2023
+/RateGroup/OSP_GetItemBatch.sql | 16 DEC 2023
+/vwBarcode_Detail.sql | 18 DEC 2023
+/BARCODE_DETAIL_STAMP.sql | 19 DEC 2023
+/Membership.sql | 20 NOV 2023
+/vwCustomerProfile.sql | 20 DEC 2023
+/OSP_GetBillPreviewProd.sql | 21 DEC 2023
+/PaymentModeOrder.sql | 24 DEC 2024
+/UserProfiles.sql | 25 DEC 2024
+/USERPROFILESABB.sql | 26 DEC 2024
+/vwMemberProfile.sql | 27 DEC 2024
+
