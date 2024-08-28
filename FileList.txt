@@ -205,6 +205,7 @@ UserProfiles.sql
 USERPROFILESABB.sql
 ---VehicleInfo_BarcodeDetail.txt
 VEHICLE_WAREHOUSE.txt
+vwAcList.sql
 vwActiveRecipeMain.sql
 vwActiveRecipeProd.sql
 vwBarcode_Detail.sql
