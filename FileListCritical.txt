@@ -97,4 +97,6 @@
 /vwMemberProfile.sql | 27 DEC 2024
 /JewelleryDetail.sql | 29 DEC 2024
 /vwAcList.sql | 30 DEC 2024
+/TRNMAIN_BRANCH_OUT.sql | 31 DEC 2024
+/TRNPROD_BRANCH_OUT.sql | 31 DEC 2024
 
