@@ -211,6 +211,7 @@ vwActiveRecipeProd.sql
 vwBarcode_Detail.sql
 vwContractPrice.txt
 vwCustomerProfile.sql
+vwMemberProfile.sql
 vwInactiveInvoices.txt
 vwIndexFragmentation.txt
 vwSchemeItems.txt

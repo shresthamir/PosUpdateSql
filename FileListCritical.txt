@@ -90,13 +90,13 @@
 /BARCODE_DETAIL_STAMP.sql | 19 DEC 2023
 /Membership.sql | 20 NOV 2023
 /vwCustomerProfile.sql | 20 DEC 2023
-/OSP_GetBillPreviewProd.sql | 21 DEC 2023
 /PaymentModeOrder.sql | 24 DEC 2024
 /UserProfiles.sql | 25 DEC 2024
 /USERPROFILESABB.sql | 26 DEC 2024
-/vwMemberProfile.sql | 27 DEC 2024
 /JewelleryDetail.sql | 29 DEC 2024
 /vwAcList.sql | 30 DEC 2024
 /TRNMAIN_BRANCH_OUT.sql | 31 DEC 2024
 /TRNPROD_BRANCH_OUT.sql | 01 JAN 2025
+/OSP_GetBillPreviewProd.sql | 02 JAN 2025
+/vwMemberProfile.sql | 02 JAN 2025
 
