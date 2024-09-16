@@ -121,7 +121,7 @@
 /Reports/RSP_DUEVOUCHERREPORT_VTRACK.txt
 /Reports/RSP_FOODCOSTING.txt
 /Reports/RSP_HJ_FRANCHISE_ROYALTY_REPORT.txt
-/Reports/RSP_ITEMLIST.txt
+/Reports/RSP_ITEMLIST.sql
 /Reports/RSP_LAKMEDSR.txt
 /Reports/RSP_ItemPriceChangeLog.txt
 /Reports/RSP_ITEMSEARCH.txt
@@ -142,7 +142,7 @@
 ---/Reports/SalesBookReport/GETMONTHLIST.txt
 ---/Reports/SalesBookReport/GETNEPALIMONTH.txt
 ---/Reports/SalesBookReport/GETNEPALIMONTHLIST.txt
-/Reports/SalesBookReport/NSP_SALESBOOKREPORT.txt
+/Reports/SalesBookReport/NSP_SALESBOOKREPORT.sql
 /Reports/SalesBookReport/NSP_SALESBOOKREPORT_VEHICLE.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT.txt
 /Reports/SalesBookReport/RSP_SALESBOOKREPORT_VEHICLE.txt
