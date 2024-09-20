@@ -2,6 +2,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RSP_VATSALESREGISTER]
 @DATE1 DATETIME,
 @DATE2 DATETIME,
 @DIVISION VARCHAR(25) = '%',
+@CHK_IncludeTaxInvoice VARCHAR(2) = '',              --IncludeTaxInvoice:TI:1
 @CHK_INCLUDEABBSALES VARCHAR(2) = '',              --IncludeAbbSales:SI:1
 @CHK_INCLUDECREDITNOTE VARCHAR(2) = '',          --IncludeCreditNotes:CN:0
 @OPT_RepMode TINYINT = 0,                             --Details:0,Summary:1
@@ -15,6 +16,7 @@ IF @CHK_OLDFORMAT = 0
 	@DIV = @DIVISION,
 	@V1 = @CHK_INCLUDEABBSALES, 
 	@V2 = @CHK_INCLUDECREDITNOTE,
+	@V3 = @CHK_IncludeTaxInvoice,
 	@REPMODE = @OPT_RepMode
 ELSE 
     EXEC NSP_VATSALESREGISTER
@@ -23,4 +25,5 @@ ELSE
 	@DIV = @DIVISION,
 	@V1 = @CHK_INCLUDEABBSALES, 
 	@V2 = @CHK_INCLUDECREDITNOTE,
+	@V3 = @CHK_IncludeTaxInvoice,
 	@REPMODE = @OPT_RepMode
