@@ -220,11 +220,11 @@
 /Reports/VatSalesRegister/NSP_VATSALESREGISTER.sql
 /Reports/VatSalesRegister/NSP_VATSALESREGISTER_NEWFORMAT.sql
 /Reports/VatSalesRegister/RSP_VATOTHERADJUSTMENTREPORT.txt
-/Reports/VatSalesRegister/RSP_VATSALESREGISTER.txt
+/Reports/VatSalesRegister/RSP_VATSALESREGISTER.sql
 /Reports/VatSalesRegister/SP_DEBITNOTEREGISTER.txt
 /Reports/VatSalesRegister/SP_DEBITNOTEREGISTER_NEWFORMAT.txt
 /Reports/VatSalesRegister/SP_PURCHASEREGISTER.txt
-/Reports/VatSalesRegister/SP_PURCHASEREGISTER_NEWFORMAT.txt
+/Reports/VatSalesRegister/SP_PURCHASEREGISTER_NEWFORMAT.sql
 /Reports/VehicleReports/RSP_VEHICLEPURCHASEREGISTER.txt
 /Reports/VehicleReports/RSP_VEHICLESALESREGISTER.txt
 /Reports/VoucherBookReport/NSP_VOUCHERBOOKREPORT.txt
