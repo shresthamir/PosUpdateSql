@@ -84,7 +84,6 @@
 /EpaymentStatus.sql | 13 DEC 2023
 /MENUITEM_ECOMMERCE_DETAIL.sql | 14 DEC 2023
 /SETTINGS.sql | 14 DEC 2023
-/RateGroup/OSP_GETITEMLIST.sql | 14 DEC 2023
 /RateGroup/OSP_GetItemBatch.sql | 16 DEC 2023
 /vwBarcode_Detail.sql | 18 DEC 2023
 /BARCODE_DETAIL_STAMP.sql | 19 DEC 2023
@@ -99,4 +98,6 @@
 /TRNPROD_BRANCH_OUT.sql | 01 JAN 2025
 /OSP_GetBillPreviewProd.sql | 02 JAN 2025
 /vwMemberProfile.sql | 02 JAN 2025
+/RateGroup/hideRawItemsInBilling.sql | 03 JAN 2025
+/RateGroup/OSP_GETITEMLIST.sql | 03 JAN 2025
 
