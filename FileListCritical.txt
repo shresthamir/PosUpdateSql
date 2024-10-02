@@ -100,4 +100,5 @@
 /vwMemberProfile.sql | 02 JAN 2025
 /RateGroup/hideRawItemsInBilling.sql | 03 JAN 2025
 /RateGroup/OSP_GETITEMLIST.sql | 03 JAN 2025
-
+/GiftCardMaster.sql | 04 JAN 2025
+/OSP_GenerateGiftVoucher.sql | 04 JAN 2025

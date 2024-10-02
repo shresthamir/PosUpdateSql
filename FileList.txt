@@ -50,6 +50,7 @@ GetKOTEstimate.sql
 PROD_EXRATE.txt
 getPrintFormat.sql
 getPrintFormat_Order.sql
+GiftCardMaster.sql
 ---GROUP_ITEM.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS.txt
 /Hotel/HSP_GET_AVAILABLE_ROOMS_AGGREGATE.txt
@@ -96,6 +97,7 @@ OSP_CheckAuditStatus.txt
 OSP_CompileCOGS.sql
 OSP_DeleteBranchTransferInTransitClear.txt
 OSP_ExportBranchTransferOut.txt
+OSP_GenerateGiftVoucher.sql
 OSP_GetBillPreviewProd.sql
 OSP_GetCounterOrderAdvance.sql
 OSP_GetDeliveryList.txt
