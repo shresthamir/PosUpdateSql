@@ -24,7 +24,6 @@
 /DISCOUNT_COMBOLIST.txt | 31 JUL 2023
 /GetKOTEstimate.sql | 27 JUL 2023
 /AddOnMapping.txt | 27 JUL 2023
-/DIVISION.txt | 7 AUG 2023
 /RMD_TRNPROD_STATUS.txt | 15 AUG 2023
 /tblTicket.txt | 15 AUG 2023
 /ItemWiseCostCenter.txt | 15 AUG 2023
@@ -102,3 +101,4 @@
 /RateGroup/OSP_GETITEMLIST.sql | 03 JAN 2025
 /GiftCardMaster.sql | 04 JAN 2025
 /OSP_GenerateGiftVoucher.sql | 04 JAN 2025
+/DIVISION.txt | 05 JAN 2025
