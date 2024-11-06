@@ -166,6 +166,7 @@ SettlementModes.txt
 SizeColorMaster.txt
 SP_CALCULATE_RE_ORDER_QUANTITY.txt
 SP_CheckTenderBasedScheme.txt
+SP_GetAllSchemes.sql
 SP_GetItemWisePointCalculation.sql
 SP_GetMarginDiscount.sql
 SP_GETSCHEMEDISCOUNT.sql

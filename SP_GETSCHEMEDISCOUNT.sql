@@ -16,7 +16,7 @@ SET NOCOUNT ON
   inner join Discount_SchemeDiscount c on a.DisID=c.DisID    
   inner join menuitem d on c.mcode = d.MCODE    
  where c.Mcode = @CODE and a.SchemeType ='Mcode' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)    
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1     
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND C.IsActive = 1     
  AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))     
  union all     
       
@@ -25,7 +25,7 @@ SET NOCOUNT ON
   inner join Discount_SchemeDiscount d on a.DisID=d.DisID    
   inner join menuitem c on c.mgroup = d.mgroup     
  where C.MCODE  = @CODE and a.SchemeType ='Mgroup' AND ISNULL(C.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)    
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1     
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND D.IsActive = 1 and     
   AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))     
      
  union all     
@@ -34,7 +34,7 @@ SET NOCOUNT ON
   inner join Discount_SchemeDiscount d on a.DisID=d.DisID    
   inner join menuitem c on d.Parent = c.PARENT      
  where C.Mcode   = @CODE and a.SchemeType ='Parent' AND ISNULL(C.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)    
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1     
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND D.IsActive = 1     
  AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))     
      
  union all     
@@ -52,7 +52,7 @@ SET NOCOUNT ON
   inner join discount_ifAnyItemsList c on a.DisID  = c.disid     
   inner join menuitem d on c.mcode = d.MCODE     
   where c.mcode   = @CODE and a.SchemeType ='AnyItems' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)    
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 and @IsAndroidBilling = 0   
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND C.IsActive = 1 and @IsAndroidBilling = 0   
  AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))     
      
  union all     
@@ -61,7 +61,7 @@ SET NOCOUNT ON
   inner join discount_ifAnyItemsList c on a.DisID  = c.disid      
   inner join menuitem d on c.mcode = d.MCODE    
  where c.mcode   = @CODE  and a.SchemeType ='Bulk' AND ISNULL(D.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)    
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 and @IsAndroidBilling = 0    
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND C.IsActive = 1 and @IsAndroidBilling = 0    
  AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))
 
  union all         
@@ -70,6 +70,6 @@ SET NOCOUNT ON
   inner join Discount_SchemeDiscount d on a.DisID=d.DisID        
   inner join menuitem c on c.MCAT = d.MCAT         
  where C.MCODE  = @CODE and a.SchemeType ='MCAT' AND ISNULL(C.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)        
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1         
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND D.IsActive = 1         
  AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))       
  order by [priority]

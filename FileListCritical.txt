@@ -33,7 +33,6 @@
 /Promotions/Add_TrnUser_IsActive_On_Discount_IfAnyItem.txt | 22 AUG 2023
 /tblMasterSequencePrimaryKey/AlterColumns.txt | 23 AUG 2023
 /tblMasterSequencePrimaryKey/AlterPrimaryKey.txt | 22 AUG 2023
-/SP_GETSCHEMEDISCOUNT.txt | 23 AUG 2023
 /vwSchemeSchedule.txt | 23 AUG 2023
 /SalesTerminal.sql | 15 SEP 2023
 /Warehouse.sql | 15 SEP 2023
@@ -102,3 +101,5 @@
 /GiftCardMaster.sql | 04 JAN 2025
 /OSP_GenerateGiftVoucher.sql | 04 JAN 2025
 /DIVISION.txt | 05 JAN 2025
+/SP_GetAllSchemes.SQL | 06 JAN 2025
+/SP_GETSCHEMEDISCOUNT.txt | 06 JAN 2025
