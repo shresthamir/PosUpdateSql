@@ -113,6 +113,7 @@ Party_Payment_Info.txt
 PaymentModeOrder.sql
 PharmacyFields.txt
 PK_TableList.txt
+PrintFormat.sql
 PROD_COG.sql
 PROD_COGS.sql
 ---PRODUCT_EDIT_LOG.txt
