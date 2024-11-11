@@ -185,7 +185,7 @@
 /Reports/StockPosition/RSP_STOCKREPORT.sql
 /Reports/StockPosition/NSP_STOCKREPORT_CONSOLIDATED.sql
 /Reports/StockPosition/RSP_STOCKREPORT_CONSOLIDATED.sql
-Reports/StockPosition/RSP_STOCKABCREPORT_BATCHWISE.sql
+/Reports/StockPosition/RSP_STOCKABCREPORT_BATCHWISE.sql
 /Reports/StockPosition/RSP_STOCKREPORT_SUMMARY.sql
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTREGISTER.txt
 /Reports/StockSettlementReports/RSP_STOCKSETTLEMNTSTATUS.txt
