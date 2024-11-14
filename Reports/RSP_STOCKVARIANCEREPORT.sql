@@ -14,6 +14,5 @@ AS
 			@MGROUP =@MGROUP,
 			@BATCH =@AdjustmentBatch ,
 			@FLAG =@OPT_FLAG,
-			@DATE1 =@DATE2,
 			@BYBARCODE =@CHK_BYBARCODE,
 			@FYID = @FYID
