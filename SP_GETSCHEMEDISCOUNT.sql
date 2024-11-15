@@ -25,7 +25,7 @@ SET NOCOUNT ON
   inner join Discount_SchemeDiscount d on a.DisID=d.DisID    
   inner join menuitem c on c.mgroup = d.mgroup     
  where C.MCODE  = @CODE and a.SchemeType ='Mgroup' AND ISNULL(C.DISMODE,'DISCOUNTABLE') = 'DISCOUNTABLE' AND (ISNULL(A.TenderMode,'') = '' OR A.TenderMode = @TENDERMODE)    
- AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND D.IsActive = 1 and     
+ AND ((@DIVISION ='%' OR isnull(a.divisions,'') = '') or (@DIVISION <> '%' and @division in  (select * from split(a.divisions,',')))) AND a.IsActive = 1 AND D.IsActive = 1  
   AND @TrnTime BETWEEN CONVERT(TIME, ISNULL(b.TimeStart,'00:00:00')) AND CONVERT(TIME, ISNULL(b.TimeEnd,'00:00:00'))     
      
  union all     

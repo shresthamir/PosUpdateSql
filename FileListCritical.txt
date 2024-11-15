@@ -100,9 +100,9 @@
 /GiftCardMaster.sql | 04 JAN 2025
 /OSP_GenerateGiftVoucher.sql | 04 JAN 2025
 /SP_GetAllSchemes.SQL | 06 JAN 2025
-/SP_GETSCHEMEDISCOUNT.txt | 06 JAN 2025
 /PrintFormat.sql | 07 JAN 2025
 /OSP_PopulateTblBillTender.sql | 08 JAN 2025
 /NepDate1.sql | 09 JAN 2025
 /OSP_GetPendingSalesOrder.sql | 09 JAN 2025
 /DIVISION.sql | 10 JAN 2025
+/SP_GETSCHEMEDISCOUNT.txt | 11 JAN 2025
