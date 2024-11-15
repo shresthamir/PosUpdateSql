@@ -86,7 +86,7 @@ MasterDeleteFlag.txt
 MultiAltUnit_Rate.txt
 MultipleRetailPrice.txt
 NepDate.txt
-NepDate1.txt
+NepDate1.sql
 ---NEPMONTH.txt
 ---NEPMONTH_FISCAL.txt
 NSP_PopulateDateMiti.txt
