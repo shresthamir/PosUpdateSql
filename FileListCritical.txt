@@ -106,3 +106,4 @@
 /OSP_GetPendingSalesOrder.sql | 09 JAN 2025
 /DIVISION.sql | 10 JAN 2025
 /SP_GETSCHEMEDISCOUNT.txt | 11 JAN 2025
+/OSP_GetSalesOrderDetail.sql | 12 JAN 2025
