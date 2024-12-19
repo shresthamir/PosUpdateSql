@@ -162,6 +162,7 @@ SalesTerminal.sql
 SCHEMESAPPLIED_PROD.txt
 SecurityQuestions.txt
 SETTINGS.sql
+SETTINGS1.sql
 SettlementModes.txt
 ---ShippingInfo.txt
 SizeColorMaster.txt
