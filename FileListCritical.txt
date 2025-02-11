@@ -108,3 +108,5 @@
 /SP_GETSCHEMEDISCOUNT.txt | 11 JAN 2025
 /OSP_GetSalesOrderDetail.sql | 13 JAN 2025
 /SETTINGS.sql | 14 JAN 2025
+/OSP_GetCounterOrderAdvance.sql | 11 FEB 2025
+/RMD_OrderMain.sql | 11 FEB 2025
