@@ -98,6 +98,7 @@
 /Reports/ProfitablitySalesAnalysis/NSP_PROFITIBILITYSALESANALYSIS_COGS.txt
 /Reports/ProfitablitySalesAnalysis/RSP_PROFITIBILITYSALESANALYSIS.txt
 /Reports/ProfitablitySalesAnalysis/vwTrnProd_COGS_Summary.txt
+/Reports/PurchaseBookReport/vwPurProd.sql
 /Reports/PurchaseBookReport/NSP_PURCHASEBOOKREPORT.sql
 /Reports/PurchaseBookReport/RSP_PURCHASEBOOKREPORT.sql
 /Reports/PurchaseReport-ItemWise/NSP_PURCHASEREPORT_ITEMWISE.sql
