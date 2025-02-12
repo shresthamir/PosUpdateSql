@@ -82,7 +82,6 @@
 /MENUITEM_ECOMMERCE_DETAIL.sql | 14 DEC 2023
 /SETTINGS.sql | 14 DEC 2023
 /RateGroup/OSP_GetItemBatch.sql | 16 DEC 2023
-/vwBarcode_Detail.sql | 18 DEC 2023
 /BARCODE_DETAIL_STAMP.sql | 19 DEC 2023
 /Membership.sql | 20 NOV 2023
 /vwCustomerProfile.sql | 20 DEC 2023
@@ -110,3 +109,4 @@
 /SETTINGS.sql | 14 JAN 2025
 /OSP_GetCounterOrderAdvance.sql | 11 FEB 2025
 /RMD_OrderMain.sql | 11 FEB 2025
+/vwBarcode_Detail.sql | 12 FEB 2025
