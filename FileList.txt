@@ -158,6 +158,7 @@ RMD_TRNPROD_STATUS.txt
 RMD_TRNTRAN_FN.txt
 SALES_TRNMAIN.txt
 SALES_TRNPROD.txt
+SalesMan.sql
 SchemeScheduleView.txt
 SalesTerminal.sql
 SCHEMESAPPLIED_PROD.txt
