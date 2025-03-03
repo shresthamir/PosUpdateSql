@@ -110,4 +110,4 @@
 /RMD_OrderMain.sql | 11 FEB 2025
 /SalesMan.sql | 18 FEB 2025
 /vwBarcode_Detail.sql | 18 FEB 2025
-/RateGroup/OSP_GetItemBatch.sql | 26 FEB 2025
+/RateGroup/OSP_GetItemBatch.sql | 3 MAR 2025
